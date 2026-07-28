@@ -1,9 +1,9 @@
-<p align="center">
-  <h1 align="center">Opus</h1>
-</p>
+# Opus
+
+<h3 align="center"> Modern, Privacy-First Android Cache Cleaner & System Storage Optimizer.</h3>
 
 <p align="center">
-  Modern, Privacy-First Android Cache Cleaner & System Storage Optimizer
+Reclaim storage space and optimize system memory with automated, privacy-first Android cache cleaning.
 </p>
 
 <div align="center">
@@ -12,7 +12,7 @@
 
 
 
-### <a name="About"></a> 📖 About
+## Overview
 
 **Opus** is a modern, high-performance, and privacy-focused Android application designed to help users inspect storage usage, clear app cache, and optimize system memory (RAM). 
 
@@ -22,7 +22,7 @@ Opus is built following **Modern Android Development (MAD)** standards with Kotl
 
 
 
-### <a name="Screenshots"></a> 📸 Screenshots
+## Screenshots
 
 Opus UI & Features:
 
@@ -41,7 +41,7 @@ Opus UI & Features:
 
 
 
-### <a name="Features"></a> ⭐ Key Features & Capabilities
+## ⭐ Key Features & Capabilities
 
 | Feature | Method / API Used | Performance & Speed | Privacy & Safety Level | Description |
 | :--- | :--- | :--- | :--- | :--- |
@@ -53,7 +53,7 @@ Opus UI & Features:
 
 
 
-### <a name="TechStack"></a> 🛠 Tech Stack & Architecture
+## 🛠 Tech Stack & Architecture
 
 Opus follows clean code architecture principles for maintainability, high performance, and minimal memory usage:
 
@@ -68,7 +68,7 @@ Opus follows clean code architecture principles for maintainability, high perfor
 
 
 
-### <a name="Installation"></a> 🔥 Installation
+## 🔥 Installation
 
 1. Go to the Releases page:
    https://github.com/hamzabellouch/opus/releases
@@ -79,7 +79,7 @@ Opus follows clean code architecture principles for maintainability, high perfor
 
 4. Make sure that: `Install from unknown sources` is enabled in your Android settings.
 
-### <a name="Build"></a> 🔨 Building from Source - Not available yet
+## 🔨 Building from Source - Not available yet
 
 
 >To build Omicron locally, make sure you have the latest version of Android Studio installed.
