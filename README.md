@@ -51,7 +51,7 @@ Opus UI & Features:
 | **System App Protection** | Built-in Safety Guard Rules | **Real-Time** | **System Protective** | Automatically prevents force-stopping critical system apps (Settings, SystemUI, Play Services). |
 | **Zero Telemetry / No Ads** | Pure Local Logic | **N/A** | **Complete Privacy** | No analytics SDKs, no external network requests, and no user tracking. |
 
----
+
 
 ### <a name="TechStack"></a> 🛠 Tech Stack & Architecture
 
