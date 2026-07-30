@@ -1,10 +1,11 @@
 Privacy Policy - Opus
+Last Updated: July 30, 2026
+
 
 1. Executive Summary & Overview:
+
 Opus is an Android utility application designed to assist users with cache cleaning, storage optimization, and system memory (RAM) management. 
-
 Core Privacy Commitment: Opus operates "100% on-device". We do not collect, store, transmit, share, or sell any personal data, usage logs, device identifiers, or lists of installed applications to external servers or third parties.
-
 
 
 2. Information Processed On-Device:
@@ -15,9 +16,7 @@ To perform its core device optimization features, Opus reads and processes the f
 - Local Preferences: Minimal app states (such as onboarding completion) stored locally using Android "SharedPreferences".
 
 
-
 3. Permissions Used & Their Purposes:
-
 Opus requests specific Android permissions strictly to deliver its core functionality:
 
 A. Usage Access (PACKAGE_USAGE_STATS)
@@ -32,15 +31,12 @@ C. Accessibility Service (BIND_ACCESSIBILITY_SERVICE)
 - Purpose: Automates navigation through system settings to perform batch "Clear Cache" and "Force Stop" actions requested by the user.
 
 
-
 4. Accessibility Service Prominent Disclosure & Policy:
-
 Opus complies fully with Google Play policies regarding Accessibility Services:
 
 - Strict Functional Scope: The Accessibility Service is utilized "solely" to perform automated UI button clicks (e.g., navigating to : Settings > Apps > Storage > Clear Cache) on behalf of the user.
 - Zero Data Extraction: The Accessibility Service "never" reads, captures, logs, or transmits personal text, passwords, messages, keystrokes, or financial data displayed on the screen.
 - User Consent & Control: The Accessibility Service requires explicit user enablement in Android Settings and can be revoked by the user at any time.
-
 
 
 5. Data Sharing, Analytics & Advertising:
@@ -50,19 +46,17 @@ Opus complies fully with Google Play policies regarding Accessibility Services:
 - No Ads: Opus does not display targeted or behavioral advertisements.
 
 
-
 6. Data Retention & Lifecycle:
+
 - Memory Cache Wiping: All transient in-memory caches held by Opus are automatically cleared whenever the app is closed, paused, or trimmed by the system.
 - Complete Data Removal: Uninstalling Opus immediately and permanently deletes all local preferences stored on the device.
-
 
 
 7. Managing Permissions & User Rights:
 You maintain full control over the permissions granted to Opus. You may revoke any permission at any time via Android Settings:
 
-1. Disable Accessibility Service: Settings > Accessibility > Installed Apps > Opus > Turn Off
-2. Revoke Usage Access: Settings > Apps > Special App Access > Usage Access > Opus > Turn Off
-
+A. Disable Accessibility Service: Settings > Accessibility > Installed Apps > Opus > Turn Off
+B. Revoke Usage Access: Settings > Apps > Special App Access > Usage Access > Opus > Turn Off
 
 
 8. Contact & Support:
