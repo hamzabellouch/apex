@@ -26,12 +26,20 @@ BlueIris UI & Features:
 
 <div align="center">
   <div>
-    <img src="" width="30%" />
-    <img src="" width="30%" />
-    <img src="" width="30%" />
-    <img src="" width="30%" />
-    <img src="" width="30%" />
-    <img src="" width="30%" />
+    <img src="https://github.com/hamzabellouch/blueiris/blob/main/Images/1.jpg" width="30%" />
+    <img src="https://github.com/hamzabellouch/blueiris/blob/main/Images/2.jpg" width="30%" />
+    <img src="https://github.com/hamzabellouch/blueiris/blob/main/Images/3.jpg" width="30%" />
+    <img src="https://github.com/hamzabellouch/blueiris/blob/main/Images/4.jpg" width="30%" />
+    <img src="https://github.com/hamzabellouch/blueiris/blob/main/Images/5.jpg" width="30%" />
+    <img src="https://github.com/hamzabellouch/blueiris/blob/main/Images/6.jpg" width="30%" />
+    <img src="https://github.com/hamzabellouch/blueiris/blob/main/Images/7.jpg" width="30%" />
+    <img src="https://github.com/hamzabellouch/blueiris/blob/main/Images/8.jpg" width="30%" />
+    <img src="https://github.com/hamzabellouch/blueiris/blob/main/Images/9.jpg" width="30%" />
+    <img src="https://github.com/hamzabellouch/blueiris/blob/main/Images/10.jpg" width="30%" />
+    <img src="https://github.com/hamzabellouch/blueiris/blob/main/Images/11.jpg" width="30%" />
+    <img src="https://github.com/hamzabellouch/blueiris/blob/main/Images/12.jpg" width="30%" />
+    <img src="https://github.com/hamzabellouch/blueiris/blob/main/Images/13.jpg" width="30%" />
+    <img src="https://github.com/hamzabellouch/blueiris/blob/main/Images/14.jpg" width="30%" />
   </div>
 </div>
 
