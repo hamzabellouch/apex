@@ -1,6 +1,6 @@
-# Contributing
+﻿# Contributing
 
-Thank you for your interest in contributing to **Opus**! Opus is an Android application built with Kotlin and Jetpack Compose designed for cache cleaning, storage management, and RAM optimization.
+Thank you for your interest in contributing to **BlueIris**! BlueIris is an Android application built with Kotlin and Jetpack Compose designed for cache cleaning, storage management, and RAM optimization.
 
 Before submitting a bug report or feature request, please search existing issues (including closed ones) to ensure it hasn't already been reported or discussed. If there are no duplicates, feel free to submit a new issue using the appropriate template.
 
@@ -11,7 +11,7 @@ For questions or any other ideas to improve, you can join our official e-mail : 
 
 ## Disclaimer
 
-Opus is an active Android project focused on providing a clean, efficient, and private storage management tool. While we strive for code quality and reliability, contributions and feedback are always welcome to improve performance and user experience.
+BlueIris is an active Android project focused on providing a clean, efficient, and private storage management tool. While we strive for code quality and reliability, contributions and feedback are always welcome to improve performance and user experience.
 
 
 
@@ -20,7 +20,7 @@ Opus is an active Android project focused on providing a clean, efficient, and p
 When submitting a bug report, please make sure your issue contains **sufficient information** to reproduce the problem. Useful details include:
 
 - Device model and Android version
-- Opus app version
+- BlueIris app version
 - Granted permission states (Usage Access, Accessibility Service)
 - Steps to reproduce the bug
 - System logs (logcat) or screenshots if applicable
@@ -29,7 +29,7 @@ When submitting a bug report, please make sure your issue contains **sufficient 
 
 ## Feature Requests
 
-Opus aims to remain a fast, privacy-focused, and lightweight system utility for Android. We welcome suggestions that enhance user experience, UI responsiveness, or storage management capabilities.
+BlueIris aims to remain a fast, privacy-focused, and lightweight system utility for Android. We welcome suggestions that enhance user experience, UI responsiveness, or storage management capabilities.
 
 When suggesting a new feature, please consider:
 - **Relevance:** Does the feature fit the core goal of cache cleaning and memory optimization?
@@ -58,7 +58,7 @@ If you are new to the project:
 
 ## Building From Source
 
-To build Opus locally:
+To build BlueIris locally:
 
 1. **Prerequisites:**
    - [Android Studio](https://developer.android.com/studio) (latest stable or preview release)
@@ -68,6 +68,6 @@ To build Opus locally:
 2. **Steps:**
    ```bash
    # Clone the repository
-   git clone https://github.com/hamzabellouch/opus.git
+   git clone https://github.com/hamzabellouch/blueiris.git
 
    # Open the project in Android Studio and sync Gradle files
