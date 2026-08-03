@@ -1,17 +1,17 @@
-# Privacy Policy - Opus
+﻿# Privacy Policy - BlueIris
 
 Last Updated: July 30, 2026
 
 
 ### 1. Executive Summary & Overview:
 
-Opus is an Android utility application designed to assist users with cache cleaning, storage optimization, and system memory (RAM) management. 
+BlueIris is an Android utility application designed to assist users with cache cleaning, storage optimization, and system memory (RAM) management. 
 #### Core Privacy Commitment:
-Opus operates "100% on-device". We do not collect, store, transmit, share, or sell any personal data, usage logs, device identifiers, or lists of installed applications to external servers or third parties.
+BlueIris operates "100% on-device". We do not collect, store, transmit, share, or sell any personal data, usage logs, device identifiers, or lists of installed applications to external servers or third parties.
 
 
 ### 2. Information Processed On-Device:
-To perform its core device optimization features, Opus reads and processes the following information `locally on your device`:
+To perform its core device optimization features, BlueIris reads and processes the following information `locally on your device`:
 
 - **Installed Application List:** Scanned locally to display installed packages, their cache sizes, and memory usage within the app interface.
 - **Storage & RAM Metrics:** Calculated dynamically on-device to present accurate storage and memory usage statistics.
@@ -19,15 +19,15 @@ To perform its core device optimization features, Opus reads and processes the f
 
 
 ### 3. Permissions Used & Their Purposes:
-Opus requests specific Android permissions strictly to deliver its core functionality:
+BlueIris requests specific Android permissions strictly to deliver its core functionality:
 
 **A. Usage Access** (`PACKAGE_USAGE_STATS`)
-- **Purpose:** Allows Opus to read read-only storage statistics and cache sizes per application.
+- **Purpose:** Allows BlueIris to read read-only storage statistics and cache sizes per application.
 - **Scope:** Used exclusively locally for storage calculation.
 
 **B. Query All Packages** (`QUERY_ALL_PACKAGES`)
 
-- **Purpose:** Enables Opus to enumerate installed applications so users can review and clean app caches.
+- **Purpose:** Enables BlueIris to enumerate installed applications so users can review and clean app caches.
 - **Scope:** Used strictly within local UI rendering.
 
 **C. Accessibility Service** (`BIND_ACCESSIBILITY_SERVICE`)
@@ -35,7 +35,7 @@ Opus requests specific Android permissions strictly to deliver its core function
 
 
 ### 4. Accessibility Service Prominent Disclosure & Policy:
-Opus complies fully with Google Play policies regarding Accessibility Services:
+BlueIris complies fully with Google Play policies regarding Accessibility Services:
 
 - **Strict Functional Scope:** The Accessibility Service is utilized "solely" to perform automated UI button clicks (e.g., navigating to : Settings > Apps > Storage > Clear Cache) on behalf of the user.
 - **Zero Data Extraction:** The Accessibility Service "never" reads, captures, logs, or transmits personal text, passwords, messages, keystrokes, or financial data displayed on the screen.
@@ -45,22 +45,22 @@ Opus complies fully with Google Play policies regarding Accessibility Services:
 ### 5. Data Sharing, Analytics & Advertising:
 
 - **No Data Sharing:** No user data leaves your device.
-- **No Third-Party Analytics / Tracking:** Opus does not integrate third-party telemetry, tracking SDKs, or analytics services.
-- **No Ads:** Opus does not display targeted or behavioral advertisements.
+- **No Third-Party Analytics / Tracking:** BlueIris does not integrate third-party telemetry, tracking SDKs, or analytics services.
+- **No Ads:** BlueIris does not display targeted or behavioral advertisements.
 
 
 ### 6. Data Retention & Lifecycle:
 
-- **Memory Cache Wiping:** All transient in-memory caches held by Opus are automatically cleared whenever the app is closed, paused, or trimmed by the system.
-- **Complete Data Removal:** Uninstalling Opus immediately and permanently deletes all local preferences stored on the device.
+- **Memory Cache Wiping:** All transient in-memory caches held by BlueIris are automatically cleared whenever the app is closed, paused, or trimmed by the system.
+- **Complete Data Removal:** Uninstalling BlueIris immediately and permanently deletes all local preferences stored on the device.
 
 
 ### 7. Managing Permissions & User Rights:
-You maintain full control over the permissions granted to Opus. You may revoke any permission at any time via Android Settings:
+You maintain full control over the permissions granted to BlueIris. You may revoke any permission at any time via Android Settings:
 
-**A. Disable Accessibility Service:** `Settings > Accessibility > Installed Apps > Opus > Turn Off`
+**A. Disable Accessibility Service:** `Settings > Accessibility > Installed Apps > BlueIris > Turn Off`
 
-**B. Revoke Usage Access:** `Settings > Apps > Special App Access > Usage Access > Opus > Turn Off`
+**B. Revoke Usage Access:** `Settings > Apps > Special App Access > Usage Access > BlueIris > Turn Off`
 
 
 ### 8. Contact & Support:
@@ -72,32 +72,32 @@ Email: hamzabellouchcontact@gmail.com
 
 
 
-# سياسة الخصوصية - Opus
+# سياسة الخصوصية - BlueIris
 آخر تحديث: ٣٠ يوليو ٢٠٢٦
 
 ### ١. الملخص التنفيذي والنظرة العامة:
 
-تطبيق Opus هو تطبيق أدوات مساعد لنظام Android، صُمم لمساعدة المستخدمين في تنظيف ذاكرة التخزين المؤقت (Cache)، وتحسين مساحة التخزين، وإدارة ذاكرة النظام (RAM).
-الالتزام الأساسي بالخصوصية: يعمل Opus بنسبة "١٠٠٪ على الجهاز". نحن لا نجمع أو نخزن أو ننقل أو نشارك أو نبيع أي بيانات شخصية أو سجلات استخدام أو معرّفات الجهاز أو قوائم التطبيقات المثبتة إلى خوادم خارجية أو أطراف ثالثة.
+تطبيق BlueIris هو تطبيق أدوات مساعد لنظام Android، صُمم لمساعدة المستخدمين في تنظيف ذاكرة التخزين المؤقت (Cache)، وتحسين مساحة التخزين، وإدارة ذاكرة النظام (RAM).
+الالتزام الأساسي بالخصوصية: يعمل BlueIris بنسبة "١٠٠٪ على الجهاز". نحن لا نجمع أو نخزن أو ننقل أو نشارك أو نبيع أي بيانات شخصية أو سجلات استخدام أو معرّفات الجهاز أو قوائم التطبيقات المثبتة إلى خوادم خارجية أو أطراف ثالثة.
 
 ٢. المعلومات التي تتم معالجتها على الجهاز:
-لتنفيذ ميزاته الأساسية الخاصة بتحسين أداء الجهاز، يقوم Opus بقراءة ومعالجة المعلومات التالية "محليًا على جهازك":
+لتنفيذ ميزاته الأساسية الخاصة بتحسين أداء الجهاز، يقوم BlueIris بقراءة ومعالجة المعلومات التالية "محليًا على جهازك":
 
 * قائمة التطبيقات المثبتة: يتم فحصها محليًا لعرض الحزم المثبتة، وأحجام ذاكرة التخزين المؤقت الخاصة بها، واستخدام الذاكرة داخل واجهة التطبيق.
 * مقاييس التخزين وRAM: يتم احتسابها ديناميكيًا على الجهاز لعرض إحصاءات دقيقة حول استخدام مساحة التخزين والذاكرة.
 * التفضيلات المحلية: يتم تخزين الحد الأدنى من حالات التطبيق (مثل إكمال شاشة الترحيب) محليًا باستخدام Android "SharedPreferences".
 
 ٣. الأذونات المستخدمة وأغراضها:
-يطلب Opus أذونات Android محددة فقط لتقديم وظائفه الأساسية:
+يطلب BlueIris أذونات Android محددة فقط لتقديم وظائفه الأساسية:
 
 أ. إذن الوصول إلى الاستخدام (PACKAGE_USAGE_STATS)
 
-* الغرض: يسمح لـ Opus بقراءة إحصاءات التخزين للقراءة فقط وأحجام ذاكرة التخزين المؤقت لكل تطبيق.
+* الغرض: يسمح لـ BlueIris بقراءة إحصاءات التخزين للقراءة فقط وأحجام ذاكرة التخزين المؤقت لكل تطبيق.
 * النطاق: يُستخدم حصريًا محليًا لحساب مساحة التخزين.
 
 ب. الاستعلام عن جميع الحزم (QUERY_ALL_PACKAGES)
 
-* الغرض: يمكّن Opus من تعداد التطبيقات المثبتة حتى يتمكن المستخدمون من مراجعة وتنظيف ذاكرة التخزين المؤقت الخاصة بالتطبيقات.
+* الغرض: يمكّن BlueIris من تعداد التطبيقات المثبتة حتى يتمكن المستخدمون من مراجعة وتنظيف ذاكرة التخزين المؤقت الخاصة بالتطبيقات.
 * النطاق: يُستخدم بشكل صارم داخل عرض واجهة المستخدم المحلية.
 
 ج. خدمة إمكانية الوصول (BIND_ACCESSIBILITY_SERVICE)
@@ -105,7 +105,7 @@ Email: hamzabellouchcontact@gmail.com
 * الغرض: تؤتمت التنقل عبر إعدادات النظام لتنفيذ إجراءات "مسح ذاكرة التخزين المؤقت" و"الإيقاف الإجباري" بشكل جماعي بناءً على طلب المستخدم.
 
 ٤. الإفصاح البارز عن خدمة إمكانية الوصول والسياسة:
-يلتزم Opus التزامًا كاملًا بسياسات Google Play المتعلقة بخدمات إمكانية الوصول:
+يلتزم BlueIris التزامًا كاملًا بسياسات Google Play المتعلقة بخدمات إمكانية الوصول:
 
 * نطاق وظيفي صارم: تُستخدم خدمة إمكانية الوصول "فقط" لتنفيذ نقرات تلقائية على أزرار واجهة المستخدم (على سبيل المثال: الإعدادات > التطبيقات > التخزين > مسح ذاكرة التخزين المؤقت) نيابةً عن المستخدم.
 * عدم استخراج البيانات: خدمة إمكانية الوصول "لا" تقرأ أو تلتقط أو تسجل أو تنقل أي نصوص شخصية أو كلمات مرور أو رسائل أو ضغطات مفاتيح أو بيانات مالية معروضة على الشاشة.
@@ -114,20 +114,20 @@ Email: hamzabellouchcontact@gmail.com
 ٥. مشاركة البيانات والتحليلات والإعلانات:
 
 * عدم مشاركة البيانات: لا تغادر أي بيانات للمستخدم جهازه.
-* عدم وجود تحليلات أو تتبع من جهات خارجية: لا يدمج Opus أي خدمات Telemetry أو SDKs للتتبع أو التحليلات من جهات خارجية.
-* لا توجد إعلانات: لا يعرض Opus إعلانات موجهة أو قائمة على السلوك.
+* عدم وجود تحليلات أو تتبع من جهات خارجية: لا يدمج BlueIris أي خدمات Telemetry أو SDKs للتتبع أو التحليلات من جهات خارجية.
+* لا توجد إعلانات: لا يعرض BlueIris إعلانات موجهة أو قائمة على السلوك.
 
 ٦. الاحتفاظ بالبيانات ودورة حياتها:
 
-* مسح ذاكرة التخزين المؤقت في الذاكرة: يتم مسح جميع بيانات ذاكرة التخزين المؤقت المؤقتة الموجودة في الذاكرة والتي يحتفظ بها Opus تلقائيًا كلما تم إغلاق التطبيق أو إيقافه مؤقتًا أو تقليصه بواسطة النظام.
-* الإزالة الكاملة للبيانات: يؤدي إلغاء تثبيت Opus إلى حذف جميع التفضيلات المحلية المخزنة على الجهاز فورًا وبشكل دائم.
+* مسح ذاكرة التخزين المؤقت في الذاكرة: يتم مسح جميع بيانات ذاكرة التخزين المؤقت المؤقتة الموجودة في الذاكرة والتي يحتفظ بها BlueIris تلقائيًا كلما تم إغلاق التطبيق أو إيقافه مؤقتًا أو تقليصه بواسطة النظام.
+* الإزالة الكاملة للبيانات: يؤدي إلغاء تثبيت BlueIris إلى حذف جميع التفضيلات المحلية المخزنة على الجهاز فورًا وبشكل دائم.
 
 ٧. إدارة الأذونات وحقوق المستخدم:
-تحتفظ بالتحكم الكامل في الأذونات الممنوحة لـ Opus. يمكنك إلغاء أي إذن في أي وقت عبر إعدادات Android:
+تحتفظ بالتحكم الكامل في الأذونات الممنوحة لـ BlueIris. يمكنك إلغاء أي إذن في أي وقت عبر إعدادات Android:
 
-أ. تعطيل خدمة إمكانية الوصول: الإعدادات > إمكانية الوصول > التطبيقات المثبتة > Opus > إيقاف التشغيل
+أ. تعطيل خدمة إمكانية الوصول: الإعدادات > إمكانية الوصول > التطبيقات المثبتة > BlueIris > إيقاف التشغيل
 
-ب. إلغاء إذن الوصول إلى الاستخدام: الإعدادات > التطبيقات > الوصول الخاص للتطبيقات > الوصول إلى الاستخدام > Opus > إيقاف التشغيل
+ب. إلغاء إذن الوصول إلى الاستخدام: الإعدادات > التطبيقات > الوصول الخاص للتطبيقات > الوصول إلى الاستخدام > BlueIris > إيقاف التشغيل
 
 ٨. التواصل والدعم:
 إذا كانت لديك أي أسئلة أو ملاحظات بشأن سياسة الخصوصية هذه أو استخدام الأذونات، فيرجى التواصل معنا على:
