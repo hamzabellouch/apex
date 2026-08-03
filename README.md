@@ -1,4 +1,4 @@
-﻿# BlueIris
+# BlueIris
 
 <h3 align="center"> Modern, Privacy-First Android Cache Cleaner & System Storage Optimizer.</h3>
 
@@ -6,9 +6,7 @@
 Reclaim storage space and optimize system memory with automated, privacy-first Android cache cleaning.
 </p>
 
-<div align="center">
-  <img src="" alt="BlueIris" width="800"/>
-</div>
+<img width="5504" height="3072" alt="BlueIris" src="https://github.com/user-attachments/assets/5f45f01b-f2f7-415c-8202-13a58ff63364" />
 
 
 
