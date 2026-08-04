@@ -24,3 +24,5 @@ local.properties
 .DS_Store
 Thumbs.db
 captures/
+app/release/
+

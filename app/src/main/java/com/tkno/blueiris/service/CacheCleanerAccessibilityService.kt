@@ -1,4 +1,4 @@
-﻿package com.tkno.blueiris.service
+package com.tkno.blueiris.service
 
 import android.accessibilityservice.AccessibilityService
 import android.accessibilityservice.GestureDescription
@@ -50,10 +50,11 @@ class CacheCleanerAccessibilityService : AccessibilityService() {
     private var hasClickedStorage = false
     private var hasClickedClearData = false
     private var hasClickedClearCache = false
+    private var hasClickedConfirmClearCache = false
     private var hasClickedForceStop = false
     private var hasClickedConfirmForceStop = false
-    private var hasScrolledForStorage = false
-    private var hasScrolledForClearCache = false
+    private var scrollCountForStorage = 0
+    private var scrollCountForClearCache = 0
     private var isStepInProgress = false
     private var pageOpenedTime = 0L
 
@@ -116,6 +117,9 @@ class CacheCleanerAccessibilityService : AccessibilityService() {
                lower.contains("safecenter") ||
                lower.contains("secure") ||
                lower.contains("controlcenter") ||
+               lower.contains("permissioncontroller") ||
+               lower.contains("packageinstaller") ||
+               lower.contains("systemui") ||
                lower.contains("miui") ||
                lower.contains("samsung") ||
                lower.contains("huawei") ||
@@ -123,6 +127,14 @@ class CacheCleanerAccessibilityService : AccessibilityService() {
                lower.contains("vivo") ||
                lower.contains("coloros") ||
                lower.contains("transsion") ||
+               lower.contains("oneplus") ||
+               lower.contains("realme") ||
+               lower.contains("honor") ||
+               lower.contains("nothing") ||
+               lower.contains("aliyun") ||
+               lower.contains("meizu") ||
+               lower.contains("asus") ||
+               lower.contains("lenovo") ||
                lower == "android"
     }
 
@@ -269,17 +281,36 @@ class CacheCleanerAccessibilityService : AccessibilityService() {
     }
 
     private fun handleClearCacheEvent(rootNode: AccessibilityNodeInfo) {
-        if (hasClickedClearCache) return
+        if (hasClickedConfirmClearCache) return
 
         val currentPkg = if (currentAppIndex in packageList.indices) packageList[currentAppIndex] else ""
         val minPageWait = getPageWait()
         val stepPause = getStepPause()
+        val disabledGraceWindow = 1800L
+
+        // If Clear Cache was clicked, check if a confirmation dialog appeared (e.g. MIUI / HyperOS / Samsung)
+        if (hasClickedClearCache) {
+            val confirmNode = findDialogConfirmNode(rootNode)
+            if (confirmNode != null) {
+                isStepInProgress = true
+                val clicked = performClick(confirmNode)
+                if (clicked) {
+                    hasClickedConfirmClearCache = true
+                    itemResultCallback?.invoke(currentPkg, true, ServiceMode.CLEAR_CACHE)
+                    scheduleNextApp(120)
+                    return
+                } else {
+                    isStepInProgress = false
+                }
+            }
+            return
+        }
 
         // Step 1: Check for "Clear Cache" button directly on current viewport
         val clearCacheNode = findClearCacheNode(rootNode)
         if (clearCacheNode != null) {
             if (!clearCacheNode.isEnabled) {
-                if (System.currentTimeMillis() - pageOpenedTime < minPageWait) return
+                if (System.currentTimeMillis() - pageOpenedTime < minPageWait + disabledGraceWindow) return
 
                 val activeRoot = rootInActiveWindow
                 if (activeRoot != null) {
@@ -289,8 +320,8 @@ class CacheCleanerAccessibilityService : AccessibilityService() {
                         val clicked = performClick(activeClearCache)
                         if (clicked) {
                             hasClickedClearCache = true
-                            itemResultCallback?.invoke(currentPkg, true, ServiceMode.CLEAR_CACHE)
-                            scheduleNextApp(120)
+                            startWatchdog()
+                            pollForClearCacheConfirmationDialog(currentPkg, 3)
                             return
                         } else {
                             isStepInProgress = false
@@ -299,6 +330,7 @@ class CacheCleanerAccessibilityService : AccessibilityService() {
                 }
 
                 hasClickedClearCache = true
+                hasClickedConfirmClearCache = true
                 itemResultCallback?.invoke(currentPkg, false, ServiceMode.CLEAR_CACHE)
                 scheduleNextApp(100)
                 return
@@ -308,8 +340,8 @@ class CacheCleanerAccessibilityService : AccessibilityService() {
             val clicked = performClick(clearCacheNode)
             if (clicked) {
                 hasClickedClearCache = true
-                itemResultCallback?.invoke(currentPkg, true, ServiceMode.CLEAR_CACHE)
-                scheduleNextApp(120)
+                startWatchdog()
+                pollForClearCacheConfirmationDialog(currentPkg, 3)
                 return
             } else {
                 isStepInProgress = false
@@ -326,6 +358,7 @@ class CacheCleanerAccessibilityService : AccessibilityService() {
                     val clicked = performClick(clearDataNode)
                     if (clicked) {
                         hasClickedClearData = true
+                        pageOpenedTime = System.currentTimeMillis()
                         startWatchdog()
                         mainHandler.postDelayed({ isStepInProgress = false }, stepPause)
                         return
@@ -342,18 +375,19 @@ class CacheCleanerAccessibilityService : AccessibilityService() {
                 val clicked = performClick(storageNode)
                 if (clicked) {
                     hasClickedStorage = true
+                    pageOpenedTime = System.currentTimeMillis()
                     startWatchdog()
                     mainHandler.postDelayed({ isStepInProgress = false }, stepPause)
                     return
                 } else {
                     isStepInProgress = false
                 }
-            } else if (!hasScrolledForStorage) {
-                // Storage item not visible -> Scroll Down once! (EXCLUSIVELY FOR CLEAR_CACHE)
-                hasScrolledForStorage = true
+            } else if (scrollCountForStorage < 4) {
+                // Storage item not visible -> Scroll Down! (EXCLUSIVELY FOR CLEAR_CACHE)
+                scrollCountForStorage++
                 isStepInProgress = true
                 performScrollDown(rootNode)
-                mainHandler.postDelayed({ isStepInProgress = false }, stepPause)
+                mainHandler.postDelayed({ isStepInProgress = false }, stepPause + 150L)
                 return
             }
         } else {
@@ -361,8 +395,9 @@ class CacheCleanerAccessibilityService : AccessibilityService() {
             val storageClearCacheNode = findClearCacheNode(rootNode)
             if (storageClearCacheNode != null) {
                 if (!storageClearCacheNode.isEnabled) {
-                    if (System.currentTimeMillis() - pageOpenedTime < minPageWait) return
+                    if (System.currentTimeMillis() - pageOpenedTime < minPageWait + disabledGraceWindow) return
                     hasClickedClearCache = true
+                    hasClickedConfirmClearCache = true
                     itemResultCallback?.invoke(currentPkg, false, ServiceMode.CLEAR_CACHE)
                     scheduleNextApp(100)
                     return
@@ -372,18 +407,18 @@ class CacheCleanerAccessibilityService : AccessibilityService() {
                 val clicked = performClick(storageClearCacheNode)
                 if (clicked) {
                     hasClickedClearCache = true
-                    itemResultCallback?.invoke(currentPkg, true, ServiceMode.CLEAR_CACHE)
-                    scheduleNextApp(120)
+                    startWatchdog()
+                    pollForClearCacheConfirmationDialog(currentPkg, 3)
                     return
                 } else {
                     isStepInProgress = false
                 }
-            } else if (!hasScrolledForClearCache) {
-                // Clear cache button not visible inside Storage -> Scroll Down once! (EXCLUSIVELY FOR CLEAR_CACHE)
-                hasScrolledForClearCache = true
+            } else if (scrollCountForClearCache < 4) {
+                // Clear cache button not visible inside Storage -> Scroll Down! (EXCLUSIVELY FOR CLEAR_CACHE)
+                scrollCountForClearCache++
                 isStepInProgress = true
                 performScrollDown(rootNode)
-                mainHandler.postDelayed({ isStepInProgress = false }, stepPause)
+                mainHandler.postDelayed({ isStepInProgress = false }, stepPause + 150L)
                 return
             }
 
@@ -394,6 +429,7 @@ class CacheCleanerAccessibilityService : AccessibilityService() {
                 val clicked = performClick(confirmNode)
                 if (clicked) {
                     hasClickedClearCache = true
+                    hasClickedConfirmClearCache = true
                     itemResultCallback?.invoke(currentPkg, true, ServiceMode.CLEAR_CACHE)
                     scheduleNextApp(120)
                     return
@@ -409,6 +445,7 @@ class CacheCleanerAccessibilityService : AccessibilityService() {
 
         val currentPkg = if (currentAppIndex in packageList.indices) packageList[currentAppIndex] else ""
         val minPageWait = getPageWait()
+        val disabledGraceWindow = 1200L
 
         // Step 1: Check for confirmation dialog first if Force Stop was clicked
         if (hasClickedForceStop) {
@@ -432,7 +469,7 @@ class CacheCleanerAccessibilityService : AccessibilityService() {
             val forceStopNode = findForceStopNode(rootNode)
             if (forceStopNode != null) {
                 if (!forceStopNode.isEnabled) {
-                    if (System.currentTimeMillis() - pageOpenedTime < minPageWait) return
+                    if (System.currentTimeMillis() - pageOpenedTime < minPageWait + disabledGraceWindow) return
 
                     // Live double-check before concluding button is truly disabled
                     val activeRoot = rootInActiveWindow
@@ -567,6 +604,42 @@ class CacheCleanerAccessibilityService : AccessibilityService() {
                     }
                 }
                 pollForConfirmationDialog(currentPkg, retriesLeft - 1)
+            } else {
+                isStepInProgress = false
+            }
+        }, delay)
+    }
+
+    private fun pollForClearCacheConfirmationDialog(currentPkg: String, retriesLeft: Int) {
+        if (!isRunning || hasClickedConfirmClearCache || retriesLeft <= 0) {
+            if (isRunning && hasClickedClearCache && !hasClickedConfirmClearCache) {
+                hasClickedConfirmClearCache = true
+                itemResultCallback?.invoke(currentPkg, true, ServiceMode.CLEAR_CACHE)
+                scheduleNextApp(120)
+                return
+            }
+            isStepInProgress = false
+            return
+        }
+
+        val delay = getConfirmWait(retriesLeft)
+
+        mainHandler.postDelayed({
+            if (isRunning && !hasClickedConfirmClearCache) {
+                val activeRoot = rootInActiveWindow
+                if (activeRoot != null) {
+                    val confirmNode = findDialogConfirmNode(activeRoot)
+                    if (confirmNode != null) {
+                        val clicked = performClick(confirmNode)
+                        if (clicked) {
+                            hasClickedConfirmClearCache = true
+                            itemResultCallback?.invoke(currentPkg, true, ServiceMode.CLEAR_CACHE)
+                            scheduleNextApp(120)
+                            return@postDelayed
+                        }
+                    }
+                }
+                pollForClearCacheConfirmationDialog(currentPkg, retriesLeft - 1)
             } else {
                 isStepInProgress = false
             }
@@ -709,7 +782,21 @@ class CacheCleanerAccessibilityService : AccessibilityService() {
     private fun isValidClearCacheNode(node: AccessibilityNodeInfo?): Boolean {
         if (node == null) return false
         val text = try { node.text?.toString()?.trim() ?: "" } catch (e: Exception) { "" }
-        if (text.length > 35) return false
+        val contentDesc = try { node.contentDescription?.toString()?.trim() ?: "" } catch (e: Exception) { "" }
+        if (text.length > 40) return false
+
+        val combined = "$text $contentDesc".lowercase()
+
+        // Exclude Clear Data / Clear Storage / Manage Space buttons from matching Clear Cache
+        val excludeDataKeywords = listOf(
+            "clear data", "clear all data", "clear storage", "manage space", "manage storage",
+            "مسح البيانات", "مسح جميع البيانات", "مسح سعة التخزين", "إدارة المساحة", "تفريغ مساحة التخزين"
+        )
+        for (exKw in excludeDataKeywords) {
+            if (combined.contains(exKw)) {
+                return false
+            }
+        }
 
         var p: AccessibilityNodeInfo? = node
         var depth = 0
@@ -801,11 +888,23 @@ class CacheCleanerAccessibilityService : AccessibilityService() {
 
     private fun findDialogConfirmNode(root: AccessibilityNodeInfo): AccessibilityNodeInfo? {
         val nodeById = findNodeByIdSuffixes(root, DIALOG_CONFIRM_ID_SUFFIXES)
-        if (nodeById != null) {
+        if (nodeById != null && isValidDialogConfirmNode(nodeById)) {
             return nodeById
         }
 
         return searchDialogButtonRecursively(root)
+    }
+
+    private fun isValidDialogConfirmNode(node: AccessibilityNodeInfo?): Boolean {
+        if (node == null) return false
+        var p: AccessibilityNodeInfo? = node
+        var depth = 0
+        while (p != null && depth < 6) {
+            if (canNodeBeClicked(p)) return true
+            p = p.parent
+            depth++
+        }
+        return false
     }
 
     private fun searchDialogButtonRecursively(node: AccessibilityNodeInfo?): AccessibilityNodeInfo? {
@@ -817,7 +916,7 @@ class CacheCleanerAccessibilityService : AccessibilityService() {
             for (keyword in DIALOG_CONFIRM_KEYWORDS) {
                 val lowerKw = keyword.lowercase()
                 if (text == lowerKw || text.contains(lowerKw)) {
-                    if (canNodeBeClicked(node)) {
+                    if (isValidDialogConfirmNode(node)) {
                         return node
                     }
                 }
@@ -917,10 +1016,11 @@ class CacheCleanerAccessibilityService : AccessibilityService() {
         hasClickedStorage = false
         hasClickedClearData = false
         hasClickedClearCache = false
+        hasClickedConfirmClearCache = false
         hasClickedForceStop = false
         hasClickedConfirmForceStop = false
-        hasScrolledForStorage = false
-        hasScrolledForClearCache = false
+        scrollCountForStorage = 0
+        scrollCountForClearCache = 0
         isStepInProgress = false
         pageOpenedTime = System.currentTimeMillis()
 
@@ -1332,11 +1432,36 @@ class CacheCleanerAccessibilityService : AccessibilityService() {
             depth++
         }
 
-        return try {
+        val actionClicked = try {
             node.performAction(AccessibilityNodeInfo.ACTION_CLICK)
         } catch (e: Exception) {
             false
         }
+
+        if (actionClicked) return true
+
+        // Fallback: Hardware gesture click (API 24+) if performAction(ACTION_CLICK) fails on custom OEM views
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            try {
+                val bounds = android.graphics.Rect()
+                node.getBoundsInScreen(bounds)
+                if (bounds.width() > 0 && bounds.height() > 0) {
+                    val centerX = bounds.centerX().toFloat()
+                    val centerY = bounds.centerY().toFloat()
+
+                    val path = Path().apply {
+                        moveTo(centerX, centerY)
+                    }
+                    val stroke = GestureDescription.StrokeDescription(path, 0, 50)
+                    val gesture = GestureDescription.Builder().addStroke(stroke).build()
+                    return dispatchGesture(gesture, null, null)
+                }
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+        }
+
+        return false
     }
 
     companion object {
@@ -1367,8 +1492,11 @@ class CacheCleanerAccessibilityService : AccessibilityService() {
             "مساحة التخزين",
             "سعة التخزين",
             "التخزين وذاكرة التخزين المؤقت",
+            "التخزين والذاكرة المؤقتة",
             "مساحة التخزين والتخزين المؤقت",
             "ذاكرة التخزين",
+            "استخدام التخزين",
+            "وحدة التخزين",
             "Espace de stockage",
             "Stockage",
             "Almacenamiento",
@@ -1407,12 +1535,20 @@ class CacheCleanerAccessibilityService : AccessibilityService() {
             "Clear Cache", 
             "Clear cache", 
             "Clean cache",
+            "CLEAR CACHE",
             "مسح ذاكرة التخزين المؤقت", 
-            "مسح التخزين المؤقت",
-            "مسح الذاكرة المؤقتة",
-            "مسح الكاش",
             "مسح ذاكرة التخزين المؤقتة",
+            "مسح ذاكرة التخزين الموقته",
+            "مسح التخزين المؤقت",
+            "مسح التخزين الموقته",
+            "مسح الذاكرة المؤقتة",
+            "مسح الذاكرة الموقته",
+            "تنظيف الذاكرة المؤقتة",
+            "تنظيف الكاش",
+            "مسح الكاش",
             "مسح التخزين",
+            "حذف ذاكرة التخزين المؤقت",
+            "حذف الكاش",
             "Vider le cache",
             "Effacer le cache",
             "Borrar caché",
@@ -1439,12 +1575,19 @@ class CacheCleanerAccessibilityService : AccessibilityService() {
         private val FORCE_STOP_KEYWORDS = listOf(
             "Force stop",
             "Force Stop",
+            "FORCE STOP",
             "إيقاف إجباري",
+            "إيقاف اجباري",
             "فرض الإيقاف",
             "إيقاف",
+            "توقيف إجباري",
+            "توقيف اجباري",
+            "توقيف",
             "إيقاف فرضياً",
             "توقف إجباري",
+            "توقف اجباري",
             "إيقاف إجباري للتطبيق",
+            "إيقاف اجباري للتطبيق",
             "Arrêt forcé",
             "Fuerzar detención",
             "Forzar detención",
@@ -1469,19 +1612,25 @@ class CacheCleanerAccessibilityService : AccessibilityService() {
         private val DIALOG_CONFIRM_KEYWORDS = listOf(
             "ok",
             "موافق",
+            "حسناً",
+            "حسنا",
             "إيقاف إجباري",
+            "إيقاف اجباري",
             "فرض الإيقاف",
             "إيقاف",
+            "توقيف",
             "تأكيد",
-            "حسناً",
             "نعم",
+            "موافقة",
             "yes",
             "confirm",
             "force stop",
+            "FORCE STOP",
             "arrêter",
             "aceptar",
             "vider le cache",
             "clear cache",
+            "CLEAR CACHE",
             "مسح التخزين المؤقت",
             "مسح ذاكرة التخزين المؤقت"
         )
@@ -1545,10 +1694,11 @@ class CacheCleanerAccessibilityService : AccessibilityService() {
                 hasClickedStorage = false
                 hasClickedClearData = false
                 hasClickedClearCache = false
+                hasClickedConfirmClearCache = false
                 hasClickedForceStop = false
                 hasClickedConfirmForceStop = false
-                hasScrolledForStorage = false
-                hasScrolledForClearCache = false
+                scrollCountForStorage = 0
+                scrollCountForClearCache = 0
                 isStepInProgress = false
                 pageOpenedTime = 0L
             }

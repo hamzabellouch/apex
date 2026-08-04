@@ -1,4 +1,4 @@
-﻿package com.tkno.blueiris.ui.main
+package com.tkno.blueiris.ui.main
 
 import android.app.LocaleManager
 import android.content.Intent
@@ -34,6 +34,7 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.outlined.ArrowForward
 import androidx.compose.material.icons.automirrored.outlined.OpenInNew
+import androidx.compose.material.icons.filled.Block
 import androidx.compose.material.icons.filled.BugReport
 import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.Settings
@@ -279,10 +280,10 @@ fun GeneralSettingsPage(
     var isBoostMode by remember { mutableStateOf(prefs.getBoolean("turbo_mode", prefs.getBoolean("boost_mode", false))) }
     var isCustomSpeedEnabled by remember { mutableStateOf(prefs.getBoolean("custom_speed_enabled", false)) }
 
-    var forceStopMode by remember { mutableIntStateOf(prefs.getInt("force_stop_mode", 0)) }
+    var forceStopMode by remember { mutableIntStateOf(prefs.getInt("force_stop_mode", 1)) }
     var showForceStopModeDialog by remember { mutableStateOf(false) }
 
-    var cleaningMode by remember { mutableIntStateOf(prefs.getInt("cleaning_mode", 2)) }
+    var cleaningMode by remember { mutableIntStateOf(prefs.getInt("cleaning_mode", 1)) }
     var isIgnoreTinyCache by remember { mutableStateOf(prefs.getBoolean("ignore_tiny_cache", true)) }
     var showCleaningModeDialog by remember { mutableStateOf(false) }
 
@@ -337,7 +338,7 @@ fun GeneralSettingsPage(
             PreferenceChevronItem(
                 title = stringResource(id = R.string.force_stop_mode_title),
                 description = forceStopModeText,
-                icon = Icons.Outlined.Cancel,
+                icon = Icons.Default.Block,
                 onClick = { showForceStopModeDialog = true }
             )
 
@@ -1498,16 +1499,16 @@ fun AboutPage(
 
     val prefs = remember { context.getSharedPreferences("blueiris_prefs", android.content.Context.MODE_PRIVATE) }
     var isAutoUpdateEnabled by remember {
-        mutableStateOf(prefs.getBoolean("auto_update_enabled", true))
+        mutableStateOf(prefs.getBoolean("auto_update_enabled", false))
     }
 
     // Launch background update check
     AppUpdater(isAutoUpdateEnabled = isAutoUpdateEnabled)
 
     val versionName = try {
-        context.packageManager.getPackageInfo(context.packageName, 0).versionName ?: "0.0.1-beta"
+        context.packageManager.getPackageInfo(context.packageName, 0).versionName ?: "0.0.2-beta"
     } catch (e: Exception) {
-        "0.0.1-beta"
+        "0.0.2-beta"
     }
     val info = "App version: $versionName\nPackage name: ${context.packageName}\nDevice: Android ${android.os.Build.VERSION.RELEASE} (API ${android.os.Build.VERSION.SDK_INT})"
     val uriHandler = LocalUriHandler.current
@@ -1600,7 +1601,7 @@ fun AboutPage(
                         title = stringResource(R.string.auto_update),
                         description = stringResource(R.string.check_for_updates_desc),
                         icon =
-                            if (isAutoUpdateEnabled) Icons.Outlined.SystemUpdate
+                            if (isAutoUpdateEnabled) Icons.Outlined.Update
                             else Icons.Outlined.UpdateDisabled,
                         isChecked = isAutoUpdateEnabled,
                         isSwitchEnabled = true,

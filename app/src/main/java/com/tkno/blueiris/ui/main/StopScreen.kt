@@ -1,4 +1,4 @@
-﻿package com.tkno.blueiris.ui.main
+package com.tkno.blueiris.ui.main
 
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.FastOutSlowInEasing
@@ -17,6 +17,7 @@ import androidx.compose.material.icons.automirrored.filled.FormatListBulleted
 import androidx.compose.material.icons.filled.Android
 import androidx.compose.material.icons.filled.Block
 import androidx.compose.material.icons.filled.History
+import androidx.compose.material.icons.filled.Memory
 import androidx.compose.material.icons.filled.PowerSettingsNew
 import androidx.compose.material.icons.filled.Storage
 import androidx.compose.material3.*
@@ -31,6 +32,7 @@ import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.platform.LocalContext
@@ -236,7 +238,8 @@ fun StopScreen(
                 horizontalArrangement = Arrangement.SpaceEvenly
             ) {
                 StopActionCircleButton(
-                    icon = Icons.Default.Storage,
+                    icon = Icons.Default.Memory,
+                    iconSize = 23.dp,
                     label = stringResource(id = R.string.stop_action_memory_info),
                     onClick = { showMemoryInfoDialog = true },
                     modifier = Modifier.weight(1f)
@@ -377,7 +380,7 @@ fun StopStatItem(
     Column(
         modifier = modifier
             .padding(horizontal = 4.dp)
-            .background(MaterialTheme.colorScheme.surfaceContainer, RoundedCornerShape(12.dp))
+            .background(MaterialTheme.colorScheme.surfaceContainer, RoundedCornerShape(20.dp))
             .padding(vertical = 10.dp, horizontal = 8.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
@@ -410,7 +413,8 @@ fun StopActionCircleButton(
     icon: androidx.compose.ui.graphics.vector.ImageVector,
     label: String,
     onClick: () -> Unit,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    iconSize: Dp = 20.dp
 ) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -429,7 +433,7 @@ fun StopActionCircleButton(
                 imageVector = icon,
                 contentDescription = label,
                 tint = MaterialTheme.colorScheme.onSurface,
-                modifier = Modifier.size(20.dp)
+                modifier = Modifier.size(iconSize)
             )
         }
         Spacer(modifier = Modifier.height(6.dp))

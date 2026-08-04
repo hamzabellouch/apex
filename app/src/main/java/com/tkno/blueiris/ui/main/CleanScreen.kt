@@ -1,4 +1,4 @@
-﻿package com.tkno.blueiris.ui.main
+package com.tkno.blueiris.ui.main
 
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.FastOutSlowInEasing
@@ -14,6 +14,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.FormatListBulleted
 import androidx.compose.material.icons.filled.AutoAwesome
 import androidx.compose.material.icons.filled.CleaningServices
+import androidx.compose.material.icons.filled.DonutLarge
 import androidx.compose.material.icons.filled.History
 import androidx.compose.material.icons.filled.Storage
 import androidx.compose.material.icons.filled.Sync
@@ -250,7 +251,7 @@ fun CleanScreen(
                     modifier = Modifier.weight(1f)
                 )
                 CleanActionCircleButton(
-                    icon = Icons.Default.Sync,
+                    icon = Icons.Default.DonutLarge,
                     label = stringResource(id = R.string.clean_action_live_cache),
                     onClick = { showLiveCacheDialog = true },
                     modifier = Modifier.weight(1f)
@@ -339,7 +340,7 @@ fun CleanStatItem(
     Column(
         modifier = modifier
             .padding(horizontal = 4.dp)
-            .background(MaterialTheme.colorScheme.surfaceContainer, RoundedCornerShape(12.dp))
+            .background(MaterialTheme.colorScheme.surfaceContainer, RoundedCornerShape(20.dp))
             .padding(vertical = 10.dp, horizontal = 8.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {

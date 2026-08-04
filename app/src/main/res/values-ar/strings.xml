@@ -1,4 +1,4 @@
-﻿<resources>
+<resources>
     <string name="app_name">BlueIris</string>
     <string name="accessibility_service_description">تُؤتمت هذه الخدمة التنقل في إعدادات تطبيقات Android لمسح ذاكرة التخزين المؤقت وإيقاف التطبيقات في الخلفية بأمان وكفاءة.</string>
     <string name="clear_cache">مسح ذاكرة التخزين المؤقت</string>
@@ -17,7 +17,7 @@
     <string name="general_settings">عام</string>
     <string name="boost_mode">وضع التوربو (Turbo)</string>
     <string name="boost_mode_desc">تسريع عملية الإيقاف والتنظيف التلقائي للأجهزة الحديثة</string>
-    <string name="custom_speed_mode">وضع السرعة المخصص</string>
+    <string name="custom_speed_mode">سرعة مخصصة</string>
     <string name="custom_speed_mode_desc">تفعيل تكوين التوقيت المخصص لعمليات الإيقاف والتنظيف</string>
     <string name="custom_speed_settings">تعديل السرعات المخصصة</string>
     <string name="custom_speed_settings_desc">تعديل التأخيرات والتوقيتات لعمليات الإيقاف والتنظيف بشكل مستقل</string>

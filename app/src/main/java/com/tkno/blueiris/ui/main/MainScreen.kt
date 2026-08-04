@@ -1,4 +1,4 @@
-﻿package com.tkno.blueiris.ui.main
+package com.tkno.blueiris.ui.main
 
 import android.content.pm.PackageManager
 import android.widget.Toast
@@ -77,8 +77,14 @@ fun MainScreen(
     val context = LocalContext.current
     val scope = rememberCoroutineScope()
     val lifecycleOwner = LocalLifecycleOwner.current
+    val prefs = remember(context) { context.getSharedPreferences("blueiris_prefs", android.content.Context.MODE_PRIVATE) }
 
-    var currentTab by remember { mutableStateOf(MainTab.Stop) }
+    val initialTab = remember(prefs) {
+        val isSwapped = prefs.getBoolean("tab_order_swapped", false)
+        if (isSwapped) MainTab.Clean else MainTab.Stop
+    }
+
+    var currentTab by remember { mutableStateOf(initialTab) }
     var currentSubScreen by remember { mutableStateOf(SubScreen.None) }
 
     // System Back Button handler for SubScreens (Whitelist, Analyze, etc.)
@@ -94,15 +100,14 @@ fun MainScreen(
     var ramInfo by remember { mutableStateOf(AppStorageHelper.getRamInfo(context)) }
     var isScanning by remember { mutableStateOf(false) }
 
-    val prefs = remember(context) { context.getSharedPreferences("blueiris_prefs", android.content.Context.MODE_PRIVATE) }
     var isAutoUpdateEnabled by remember {
-        mutableStateOf(prefs.getBoolean("auto_update_enabled", true))
+        mutableStateOf(prefs.getBoolean("auto_update_enabled", false))
     }
 
     DisposableEffect(prefs) {
         val listener = android.content.SharedPreferences.OnSharedPreferenceChangeListener { p, key ->
             if (key == "auto_update_enabled") {
-                isAutoUpdateEnabled = p.getBoolean("auto_update_enabled", true)
+                isAutoUpdateEnabled = p.getBoolean("auto_update_enabled", false)
             }
         }
         prefs.registerOnSharedPreferenceChangeListener(listener)
@@ -230,13 +235,14 @@ fun MainScreen(
     val accentBlue = Color(0xFF48AFFF)
     val stopOrange = Color(0xFFFF6D00)
     val androidGreen = Color(0xFF3DDC84)
-    val menuGray = Color.White
+    val menuGray = MaterialTheme.colorScheme.onSurface
     val appBackground = MaterialTheme.colorScheme.background
 
     // Load actual apps & system metrics ONLY when app is actively open and in focus (resumes on foreground, halts completely when paused/closed)
     LaunchedEffect(lifecycleOwner, isUsageAccessGranted, showCleaningOverlay) {
         if (isUsageAccessGranted && !showCleaningOverlay) {
             lifecycleOwner.repeatOnLifecycle(Lifecycle.State.RESUMED) {
+                isScanning = true
                 // ULTRA-FAST (0ms) Instant initial fetch when user enters/resumes app
                 val initialApps = applySessionOverrides(AppStorageHelper.getInstalledAppsWithCache(context, forceRefresh = true))
                 installedApps = initialApps
@@ -396,137 +402,158 @@ fun MainScreen(
         }
     }
 
-    val unselectedNavColor = Color.White
+    val unselectedNavColor = MaterialTheme.colorScheme.onSurface
 
     Scaffold(
         bottomBar = {
             if (currentSubScreen == SubScreen.None && !isShowingPermissionScreen) {
-                NavigationBar(
-                    containerColor = MaterialTheme.colorScheme.surfaceContainer,
-                    tonalElevation = 0.dp,
-                    modifier = Modifier
-                        .height(72.dp)
-                        .onGloballyPositioned { coordinates ->
-                            val totalWidth = coordinates.size.width.toFloat()
-                            if (totalWidth > 0) {
-                                itemWidthPx = totalWidth / 4f
-                            }
-                        }
+                Surface(
+                    color = MaterialTheme.colorScheme.surfaceContainer,
+                    tonalElevation = 0.dp
                 ) {
-                    reorderableTabs.forEachIndexed { index, tab ->
-                        val isSelected = currentTab == tab
-                        val isDragging = draggingIndex == index
-                        val canDrag = index < 2
-
-                        val (tabLabel, tabIcon, tabColor) = when (tab) {
-                            MainTab.Stop -> Triple(stringResource(R.string.nav_stop), Icons.Default.Block, stopOrange)
-                            MainTab.Clean -> Triple(stringResource(R.string.nav_clean), Icons.Default.CleaningServices, accentBlue)
-                            MainTab.Apps -> Triple(stringResource(R.string.nav_apps), Icons.Default.Android, androidGreen)
-                            MainTab.Menu -> Triple(stringResource(R.string.nav_menu), Icons.Default.Menu, menuGray)
-                        }
-
-                        NavigationBarItem(
-                            selected = isSelected,
-                            onClick = { currentTab = tab },
-                            icon = {
-                                Icon(
-                                    imageVector = tabIcon,
-                                    contentDescription = tabLabel,
-                                    tint = if (isSelected) tabColor else unselectedNavColor
-                                )
-                            },
-                            label = {
-                                Text(
-                                    text = tabLabel,
-                                    color = if (isSelected) tabColor else unselectedNavColor,
-                                    fontSize = 12.sp
-                                )
-                            },
-                            colors = NavigationBarItemDefaults.colors(
-                                indicatorColor = tabColor.copy(alpha = 0.2f),
-                                selectedIconColor = tabColor,
-                                selectedTextColor = tabColor,
-                                unselectedIconColor = unselectedNavColor,
-                                unselectedTextColor = unselectedNavColor
-                            ),
+                    Column(modifier = Modifier.fillMaxWidth()) {
+                    if (isScanning) {
+                        LinearProgressIndicator(
                             modifier = Modifier
-                                .graphicsLayer {
-                                    if (isDragging) {
-                                        translationX = currentDragOffset
-                                        scaleX = 1.12f
-                                        scaleY = 1.12f
-                                    }
+                                .fillMaxWidth()
+                                .height(3.dp),
+                            color = when (currentTab) {
+                                MainTab.Stop -> stopOrange
+                                MainTab.Clean -> accentBlue
+                                MainTab.Apps -> androidGreen
+                                MainTab.Menu -> accentBlue
+                            },
+                            trackColor = Color.Transparent
+                        )
+                    }
+                    NavigationBar(
+                        containerColor = MaterialTheme.colorScheme.surfaceContainer,
+                        tonalElevation = 0.dp,
+                        modifier = Modifier
+                            .height(72.dp)
+                            .onGloballyPositioned { coordinates ->
+                                val totalWidth = coordinates.size.width.toFloat()
+                                if (totalWidth > 0) {
+                                    itemWidthPx = totalWidth / 4f
                                 }
-                                .then(
-                                    if (canDrag) {
-                                        Modifier.pointerInput(index) {
-                                            awaitEachGesture {
-                                                val down = awaitFirstDown(requireUnconsumed = false)
-                                                var isLongPressActive = false
+                            }
+                    ) {
+                        reorderableTabs.forEachIndexed { index, tab ->
+                            val isSelected = currentTab == tab
+                            val isDragging = draggingIndex == index
+                            val canDrag = index < 2
 
-                                                val longPressTimer = scope.launch {
-                                                    delay(viewConfiguration.longPressTimeoutMillis)
-                                                    isLongPressActive = true
-                                                    draggingIndex = index
-                                                    currentDragOffset = 0f
-                                                    haptic.performHapticFeedback(HapticFeedbackType.LongPress)
-                                                }
+                            val (tabLabel, tabIcon, tabColor) = when (tab) {
+                                MainTab.Stop -> Triple(stringResource(R.string.nav_stop), Icons.Default.Block, stopOrange)
+                                MainTab.Clean -> Triple(stringResource(R.string.nav_clean), Icons.Default.CleaningServices, accentBlue)
+                                MainTab.Apps -> Triple(stringResource(R.string.nav_apps), Icons.Default.Android, androidGreen)
+                                MainTab.Menu -> Triple(stringResource(R.string.nav_menu), Icons.Default.Menu, menuGray)
+                            }
 
-                                                val pointer = down.id
-                                                while (true) {
-                                                    val event = awaitPointerEvent()
-                                                    val change = event.changes.firstOrNull { it.id == pointer }
+                            NavigationBarItem(
+                                selected = isSelected,
+                                onClick = { currentTab = tab },
+                                icon = {
+                                    Icon(
+                                        imageVector = tabIcon,
+                                        contentDescription = tabLabel,
+                                        tint = if (isSelected) tabColor else unselectedNavColor
+                                    )
+                                },
+                                label = {
+                                    Text(
+                                        text = tabLabel,
+                                        color = if (isSelected) tabColor else unselectedNavColor,
+                                        fontSize = 12.sp
+                                    )
+                                },
+                                colors = NavigationBarItemDefaults.colors(
+                                    indicatorColor = tabColor.copy(alpha = 0.2f),
+                                    selectedIconColor = tabColor,
+                                    selectedTextColor = tabColor,
+                                    unselectedIconColor = unselectedNavColor,
+                                    unselectedTextColor = unselectedNavColor
+                                ),
+                                modifier = Modifier
+                                    .graphicsLayer {
+                                        if (isDragging) {
+                                            translationX = currentDragOffset
+                                            scaleX = 1.12f
+                                            scaleY = 1.12f
+                                        }
+                                    }
+                                    .then(
+                                        if (canDrag) {
+                                            Modifier.pointerInput(index) {
+                                                awaitEachGesture {
+                                                    val down = awaitFirstDown(requireUnconsumed = false)
+                                                    var isLongPressActive = false
 
-                                                    if (change == null || !change.pressed) {
-                                                        longPressTimer.cancel()
-                                                        if (isLongPressActive) {
-                                                            draggingIndex = null
-                                                            currentDragOffset = 0f
-                                                        }
-                                                        break
+                                                    val longPressTimer = scope.launch {
+                                                        delay(viewConfiguration.longPressTimeoutMillis)
+                                                        isLongPressActive = true
+                                                        draggingIndex = index
+                                                        currentDragOffset = 0f
+                                                        haptic.performHapticFeedback(HapticFeedbackType.LongPress)
                                                     }
 
-                                                    if (!isLongPressActive) {
-                                                        val diff = change.position - down.position
-                                                        if (diff.getDistance() > viewConfiguration.touchSlop) {
+                                                    val pointer = down.id
+                                                    while (true) {
+                                                        val event = awaitPointerEvent()
+                                                        val change = event.changes.firstOrNull { it.id == pointer }
+
+                                                        if (change == null || !change.pressed) {
                                                             longPressTimer.cancel()
+                                                            if (isLongPressActive) {
+                                                                draggingIndex = null
+                                                                currentDragOffset = 0f
+                                                            }
+                                                            break
                                                         }
-                                                    } else {
-                                                        change.consume()
-                                                        val deltaX = change.position.x - change.previousPosition.x
-                                                        val activeIndex = draggingIndex ?: break
-                                                        currentDragOffset += deltaX
 
-                                                        val threshold = if (itemWidthPx > 0f) itemWidthPx * 0.5f else 100f
+                                                        if (!isLongPressActive) {
+                                                            val diff = change.position - down.position
+                                                            if (diff.getDistance() > viewConfiguration.touchSlop) {
+                                                                longPressTimer.cancel()
+                                                            }
+                                                        } else {
+                                                            change.consume()
+                                                            val deltaX = change.position.x - change.previousPosition.x
+                                                            val activeIndex = draggingIndex ?: break
+                                                            currentDragOffset += deltaX
 
-                                                        if (currentDragOffset > threshold && activeIndex == 0) {
-                                                            val temp = reorderableTabs[0]
-                                                            reorderableTabs[0] = reorderableTabs[1]
-                                                            reorderableTabs[1] = temp
-                                                            draggingIndex = 1
-                                                            currentDragOffset -= itemWidthPx
-                                                            haptic.performHapticFeedback(HapticFeedbackType.LongPress)
-                                                            prefs.edit().putBoolean("tab_order_swapped", reorderableTabs[0] == MainTab.Clean).apply()
-                                                        } else if (currentDragOffset < -threshold && activeIndex == 1) {
-                                                            val temp = reorderableTabs[1]
-                                                            reorderableTabs[1] = reorderableTabs[0]
-                                                            reorderableTabs[0] = temp
-                                                            draggingIndex = 0
-                                                            currentDragOffset += itemWidthPx
-                                                            haptic.performHapticFeedback(HapticFeedbackType.LongPress)
-                                                            prefs.edit().putBoolean("tab_order_swapped", reorderableTabs[0] == MainTab.Clean).apply()
+                                                            val threshold = if (itemWidthPx > 0f) itemWidthPx * 0.5f else 100f
+
+                                                            if (currentDragOffset > threshold && activeIndex == 0) {
+                                                                val temp = reorderableTabs[0]
+                                                                reorderableTabs[0] = reorderableTabs[1]
+                                                                reorderableTabs[1] = temp
+                                                                draggingIndex = 1
+                                                                currentDragOffset -= itemWidthPx
+                                                                haptic.performHapticFeedback(HapticFeedbackType.LongPress)
+                                                                prefs.edit().putBoolean("tab_order_swapped", reorderableTabs[0] == MainTab.Clean).apply()
+                                                            } else if (currentDragOffset < -threshold && activeIndex == 1) {
+                                                                val temp = reorderableTabs[1]
+                                                                reorderableTabs[1] = reorderableTabs[0]
+                                                                reorderableTabs[0] = temp
+                                                                draggingIndex = 0
+                                                                currentDragOffset += itemWidthPx
+                                                                haptic.performHapticFeedback(HapticFeedbackType.LongPress)
+                                                                prefs.edit().putBoolean("tab_order_swapped", reorderableTabs[0] == MainTab.Clean).apply()
+                                                            }
                                                         }
                                                     }
                                                 }
                                             }
-                                        }
-                                    } else Modifier
-                                )
-                        )
+                                        } else Modifier
+                                    )
+                            )
+                        }
                     }
                 }
             }
-        },
+        }
+    },
         containerColor = appBackground,
         modifier = modifier
     ) { paddingValues ->

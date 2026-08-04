@@ -1,4 +1,4 @@
-﻿package com.tkno.blueiris.ui.page.settings.about
+package com.tkno.blueiris.ui.page.settings.about
 
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
@@ -77,7 +77,7 @@ fun UpdatePage(onNavigateBack: () -> Unit, triggerUpdate: Boolean = false) {
     val scope = rememberCoroutineScope()
     val prefs = remember { context.getSharedPreferences("blueiris_prefs", android.content.Context.MODE_PRIVATE) }
 
-    var autoUpdate by remember { mutableStateOf(prefs.getBoolean("auto_update_enabled", true)) }
+    var autoUpdate by remember { mutableStateOf(prefs.getBoolean("auto_update_enabled", false)) }
     var updateChannel by remember { mutableStateOf(prefs.getInt("update_channel", 1)) } // 1: PRE_RELEASE
     var bellEnabled by remember { mutableStateOf(prefs.getBoolean("update_bell_enabled", true)) }
 
@@ -271,7 +271,7 @@ fun UpdatePage(onNavigateBack: () -> Unit, triggerUpdate: Boolean = false) {
                         ProgressIndicatorButton(
                             modifier = Modifier.padding(horizontal = 24.dp).padding(top = 6.dp).padding(bottom = 12.dp),
                             text = stringResource(id = R.string.check_for_updates),
-                            icon = Icons.Outlined.SystemUpdate,
+                            icon = Icons.Outlined.Update,
                             isLoading = isLoading,
                         ) {
                             if (!isLoading) {

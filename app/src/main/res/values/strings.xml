@@ -17,7 +17,7 @@
     <string name="general_settings">General</string>
     <string name="boost_mode">Turbo mode</string>
     <string name="boost_mode_desc">Accelerate cleaning and stopping automation speed for high-end devices</string>
-    <string name="custom_speed_mode">Custom speed mode</string>
+    <string name="custom_speed_mode">Custom speed</string>
     <string name="custom_speed_mode_desc">Enable custom timing configuration for Stop and Clean operations</string>
     <string name="custom_speed_settings">Custom speed configuration</string>
     <string name="custom_speed_settings_desc">Fine-tune individual delays and timings for Stop and Clean actions</string>

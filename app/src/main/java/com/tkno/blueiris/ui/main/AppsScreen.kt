@@ -1,4 +1,4 @@
-﻿package com.tkno.blueiris.ui.main
+package com.tkno.blueiris.ui.main
 
 import androidx.activity.compose.BackHandler
 import androidx.compose.animation.AnimatedContent
