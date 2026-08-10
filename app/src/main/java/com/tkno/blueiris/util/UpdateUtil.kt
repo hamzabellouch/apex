@@ -1,4 +1,4 @@
-﻿package com.tkno.blueiris.util
+package com.tkno.blueiris.util
 
 import android.content.Context
 import android.content.Intent
@@ -23,11 +23,68 @@ import okhttp3.ResponseBody
 import java.io.File
 import java.util.regex.Pattern
 
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.app.PendingIntent
+import androidx.core.app.NotificationCompat
+import com.tkno.blueiris.MainActivity
+import com.tkno.blueiris.R
+
 object UpdateUtil {
 
     private const val OWNER = "hamzabellouch"
     private const val REPO = "blueiris"
     private const val TAG = "UpdateUtil"
+    private const val CHANNEL_ID = "app_update_channel"
+
+    fun showUpdateNotification(context: Context, release: Release) {
+        runCatching {
+            val notificationManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as? NotificationManager
+                ?: return
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                val channelName = try { context.getString(R.string.auto_update) } catch (e: Throwable) { "App Updates" }
+                val channel = NotificationChannel(
+                    CHANNEL_ID,
+                    channelName,
+                    NotificationManager.IMPORTANCE_DEFAULT
+                ).apply {
+                    description = try { context.getString(R.string.check_for_updates_desc) } catch (e: Throwable) { "New version notifications" }
+                }
+                notificationManager.createNotificationChannel(channel)
+            }
+
+            val intent = Intent(context, MainActivity::class.java).apply {
+                action = "ACTION_SHOW_UPDATE_DIALOG"
+                putExtra("show_update_dialog", true)
+                putExtra("release_name", release.name ?: release.tagName ?: "New Update")
+                putExtra("release_body", release.body ?: "")
+                putExtra("release_tag", release.tagName ?: "")
+                flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
+            }
+
+            val pendingIntent = PendingIntent.getActivity(
+                context,
+                1001,
+                intent,
+                PendingIntent.FLAG_UPDATE_CURRENT or (if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) PendingIntent.FLAG_IMMUTABLE else 0)
+            )
+
+            val versionName = release.tagName ?: release.name ?: "New Version"
+            val title = try { context.getString(R.string.new_update_available) } catch (e: Throwable) { "New Update Available" }
+            val text = try { context.getString(R.string.new_update_desc, versionName) } catch (e: Throwable) { "Version $versionName is available. Tap to update." }
+
+            val builder = NotificationCompat.Builder(context, CHANNEL_ID)
+                .setSmallIcon(R.mipmap.ic_launcher)
+                .setContentTitle(title)
+                .setContentText(text)
+                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                .setAutoCancel(true)
+                .setContentIntent(pendingIntent)
+
+            notificationManager.notify(1001, builder.build())
+        }.onFailure { Log.e(TAG, "Failed to post update notification", it) }
+    }
 
     private val client = HttpClient.client
     private val jsonFormat = Json { ignoreUnknownKeys = true }
@@ -44,7 +101,7 @@ object UpdateUtil {
                 val bodyString = response.body?.string() ?: return emptyList()
                 jsonFormat.decodeFromString<List<Release>>(bodyString)
             }
-        } catch (e: Exception) {
+        } catch (e: Throwable) {
             if (e is kotlinx.coroutines.CancellationException) throw e
             Log.e(TAG, "Failed to fetch releases list", e)
             emptyList()
@@ -69,14 +126,18 @@ object UpdateUtil {
         }
 
     private fun Context.getCurrentVersion(): Version =
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            packageManager
-                .getPackageInfo(packageName, PackageManager.PackageInfoFlags.of(0))
-                .versionName
-                ?.toVersion() ?: EMPTY_VERSION
-        } else {
-            @Suppress("DEPRECATION")
-            packageManager.getPackageInfo(packageName, 0).versionName?.toVersion() ?: EMPTY_VERSION
+        try {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                packageManager
+                    .getPackageInfo(packageName, PackageManager.PackageInfoFlags.of(0))
+                    .versionName
+                    ?.toVersion() ?: EMPTY_VERSION
+            } else {
+                @Suppress("DEPRECATION")
+                packageManager.getPackageInfo(packageName, 0).versionName?.toVersion() ?: EMPTY_VERSION
+            }
+        } catch (e: Throwable) {
+            EMPTY_VERSION
         }
 
     private fun Context.getLatestApk(): File {
@@ -149,7 +210,7 @@ object UpdateUtil {
                     return@withContext emptyFlow()
                 }
                 return@withContext responseBody.downloadFileWithProgress(saveFile)
-            } catch (e: Exception) {
+            } catch (e: Throwable) {
                 if (e is kotlinx.coroutines.CancellationException) throw e
                 Log.e(TAG, "Download error", e)
             }

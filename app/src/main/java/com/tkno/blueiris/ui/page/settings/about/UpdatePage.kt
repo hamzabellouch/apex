@@ -67,40 +67,37 @@ import kotlinx.coroutines.withContext
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun UpdatePage(onNavigateBack: () -> Unit, triggerUpdate: Boolean = false) {
-    val scrollBehavior =
-        TopAppBarDefaults.exitUntilCollapsedScrollBehavior(
-            rememberTopAppBarState(),
-            canScroll = { true },
-        )
+fun UpdatePage(
+    onNavigateBack: () -> Unit,
+    triggerUpdate: Boolean = false
+) {
+    val scrollBehavior = TopAppBarDefaults.exitUntilCollapsedScrollBehavior()
     val context = LocalContext.current
     val scope = rememberCoroutineScope()
     val prefs = remember { context.getSharedPreferences("blueiris_prefs", android.content.Context.MODE_PRIVATE) }
 
-    var autoUpdate by remember { mutableStateOf(prefs.getBoolean("auto_update_enabled", false)) }
-    var updateChannel by remember { mutableStateOf(prefs.getInt("update_channel", 1)) } // 1: PRE_RELEASE
-    var bellEnabled by remember { mutableStateOf(prefs.getBoolean("update_bell_enabled", true)) }
+    var autoUpdate by remember { mutableStateOf(try { prefs.getBoolean("auto_update_enabled", false) } catch (e: Throwable) { false }) }
+    var updateChannel by remember { mutableStateOf(try { prefs.getInt("update_channel", 1) } catch (e: Throwable) { 1 }) }
+    var bellEnabled by remember { mutableStateOf(try { prefs.getBoolean("update_bell_enabled", true) } catch (e: Throwable) { true }) }
 
     var customDir by remember {
         mutableStateOf(
-            prefs.getString(
-                "app_update_directory",
+            try {
+                prefs.getString("app_update_directory", null)
+            } catch (e: Throwable) { null }
+            ?: try {
                 android.os.Environment.getExternalStoragePublicDirectory(
                     android.os.Environment.DIRECTORY_DOWNLOADS
-                ).absolutePath
-            ) ?: ""
+                )?.absolutePath
+            } catch (e: Throwable) { null }
+            ?: try {
+                context.getExternalFilesDir(android.os.Environment.DIRECTORY_DOWNLOADS)?.absolutePath
+                    ?: context.filesDir.absolutePath
+            } catch (e: Throwable) {
+                context.filesDir.absolutePath
+            }
         )
     }
-
-    val folderPickerLauncher =
-        rememberLauncherForActivityResult(contract = ActivityResultContracts.OpenDocumentTree()) { uri ->
-            uri?.let {
-                val path = uri.path ?: ""
-                prefs.edit().putString("app_update_directory", path).apply()
-                customDir = path
-                android.widget.Toast.makeText(context, "Update directory set to: $path", android.widget.Toast.LENGTH_SHORT).show()
-            }
-        }
 
     var release by remember { mutableStateOf(UpdateUtil.Release()) }
     var showUpdateDialog by remember { mutableStateOf(false) }
@@ -176,7 +173,14 @@ fun UpdatePage(onNavigateBack: () -> Unit, triggerUpdate: Boolean = false) {
                                 text = { Text(stringResource(id = R.string.update_directory)) },
                                 onClick = {
                                     menuExpanded = false
-                                    folderPickerLauncher.launch(null)
+                                    runCatching {
+                                        val intent = android.content.Intent(android.content.Intent.ACTION_OPEN_DOCUMENT_TREE).apply {
+                                            addFlags(android.content.Intent.FLAG_GRANT_READ_URI_PERMISSION or android.content.Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION)
+                                        }
+                                        context.startActivity(intent)
+                                    }.onFailure {
+                                        android.widget.Toast.makeText(context, "Folder picker not available", android.widget.Toast.LENGTH_SHORT).show()
+                                    }
                                 },
                             )
                         }

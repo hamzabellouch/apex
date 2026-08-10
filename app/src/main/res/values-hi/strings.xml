@@ -123,7 +123,7 @@
     <string name="permission_issue_desc">Download/ और Documents/ के बाहर की डायरेक्टरी समर्थित नहीं हैं</string>
     <string name="battery_configuration">बैटरी कॉन्फ़िगरेशन</string>
     <string name="battery_configuration_desc">पृष्ठभूमि में डाउनलोड करने के लिए इस ऐप के लिए बैटरी ऑप्टिमाइज़ेशन को नज़रअंदाज़ करें</string>
-    <string name="service_title">Blue Iris डाउनलोड कर रहा है…</string>
+    <string name="service_title">BlueIris डाउनलोड कर रहा है…</string>
     <string name="unknown_error">अज्ञात त्रुटि</string>
     <string name="translate">अनुवाद करें</string>
     <string name="translate_desc">Hosted Weblate पर इस ऐप का अनुवाद करने में मदद करें</string>
@@ -169,7 +169,7 @@
     <string name="matrix_space">Matrix</string>
     <string name="sponsor">स्पॉन्सर करें</string>
     <string name="sponsor_desc">GitHub पर स्पॉन्सर करके इस ऐप का समर्थन करें</string>
-    <string name="sponsor_msg">Blue Iris भविष्य में सभी के लिए हमेशा मुफ़्त और ओपन सोर्स रहेगा। यदि आप इसे पसंद करते हैं, तो कृपया GitHub पर मुझे स्पॉन्सर करने पर विचार करें!</string>
+    <string name="sponsor_msg">BlueIris भविष्य में सभी के लिए हमेशा मुफ़्त और ओपन सोर्स रहेगा। यदि आप इसे पसंद करते हैं, तो कृपया GitHub पर मुझे स्पॉन्सर करने पर विचार करें!</string>
     <string name="feedback">फ़ीडबैक</string>
     <string name="sponsors">स्पॉन्सर</string>
     <string name="instagram">Instagram</string>
@@ -217,14 +217,14 @@
     <string name="scan_history">स्कैन इतिहास</string>
     <string name="no_scan_history_yet">अभी तक कोई स्कैन इतिहास नहीं है</string>
     <string name="scan_code">कोड स्कैन करें</string>
-    <string name="scanned_by_links">Blue Iris द्वारा स्कैन किया गया</string>
+    <string name="scanned_by_links">BlueIris द्वारा स्कैन किया गया</string>
     <string name="scan_qr_instruction">कैमरा का उपयोग करके क्यूआर कोड स्कैन करें या गैलरी से आयात करें</string>
     <string name="scan_now">अभी स्कैन करें</string>
     <string name="scanned_content">स्कैन की गई सामग्री</string>
     <string name="feature_currently_unavailable">यह सुविधा वर्तमान में अनुपलब्ध है।</string>
     <string name="contact">संपर्क करें</string>
-    <string name="contact_desc">Blue Iris में नई सुविधाएँ जोड़ने के लिए डेवलपर से संपर्क करें</string>
-    <string name="links_issue_tracker">Blue Iris इश्यू ट्रैकर</string>
+    <string name="contact_desc">BlueIris में नई सुविधाएँ जोड़ने के लिए डेवलपर से संपर्क करें</string>
+    <string name="links_issue_tracker">BlueIris इश्यू ट्रैकर</string>
     <string name="enter_url_error">कृपया एक URL दर्ज करें</string>
     <string name="invalid_url_format">अमान्य URL फ़ॉर्मेट। कृपया एक वैध वेब पता दर्ज करें (जैसे example.com)।</string>
     <string name="copied_to_clipboard">क्लिपबोर्ड पर कॉपी किया गया</string>
@@ -258,5 +258,189 @@
     <string name="early_access">अग्रिम पहुँच</string>
     <string name="pre_release_desc">नई सुविधाओं और परिवर्तनों का पूर्वावलोकन करने के लिए प्री-रिलीज़ बिल्ड इंस्टॉल करें।\n\nइन संस्करणों में कुछ अस्थिरता होगी, इसलिए यदि आपको ऐप को बेहतर बनाने में हमारी मदद करने के लिए कोई समस्या आती है तो कृपया हमें फ़ीडबैक देने में संकोच न करें।</string>
     <string name="update_directory">अपडेट डायरेक्टरी</string>
-</resources>
 
+    
+    <!-- Navigation Tabs & Toasts -->
+    <string name="nav_stop">रोकें</string>
+    <string name="nav_clean">सफ़ाई</string>
+    <string name="nav_apps">ऐप्स</string>
+    <string name="nav_menu">मेनू</string>
+    <string name="toast_all_cache_cleaned">सभी कैश फ़ाइलें पहले से ही साफ़ हैं (0 KB)</string>
+    <string name="toast_all_bg_apps_stopped">सभी बैकग्राउंड ऐप्स पहले से रोक दिए गए हैं</string>
+    <string name="toast_selected_apps_no_cache">चयनित ऐप्स में कोई कैश नहीं है (0 KB)</string>
+
+    <!-- AppsScreen Filter & Sort -->
+    <string name="app_filter_all">सभी ऐप्स</string>
+    <string name="app_filter_user">उपयोगकर्ता ऐप्स</string>
+    <string name="app_filter_system">सिस्टम ऐप्स</string>
+    <string name="app_sort_by_name">नाम के अनुसार</string>
+    <string name="app_sort_by_date">तारीख के अनुसार</string>
+    <string name="app_sort_by_size">आकार के अनुसार</string>
+    <string name="apps_screen_title">ऐप्स</string>
+    <string name="apps_listed_count">%1$d ऐप्स सूचीबद्ध हैं</string>
+    <string name="cd_filter_apps">ऐप्स फ़िल्टर करें</string>
+    <string name="cd_sort_apps">ऐप्स क्रमबद्ध करें</string>
+    <string name="apps_no_apps_found">इस फ़िल्टर के लिए कोई ऐप नहीं मिला</string>
+    <string name="cd_clear_selection">चयन साफ़ करें</string>
+    <string name="apps_selected_count">चयनित: %1$d</string>
+    <string name="cd_clean_selected_apps">चयनित ऐप्स साफ़ करें</string>
+    <string name="cd_selected">चयनित</string>
+    <string name="app_size_prefix">आकार: %1$s</string>
+    <string name="cd_go_to_details">विवरण पर जाएं</string>
+
+    <!-- App Detail Screen Strings -->
+    <string name="app_detail_version">संस्करण: %1$s</string>
+    <string name="app_detail_apk_size">APK आकार</string>
+    <string name="app_detail_install_date">स्थापना की तारीख</string>
+    <string name="app_detail_last_update">अंतिम अपडेट</string>
+    <string name="app_detail_requested_permissions">अनुरोधित अनुमतियां</string>
+    <string name="app_detail_uninstall">अनइंस्टॉल करें</string>
+    <string name="app_detail_update">अपडेट करें</string>
+    <string name="app_detail_launch">शुरू करें</string>
+    <string name="app_detail_app_info">ऐप जानकारी</string>
+    <string name="toast_cannot_launch_app">इस एप्लिकेशन को शुरू नहीं किया जा सकता</string>
+    <string name="toast_cannot_open_store">स्टोर पेज नहीं खोला जा सकता</string>
+
+    <!-- Speed & Performance Strings -->
+    <string name="performance_and_speed_title">प्रदर्शन और गति</string>
+
+    <!-- Stop Process Strings -->
+    <string name="stop_process_title">रोकने की प्रक्रिया</string>
+    <string name="force_stop_mode_title">बलपूर्वक रोकने का मोड</string>
+
+    <!-- Clean Process Strings -->
+    <string name="clean_process_title">सफ़ाई प्रक्रिया</string>
+    <string name="cleaning_mode_title">सफ़ाई मोड</string>
+    <string name="cleaning_mode_manual">मैनुअल</string>
+    <string name="cleaning_mode_automatic">स्वचालित</string>
+    <string name="cleaning_mode_ask_each_time">हर बार पूछें</string>
+    <string name="ignore_tiny_cache_title">छोटे कैश को नजरअंदाज करें</string>
+    <string name="ignore_tiny_cache_desc">3 MB से कम कैश वाले ऐप्स को छोड़ दें</string>
+
+    <!-- StopScreen Strings -->
+    <string name="stop_title">रोकें</string>
+    <string name="stop_history_icon_desc">इतिहास</string>
+    <string name="stop_gauge_apps">ऐप्स</string>
+    <string name="stop_gauge_background">बैकग्राउंड</string>
+    <string name="stop_gauge_zero">0</string>
+    <string name="stop_gauge_active_count">%1$d सक्रिय</string>
+    <string name="stop_stat_running_title">चल रहा है</string>
+    <string name="stop_stat_running_value">%1$d ऐप्स</string>
+    <string name="stop_stat_ram_used">उपयोग की गई RAM</string>
+    <string name="stop_stat_free_ram">खाली RAM</string>
+    <string name="stop_action_memory_info">मेमोरी जानकारी</string>
+    <string name="stop_action_whitelist">व्हाइटलिस्ट</string>
+    <string name="stop_action_running_apps">चल रहे ऐप्स</string>
+    <string name="stop_button_icon_desc">रोकने का आइकन</string>
+    <string name="stop_start_button">रोकना शुरू करें</string>
+    <string name="stop_dialog_memory_title">सिस्टम RAM जानकारी</string>
+    <string name="stop_dialog_total_ram">कुल RAM: %1$s</string>
+    <string name="stop_dialog_used_ram">उपयोग की गई RAM: %1$s (%2$d%%)</string>
+    <string name="stop_dialog_free_ram">खाली RAM: %1$s</string>
+    <string name="stop_dialog_close">बंद करें</string>
+    <string name="stop_dialog_running_apps_title">चल रहे ऐप्स (%1$d)</string>
+    <string name="stop_dialog_no_running_apps">कोई सक्रिय बैकग्राउंड ऐप नहीं है।</string>
+
+    <!-- CleanScreen Strings -->
+    <string name="clean_title">सफ़ाई</string>
+    <string name="clean_history_icon_desc">इतिहास</string>
+    <string name="clean_gauge_unit_mb">MB</string>
+    <string name="clean_gauge_system_cleaned">सिस्टम साफ़ हो गया</string>
+    <string name="clean_gauge_can_be_cleared">साफ़ किया जा सकता है</string>
+    <string name="clean_gauge_zero_mb">0 MB</string>
+    <string name="clean_gauge_current_mb">%1$s MB</string>
+    <string name="clean_stat_total">कुल</string>
+    <string name="clean_stat_used">प्रयुक्त</string>
+    <string name="clean_stat_cache">कैश</string>
+    <string name="clean_action_storage_details">स्टोरेज विवरण</string>
+    <string name="clean_action_whitelist">व्हाइटलिस्ट</string>
+    <string name="clean_action_live_cache">लाइव कैश</string>
+    <string name="clean_button_icon_desc">सफ़ाई का आइकन</string>
+    <string name="clean_start_button">सफ़ाई शुरू करें</string>
+    <string name="clean_dialog_storage_details_title">स्टोरेज विवरण</string>
+    <string name="clean_dialog_total_storage">कुल आंतरिक स्टोरेज: %1$s</string>
+    <string name="clean_dialog_used_storage">उपयोग किया गया स्टोरेज: %1$s</string>
+    <string name="clean_dialog_clearable_cache">साफ़ करने योग्य कैश: %1$s</string>
+    <string name="clean_dialog_close">बंद करें</string>
+    <string name="clean_dialog_live_cache_title">लाइव कैश मॉनिटर</string>
+    <string name="clean_dialog_live_cache_desc">लाइव कैश आकार: %1$s।</string>
+    <string name="clean_dialog_ok">ठीक है</string>
+
+    <!-- Sub-screens Extracted Strings -->
+    <string name="cd_back">वापस</string>
+    <string name="cd_broom_icon">झाडू का आइकन</string>
+    <string name="cd_whitelist_icon">व्हाइटलिस्ट आइकन</string>
+    <string name="cd_remove">हटाएं</string>
+    <string name="cd_add_app">ऐप जोड़ें</string>
+    <string name="cd_check_icon">चेक आइकन</string>
+    <string name="cd_toggle_icon">स्विच</string>
+    <string name="cd_accessibility_icon">एक्सेसिबिलिटी आइकन</string>
+    <string name="cd_success_icon">सफलता आइकन</string>
+    <string name="cd_usage_access_icon">उपयोग पहुंच आइकन</string>
+    <string name="cd_blueiris_app_icon">BlueIris आइकन</string>
+    <string name="cd_notifications_icon">सूचना आइकन</string>
+    <string name="cd_checkmark_icon">चेक चिह्न</string>
+
+    <string name="analyze_screen_title">विश्लेषण</string>
+    <string name="analyze_cache_apps_count">कैश (%1$d ऐप्स)</string>
+    <string name="analyze_no_cache_found">कोई कैश फ़ाइल नहीं मिली</string>
+    <string name="analyze_clear_button">साफ़ करें</string>
+
+    <string name="whitelist_title">व्हाइटलिस्ट</string>
+    <string name="whitelist_empty_avoid_stop">रोकने से बचने के लिए ऐप जोड़ें</string>
+    <string name="whitelist_empty_avoid_clean">कैश सफ़ाई से बचने के लिए ऐप जोड़ें</string>
+    <string name="whitelist_dialog_title_add">व्हाइटलिस्ट में जोड़ें</string>
+    <string name="whitelist_dialog_title_selected">चयनित (%1$d)</string>
+    <string name="whitelist_dialog_all_apps_added">सभी ऐप्स पहले से ही व्हाइटलिस्ट में हैं।</string>
+    <string name="whitelist_dialog_add_btn">जोड़ें</string>
+    <string name="whitelist_dialog_add_count_btn">जोड़ें (%1$d)</string>
+
+    <string name="history_title">इतिहास</string>
+    <string name="history_today_stopped">आज रोके गए</string>
+    <string name="history_no_apps_stopped_today">आज कोई ऐप नहीं रोका गया</string>
+    <string name="history_today_cleared">आज साफ़ किए गए</string>
+    <string name="history_period_today">आज</string>
+    <string name="history_period_yesterday">कल</string>
+    <string name="history_period_last_7_days">पिछले 7 दिन</string>
+    <string name="history_period_last_30_days">पिछले 30 दिन</string>
+    <string name="history_period_tap_details">विवरण के लिए टैप करें</string>
+    <string name="history_clear_all">सभी साफ़ करें</string>
+    <string name="history_period_summary_singular">कुल: %1$d ऐप  |  %2$s कैश</string>
+    <string name="history_period_summary_plural">कुल: %1$d ऐप्स  |  %2$s कैश</string>
+    <string name="history_no_cache_cleared_period">इस अवधि में कोई कैश साफ़ नहीं किया गया</string>
+    <string name="history_item_cache_size">कैश: %1$s</string>
+    <string name="history_dialog_clear_clean_msg">क्या आप सफ़ाई इतिहास मिटाना चाहते हैं?</string>
+    <string name="history_dialog_clear_stop_msg">क्या आप रोकने का इतिहास मिटाना चाहते हैं?</string>
+    <string name="history_stop_count_singular">%1$d बार</string>
+    <string name="history_stop_count_plural">%1$d बार</string>
+
+    <string name="done_count_apps_singular">1 ऐप</string>
+    <string name="done_count_apps_plural">%1$d ऐप्स</string>
+    <string name="done_stopped_subtitle">रोके गए: %1$s</string>
+    <string name="done_cleaned_subtitle">साफ़ किए गए: %1$s</string>
+    <string name="done_button">संपन्न</string>
+
+    <string name="permission_title">अनुमति</string>
+    <string name="accessibility_permission_title">एक्सेसिबिलिटी सेवा API</string>
+    <string name="accessibility_permission_desc1">यह ऐप ऑटोमेशन के लिए API का उपयोग करता है।</string>
+    <string name="accessibility_permission_desc2">डेटा कभी भी एकत्र या साझा नहीं किया जाता है।</string>
+    <string name="btn_cancel_uppercase">रद्द करें</string>
+    <string name="btn_continue_uppercase">जारी रखें</string>
+
+    <string name="permission_success_title">सफल!</string>
+    <string name="permission_success_desc1">बधाई हो, आप तैयार हैं।</string>
+    <string name="permission_success_desc2">हम व्यक्तिगत जानकारी एकत्र नहीं करते हैं।</string>
+
+    <string name="usage_access_permission_title">उपयोग पहुंच अनुमति</string>
+    <string name="usage_access_permission_desc1">उपयोग डेटा तक पहुंच की अनुमति आवश्यक है।</string>
+    <string name="usage_access_permission_desc2">सक्षम करने के लिए नीचे दिए गए बटन पर क्लिक करें।</string>
+
+    <string name="onboarding_privacy_note">आगे बढ़कर, आप स्वीकार करते हैं BlueIris %1$s</string>
+    <string name="btn_next">अगला</string>
+    <string name="btn_get_started">शुरू करें</string>
+    <string name="onboarding_page1_desc">सभी ऐप्स का कैश साफ़ करें और अधिक स्पेस पाएं।</string>
+    <string name="onboarding_page2_title">कैश सूचनाएं</string>
+    <string name="onboarding_page2_desc">कैश अधिक होने पर सूचना प्राप्त करें।</string>
+    <string name="onboarding_page3_title">बस इतना ही!</string>
+    <string name="onboarding_page3_desc">सब कुछ सफलतापूर्वक कॉन्फ़िगर हो गया है।</string>
+</resources>

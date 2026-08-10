@@ -5,6 +5,7 @@ import androidx.compose.animation.core.FastOutSlowInEasing
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Canvas
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -29,7 +30,9 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.StrokeCap
+import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.graphics.drawscope.Stroke
+import androidx.core.graphics.drawable.toBitmap
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.Dp
@@ -335,13 +338,44 @@ fun StopScreen(
                                     .padding(vertical = 6.dp),
                                 verticalAlignment = Alignment.CenterVertically
                             ) {
-                                Icon(
-                                    imageVector = Icons.Default.Android,
-                                    contentDescription = null,
-                                    tint = stopOrange,
-                                    modifier = Modifier.size(20.dp)
-                                )
-                                Spacer(modifier = Modifier.width(10.dp))
+                                Box(
+                                    modifier = Modifier
+                                        .size(36.dp)
+                                        .background(MaterialTheme.colorScheme.surfaceContainerHigh, CircleShape),
+                                    contentAlignment = Alignment.Center
+                                ) {
+                                    if (app.icon != null) {
+                                        val bitmap = remember(app.packageName) {
+                                            try {
+                                                app.icon.toBitmap().asImageBitmap()
+                                            } catch (e: Exception) {
+                                                null
+                                            }
+                                        }
+                                        if (bitmap != null) {
+                                            Image(
+                                                bitmap = bitmap,
+                                                contentDescription = app.name,
+                                                modifier = Modifier.size(24.dp)
+                                            )
+                                        } else {
+                                            Icon(
+                                                imageVector = Icons.Default.Android,
+                                                contentDescription = app.name,
+                                                tint = stopOrange,
+                                                modifier = Modifier.size(20.dp)
+                                            )
+                                        }
+                                    } else {
+                                        Icon(
+                                            imageVector = Icons.Default.Android,
+                                            contentDescription = app.name,
+                                            tint = stopOrange,
+                                            modifier = Modifier.size(20.dp)
+                                        )
+                                    }
+                                }
+                                Spacer(modifier = Modifier.width(12.dp))
                                 Column {
                                     Text(
                                         text = app.name,

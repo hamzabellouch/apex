@@ -1,4 +1,4 @@
-﻿package com.tkno.blueiris.theme
+package com.tkno.blueiris.theme
 
 import android.app.Activity
 import android.content.Context
@@ -12,11 +12,21 @@ import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.DisposableEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.platform.LocalView
+import androidx.compose.ui.unit.LayoutDirection
 import androidx.core.os.ConfigurationCompat
+import androidx.core.text.TextUtilsCompat
+import androidx.core.view.ViewCompat
 import androidx.core.view.WindowCompat
 import java.util.Locale
 
@@ -66,20 +76,47 @@ fun BlueIrisTheme(
     val configuration = LocalConfiguration.current
 
     val prefs = remember(context) { context.getSharedPreferences("blueiris_prefs", Context.MODE_PRIVATE) }
-    val langTag = remember(configuration) {
-        prefs.getString("app_language", "system") ?: "system"
+    var langTag by remember { mutableStateOf(prefs.getString("app_language", "system") ?: "system") }
+
+    DisposableEffect(prefs) {
+        val listener = android.content.SharedPreferences.OnSharedPreferenceChangeListener { p, key ->
+            if (key == "app_language") {
+                langTag = p.getString("app_language", "system") ?: "system"
+            }
+        }
+        prefs.registerOnSharedPreferenceChangeListener(listener)
+        onDispose {
+            prefs.unregisterOnSharedPreferenceChangeListener(listener)
+        }
     }
 
     val currentLocale = remember(configuration) {
         ConfigurationCompat.getLocales(configuration).get(0) ?: Locale.getDefault()
     }
 
-    val isArabic = remember(langTag, currentLocale) {
-        if (langTag == "system") {
-            currentLocale.language == "ar"
-        } else {
-            langTag.startsWith("ar")
+    val targetLocale = remember(langTag, currentLocale) {
+        if (langTag == "system") currentLocale else Locale.forLanguageTag(langTag)
+    }
+
+    val isRtl = remember(targetLocale) {
+        TextUtilsCompat.getLayoutDirectionFromLocale(targetLocale) == ViewCompat.LAYOUT_DIRECTION_RTL
+    }
+
+    val layoutDirection = if (isRtl) LayoutDirection.Rtl else LayoutDirection.Ltr
+
+    val isArabic = remember(targetLocale) {
+        targetLocale.language == "ar"
+    }
+
+    val updatedConfig = remember(configuration, targetLocale, isRtl) {
+        android.content.res.Configuration(configuration).apply {
+            setLocale(targetLocale)
+            setLayoutDirection(targetLocale)
         }
+    }
+
+    val updatedContext = remember(context, updatedConfig) {
+        context.createConfigurationContext(updatedConfig)
     }
 
     val typography = remember(isArabic) {
@@ -107,6 +144,12 @@ fun BlueIrisTheme(
         }
     }
 
-    MaterialTheme(colorScheme = colorScheme, typography = typography, content = content)
+    CompositionLocalProvider(
+        LocalConfiguration provides updatedConfig,
+        LocalContext provides updatedContext,
+        LocalLayoutDirection provides layoutDirection
+    ) {
+        MaterialTheme(colorScheme = colorScheme, typography = typography, content = content)
+    }
 }
 

@@ -123,7 +123,7 @@
     <string name="permission_issue_desc">Οι κατάλογοι εκτός των Download/ και Documents/ δεν υποστηρίζονται</string>
     <string name="battery_configuration">Διαμόρφωση μπαταρίας</string>
     <string name="battery_configuration_desc">Παράβλεψη βελτιστοποίησης μπαταρίας για αυτήν την εφαρμογή για λήψη στο υπόβαθρο</string>
-    <string name="service_title">Το Blue Iris πραγματοποιεί λήψη…</string>
+    <string name="service_title">Το BlueIris πραγματοποιεί λήψη…</string>
     <string name="unknown_error">Άγνωστο σφάλμα</string>
     <string name="translate">Μετάφραση</string>
     <string name="translate_desc">Βοηθήστε στη μετάφραση αυτής της εφαρμογής στο Hosted Weblate</string>
@@ -169,7 +169,7 @@
     <string name="matrix_space">Matrix</string>
     <string name="sponsor">Χορηγία</string>
     <string name="sponsor_desc">Υποστηρίξτε αυτήν την εφαρμογή κάνοντας χορηγία στο GitHub</string>
-    <string name="sponsor_msg">Το Blue Iris θα είναι πάντα δωρεάν και ανοιχτού κώδικα στο μέλλον για όλους. Αν σας αρέσει, σκεφτείτε να με υποστηρίξετε στο GitHub!</string>
+    <string name="sponsor_msg">Το BlueIris θα είναι πάντα δωρεάν και ανοιχτού κώδικα στο μέλλον για όλους. Αν σας αρέσει, σκεφτείτε να με υποστηρίξετε στο GitHub!</string>
     <string name="feedback">Σχόλια</string>
     <string name="sponsors">Χορηγοί</string>
     <string name="instagram">Instagram</string>
@@ -217,14 +217,14 @@
     <string name="scan_history">Ιστορικό σαρώσεων</string>
     <string name="no_scan_history_yet">Δεν υπάρχει ιστορικό σαρώσεων ακόμα</string>
     <string name="scan_code">Σάρωση κωδικού</string>
-    <string name="scanned_by_links">Σαρώθηκε από το Blue Iris</string>
+    <string name="scanned_by_links">Σαρώθηκε από το BlueIris</string>
     <string name="scan_qr_instruction">Σαρώστε κωδικούς QR χρησιμοποιώντας την κάμερα ή εισαγάγετε από τη συλλογή</string>
     <string name="scan_now">Σάρωση τώρα</string>
     <string name="scanned_content">Περιεχόμενο που σαρώθηκε</string>
     <string name="feature_currently_unavailable">Αυτή η λειτουργία δεν είναι διαθέσιμη προς το παρόν.</string>
     <string name="contact">Επικοινωνία</string>
-    <string name="contact_desc">Επικοινωνήστε με τον προγραμματιστή για να προσθέσει νέες λειτουργίες στο Blue Iris</string>
-    <string name="links_issue_tracker">Παρακολούθηση ζητημάτων Blue Iris</string>
+    <string name="contact_desc">Επικοινωνήστε με τον προγραμματιστή για να προσθέσει νέες λειτουργίες στο BlueIris</string>
+    <string name="links_issue_tracker">Παρακολούθηση ζητημάτων BlueIris</string>
     <string name="enter_url_error">Παρακαλώ εισαγάγετε ένα URL</string>
     <string name="invalid_url_format">Μη έγκυρη μορφή URL. Παρακαλώ εισαγάγετε μια έγκυρη διεύθυνση ιστού (π.χ. example.com).</string>
     <string name="copied_to_clipboard">Αντιγράφηκε στο πρόχειρο</string>
@@ -258,5 +258,189 @@
     <string name="early_access">Πρώιμη πρόσβαση</string>
     <string name="pre_release_desc">Εγκαταστήστε δοκιμαστικές εκδόσεις για να προεπισκοπήσετε νέες λειτουργίες και αλλαγές.\n\nΘα υπάρχει κάποια αστάθεια σε αυτές τις εκδόσεις, επομένως μην διστάσετε να μας στείλετε σχόλια εάν αντιμετωπίσετε προβλήματα για να μας βοηθήσετε να βελτιώσουμε την εφαρμογή.</string>
     <string name="update_directory">Κατάλογος ενημέρωσης</string>
-</resources>
 
+    
+    <!-- Navigation Tabs & Toasts -->
+    <string name="nav_stop">Διακοπή</string>
+    <string name="nav_clean">Καθαρισμός</string>
+    <string name="nav_apps">Εφαρμογές</string>
+    <string name="nav_menu">Μενού</string>
+    <string name="toast_all_cache_cleaned">Όλη η κρυφή μνήμη έχει καθαριστεί (0 KB)</string>
+    <string name="toast_all_bg_apps_stopped">Όλες οι εφαρμογές παρασκηνίου έχουν σταματήσει</string>
+    <string name="toast_selected_apps_no_cache">Οι επιλεγμένες εφαρμογές δεν έχουν κρυφή μνήμη (0 KB)</string>
+
+    <!-- AppsScreen Filter & Sort -->
+    <string name="app_filter_all">Όλες οι εφαρμογές</string>
+    <string name="app_filter_user">Εφαρμογές χρήστη</string>
+    <string name="app_filter_system">Εφαρμογές συστήματος</string>
+    <string name="app_sort_by_name">Κατά όνομα</string>
+    <string name="app_sort_by_date">Κατά ημερομηνία</string>
+    <string name="app_sort_by_size">Κατά μέγεθος</string>
+    <string name="apps_screen_title">Εφαρμογές</string>
+    <string name="apps_listed_count">%1$d εφαρμογές στη λίστα</string>
+    <string name="cd_filter_apps">Φιλτράρισμα εφαρμογών</string>
+    <string name="cd_sort_apps">Ταξινόμηση εφαρμογών</string>
+    <string name="apps_no_apps_found">Δεν βρέθηκαν εφαρμογές για αυτό το φίλτρο</string>
+    <string name="cd_clear_selection">Καθαρισμός επιλογής</string>
+    <string name="apps_selected_count">Επιλέχθηκαν: %1$d</string>
+    <string name="cd_clean_selected_apps">Καθαρισμός επιλεγμένων εφαρμογών</string>
+    <string name="cd_selected">Επιλέχθηκε</string>
+    <string name="app_size_prefix">Μέγεθος: %1$s</string>
+    <string name="cd_go_to_details">Μετάβαση στις λεπτομέρειες</string>
+
+    <!-- App Detail Screen Strings -->
+    <string name="app_detail_version">Έκδοση: %1$s</string>
+    <string name="app_detail_apk_size">Μέγεθος APK</string>
+    <string name="app_detail_install_date">Ημερομηνία εγκατάστασης</string>
+    <string name="app_detail_last_update">Τελευταία ενημέρωση</string>
+    <string name="app_detail_requested_permissions">Απαιτούμενα δικαιώματα</string>
+    <string name="app_detail_uninstall">Απεγκατάσταση</string>
+    <string name="app_detail_update">Ενημέρωση</string>
+    <string name="app_detail_launch">Εκκίνηση</string>
+    <string name="app_detail_app_info">ΠΛΗΡΟΦΟΡΙΕΣ ΕΦΑΡΜΟΓΗΣ</string>
+    <string name="toast_cannot_launch_app">Αδυναμία εκκίνησης αυτής της εφαρμογής</string>
+    <string name="toast_cannot_open_store">Αδυναμία ανοίγματος της σελίδας του καταστήματος</string>
+
+    <!-- Speed & Performance Strings -->
+    <string name="performance_and_speed_title">Απόδοση &amp; Ταχύτητα</string>
+
+    <!-- Stop Process Strings -->
+    <string name="stop_process_title">Διαδικασία διακοπής</string>
+    <string name="force_stop_mode_title">Λειτουργία αναγκαστικής διακοπής</string>
+
+    <!-- Clean Process Strings -->
+    <string name="clean_process_title">Διαδικασία καθαρισμού</string>
+    <string name="cleaning_mode_title">Λειτουργία καθαρισμού</string>
+    <string name="cleaning_mode_manual">Χειροκίνητα</string>
+    <string name="cleaning_mode_automatic">Αυτόματα</string>
+    <string name="cleaning_mode_ask_each_time">Ερώτηση κάθε φορά</string>
+    <string name="ignore_tiny_cache_title">Παράβλεψη μικρής κρυφής μνήμης</string>
+    <string name="ignore_tiny_cache_desc">Εξαίρεση εφαρμογών με κρυφή μνήμη κάτω από 3 MB</string>
+
+    <!-- StopScreen Strings -->
+    <string name="stop_title">Διακοπή</string>
+    <string name="stop_history_icon_desc">Ιστορικό</string>
+    <string name="stop_gauge_apps">ΕΦΑΡΜΟΓΕΣ</string>
+    <string name="stop_gauge_background">Παρασκήνιο</string>
+    <string name="stop_gauge_zero">0</string>
+    <string name="stop_gauge_active_count">%1$d Ενεργές</string>
+    <string name="stop_stat_running_title">Σε εκτέλεση</string>
+    <string name="stop_stat_running_value">%1$d Εφαρμογές</string>
+    <string name="stop_stat_ram_used">Χρησιμοποιούμενη RAM</string>
+    <string name="stop_stat_free_ram">Ελεύθερη RAM</string>
+    <string name="stop_action_memory_info">Πληροφορίες μνήμης</string>
+    <string name="stop_action_whitelist">Λευκή λίστα</string>
+    <string name="stop_action_running_apps">Εφαρμογές σε εκτέλεση</string>
+    <string name="stop_button_icon_desc">Εικονίδιο διακοπής</string>
+    <string name="stop_start_button">ΕΝΑΡΞΗ ΔΙΑΚΟΠΗΣ</string>
+    <string name="stop_dialog_memory_title">Πληροφορίες RAM συστήματος</string>
+    <string name="stop_dialog_total_ram">Συνολική RAM: %1$s</string>
+    <string name="stop_dialog_used_ram">Χρησιμοποιούμενη RAM: %1$s (%2$d%%)</string>
+    <string name="stop_dialog_free_ram">Ελεύθερη RAM: %1$s</string>
+    <string name="stop_dialog_close">ΚΛΕΙΣΙΜΟ</string>
+    <string name="stop_dialog_running_apps_title">Εφαρμογές σε εκτέλεση (%1$d)</string>
+    <string name="stop_dialog_no_running_apps">Δεν υπάρχουν ενεργές εφαρμογές παρασκηνίου.</string>
+
+    <!-- CleanScreen Strings -->
+    <string name="clean_title">Καθαρισμός</string>
+    <string name="clean_history_icon_desc">Ιστορικό</string>
+    <string name="clean_gauge_unit_mb">MB</string>
+    <string name="clean_gauge_system_cleaned">Το σύστημα καθαρίστηκε</string>
+    <string name="clean_gauge_can_be_cleared">Μπορεί να καθαριστεί</string>
+    <string name="clean_gauge_zero_mb">0 MB</string>
+    <string name="clean_gauge_current_mb">%1$s MB</string>
+    <string name="clean_stat_total">Σύνολο</string>
+    <string name="clean_stat_used">Χρησιμοποιείται</string>
+    <string name="clean_stat_cache">Κρυφή μνήμη</string>
+    <string name="clean_action_storage_details">Λεπτομέρειες αποθηκευτικού χώρου</string>
+    <string name="clean_action_whitelist">Λευκή λίστα</string>
+    <string name="clean_action_live_cache">Ζωντανή κρυφή μνήμη</string>
+    <string name="clean_button_icon_desc">Εικονίδιο καθαρισμού</string>
+    <string name="clean_start_button">ΕΝΑΡΞΗ ΚΑΘΑΡΙΣΜΟΥ</string>
+    <string name="clean_dialog_storage_details_title">Λεπτομέρειες αποθηκευτικού χώρου</string>
+    <string name="clean_dialog_total_storage">Συνολικός εσωτερικός χώρος: %1$s</string>
+    <string name="clean_dialog_used_storage">Χρησιμοποιούμενος χώρος: %1$s</string>
+    <string name="clean_dialog_clearable_cache">Καθαρίσιμη κρυφή μνήμη: %1$s</string>
+    <string name="clean_dialog_close">ΚΛΕΙΣΙΜΟ</string>
+    <string name="clean_dialog_live_cache_title">Παρακολούθηση ζωντανής κρυφής μνήμης</string>
+    <string name="clean_dialog_live_cache_desc">Μέγεθος κρυφής μνήμης: %1$s.</string>
+    <string name="clean_dialog_ok">OK</string>
+
+    <!-- Sub-screens Extracted Strings -->
+    <string name="cd_back">Πίσω</string>
+    <string name="cd_broom_icon">Εικονίδιο σκούπας</string>
+    <string name="cd_whitelist_icon">Εικονίδιο λευκής λίστας</string>
+    <string name="cd_remove">Αφαίρεση</string>
+    <string name="cd_add_app">Προσθήκη εφαρμογής</string>
+    <string name="cd_check_icon">Εικονίδιο ελέγχου</string>
+    <string name="cd_toggle_icon">Διακόπτης</string>
+    <string name="cd_accessibility_icon">Εικονίδιο προσβασιμότητας</string>
+    <string name="cd_success_icon">Εικονίδιο επιτυχίας</string>
+    <string name="cd_usage_access_icon">Εικονίδιο πρόσβασης χρήσης</string>
+    <string name="cd_blueiris_app_icon">Εικονίδιο BlueIris</string>
+    <string name="cd_notifications_icon">Εικονίδιο ειδοποιήσεων</string>
+    <string name="cd_checkmark_icon">Σημάδι ελέγχου</string>
+
+    <string name="analyze_screen_title">Ανάλυση</string>
+    <string name="analyze_cache_apps_count">Κρυφή μνήμη (%1$d Εφαρμογές)</string>
+    <string name="analyze_no_cache_found">Δεν βρέθηκαν αρχεία κρυφής μνήμης</string>
+    <string name="analyze_clear_button">ΚΑΘΑΡΙΣΜΟΣ</string>
+
+    <string name="whitelist_title">Λευκή λίστα</string>
+    <string name="whitelist_empty_avoid_stop">Προσθέστε μια εφαρμογή για να αποφύγετε τη διακοπή</string>
+    <string name="whitelist_empty_avoid_clean">Προσθέστε μια εφαρμογή για να αποφύγετε τον καθαρισμό</string>
+    <string name="whitelist_dialog_title_add">Προσθήκη στη λευκή λίστα</string>
+    <string name="whitelist_dialog_title_selected">Επιλέχθηκαν (%1$d)</string>
+    <string name="whitelist_dialog_all_apps_added">Όλες οι εφαρμογές είναι ήδη στη λευκή λίστα.</string>
+    <string name="whitelist_dialog_add_btn">Προσθήκη</string>
+    <string name="whitelist_dialog_add_count_btn">Προσθήκη (%1$d)</string>
+
+    <string name="history_title">Ιστορικό</string>
+    <string name="history_today_stopped">Σταμάτησαν σήμερα</string>
+    <string name="history_no_apps_stopped_today">Καμία εφαρμογή δεν σταμάτησε σήμερα</string>
+    <string name="history_today_cleared">Καθαρίστηκαν σήμερα</string>
+    <string name="history_period_today">Σήμερα</string>
+    <string name="history_period_yesterday">Χθες</string>
+    <string name="history_period_last_7_days">Τελευταίες 7 ημέρες</string>
+    <string name="history_period_last_30_days">Τελευταίες 30 ημέρες</string>
+    <string name="history_period_tap_details">Πατήστε για λεπτομέρειες</string>
+    <string name="history_clear_all">Καθαρισμός όλων</string>
+    <string name="history_period_summary_singular">Σύνολο: %1$d εφαρμογή  |  %2$s Κρυφή μνήμη</string>
+    <string name="history_period_summary_plural">Σύνολο: %1$d εφαρμογές  |  %2$s Κρυφή μνήμη</string>
+    <string name="history_no_cache_cleared_period">Δεν καθαρίστηκε κρυφή μνήμη αυτή την περίοδο</string>
+    <string name="history_item_cache_size">Κρυφή μνήμη: %1$s</string>
+    <string name="history_dialog_clear_clean_msg">Θέλετε να διαγράψετε το ιστορικό καθαρισμού;</string>
+    <string name="history_dialog_clear_stop_msg">Θέλετε να διαγράψετε το ιστορικό διακοπής;</string>
+    <string name="history_stop_count_singular">%1$d φορά</string>
+    <string name="history_stop_count_plural">%1$d φορές</string>
+
+    <string name="done_count_apps_singular">1 Εφαρμογή</string>
+    <string name="done_count_apps_plural">%1$d Εφαρμογές</string>
+    <string name="done_stopped_subtitle">Σταμάτησαν: %1$s</string>
+    <string name="done_cleaned_subtitle">Καθαρίστηκαν: %1$s</string>
+    <string name="done_button">ΤΕΛΟΣ</string>
+
+    <string name="permission_title">Άδεια</string>
+    <string name="accessibility_permission_title">API Υπηρεσίας Προσβασιμότητας</string>
+    <string name="accessibility_permission_desc1">Αυτή η εφαρμογή χρησιμοποιεί το API για την αυτοματοποίηση του καθαρισμού.</string>
+    <string name="accessibility_permission_desc2">Τα δεδομένα δεν συλλέγονται και δεν κοινοποιούνται ποτέ.</string>
+    <string name="btn_cancel_uppercase">ΑΚΥΡΩΣΗ</string>
+    <string name="btn_continue_uppercase">ΣΥΝΕΧΕΙΑ</string>
+
+    <string name="permission_success_title">Επιτυχία!</string>
+    <string name="permission_success_desc1">Συγχαρητήρια, είστε έτοιμοι.</string>
+    <string name="permission_success_desc2">Δεν συλλέγουμε προσωπικές πληροφορίες.</string>
+
+    <string name="usage_access_permission_title">Άδεια Πρόσβασης Χρήσης</string>
+    <string name="usage_access_permission_desc1">Απαιτείται άδεια πρόσβασης στα δεδομένα χρήσης.</string>
+    <string name="usage_access_permission_desc2">Κάντε κλικ στο κουμπί παρακάτω για ενεργοποίηση.</string>
+
+    <string name="onboarding_privacy_note">Συνεχίζοντας αποδέχεστε τους όρους του BlueIris %1$s</string>
+    <string name="btn_next">ΕΠΟΜΕΝΟ</string>
+    <string name="btn_get_started">ΞΕΚΙΝΗΣΤΕ</string>
+    <string name="onboarding_page1_desc">Καθαρίστε την κρυφή μνήμη όλων των εφαρμογών για περισσότερο χώρο.</string>
+    <string name="onboarding_page2_title">Ειδοποιήσεις κρυφής μνήμης</string>
+    <string name="onboarding_page2_desc">Λάβετε ειδοποίηση όταν η κρυφή μνήμη είναι πολύ μεγάλη.</string>
+    <string name="onboarding_page3_title">Αυτό είναι όλο!</string>
+    <string name="onboarding_page3_desc">Όλα ρυθμίστηκαν με επιτυχία.</string>
+</resources>

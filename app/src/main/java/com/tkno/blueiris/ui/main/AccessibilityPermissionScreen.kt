@@ -1,4 +1,4 @@
-﻿package com.tkno.blueiris.ui.main
+package com.tkno.blueiris.ui.main
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -23,6 +23,7 @@ import com.tkno.blueiris.R
 fun AccessibilityPermissionScreen(
     onContinueClick: () -> Unit,
     onCancelClick: () -> Unit,
+    descriptionResId: Int = R.string.accessibility_permission_desc1,
     modifier: Modifier = Modifier
 ) {
     val darkBg = MaterialTheme.colorScheme.background
@@ -96,7 +97,7 @@ fun AccessibilityPermissionScreen(
 
             // Paragraph 1
             Text(
-                text = stringResource(R.string.accessibility_permission_desc1),
+                text = stringResource(descriptionResId),
                 color = bodyTextColor,
                 fontSize = 14.sp,
                 fontWeight = FontWeight.Normal,

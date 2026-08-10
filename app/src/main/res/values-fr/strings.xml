@@ -123,7 +123,7 @@
     <string name="permission_issue_desc">Les répertoires en dehors de Download/ et Documents/ ne sont pas pris en charge</string>
     <string name="battery_configuration">Configuration de la batterie</string>
     <string name="battery_configuration_desc">Ignorer l\'optimisation de la batterie pour cette application afin de télécharger en arrière-plan</string>
-    <string name="service_title">Blue Iris est en cours de téléchargement…</string>
+    <string name="service_title">BlueIris est en cours de téléchargement…</string>
     <string name="unknown_error">Erreur inconnue</string>
     <string name="translate">Traduire</string>
     <string name="translate_desc">Aidez à traduire cette application sur Hosted Weblate</string>
@@ -169,7 +169,7 @@
     <string name="matrix_space">Matrix</string>
     <string name="sponsor">Sponsoriser</string>
     <string name="sponsor_desc">Soutenir cette application en la sponsorisant sur GitHub</string>
-    <string name="sponsor_msg">Blue Iris sera toujours gratuit et open source à l\'avenir pour tout le monde. Si vous l\'appréciez, pensez à me sponsoriser sur GitHub !</string>
+    <string name="sponsor_msg">BlueIris sera toujours gratuit et open source à l\'avenir pour tout le monde. Si vous l\'appréciez, pensez à me sponsoriser sur GitHub !</string>
     <string name="feedback">Commentaires</string>
     <string name="sponsors">Sponsors</string>
     <string name="instagram">Instagram</string>
@@ -217,14 +217,14 @@
     <string name="scan_history">Historique des scans</string>
     <string name="no_scan_history_yet">Aucun historique de scan pour le moment</string>
     <string name="scan_code">Scanner le code</string>
-    <string name="scanned_by_links">Scanné par Blue Iris</string>
+    <string name="scanned_by_links">Scanné par BlueIris</string>
     <string name="scan_qr_instruction">Scannez les codes QR à l\'aide de l\'appareil photo ou importez-les depuis la galerie</string>
     <string name="scan_now">Scanner maintenant</string>
     <string name="scanned_content">Contenu scanné</string>
     <string name="feature_currently_unavailable">Cette fonctionnalité est actuellement indisponible.</string>
     <string name="contact">Contact</string>
-    <string name="contact_desc">Contactez le développeur pour ajouter de nouvelles fonctionnalités dans Blue Iris</string>
-    <string name="links_issue_tracker">Suivi des problèmes de Blue Iris</string>
+    <string name="contact_desc">Contactez le développeur pour ajouter de nouvelles fonctionnalités dans BlueIris</string>
+    <string name="links_issue_tracker">Suivi des problèmes de BlueIris</string>
     <string name="enter_url_error">Veuillez saisir une URL</string>
     <string name="invalid_url_format">Format d\'URL non valide. Veuillez saisir une adresse web valide (ex. exemple.com).</string>
     <string name="copied_to_clipboard">Copié dans le presse-papiers</string>
@@ -258,5 +258,192 @@
     <string name="early_access">Accès anticipé</string>
     <string name="pre_release_desc">Installez des versions de pré-déploiement pour prévisualiser les nouvelles fonctionnalités et modifications.\n\nIl y aura une certaine instabilité dans ces versions, n\'hésitez donc pas à nous faire part de vos commentaires si vous rencontrez des problèmes pour nous aider à améliorer l\'application.</string>
     <string name="update_directory">Répertoire de mise à jour</string>
-</resources>
 
+    
+    <!-- Navigation Tabs & Toasts -->
+    <string name="nav_stop">Arrêt</string>
+    <string name="nav_clean">Nettoyage</string>
+    <string name="nav_apps">Applications</string>
+    <string name="nav_menu">Menu</string>
+    <string name="toast_all_cache_cleaned">Tous les caches sont nettoyés (0 Ko)</string>
+    <string name="toast_all_bg_apps_stopped">Toutes les applications en arrière-plan sont arrêtées</string>
+    <string name="toast_selected_apps_no_cache">Les applications sélectionnées n\'ont pas de cache (0 Ko)</string>
+
+    <!-- AppsScreen Filter & Sort -->
+    <string name="app_filter_all">Applications</string>
+    <string name="app_filter_user">Applications</string>
+    <string name="app_filter_system">Applications</string>
+    <string name="app_sort_by_name">Par nom</string>
+    <string name="app_sort_by_date">Par date</string>
+    <string name="app_sort_by_size">Par taille</string>
+    <string name="apps_screen_title">Applications</string>
+    <string name="apps_listed_count">%1$d applications listées</string>
+    <string name="cd_filter_apps">Filtrer les applications</string>
+    <string name="cd_sort_apps">Trier les applications</string>
+    <string name="apps_no_apps_found">Aucune application trouvée</string>
+    <string name="cd_clear_selection">Effacer la sélection</string>
+    <string name="apps_selected_count">Sélectionné : %1$d</string>
+    <string name="cd_clean_selected_apps">Nettoyer les applications sélectionnées</string>
+    <string name="cd_selected">Sélectionné</string>
+    <string name="app_size_prefix">Taille : %1$s</string>
+    <string name="cd_go_to_details">Voir les détails</string>
+
+    <!-- App Detail Screen Strings -->
+    <string name="app_detail_version">Version : %1$s</string>
+    <string name="app_detail_apk_size">Taille de l\'APK</string>
+    <string name="app_detail_install_date">Date d\'installation</string>
+    <string name="app_detail_last_update">Dernière mise à jour</string>
+    <string name="app_detail_requested_permissions">Autorisations demandées</string>
+    <string name="app_detail_uninstall">Désinstaller</string>
+    <string name="app_detail_update">Mettre à jour</string>
+    <string name="app_detail_launch">Lancer</string>
+    <string name="app_detail_app_info">INFO APPLICATION</string>
+    <string name="toast_cannot_launch_app">Impossible de lancer cette application</string>
+    <string name="toast_cannot_open_store">Impossible d\'ouvrir le store</string>
+
+    <!-- Speed & Performance Strings -->
+    <string name="performance_and_speed_title">Performance &amp; Vitesse</string>
+
+    <!-- Stop Process Strings -->
+    <string name="stop_process_title">Processus d\'arrêt</string>
+    <string name="force_stop_mode_title">Mode d\'arrêt forcé</string>
+
+    <!-- Clean Process Strings -->
+    <string name="clean_process_title">Processus de nettoyage</string>
+    <string name="cleaning_mode_title">Mode de nettoyage</string>
+    <string name="cleaning_mode_manual">Manuel</string>
+    <string name="cleaning_mode_automatic">Automatique</string>
+    <string name="cleaning_mode_ask_each_time">Toujours demander</string>
+    <string name="ignore_tiny_cache_title">Ignorer les petits caches</string>
+    <string name="ignore_tiny_cache_desc">Ignorer les applications ayant moins de 3 Mo de cache</string>
+
+    <!-- StopScreen Strings -->
+    <string name="stop_title">Arrêt</string>
+    <string name="stop_history_icon_desc">Historique</string>
+    <string name="stop_gauge_apps">APPLICATIONS</string>
+    <string name="stop_gauge_background">Arrière-plan</string>
+    <string name="stop_gauge_zero">0</string>
+    <string name="stop_gauge_active_count">%1$d Actives</string>
+    <string name="stop_stat_running_title">En cours</string>
+    <string name="stop_stat_running_value">%1$d Applications</string>
+    <string name="stop_stat_ram_used">RAM utilisée</string>
+    <string name="stop_stat_free_ram">RAM libre</string>
+    <string name="stop_action_memory_info">Info mémoire</string>
+    <string name="stop_action_whitelist">Liste blanche</string>
+    <string name="stop_action_running_apps">Applications en cours</string>
+    <string name="stop_button_icon_desc">Icône arrêt</string>
+    <string name="stop_start_button">LANCER L\'ARRÊT</string>
+    <string name="stop_dialog_memory_title">Info mémoire système</string>
+    <string name="stop_dialog_total_ram">RAM totale : %1$s</string>
+    <string name="stop_dialog_used_ram">RAM utilisée : %1$s (%2$d%%)</string>
+    <string name="stop_dialog_free_ram">RAM libre : %1$s</string>
+    <string name="stop_dialog_close">FERMER</string>
+    <string name="stop_dialog_running_apps_title">Applications en cours (%1$d)</string>
+    <string name="stop_dialog_no_running_apps">Aucune application active en arrière-plan.</string>
+
+    <!-- CleanScreen Strings -->
+    <string name="clean_title">Nettoyage</string>
+    <string name="clean_history_icon_desc">Historique</string>
+    <string name="clean_gauge_unit_mb">Mo</string>
+    <string name="clean_gauge_system_cleaned">Système propre</string>
+    <string name="clean_gauge_can_be_cleared">Nettoyable</string>
+    <string name="clean_gauge_zero_mb">0 Mo</string>
+    <string name="clean_gauge_current_mb">%1$s Mo</string>
+    <string name="clean_stat_total">Total</string>
+    <string name="clean_stat_used">Utilisé</string>
+    <string name="clean_stat_cache">Cache</string>
+    <string name="clean_action_storage_details">Détails stockage</string>
+    <string name="clean_action_whitelist">Liste blanche</string>
+    <string name="clean_action_live_cache">Cache en direct</string>
+    <string name="clean_button_icon_desc">Icône nettoyage</string>
+    <string name="clean_start_button">LANCER LE NETTOYAGE</string>
+    <string name="clean_dialog_storage_details_title">Détails du stockage</string>
+    <string name="clean_dialog_total_storage">Stockage interne total : %1$s</string>
+    <string name="clean_dialog_used_storage">Stockage utilisé : %1$s</string>
+    <string name="clean_dialog_clearable_cache">Cache nettoyable : %1$s</string>
+    <string name="clean_dialog_close">FERMER</string>
+    <string name="clean_dialog_live_cache_title">Moniteur de cache en direct</string>
+    <string name="clean_dialog_live_cache_desc">Taille du cache en direct : %1$s.</string>
+    <string name="clean_dialog_ok">OK</string>
+
+    <!-- Sub-screens Extracted Strings -->
+    <string name="cd_back">Retour</string>
+    <string name="cd_broom_icon">Icône balai</string>
+    <string name="cd_whitelist_icon">Icône liste blanche</string>
+    <string name="cd_remove">Supprimer</string>
+    <string name="cd_add_app">Ajouter une application</string>
+    <string name="cd_check_icon">Icône de validation</string>
+    <string name="cd_toggle_icon">Icône bascule</string>
+    <string name="cd_accessibility_icon">Icône accessibilité</string>
+    <string name="cd_success_icon">Icône succès</string>
+    <string name="cd_usage_access_icon">Icône accès utilisation</string>
+    <string name="cd_blueiris_app_icon">Icône BlueIris</string>
+    <string name="cd_notifications_icon">Icône notifications</string>
+    <string name="cd_checkmark_icon">Icône coche</string>
+
+    <string name="analyze_screen_title">Analyser</string>
+    <string name="analyze_cache_apps_count">Cache (%1$d Applications)</string>
+    <string name="analyze_no_cache_found">Aucun fichier en cache trouvé</string>
+    <string name="analyze_clear_button">LANCER LE NETTOYAGE</string>
+
+    <string name="whitelist_title">Liste blanche</string>
+    <string name="whitelist_empty_avoid_stop">Ajoutez une application pour éviter
+l\'arrêt forcé</string>
+    <string name="whitelist_empty_avoid_clean">Ajoutez une application pour éviter
+le nettoyage du cache</string>
+    <string name="whitelist_dialog_title_add">Ajouter à la liste blanche</string>
+    <string name="whitelist_dialog_title_selected">Sélectionné (%1$d)</string>
+    <string name="whitelist_dialog_all_apps_added">Toutes les applications sont déjà dans la liste blanche.</string>
+    <string name="whitelist_dialog_add_btn">Ajouter</string>
+    <string name="whitelist_dialog_add_count_btn">Ajouter (%1$d)</string>
+
+    <string name="history_title">Historique</string>
+    <string name="history_today_stopped">Arrêtés aujourd\'hui</string>
+    <string name="history_no_apps_stopped_today">Aucune application arrêtée aujourd\'hui</string>
+    <string name="history_today_cleared">Nettoyés aujourd\'hui</string>
+    <string name="history_period_today">Aujourd\'hui</string>
+    <string name="history_period_yesterday">Hier</string>
+    <string name="history_period_last_7_days">7 derniers jours</string>
+    <string name="history_period_last_30_days">30 derniers jours</string>
+    <string name="history_period_tap_details">Appuyez pour voir les détails</string>
+    <string name="history_clear_all">Tout effacer</string>
+    <string name="history_period_summary_singular">Total : %1$d application  |  %2$s Cache</string>
+    <string name="history_period_summary_plural">Total : %1$d applications  |  %2$s Cache</string>
+    <string name="history_no_cache_cleared_period">Aucun cache nettoyé durant cette période</string>
+    <string name="history_item_cache_size">Cache : %1$s</string>
+    <string name="history_dialog_clear_clean_msg">Voulez-vous vraiment effacer l\'historique de nettoyage ?</string>
+    <string name="history_dialog_clear_stop_msg">Voulez-vous vraiment effacer l\'historique d\'arrêt ?</string>
+    <string name="history_stop_count_singular">%1$d fois</string>
+    <string name="history_stop_count_plural">%1$d fois</string>
+
+    <string name="done_count_apps_singular">1 Application</string>
+    <string name="done_count_apps_plural">%1$d Applications</string>
+    <string name="done_stopped_subtitle">Arrêtés : %1$s</string>
+    <string name="done_cleaned_subtitle">Nettoyés : %1$s</string>
+    <string name="done_button">TERMINÉ</string>
+
+    <string name="permission_title">Autorisation</string>
+    <string name="accessibility_permission_title">API de service d\'accessibilité</string>
+    <string name="accessibility_permission_desc1">Cette application utilise cette API pour automatiser le nettoyage du cache.</string>
+    <string name="accessibility_permission_desc2">Les données accédées ne seront jamais collectées ni partagées.</string>
+    <string name="btn_cancel_uppercase">ANNULER</string>
+    <string name="btn_continue_uppercase">CONTINUER</string>
+
+    <string name="permission_success_title">Succès !</string>
+    <string name="permission_success_desc1">Félicitations, vous êtes prêt.</string>
+    <string name="permission_success_desc2">Nous ne collectons aucune donnée personnelle.</string>
+
+    <string name="usage_access_permission_title">Autorisation d\'accès à l\'utilisation</string>
+    <string name="usage_access_permission_desc1">Cette application nécessite l\'autorisation d\'accès aux données d\'utilisation.</string>
+    <string name="usage_access_permission_desc2">Pour l\'activer, appuyez sur le bouton ci-dessous.</string>
+
+    <string name="onboarding_privacy_note">En continuant, vous acceptez
+les conditions de BlueIris %1$s</string>
+    <string name="btn_next">SUIVANT</string>
+    <string name="btn_get_started">COMMENCER</string>
+    <string name="onboarding_page1_desc">Videz le cache de toutes vos applications et libérez de l\'espace de stockage.</string>
+    <string name="onboarding_page2_title">Notifications de cache</string>
+    <string name="onboarding_page2_desc">Recevez une notification lorsque le cache devient trop volumineux.</string>
+    <string name="onboarding_page3_title">C\'est tout !</string>
+    <string name="onboarding_page3_desc">Tout est configuré avec succès et l\'application est prête.</string>
+</resources>

@@ -82,7 +82,7 @@ fun OnboardingScreen(
                 val privacyPolicyText = stringResource(R.string.privacy_policy)
                 Text(
                     text = buildAnnotatedString {
-                        append("By proceeding, you confirm you accept\nBlue Iris's ")
+                        append("By proceeding, you confirm you accept\nBlueIris's ")
                         withStyle(style = SpanStyle(color = accentBlue, fontWeight = FontWeight.SemiBold)) {
                             append(privacyPolicyText)
                         }
@@ -148,7 +148,7 @@ fun OnboardingScreen(
 
 @Composable
 private fun OnboardingPageOne() {
-    // Official Blue Iris app launcher logo
+    // Official BlueIris app launcher logo
     Image(
         painter = painterResource(id = R.drawable.ic_app_logo),
         contentDescription = stringResource(R.string.cd_blueiris_app_icon),

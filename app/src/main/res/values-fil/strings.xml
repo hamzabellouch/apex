@@ -123,7 +123,7 @@
     <string name="permission_issue_desc">Ang mga direktoryo sa labas ng Download/ at Documents/ ay hindi suportado</string>
     <string name="battery_configuration">Konpigurasyon ng baterya</string>
     <string name="battery_configuration_desc">Balewalain ang pagpapatipid sa baterya para sa app na ito upang mag-download sa background</string>
-    <string name="service_title">Nagda-download ang Blue Iris…</string>
+    <string name="service_title">Nagda-download ang BlueIris…</string>
     <string name="unknown_error">Hindi kilalang error</string>
     <string name="translate">Isalin</string>
     <string name="translate_desc">Tumulong sa pag-translate ng app na ito sa Hosted Weblate</string>
@@ -169,7 +169,7 @@
     <string name="matrix_space">Matrix</string>
     <string name="sponsor">Sponsor</string>
     <string name="sponsor_desc">Suportahan ang app na ito sa pamamagitan ng pag-sponsor sa GitHub</string>
-    <string name="sponsor_msg">Ang Blue Iris ay palaging libre at open source sa hinaharap para sa lahat. Kung gusto mo ito, mangyaring isaalang-alang ang pag-sponsor sa akin sa GitHub!</string>
+    <string name="sponsor_msg">Ang BlueIris ay palaging libre at open source sa hinaharap para sa lahat. Kung gusto mo ito, mangyaring isaalang-alang ang pag-sponsor sa akin sa GitHub!</string>
     <string name="feedback">Feedback</string>
     <string name="sponsors">Mga Sponsor</string>
     <string name="instagram">Instagram</string>
@@ -217,14 +217,14 @@
     <string name="scan_history">Kasaysayan ng Pag-scan</string>
     <string name="no_scan_history_yet">Wala pang kasaysayan ng pag-scan</string>
     <string name="scan_code">I-scan ang code</string>
-    <string name="scanned_by_links">Na-scan ng Blue Iris</string>
+    <string name="scanned_by_links">Na-scan ng BlueIris</string>
     <string name="scan_qr_instruction">I-scan ang mga QR code gamit ang camera o i-import mula sa gallery</string>
     <string name="scan_now">I-scan na ngayon</string>
     <string name="scanned_content">Na-scan na nilalaman</string>
     <string name="feature_currently_unavailable">Kasalukuyang hindi available ang tampok na ito.</string>
     <string name="contact">Makipag-ugnayan</string>
-    <string name="contact_desc">Makipag-ugnayan sa developer upang magdagdag ng mga bagong tampok sa Blue Iris</string>
-    <string name="links_issue_tracker">Blue Iris Taga-subaybay ng Isyu</string>
+    <string name="contact_desc">Makipag-ugnayan sa developer upang magdagdag ng mga bagong tampok sa BlueIris</string>
+    <string name="links_issue_tracker">BlueIris Taga-subaybay ng Isyu</string>
     <string name="enter_url_error">Mangyaring maglagay ng URL</string>
     <string name="invalid_url_format">Hindi wastong format ng URL. Mangyaring magpasok ng wastong web address (hal. example.com).</string>
     <string name="copied_to_clipboard">Nakopya sa clipboard</string>
@@ -258,5 +258,189 @@
     <string name="early_access">Maagang pag-access</string>
     <string name="pre_release_desc">I-install ang mga pre-release na build upang ma-preview ang mga bagong tampok at pagbabago.\n\nMay ilang kawalan ng katatagan sa mga bersyong ito, kaya mangyaring huwag mag-atubiling magbigay sa amin ng feedback kung makaranas ka ng anumang problema upang matulungan kaming mapabuti ang app para sa hinaharap.</string>
     <string name="update_directory">Direktoryo ng update</string>
-</resources>
 
+    
+    <!-- Navigation Tabs & Toasts -->
+    <string name="nav_stop">Itigil</string>
+    <string name="nav_clean">Linisin</string>
+    <string name="nav_apps">Mga App</string>
+    <string name="nav_menu">Menu</string>
+    <string name="toast_all_cache_cleaned">Nalinis na ang lahat ng cache (0 KB)</string>
+    <string name="toast_all_bg_apps_stopped">Napatigil na ang lahat ng background apps</string>
+    <string name="toast_selected_apps_no_cache">Walang cache ang mga piniling app (0 KB)</string>
+
+    <!-- AppsScreen Filter & Sort -->
+    <string name="app_filter_all">Lahat ng App</string>
+    <string name="app_filter_user">App ng User</string>
+    <string name="app_filter_system">App ng Sistema</string>
+    <string name="app_sort_by_name">Ayon sa Pangalan</string>
+    <string name="app_sort_by_date">Ayon sa Petsa</string>
+    <string name="app_sort_by_size">Ayon sa Laki</string>
+    <string name="apps_screen_title">Mga App</string>
+    <string name="apps_listed_count">%1$d mga app sa listahan</string>
+    <string name="cd_filter_apps">I-filter ang mga App</string>
+    <string name="cd_sort_apps">I-sort ang mga App</string>
+    <string name="apps_no_apps_found">Walang nahanap na app para sa filter na ito</string>
+    <string name="cd_clear_selection">Alisin ang Pagpili</string>
+    <string name="apps_selected_count">Pinili: %1$d</string>
+    <string name="cd_clean_selected_apps">Linisin ang mga Piniling App</string>
+    <string name="cd_selected">Pinili</string>
+    <string name="app_size_prefix">Laki: %1$s</string>
+    <string name="cd_go_to_details">Pumunta sa Mga Detalye</string>
+
+    <!-- App Detail Screen Strings -->
+    <string name="app_detail_version">Bersyon: %1$s</string>
+    <string name="app_detail_apk_size">Laki ng APK</string>
+    <string name="app_detail_install_date">Petsa ng Pag-install</string>
+    <string name="app_detail_last_update">Huling Update</string>
+    <string name="app_detail_requested_permissions">Hinihinging Permiso</string>
+    <string name="app_detail_uninstall">I-uninstall</string>
+    <string name="app_detail_update">I-update</string>
+    <string name="app_detail_launch">Buksan</string>
+    <string name="app_detail_app_info">IMPORMASYON NG APP</string>
+    <string name="toast_cannot_launch_app">Hindi mabuksan ang application na ito</string>
+    <string name="toast_cannot_open_store">Hindi mabuksan ang store page</string>
+
+    <!-- Speed & Performance Strings -->
+    <string name="performance_and_speed_title">Kabisahan &amp; Bilis</string>
+
+    <!-- Stop Process Strings -->
+    <string name="stop_process_title">Proseso ng Pagpapatigil</string>
+    <string name="force_stop_mode_title">Puwersahang Pagpapatigil</string>
+
+    <!-- Clean Process Strings -->
+    <string name="clean_process_title">Proseso ng Paglilinis</string>
+    <string name="cleaning_mode_title">Paraan ng Paglilinis</string>
+    <string name="cleaning_mode_manual">Manwal</string>
+    <string name="cleaning_mode_automatic">Awtomatiko</string>
+    <string name="cleaning_mode_ask_each_time">Magtanong sa Bawat Oras</string>
+    <string name="ignore_tiny_cache_title">Balewalain ang Maliit na Cache</string>
+    <string name="ignore_tiny_cache_desc">Alisin ang mga app na mas mababa sa 3 MB ang Cache</string>
+
+    <!-- StopScreen Strings -->
+    <string name="stop_title">Itigil</string>
+    <string name="stop_history_icon_desc">Kasaysayan</string>
+    <string name="stop_gauge_apps">MGA APP</string>
+    <string name="stop_gauge_background">Nasa Likod</string>
+    <string name="stop_gauge_zero">0</string>
+    <string name="stop_gauge_active_count">%1$d Aktibo</string>
+    <string name="stop_stat_running_title">Gumagana</string>
+    <string name="stop_stat_running_value">%1$d Mga App</string>
+    <string name="stop_stat_ram_used">Ginamit na RAM</string>
+    <string name="stop_stat_free_ram">Bureng RAM</string>
+    <string name="stop_action_memory_info">Impormasyon sa Memorya</string>
+    <string name="stop_action_whitelist">Puting Listahan</string>
+    <string name="stop_action_running_apps">Gumaganang Mga App</string>
+    <string name="stop_button_icon_desc">Icon ng Pagpapatigil</string>
+    <string name="stop_start_button">SIMULAN ANG PAGTIGIL</string>
+    <string name="stop_dialog_memory_title">Impormasyon sa RAM ng Sistema</string>
+    <string name="stop_dialog_total_ram">Kabuuan ng RAM: %1$s</string>
+    <string name="stop_dialog_used_ram">Ginamit na RAM: %1$s (%2$d%%)</string>
+    <string name="stop_dialog_free_ram">Bureng RAM: %1$s</string>
+    <string name="stop_dialog_close">ISARA</string>
+    <string name="stop_dialog_running_apps_title">Gumaganang Mga App (%1$d)</string>
+    <string name="stop_dialog_no_running_apps">Walang aktibong background apps.</string>
+
+    <!-- CleanScreen Strings -->
+    <string name="clean_title">Linisin</string>
+    <string name="clean_history_icon_desc">Kasaysayan</string>
+    <string name="clean_gauge_unit_mb">MB</string>
+    <string name="clean_gauge_system_cleaned">Malinis na ang Sistema</string>
+    <string name="clean_gauge_can_be_cleared">Madedalisay</string>
+    <string name="clean_gauge_zero_mb">0 MB</string>
+    <string name="clean_gauge_current_mb">%1$s MB</string>
+    <string name="clean_stat_total">Kabuuan</string>
+    <string name="clean_stat_used">Ginamit</string>
+    <string name="clean_stat_cache">Cache</string>
+    <string name="clean_action_storage_details">Mga Detalye ng Storage</string>
+    <string name="clean_action_whitelist">Puting Listahan</string>
+    <string name="clean_action_live_cache">Live Cache</string>
+    <string name="clean_button_icon_desc">Icon ng Paglilinis</string>
+    <string name="clean_start_button">SIMULAN ANG PAGLINIS</string>
+    <string name="clean_dialog_storage_details_title">Mga Detalye ng Storage</string>
+    <string name="clean_dialog_total_storage">Kabuuan ng Internal Storage: %1$s</string>
+    <string name="clean_dialog_used_storage">Ginamit na Storage: %1$s</string>
+    <string name="clean_dialog_clearable_cache">Masisimot na Cache: %1$s</string>
+    <string name="clean_dialog_close">ISARA</string>
+    <string name="clean_dialog_live_cache_title">Subaybayan ang Live Cache</string>
+    <string name="clean_dialog_live_cache_desc">Laki ng Live Cache: %1$s.</string>
+    <string name="clean_dialog_ok">OK</string>
+
+    <!-- Sub-screens Extracted Strings -->
+    <string name="cd_back">Bumalik</string>
+    <string name="cd_broom_icon">Icon ng Walis</string>
+    <string name="cd_whitelist_icon">Icon ng Puting Listahan</string>
+    <string name="cd_remove">Alisin</string>
+    <string name="cd_add_app">Magdagdag ng App</string>
+    <string name="cd_check_icon">Icon ng Tsek</string>
+    <string name="cd_toggle_icon">Switch</string>
+    <string name="cd_accessibility_icon">Icon ng Accessibility</string>
+    <string name="cd_success_icon">Icon ng Tagumpay</string>
+    <string name="cd_usage_access_icon">Icon ng Access sa Paggamit</string>
+    <string name="cd_blueiris_app_icon">Icon ng BlueIris</string>
+    <string name="cd_notifications_icon">Icon ng Notification</string>
+    <string name="cd_checkmark_icon">Tsek</string>
+
+    <string name="analyze_screen_title">Suriin</string>
+    <string name="analyze_cache_apps_count">Cache (%1$d Mga App)</string>
+    <string name="analyze_no_cache_found">Walang nahanap na mga cache file</string>
+    <string name="analyze_clear_button">LINISIN</string>
+
+    <string name="whitelist_title">Puting Listahan</string>
+    <string name="whitelist_empty_avoid_stop">Magdagdag ng app upang maiwasan ang pagpapatigil</string>
+    <string name="whitelist_empty_avoid_clean">Magdagdag ng app upang maiwasan ang paglinis ng cache</string>
+    <string name="whitelist_dialog_title_add">Idagdag sa Puting Listahan</string>
+    <string name="whitelist_dialog_title_selected">Pinili (%1$d)</string>
+    <string name="whitelist_dialog_all_apps_added">Lahat ng app ay nasa puting listahan na.</string>
+    <string name="whitelist_dialog_add_btn">Idagdag</string>
+    <string name="whitelist_dialog_add_count_btn">Idagdag (%1$d)</string>
+
+    <string name="history_title">Kasaysayan</string>
+    <string name="history_today_stopped">Napatigil Ngayon</string>
+    <string name="history_no_apps_stopped_today">Walang napatigil na app ngayon</string>
+    <string name="history_today_cleared">Nalinis Ngayon</string>
+    <string name="history_period_today">Ngayon</string>
+    <string name="history_period_yesterday">Kahapon</string>
+    <string name="history_period_last_7_days">Nakaraang 7 Araw</string>
+    <string name="history_period_last_30_days">Nakaraang 30 Araw</string>
+    <string name="history_period_tap_details">Pindutin para sa mga detalye</string>
+    <string name="history_clear_all">Linisin Lahat</string>
+    <string name="history_period_summary_singular">Kabuuan: %1$d app  |  %2$s Cache</string>
+    <string name="history_period_summary_plural">Kabuuan: %1$d mga app  |  %2$s Cache</string>
+    <string name="history_no_cache_cleared_period">Walang nalinis na cache sa panahong ito</string>
+    <string name="history_item_cache_size">Cache: %1$s</string>
+    <string name="history_dialog_clear_clean_msg">Gusto mo bang burahin ang kasaysayan ng paglilinis?</string>
+    <string name="history_dialog_clear_stop_msg">Gusto mo bang burahin ang kasaysayan ng pagpapatigil?</string>
+    <string name="history_stop_count_singular">%1$d beses</string>
+    <string name="history_stop_count_plural">%1$d beses</string>
+
+    <string name="done_count_apps_singular">1 App</string>
+    <string name="done_count_apps_plural">%1$d Mga App</string>
+    <string name="done_stopped_subtitle">Napatigil: %1$s</string>
+    <string name="done_cleaned_subtitle">Nalinis: %1$s</string>
+    <string name="done_button">TAPOS NA</string>
+
+    <string name="permission_title">Permiso</string>
+    <string name="accessibility_permission_title">API ng Serbisyong Accessibility</string>
+    <string name="accessibility_permission_desc1">Ginagamit ng app na ito ang API upang awtomatikong linisin ang cache.</string>
+    <string name="accessibility_permission_desc2">Hindi kailanman kinukuha o ibinabahagi ang data.</string>
+    <string name="btn_cancel_uppercase">KANSELAHIN</string>
+    <string name="btn_continue_uppercase">IPAGPATULOY</string>
+
+    <string name="permission_success_title">Tagumpay!</string>
+    <string name="permission_success_desc1">Maligayang pagbati, handa ka na.</string>
+    <string name="permission_success_desc2">Hindi kami nangongolekta ng personal na impormasyon.</string>
+
+    <string name="usage_access_permission_title">Permiso sa Access sa Paggamit</string>
+    <string name="usage_access_permission_desc1">Kailangan ang permiso sa pag-access sa data ng paggamit.</string>
+    <string name="usage_access_permission_desc2">Pindutin ang button sa ibaba upang i-enable.</string>
+
+    <string name="onboarding_privacy_note">Sa pagpapatuloy, tinatanggap mo ang BlueIris %1$s</string>
+    <string name="btn_next">SUSUNOD</string>
+    <string name="btn_get_started">MAGSIMULA</string>
+    <string name="onboarding_page1_desc">Linisin ang cache ng lahat ng app para sa mas maraming espasyo.</string>
+    <string name="onboarding_page2_title">Mga Notification sa Cache</string>
+    <string name="onboarding_page2_desc">Makatanggap ng abiso kapag sobra na ang cache.</string>
+    <string name="onboarding_page3_title">Yun lamang!</string>
+    <string name="onboarding_page3_desc">Matagumpay na naisaayos ang lahat.</string>
+</resources>

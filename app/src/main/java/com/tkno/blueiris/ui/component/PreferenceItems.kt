@@ -1,4 +1,4 @@
-﻿package com.tkno.blueiris.ui.component
+package com.tkno.blueiris.ui.component
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -14,7 +14,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.selection.toggleable
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ChevronRight
+import androidx.compose.material.icons.automirrored.filled.KeyboardArrowRight
 import androidx.compose.material.icons.outlined.Check
 import androidx.compose.material.icons.outlined.Info
 import androidx.compose.material.icons.outlined.Translate
@@ -22,6 +22,7 @@ import androidx.compose.material3.Checkbox
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.RadioButton
+import androidx.compose.material3.RadioButtonDefaults
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Switch
 import androidx.compose.material3.SwitchDefaults
@@ -132,6 +133,7 @@ fun PreferenceSingleChoiceItem(
     text: String,
     selected: Boolean,
     contentPadding: PaddingValues = PaddingValues(horizontal = 8.dp, vertical = 16.dp),
+    selectedColor: Color? = null,
     onClick: () -> Unit,
 ) {
     Surface(
@@ -148,13 +150,14 @@ fun PreferenceSingleChoiceItem(
                     text = text,
                     maxLines = 1,
                     style = PreferenceTitleVariant,
-                    color = MaterialTheme.colorScheme.onSurface,
+                    color = if (selected && selectedColor != null) selectedColor else MaterialTheme.colorScheme.onSurface,
                     overflow = TextOverflow.Ellipsis,
                 )
             }
             RadioButton(
                 selected = selected,
                 onClick = onClick,
+                colors = if (selectedColor != null) RadioButtonDefaults.colors(selectedColor = selectedColor) else RadioButtonDefaults.colors(),
                 modifier = Modifier.padding().clearAndSetSemantics {},
             )
         }
@@ -616,7 +619,7 @@ fun PreferenceChevronItem(
             }
 
             Icon(
-                imageVector = Icons.Default.ChevronRight,
+                imageVector = Icons.AutoMirrored.Filled.KeyboardArrowRight,
                 contentDescription = null,
                 tint = MaterialTheme.colorScheme.onSurfaceVariant.applyOpacity(enabled),
                 modifier = Modifier.padding(end = 6.dp)

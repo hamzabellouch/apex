@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Blue Iris</string>
+    <string name="app_name">BlueIris</string>
     <string name="accessibility_service_description">This service automates navigation in Android app settings to safely and efficiently clear cache and stop background apps.</string>
     <string name="clear_cache">Clear Cache</string>
     <string name="storage">Storage</string>
@@ -133,7 +133,7 @@
     <string name="permission_issue_desc">Directories outside Download/ and Documents/ are not supported</string>
     <string name="battery_configuration">Battery configuration</string>
     <string name="battery_configuration_desc">Ignore battery optimization for this app to download in the background</string>
-    <string name="service_title">Blue Iris is downloading…</string>
+    <string name="service_title">BlueIris is downloading…</string>
     <string name="unknown_error">Unknown error</string>
     <string name="translate">Translate</string>
     <string name="translate_desc">Help translate this app on Hosted Weblate</string>
@@ -179,7 +179,7 @@
     <string name="matrix_space">Matrix</string>
     <string name="sponsor">Sponsor</string>
     <string name="sponsor_desc">Support this app by sponsoring on GitHub</string>
-    <string name="sponsor_msg">Blue Iris will be always free and open source in the future for everyone. If you like it, please consider sponsoring me on GitHub!</string>
+    <string name="sponsor_msg">BlueIris will be always free and open source in the future for everyone. If you like it, please consider sponsoring me on GitHub!</string>
     <string name="feedback">Feedback</string>
     <string name="sponsors">Sponsors</string>
     <string name="instagram">Instagram</string>
@@ -228,14 +228,14 @@
     <string name="scan_history">Scan History</string>
     <string name="no_scan_history_yet">No scan history yet</string>
     <string name="scan_code">Scan code</string>
-    <string name="scanned_by_links">Scanned by Blue Iris</string>
+    <string name="scanned_by_links">Scanned by BlueIris</string>
     <string name="scan_qr_instruction">Scan QR codes using camera or import from gallery</string>
     <string name="scan_now">Scan now</string>
     <string name="scanned_content">Scanned content</string>
     <string name="feature_currently_unavailable">This is currently unavailable.</string>
     <string name="contact">Contact</string>
-    <string name="contact_desc">Contact the developer to add new features in Blue Iris</string>
-    <string name="links_issue_tracker">Blue Iris Issue Tracker</string>
+    <string name="contact_desc">Contact the developer to add new features in BlueIris</string>
+    <string name="links_issue_tracker">BlueIris Issue Tracker</string>
     <string name="enter_url_error">Please enter a URL</string>
     <string name="invalid_url_format">Invalid URL format. Please enter a valid web address (e.g. example.com).</string>
     <string name="no_internet_error">No internet connection. Please check your network and try again.</string>
@@ -395,7 +395,7 @@
     <string name="cd_accessibility_icon">Accessibility API Icon</string>
     <string name="cd_success_icon">Success Icon</string>
     <string name="cd_usage_access_icon">Usage Access Icon</string>
-    <string name="cd_blueiris_app_icon">Blue Iris App Icon</string>
+    <string name="cd_blueiris_app_icon">BlueIris App Icon</string>
     <string name="cd_notifications_icon">Notifications Icon</string>
     <string name="cd_checkmark_icon">Checkmark Icon</string>
 
@@ -412,9 +412,24 @@
     <string name="whitelist_dialog_all_apps_added">All apps are already in the whitelist.</string>
     <string name="whitelist_dialog_add_btn">Add</string>
     <string name="whitelist_dialog_add_count_btn">Add (%1$d)</string>
+    <string name="search_apps">Search apps…</string>
+
+    <string name="filter_and_sort">Filter and sort</string>
+    <string name="show_system_apps">Show system apps</string>
+    <string name="filter_by">Filter by</string>
+    <string name="filter_by_all">All</string>
+    <string name="filter_by_enabled">Enabled</string>
+    <string name="filter_by_disabled">Disabled</string>
+    <string name="sort_by">Sort by</string>
+    <string name="sort_by_name">Name</string>
+    <string name="sort_by_size">Size</string>
+    <string name="sort_by_last_used">Last used</string>
+    <string name="sort_by_last_updated">Last updated</string>
+    <string name="btn_ok">OK</string>
 
     <string name="history_title">History</string>
     <string name="history_today_stopped">Today Stopped</string>
+    <string name="history_stop_unit">Apps</string>
     <string name="history_no_apps_stopped_today">No apps stopped today</string>
     <string name="history_today_cleared">Today Cleared</string>
     <string name="history_period_today">Today</string>
@@ -425,6 +440,9 @@
     <string name="history_clear_all">Clear All</string>
     <string name="history_period_summary_singular">Total: %1$d app  |  %2$s Cache</string>
     <string name="history_period_summary_plural">Total: %1$d apps  |  %2$s Cache</string>
+    <string name="history_period_summary_stop_singular">Total: %1$d app  |  %2$d times stopped</string>
+    <string name="history_period_summary_stop_plural">Total: %1$d apps  |  %2$d times stopped</string>
+    <string name="history_no_apps_stopped_period">No apps were stopped during this period</string>
     <string name="history_no_cache_cleared_period">No cache cleared in this period</string>
     <string name="history_item_cache_size">Cache: %1$s</string>
     <string name="history_dialog_clear_clean_msg">Are you sure you want to clear all clean history records?</string>
@@ -441,6 +459,7 @@
     <string name="permission_title">Permission</string>
     <string name="accessibility_permission_title">Accessibility Service API</string>
     <string name="accessibility_permission_desc1">This app uses this API to automate the clear-cache operation. The service temporarily accesses window content, including interactive windows, to locate specific buttons in the system settings and may perform automated gestures such as clicks or scrolling to complete the process.</string>
+    <string name="accessibility_permission_desc1_stop">This app uses this API to automate the force-stop operation. The service temporarily accesses window content, including interactive windows, to locate specific buttons in the system settings and may perform automated gestures such as clicks or scrolling to complete the process.</string>
     <string name="accessibility_permission_desc2">Data accessed through this API will never be collected or shared.</string>
     <string name="btn_cancel_uppercase">CANCEL</string>
     <string name="btn_continue_uppercase">CONTINUE</string>
@@ -451,14 +470,16 @@
 
     <string name="usage_access_permission_title">Usage Access Permission</string>
     <string name="usage_access_permission_desc1">This app requires the Usage Data Access permission to detect the size of app, data and cache of the installed apps.</string>
-    <string name="usage_access_permission_desc2">To enable it, click the button below and allow permission for Blue Iris.</string>
+    <string name="usage_access_permission_desc2">To enable it, click the button below and allow permission for BlueIris.</string>
 
-    <string name="onboarding_privacy_note">By proceeding, you confirm you accept\nBlue Iris\'s %1$s</string>
+    <string name="onboarding_privacy_note">By proceeding, you confirm you accept\nBlueIris\'s %1$s</string>
     <string name="btn_next">NEXT</string>
     <string name="btn_get_started">GET STARTED</string>
-    <string name="onboarding_page1_desc">Clear cache of all apps and get more available storage space with the help of Blue Iris.</string>
+    <string name="onboarding_page1_desc">Clear cache of all apps and get more available storage space with the help of BlueIris.</string>
     <string name="onboarding_page2_title">Cache Notifications</string>
     <string name="onboarding_page2_desc">Get notification whenever you have too much cache. This will help you to track cache in notification.</string>
     <string name="onboarding_page3_title">That’s all!</string>
     <string name="onboarding_page3_desc">Everything was successfully configured and now the app is ready to work. Have a nice use.</string>
+    <string name="new_update_available">New Update Available</string>
+    <string name="new_update_desc">Version %1$s is available. Tap to download and install.</string>
 </resources>

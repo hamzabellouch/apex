@@ -91,8 +91,8 @@ fun CleanScreen(
                 }
             }
 
-            // Dynamic gauge target calculation based on max 1 GB cache capacity
-            val maxCacheBytes = 1024f * 1024f * 1024f // 1 GB
+            // Dynamic gauge target calculation based on max 1 GB cache capacity or totalCacheBytes
+            val maxCacheBytes = maxOf(1024f * 1024f * 1024f, totalCacheBytes.toFloat())
             val targetFraction = remember(totalCacheBytes, isCleaned) {
                 if (isCleaned || totalCacheBytes == 0L) 0.0f
                 else (totalCacheBytes.toFloat() / maxCacheBytes).coerceIn(0.02f, 1.0f)
@@ -109,8 +109,11 @@ fun CleanScreen(
             }
 
             val animatedRatio = if (targetFraction > 0f) (progressAnimatable.value / targetFraction).coerceIn(0f, 1f) else 0f
-            val animatedMb = (remainingCacheMb * animatedRatio).toInt()
-            val displayMbStr = if (totalCacheBytes > 0 && remainingCacheMb == 0) "1" else animatedMb.toString()
+            val animatedBytes = (totalCacheBytes * animatedRatio).toLong()
+            val (displayValueStr, displayUnitStr) = AppStorageHelper.formatSizeParts(
+                if (totalCacheBytes > 0 && animatedBytes == 0L) totalCacheBytes else animatedBytes,
+                maxDecimals = 1
+            )
 
             val gaugeTrackColor = MaterialTheme.colorScheme.surfaceContainerHigh
             // Circular Gauge Card for Clean
@@ -155,7 +158,7 @@ fun CleanScreen(
                     modifier = Modifier.offset(y = (-10).dp)
                 ) {
                     Text(
-                        text = if (isCleaned) "0" else displayMbStr,
+                        text = if (isCleaned) "0" else displayValueStr,
                         color = MaterialTheme.colorScheme.onBackground,
                         fontSize = 30.sp,
                         fontWeight = FontWeight.Bold,
@@ -163,7 +166,7 @@ fun CleanScreen(
                         textAlign = TextAlign.Center
                     )
                     Text(
-                        text = stringResource(id = R.string.clean_gauge_unit_mb),
+                        text = if (isCleaned) "MB" else displayUnitStr,
                         color = MaterialTheme.colorScheme.onBackground,
                         fontSize = 16.sp,
                         fontWeight = FontWeight.Bold,
@@ -179,14 +182,14 @@ fun CleanScreen(
                     )
                 }
 
-                // Percentage Labels
+                // Gauge End Labels
                 Box(
                     modifier = Modifier
                         .fillMaxSize()
                         .padding(horizontal = 32.dp, vertical = 16.dp)
                 ) {
                     Text(
-                        text = stringResource(id = R.string.clean_gauge_zero_mb),
+                        text = "0 ${if (isCleaned) "MB" else displayUnitStr}",
                         color = MaterialTheme.colorScheme.onSurfaceVariant,
                         fontSize = 12.sp,
                         modifier = Modifier
@@ -194,7 +197,7 @@ fun CleanScreen(
                             .offset(x = 16.dp, y = (-24).dp)
                     )
                     Text(
-                        text = stringResource(id = R.string.clean_gauge_current_mb, if (isCleaned) "0" else displayMbStr),
+                        text = if (isCleaned) "0 MB" else AppStorageHelper.formatSize(totalCacheBytes),
                         color = MaterialTheme.colorScheme.onSurfaceVariant,
                         fontSize = 12.sp,
                         modifier = Modifier

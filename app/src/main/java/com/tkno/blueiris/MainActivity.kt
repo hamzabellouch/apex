@@ -1,4 +1,4 @@
-﻿package com.tkno.blueiris
+package com.tkno.blueiris
 
 import android.app.LocaleManager
 import android.content.ComponentName
@@ -42,6 +42,7 @@ class MainActivity : ComponentActivity() {
             Locale.setDefault(locale)
             val config = newBase.resources.configuration
             config.setLocale(locale)
+            config.setLayoutDirection(locale)
             val context = newBase.createConfigurationContext(config)
             super.attachBaseContext(context)
             return
@@ -98,8 +99,14 @@ class MainActivity : ComponentActivity() {
         Locale.setDefault(targetLocale)
         val config = resources.configuration
         config.setLocale(targetLocale)
+        config.setLayoutDirection(targetLocale)
         @Suppress("DEPRECATION")
         resources.updateConfiguration(config, resources.displayMetrics)
+    }
+
+    override fun onNewIntent(intent: Intent) {
+        super.onNewIntent(intent)
+        setIntent(intent)
     }
 
     override fun onResume() {
@@ -113,6 +120,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             var darkThemePref by remember { mutableIntStateOf(prefs.getInt("dark_theme", 0)) }
             var isDynamicColor by remember { mutableStateOf(prefs.getBoolean("dynamic_color", true)) }
+            var appLanguagePref by remember { mutableStateOf(prefs.getString("app_language", "system") ?: "system") }
 
             DisposableEffect(prefs) {
                 val listener = android.content.SharedPreferences.OnSharedPreferenceChangeListener { p, key ->
@@ -120,6 +128,8 @@ class MainActivity : ComponentActivity() {
                         darkThemePref = p.getInt("dark_theme", 0)
                     } else if (key == "dynamic_color") {
                         isDynamicColor = p.getBoolean("dynamic_color", true)
+                    } else if (key == "app_language") {
+                        appLanguagePref = p.getString("app_language", "system") ?: "system"
                     }
                 }
                 prefs.registerOnSharedPreferenceChangeListener(listener)

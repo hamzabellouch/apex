@@ -123,7 +123,7 @@
     <string name="permission_issue_desc">Download/ および Documents/ 以外のディレクトリはサポートされていません</string>
     <string name="battery_configuration">バッテリー設定</string>
     <string name="battery_configuration_desc">バックグラウンドでダウンロードするには、このアプリのバッテリー最適化を無視します</string>
-    <string name="service_title">Blue Irisがダウンロード中…</string>
+    <string name="service_title">BlueIrisがダウンロード中…</string>
     <string name="unknown_error">不明なエラー</string>
     <string name="translate">翻訳</string>
     <string name="translate_desc">Hosted Weblateでこのアプリの翻訳を支援</string>
@@ -169,7 +169,7 @@
     <string name="matrix_space">Matrix</string>
     <string name="sponsor">スポンサー</string>
     <string name="sponsor_desc">GitHubでスポンサーになってこのアプリをサポート</string>
-    <string name="sponsor_msg">Blue Irisは将来もすべての人に対して常に無料かつオープンソースです。気に入っていただけましたら、GitHubでスポンサーになることをご検討ください！</string>
+    <string name="sponsor_msg">BlueIrisは将来もすべての人に対して常に無料かつオープンソースです。気に入っていただけましたら、GitHubでスポンサーになることをご検討ください！</string>
     <string name="feedback">フィードバック</string>
     <string name="sponsors">スポンサー</string>
     <string name="instagram">Instagram</string>
@@ -217,14 +217,14 @@
     <string name="scan_history">スキャン履歴</string>
     <string name="no_scan_history_yet">スキャン履歴はまだありません</string>
     <string name="scan_code">コードをスキャン</string>
-    <string name="scanned_by_links">Blue Irisでスキャン済み</string>
+    <string name="scanned_by_links">BlueIrisでスキャン済み</string>
     <string name="scan_qr_instruction">カメラでQRコードをスキャンするか、ギャラリーからインポートします</string>
     <string name="scan_now">今すぐスキャン</string>
     <string name="scanned_content">スキャンされた内容</string>
     <string name="feature_currently_unavailable">現在利用できません。</string>
     <string name="contact">お問い合わせ</string>
-    <string name="contact_desc">Blue Irisに新機能を追加するには開発者にお問い合わせください</string>
-    <string name="links_issue_tracker">Blue Iris イシュートラッカー</string>
+    <string name="contact_desc">BlueIrisに新機能を追加するには開発者にお問い合わせください</string>
+    <string name="links_issue_tracker">BlueIris イシュートラッカー</string>
     <string name="enter_url_error">URLを入力してください</string>
     <string name="invalid_url_format">無効なURL形式です。有効なウェブアドレスを入力してください（例: example.com）。</string>
     <string name="copied_to_clipboard">クリップボードにコピーしました</string>
@@ -258,5 +258,189 @@
     <string name="early_access">早期アクセス</string>
     <string name="pre_release_desc">プレリリースビルドをインストールして、新しい機能や変更をプレビューします。\n\nこれらのバージョンには一部の不安定さが伴うため、将来のアプリ改善のために問題が発生した場合はお気軽にご意見をお寄せください。</string>
     <string name="update_directory">更新ディレクトリ</string>
-</resources>
 
+    
+    <!-- Navigation Tabs & Toasts -->
+    <string name="nav_stop">停止</string>
+    <string name="nav_clean">クリーン</string>
+    <string name="nav_apps">アプリ</string>
+    <string name="nav_menu">メニュー</string>
+    <string name="toast_all_cache_cleaned">すべてのキャッシュはすでに消去されています (0 KB)</string>
+    <string name="toast_all_bg_apps_stopped">すべてのバックグラウンドアプリは停止しています</string>
+    <string name="toast_selected_apps_no_cache">選択したアプリにキャッシュはありません (0 KB)</string>
+
+    <!-- AppsScreen Filter & Sort -->
+    <string name="app_filter_all">すべてのアプリ</string>
+    <string name="app_filter_user">ユーザーアプリ</string>
+    <string name="app_filter_system">システムアプリ</string>
+    <string name="app_sort_by_name">名前順</string>
+    <string name="app_sort_by_date">日付順</string>
+    <string name="app_sort_by_size">サイズ順</string>
+    <string name="apps_screen_title">アプリ</string>
+    <string name="apps_listed_count">%1$d 件のアプリ</string>
+    <string name="cd_filter_apps">アプリをフィルター</string>
+    <string name="cd_sort_apps">アプリを並べ替え</string>
+    <string name="apps_no_apps_found">条件に一致するアプリが見つかりません</string>
+    <string name="cd_clear_selection">選択を解除</string>
+    <string name="apps_selected_count">選択中: %1$d</string>
+    <string name="cd_clean_selected_apps">選択したアプリをクリーン</string>
+    <string name="cd_selected">選択済み</string>
+    <string name="app_size_prefix">サイズ: %1$s</string>
+    <string name="cd_go_to_details">詳細を見る</string>
+
+    <!-- App Detail Screen Strings -->
+    <string name="app_detail_version">バージョン: %1$s</string>
+    <string name="app_detail_apk_size">APKサイズ</string>
+    <string name="app_detail_install_date">インストール日</string>
+    <string name="app_detail_last_update">最終更新日</string>
+    <string name="app_detail_requested_permissions">要求された権限</string>
+    <string name="app_detail_uninstall">アンインストール</string>
+    <string name="app_detail_update">更新</string>
+    <string name="app_detail_launch">起動</string>
+    <string name="app_detail_app_info">アプリ情報</string>
+    <string name="toast_cannot_launch_app">アプリを起動できません</string>
+    <string name="toast_cannot_open_store">ストアページを開けません</string>
+
+    <!-- Speed & Performance Strings -->
+    <string name="performance_and_speed_title">パフォーマンスと速度</string>
+
+    <!-- Stop Process Strings -->
+    <string name="stop_process_title">停止プロセス</string>
+    <string name="force_stop_mode_title">強制停止モード</string>
+
+    <!-- Clean Process Strings -->
+    <string name="clean_process_title">クリーンプロセス</string>
+    <string name="cleaning_mode_title">クリーンモード</string>
+    <string name="cleaning_mode_manual">手動</string>
+    <string name="cleaning_mode_automatic">自動</string>
+    <string name="cleaning_mode_ask_each_time">毎回確認</string>
+    <string name="ignore_tiny_cache_title">小容量キャッシュを無視</string>
+    <string name="ignore_tiny_cache_desc">3 MB未満のキャッシュを持つアプリを除外</string>
+
+    <!-- StopScreen Strings -->
+    <string name="stop_title">停止</string>
+    <string name="stop_history_icon_desc">履歴</string>
+    <string name="stop_gauge_apps">アプリ</string>
+    <string name="stop_gauge_background">バックグラウンド</string>
+    <string name="stop_gauge_zero">0</string>
+    <string name="stop_gauge_active_count">%1$d アクティブ</string>
+    <string name="stop_stat_running_title">実行中</string>
+    <string name="stop_stat_running_value">%1$d アプリ</string>
+    <string name="stop_stat_ram_used">使用中RAM</string>
+    <string name="stop_stat_free_ram">空きRAM</string>
+    <string name="stop_action_memory_info">メモリ情報</string>
+    <string name="stop_action_whitelist">ホワイトリスト</string>
+    <string name="stop_action_running_apps">実行中のアプリ</string>
+    <string name="stop_button_icon_desc">停止アイコン</string>
+    <string name="stop_start_button">停止を開始</string>
+    <string name="stop_dialog_memory_title">システムRAM情報</string>
+    <string name="stop_dialog_total_ram">合計RAM: %1$s</string>
+    <string name="stop_dialog_used_ram">使用中RAM: %1$s (%2$d%%)</string>
+    <string name="stop_dialog_free_ram">空きRAM: %1$s</string>
+    <string name="stop_dialog_close">閉じる</string>
+    <string name="stop_dialog_running_apps_title">実行中のアプリ (%1$d)</string>
+    <string name="stop_dialog_no_running_apps">実行中のバックグラウンドアプリはありません。</string>
+
+    <!-- CleanScreen Strings -->
+    <string name="clean_title">クリーン</string>
+    <string name="clean_history_icon_desc">履歴</string>
+    <string name="clean_gauge_unit_mb">MB</string>
+    <string name="clean_gauge_system_cleaned">システムはクリーンです</string>
+    <string name="clean_gauge_can_be_cleared">消去可能</string>
+    <string name="clean_gauge_zero_mb">0 MB</string>
+    <string name="clean_gauge_current_mb">%1$s MB</string>
+    <string name="clean_stat_total">合計</string>
+    <string name="clean_stat_used">使用済み</string>
+    <string name="clean_stat_cache">キャッシュ</string>
+    <string name="clean_action_storage_details">ストレージ詳細</string>
+    <string name="clean_action_whitelist">ホワイトリスト</string>
+    <string name="clean_action_live_cache">ライブキャッシュ</string>
+    <string name="clean_button_icon_desc">クリーンアイコン</string>
+    <string name="clean_start_button">クリーンを開始</string>
+    <string name="clean_dialog_storage_details_title">ストレージ詳細</string>
+    <string name="clean_dialog_total_storage">内部ストレージ合計: %1$s</string>
+    <string name="clean_dialog_used_storage">使用中のストレージ: %1$s</string>
+    <string name="clean_dialog_clearable_cache">消去可能なキャッシュ: %1$s</string>
+    <string name="clean_dialog_close">閉じる</string>
+    <string name="clean_dialog_live_cache_title">ライブキャッシュモニター</string>
+    <string name="clean_dialog_live_cache_desc">ライブキャッシュサイズ: %1$s。</string>
+    <string name="clean_dialog_ok">OK</string>
+
+    <!-- Sub-screens Extracted Strings -->
+    <string name="cd_back">戻る</string>
+    <string name="cd_broom_icon">ほうきアイコン</string>
+    <string name="cd_whitelist_icon">ホワイトリストアイコン</string>
+    <string name="cd_remove">削除</string>
+    <string name="cd_add_app">アプリを追加</string>
+    <string name="cd_check_icon">チェックアイコン</string>
+    <string name="cd_toggle_icon">スイッチ</string>
+    <string name="cd_accessibility_icon">ユーザー補助アイコン</string>
+    <string name="cd_success_icon">成功アイコン</string>
+    <string name="cd_usage_access_icon">使用権限アイコン</string>
+    <string name="cd_blueiris_app_icon">BlueIrisアイコン</string>
+    <string name="cd_notifications_icon">通知アイコン</string>
+    <string name="cd_checkmark_icon">チェックマーク</string>
+
+    <string name="analyze_screen_title">分析</string>
+    <string name="analyze_cache_apps_count">キャッシュ (%1$d 件のアプリ)</string>
+    <string name="analyze_no_cache_found">キャッシュファイルが見つかりません</string>
+    <string name="analyze_clear_button">消去</string>
+
+    <string name="whitelist_title">ホワイトリスト</string>
+    <string name="whitelist_empty_avoid_stop">強制停止を避けるためアプリを追加</string>
+    <string name="whitelist_empty_avoid_clean">キャッシュクリーンを避けるためアプリを追加</string>
+    <string name="whitelist_dialog_title_add">ホワイトリストに追加</string>
+    <string name="whitelist_dialog_title_selected">選択中 (%1$d)</string>
+    <string name="whitelist_dialog_all_apps_added">すべてのアプリはすでに追加されています。</string>
+    <string name="whitelist_dialog_add_btn">追加</string>
+    <string name="whitelist_dialog_add_count_btn">追加 (%1$d)</string>
+
+    <string name="history_title">履歴</string>
+    <string name="history_today_stopped">本日停止済み</string>
+    <string name="history_no_apps_stopped_today">本日停止したアプリはありません</string>
+    <string name="history_today_cleared">本日消去済み</string>
+    <string name="history_period_today">今日</string>
+    <string name="history_period_yesterday">昨日</string>
+    <string name="history_period_last_7_days">過去7日間</string>
+    <string name="history_period_last_30_days">過去30日間</string>
+    <string name="history_period_tap_details">タップして詳細を表示</string>
+    <string name="history_clear_all">すべて消去</string>
+    <string name="history_period_summary_singular">合計: %1$d アプリ  |  %2$s キャッシュ</string>
+    <string name="history_period_summary_plural">合計: %1$d アプリ  |  %2$s キャッシュ</string>
+    <string name="history_no_cache_cleared_period">この期間中に消去されたキャッシュはありません</string>
+    <string name="history_item_cache_size">キャッシュ: %1$s</string>
+    <string name="history_dialog_clear_clean_msg">クリーン履歴を消去しますか？</string>
+    <string name="history_dialog_clear_stop_msg">停止履歴を消去しますか？</string>
+    <string name="history_stop_count_singular">%1$d 回</string>
+    <string name="history_stop_count_plural">%1$d 回</string>
+
+    <string name="done_count_apps_singular">1 アプリ</string>
+    <string name="done_count_apps_plural">%1$d アプリ</string>
+    <string name="done_stopped_subtitle">停止済み: %1$s</string>
+    <string name="done_cleaned_subtitle">クリーン済み: %1$s</string>
+    <string name="done_button">完了</string>
+
+    <string name="permission_title">権限</string>
+    <string name="accessibility_permission_title">ユーザー補助サービスAPI</string>
+    <string name="accessibility_permission_desc1">自動でキャッシュを消去するためにAPIを使用します。</string>
+    <string name="accessibility_permission_desc2">データが収集または共有されることはありません。</string>
+    <string name="btn_cancel_uppercase">キャンセル</string>
+    <string name="btn_continue_uppercase">続行</string>
+
+    <string name="permission_success_title">完了！</string>
+    <string name="permission_success_desc1">設定が完了しました。</string>
+    <string name="permission_success_desc2">個人情報を収集することはありません。</string>
+
+    <string name="usage_access_permission_title">使用状況へのアクセス権限</string>
+    <string name="usage_access_permission_desc1">使用状況アクセス権限が必要です。</string>
+    <string name="usage_access_permission_desc2">下のボタンをタップして有効にしてください。</string>
+
+    <string name="onboarding_privacy_note">続行することでBlueIrisの規約に同意したことになります %1$s</string>
+    <string name="btn_next">次へ</string>
+    <string name="btn_get_started">はじめる</string>
+    <string name="onboarding_page1_desc">全アプリのキャッシュを削除して空き容量を増やします。</string>
+    <string name="onboarding_page2_title">キャッシュ通知</string>
+    <string name="onboarding_page2_desc">キャッシュが増えた際に通知を受け取ります。</string>
+    <string name="onboarding_page3_title">これで完了です！</string>
+    <string name="onboarding_page3_desc">すべての設定が正常に完了しました。</string>
+</resources>

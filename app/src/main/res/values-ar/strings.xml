@@ -133,7 +133,7 @@
     <string name="permission_issue_desc">المجلدات خارج Download/ و Documents/ غير مدعومة</string>
     <string name="battery_configuration">تكوين البطارية</string>
     <string name="battery_configuration_desc">تجاهل تحسين البطارية لهذا التطبيق للتنزيل في الخلفية</string>
-    <string name="service_title">Blue Iris يقوم بالتنزيل…</string>
+    <string name="service_title">BlueIris يقوم بالتنزيل…</string>
     <string name="unknown_error">خطأ غير معروف</string>
     <string name="translate">ترجمة</string>
     <string name="translate_desc">المساعدة في ترجمة هذا التطبيق على Hosted Weblate</string>
@@ -179,7 +179,7 @@
     <string name="matrix_space">ماتريكس</string>
     <string name="sponsor">دعم المشروع</string>
     <string name="sponsor_desc">دعم هذا التطبيق عن طريق الرعاية على GitHub</string>
-    <string name="sponsor_msg">سيكون تطبيق Blue Iris دائماً مجانياً ومفتوح المصدر في المستقبل للجميع. إذا أعجبك، يرجى النظر في رعايتي على GitHub!</string>
+    <string name="sponsor_msg">سيكون تطبيق BlueIris دائماً مجانياً ومفتوح المصدر في المستقبل للجميع. إذا أعجبك، يرجى النظر في رعايتي على GitHub!</string>
     <string name="feedback">الآراء والملاحظات</string>
     <string name="sponsors">الداعمون</string>
     <string name="instagram">إنستغرام</string>
@@ -228,14 +228,14 @@
     <string name="scan_history">سجل المسح</string>
     <string name="no_scan_history_yet">لا يوجد سجل مسح حتى الآن</string>
     <string name="scan_code">مسح الرمز</string>
-    <string name="scanned_by_links">تم المسح بواسطة Blue Iris</string>
+    <string name="scanned_by_links">تم المسح بواسطة BlueIris</string>
     <string name="scan_qr_instruction">قم بمسح رموز QR باستخدام الكاميرا أو الاستيراد من المعرض</string>
     <string name="scan_now">إمسح الآن</string>
     <string name="scanned_content">المحتوى الممسوح</string>
     <string name="feature_currently_unavailable">هذه الميزة غير متاحة حالياً.</string>
     <string name="contact">الاتصال</string>
-    <string name="contact_desc">تواصل مع المطور لإضافة ميزات جديدة في Blue Iris</string>
-    <string name="links_issue_tracker">متتبع مشاكل Blue Iris</string>
+    <string name="contact_desc">تواصل مع المطور لإضافة ميزات جديدة في BlueIris</string>
+    <string name="links_issue_tracker">متتبع مشاكل BlueIris</string>
     <string name="enter_url_error">يرجى إدخال رابط URL</string>
     <string name="invalid_url_format">تدوين URL غير صالح. يرجى إدخال عنوان ويب صالح (مثال: example.com).</string>
     <string name="no_internet_error">لا يوجد اتصال بالإنترنت. يرجى التحقق من الشبكة والمحاولة مرة أخرى.</string>
@@ -395,7 +395,7 @@
     <string name="cd_accessibility_icon">رمز إمكانية الوصول</string>
     <string name="cd_success_icon">رمز النجاح</string>
     <string name="cd_usage_access_icon">رمز الوصول لبيانات الاستخدام</string>
-    <string name="cd_blueiris_app_icon">رمز تطبيق Blue Iris</string>
+    <string name="cd_blueiris_app_icon">رمز تطبيق BlueIris</string>
     <string name="cd_notifications_icon">رمز الإشعارات</string>
     <string name="cd_checkmark_icon">رمز علامة الصح</string>
 
@@ -412,9 +412,24 @@
     <string name="whitelist_dialog_all_apps_added">جميع التطبيقات موجودة بالفعل في القائمة البيضاء.</string>
     <string name="whitelist_dialog_add_btn">إضافة</string>
     <string name="whitelist_dialog_add_count_btn">إضافة (%1$d)</string>
+    <string name="search_apps">البحث عن تطبيق…</string>
+
+    <string name="filter_and_sort">التصفية والفرز</string>
+    <string name="show_system_apps">إظهار تطبيقات النظام</string>
+    <string name="filter_by">التصفية حسب</string>
+    <string name="filter_by_all">الكل</string>
+    <string name="filter_by_enabled">المفعلة</string>
+    <string name="filter_by_disabled">غير المفعلة</string>
+    <string name="sort_by">الفرز حسب</string>
+    <string name="sort_by_name">الاسم</string>
+    <string name="sort_by_size">الحجم</string>
+    <string name="sort_by_last_used">آخر استخدام</string>
+    <string name="sort_by_last_updated">آخر تحديث</string>
+    <string name="btn_ok">موافق</string>
 
     <string name="history_title">السجل</string>
     <string name="history_today_stopped">تم إيقافها اليوم</string>
+    <string name="history_stop_unit">Apps</string>
     <string name="history_no_apps_stopped_today">لم يتم إيقاف أي تطبيقات اليوم</string>
     <string name="history_today_cleared">تم تنظيفها اليوم</string>
     <string name="history_period_today">اليوم</string>
@@ -425,6 +440,9 @@
     <string name="history_clear_all">مسح الكل</string>
     <string name="history_period_summary_singular">الإجمالي: %1$d تطبيق  |  %2$s ذاكرة تخزين مؤقت</string>
     <string name="history_period_summary_plural">الإجمالي: %1$d تطبيقات  |  %2$s ذاكرة تخزين مؤقت</string>
+    <string name="history_period_summary_stop_singular">الإجمالي: %1$d تطبيق  |  توقفت %2$d مرة</string>
+    <string name="history_period_summary_stop_plural">الإجمالي: %1$d تطبيقات  |  توقفت %2$d مرة</string>
+    <string name="history_no_apps_stopped_period">لم يتم إيقاف أي تطبيقات خلال هذه الفترة</string>
     <string name="history_no_cache_cleared_period">لم يتم مسح ذاكرة التخزين المؤقت في هذه الفترة</string>
     <string name="history_item_cache_size">ذاكرة التخزين المؤقت: %1$s</string>
     <string name="history_dialog_clear_clean_msg">هل أنت تأكد من أنك تريد مسح جميع سجلات عمليات التنظيف؟</string>
@@ -441,6 +459,7 @@
     <string name="permission_title">الأذونات</string>
     <string name="accessibility_permission_title">خدمة إمكانية الوصول (API)</string>
     <string name="accessibility_permission_desc1">يستخدم هذا التطبيق هذه الواجهة لأتمتة عملية مسح ذاكرة التخزين المؤقت. تصل الخدمة مؤقتًا إلى محتوى الشاشة، بما في ذلك النوافذ التفاعلية، لتحديد أزرار معينة في إعدادات النظام وقد تفرّض إيماءات آلية مثل النقرات أو التمرير لإكمال العملية.</string>
+    <string name="accessibility_permission_desc1_stop">يستخدم هذا التطبيق هذه الواجهة لأتمتة عملية إيقاف التطبيقات. تصل الخدمة مؤقتًا إلى محتوى الشاشة، بما في ذلك النوافذ التفاعلية، لتحديد أزرار معينة في إعدادات النظام وقد تفرّض إيماءات آلية مثل النقرات أو التمرير لإكمال العملية.</string>
     <string name="accessibility_permission_desc2">لن يتم تجميع البيانات التي يتم الوصول إليها عبر هذه الواجهة أو مشاركتها بأي شكل من الأشكال.</string>
     <string name="btn_cancel_uppercase">إلغاء</string>
     <string name="btn_continue_uppercase">متابعة</string>
@@ -451,14 +470,16 @@
 
     <string name="usage_access_permission_title">إذن الوصول إلى بيانات الاستخدام</string>
     <string name="usage_access_permission_desc1">يتطلب هذا التطبيق إذن الوصول إلى بيانات الاستخدام لاكتشاف حجم التطبيقات والبيانات وذاكرة التخزين المؤقت للتطبيقات المثبتة.</string>
-    <string name="usage_access_permission_desc2">لتفعيله، انقر فوق الزر أدناه وامنح الإذن لتطبيق Blue Iris.</string>
+    <string name="usage_access_permission_desc2">لتفعيله، انقر فوق الزر أدناه وامنح الإذن لتطبيق BlueIris.</string>
 
-    <string name="onboarding_privacy_note">بالمتابعة، فإنك تؤكد موافقتك على\n%1$s الخاص بـ Blue Iris</string>
+    <string name="onboarding_privacy_note">بالمتابعة، فإنك تؤكد موافقتك على\n%1$s الخاص بـ BlueIris</string>
     <string name="btn_next">التالي</string>
     <string name="btn_get_started">ابدأ الآن</string>
-    <string name="onboarding_page1_desc">قم بمسح ذاكرة التخزين المؤقت لجميع التطبيقات واحصل على مساحة تخزين إضافية بمساعدة Blue Iris.</string>
+    <string name="onboarding_page1_desc">قم بمسح ذاكرة التخزين المؤقت لجميع التطبيقات واحصل على مساحة تخزين إضافية بمساعدة BlueIris.</string>
     <string name="onboarding_page2_title">إشعارات التخزين المؤقت</string>
     <string name="onboarding_page2_desc">احصل على إشعار عندما تتراكم ذاكرة التخزين المؤقت بشكل كبير. سيساعدك هذا على تتبع التخزين المؤقت عبر الإشعارات.</string>
     <string name="onboarding_page3_title">هذا كل شيء!</string>
     <string name="onboarding_page3_desc">تم تكوين كل شيء بنجاح والتطبيق الآن جاهز للعمل. نتمنى لك استخدامًا ممتعًا.</string>
+    <string name="new_update_available">تحديث جديد متاح</string>
+    <string name="new_update_desc">إصدار جديد (%1$s) متوفر الآن. انقر للتحميل والتثبيت.</string>
 </resources>

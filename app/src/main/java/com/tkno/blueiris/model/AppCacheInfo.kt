@@ -1,4 +1,4 @@
-﻿package com.tkno.blueiris.model
+package com.tkno.blueiris.model
 
 import android.graphics.drawable.Drawable
 
@@ -14,5 +14,8 @@ data class AppCacheInfo(
     val isStopped: Boolean = false,
     val isStoppable: Boolean = true,
     val isCleanable: Boolean = true,
-    val installTime: Long = 0L
+    val installTime: Long = 0L,
+    val isEnabled: Boolean = true,
+    val lastUpdateTime: Long = 0L,
+    val lastUsedTime: Long = 0L
 )

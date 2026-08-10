@@ -1,4 +1,4 @@
-﻿package com.tkno.blueiris.util
+package com.tkno.blueiris.util
 
 import android.app.ActivityManager
 import android.app.AppOpsManager
@@ -223,6 +223,10 @@ object AppStorageHelper {
                         }
                     }
 
+                    val isEnabled = appInfo.enabled
+                    val lastUpdateTime = pkg.lastUpdateTime
+                    val lastUsedTime = pkg.lastUpdateTime.takeIf { it > 0 } ?: installTime
+
                     AppCacheInfo(
                         packageName = pkg.packageName,
                         name = appName,
@@ -235,7 +239,10 @@ object AppStorageHelper {
                         isStopped = isStopped,
                         isStoppable = isStoppable,
                         isCleanable = isCleanable,
-                        installTime = installTime
+                        installTime = installTime,
+                        isEnabled = isEnabled,
+                        lastUpdateTime = lastUpdateTime,
+                        lastUsedTime = lastUsedTime
                     )
                 }
             }.awaitAll().filterNotNull()
@@ -264,15 +271,43 @@ object AppStorageHelper {
     }
 
     fun formatSize(bytes: Long): String {
-        if (bytes <= 0) return "0 KB"
+        val (valueStr, unitStr) = formatSizeParts(bytes, maxDecimals = 2)
+        return "$valueStr $unitStr"
+    }
+
+    fun formatSizeParts(bytes: Long, maxDecimals: Int = 2): Pair<String, String> {
+        if (bytes <= 0) return Pair("0", "KB")
         val kb = bytes / 1024f
         val mb = kb / 1024f
         val gb = mb / 1024f
+        val tb = gb / 1024f
 
         return when {
-            gb >= 1.0f -> String.format(java.util.Locale.US, "%.2f GB", gb)
-            mb >= 1.0f -> String.format(java.util.Locale.US, "%.1f MB", mb)
-            else -> String.format(java.util.Locale.US, "%.0f KB", kb)
+            tb >= 1.0f -> Pair(formatNumber(tb, maxDecimals), "TB")
+            gb >= 1.0f -> Pair(formatNumber(gb, maxDecimals), "GB")
+            mb >= 1.0f -> Pair(formatNumber(mb, maxDecimals), "MB")
+            kb >= 1.0f -> Pair(formatNumber(kb, maxDecimals), "KB")
+            else -> Pair(bytes.toString(), "B")
+        }
+    }
+
+    private fun formatNumber(value: Float, maxDecimals: Int): String {
+        if (maxDecimals == 1) {
+            val roundedInt = kotlin.math.round(value)
+            if (kotlin.math.abs(value - roundedInt) < 0.05f) {
+                return String.format(java.util.Locale.US, "%.0f", value)
+            }
+            return String.format(java.util.Locale.US, "%.1f", value)
+        } else {
+            val roundedInt = kotlin.math.round(value)
+            if (kotlin.math.abs(value - roundedInt) < 0.005f) {
+                return String.format(java.util.Locale.US, "%.2f", value)
+            }
+            val roundedOneDecimal = kotlin.math.round(value * 10f) / 10f
+            if (kotlin.math.abs(value - roundedOneDecimal) < 0.005f) {
+                return String.format(java.util.Locale.US, "%.1f", value)
+            }
+            return String.format(java.util.Locale.US, "%.2f", value)
         }
     }
 

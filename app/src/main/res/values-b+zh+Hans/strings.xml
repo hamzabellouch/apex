@@ -123,7 +123,7 @@
     <string name="permission_issue_desc">不支持 Download/ 和 Documents/ 以外的目录</string>
     <string name="battery_configuration">电池配置</string>
     <string name="battery_configuration_desc">忽略此应用的电池优化以便在后台进行下载</string>
-    <string name="service_title">Blue Iris 正在下载…</string>
+    <string name="service_title">BlueIris 正在下载…</string>
     <string name="unknown_error">未知错误</string>
     <string name="translate">翻译</string>
     <string name="translate_desc">在 Hosted Weblate 上协助翻译此应用</string>
@@ -169,7 +169,7 @@
     <string name="matrix_space">Matrix</string>
     <string name="sponsor">赞助</string>
     <string name="sponsor_desc">通过在 GitHub 上进行赞助来支持本应用</string>
-    <string name="sponsor_msg">Blue Iris 在未来将始终对所有人免费且开源。如果您喜欢它，请考虑在 GitHub 上赞助我！</string>
+    <string name="sponsor_msg">BlueIris 在未来将始终对所有人免费且开源。如果您喜欢它，请考虑在 GitHub 上赞助我！</string>
     <string name="feedback">反馈</string>
     <string name="sponsors">赞助者</string>
     <string name="instagram">Instagram</string>
@@ -217,14 +217,14 @@
     <string name="scan_history">扫码历史</string>
     <string name="no_scan_history_yet">暂无扫码历史</string>
     <string name="scan_code">扫码</string>
-    <string name="scanned_by_links">由 Blue Iris 扫描</string>
+    <string name="scanned_by_links">由 BlueIris 扫描</string>
     <string name="scan_qr_instruction">使用相机扫描二维码或从相册导入</string>
     <string name="scan_now">立即扫描</string>
     <string name="scanned_content">扫描内容</string>
     <string name="feature_currently_unavailable">此功能暂不可用。</string>
     <string name="contact">联系方式</string>
-    <string name="contact_desc">联系开发者为 Blue Iris 添加新功能</string>
-    <string name="links_issue_tracker">Blue Iris Issue 追踪器</string>
+    <string name="contact_desc">联系开发者为 BlueIris 添加新功能</string>
+    <string name="links_issue_tracker">BlueIris Issue 追踪器</string>
     <string name="enter_url_error">请输入 URL</string>
     <string name="invalid_url_format">URL 格式无效。请输入有效的网址（例如 example.com）。</string>
     <string name="copied_to_clipboard">已复制到剪贴板</string>
@@ -258,5 +258,192 @@
     <string name="early_access">抢先体验</string>
     <string name="pre_release_desc">安装预发布版本以预览新功能和更改。\n\n这些版本可能不够稳定，如果您遇到任何问题，请随时向我们反馈，以帮助我们不断改进应用。</string>
     <string name="update_directory">更新目录</string>
-</resources>
 
+    
+    <!-- Navigation Tabs & Toasts -->
+    <string name="nav_stop">停止</string>
+    <string name="nav_clean">清理</string>
+    <string name="nav_apps">应用</string>
+    <string name="nav_menu">菜单</string>
+    <string name="toast_all_cache_cleaned">所有缓存均已清理 (0 KB)</string>
+    <string name="toast_all_bg_apps_stopped">所有后台应用均已停止</string>
+    <string name="toast_selected_apps_no_cache">所选应用没有缓存 (0 KB)</string>
+
+    <!-- AppsScreen Filter & Sort -->
+    <string name="app_filter_all">应用</string>
+    <string name="app_filter_user">应用</string>
+    <string name="app_filter_system">应用</string>
+    <string name="app_sort_by_name">按名称</string>
+    <string name="app_sort_by_date">按日期</string>
+    <string name="app_sort_by_size">按应用大小</string>
+    <string name="apps_screen_title">应用</string>
+    <string name="apps_listed_count">已列出 %1$d 个应用</string>
+    <string name="cd_filter_apps">筛选应用</string>
+    <string name="cd_sort_apps">排序应用</string>
+    <string name="apps_no_apps_found">未找到相关应用</string>
+    <string name="cd_clear_selection">清除选择</string>
+    <string name="apps_selected_count">已选择: %1$d</string>
+    <string name="cd_clean_selected_apps">清理所选应用</string>
+    <string name="cd_selected">已选择</string>
+    <string name="app_size_prefix">大小: %1$s</string>
+    <string name="cd_go_to_details">查看详情</string>
+
+    <!-- App Detail Screen Strings -->
+    <string name="app_detail_version">版本: %1$s</string>
+    <string name="app_detail_apk_size">APK 大小</string>
+    <string name="app_detail_install_date">安装日期</string>
+    <string name="app_detail_last_update">最后更新</string>
+    <string name="app_detail_requested_permissions">请求的权限</string>
+    <string name="app_detail_uninstall">卸载</string>
+    <string name="app_detail_update">更新</string>
+    <string name="app_detail_launch">启动</string>
+    <string name="app_detail_app_info">应用信息</string>
+    <string name="toast_cannot_launch_app">无法启动此应用</string>
+    <string name="toast_cannot_open_store">无法打开商店页面</string>
+
+    <!-- Speed & Performance Strings -->
+    <string name="performance_and_speed_title">性能与速度</string>
+
+    <!-- Stop Process Strings -->
+    <string name="stop_process_title">停止进程</string>
+    <string name="force_stop_mode_title">强行停止模式</string>
+
+    <!-- Clean Process Strings -->
+    <string name="clean_process_title">清理进程</string>
+    <string name="cleaning_mode_title">清理模式</string>
+    <string name="cleaning_mode_manual">手动</string>
+    <string name="cleaning_mode_automatic">自动</string>
+    <string name="cleaning_mode_ask_each_time">每次询问</string>
+    <string name="ignore_tiny_cache_title">忽略微小缓存</string>
+    <string name="ignore_tiny_cache_desc">排除缓存小于 3 MB 的应用</string>
+
+    <!-- StopScreen Strings -->
+    <string name="stop_title">停止</string>
+    <string name="stop_history_icon_desc">历史记录</string>
+    <string name="stop_gauge_apps">应用</string>
+    <string name="stop_gauge_background">后台</string>
+    <string name="stop_gauge_zero">0</string>
+    <string name="stop_gauge_active_count">%1$d 个活跃</string>
+    <string name="stop_stat_running_title">运行中</string>
+    <string name="stop_stat_running_value">%1$d 个应用</string>
+    <string name="stop_stat_ram_used">已用内存</string>
+    <string name="stop_stat_free_ram">可用内存</string>
+    <string name="stop_action_memory_info">内存信息</string>
+    <string name="stop_action_whitelist">白名单</string>
+    <string name="stop_action_running_apps">运行中应用</string>
+    <string name="stop_button_icon_desc">停止图标</string>
+    <string name="stop_start_button">开始停止</string>
+    <string name="stop_dialog_memory_title">系统内存信息</string>
+    <string name="stop_dialog_total_ram">总内存: %1$s</string>
+    <string name="stop_dialog_used_ram">已用内存: %1$s (%2$d%%)</string>
+    <string name="stop_dialog_free_ram">可用内存: %1$s</string>
+    <string name="stop_dialog_close">关闭</string>
+    <string name="stop_dialog_running_apps_title">运行中应用 (%1$d)</string>
+    <string name="stop_dialog_no_running_apps">没有活跃的后台运行应用。</string>
+
+    <!-- CleanScreen Strings -->
+    <string name="clean_title">清理</string>
+    <string name="clean_history_icon_desc">历史记录</string>
+    <string name="clean_gauge_unit_mb">MB</string>
+    <string name="clean_gauge_system_cleaned">系统已整洁</string>
+    <string name="clean_gauge_can_be_cleared">可清理</string>
+    <string name="clean_gauge_zero_mb">0 MB</string>
+    <string name="clean_gauge_current_mb">%1$s MB</string>
+    <string name="clean_stat_total">总计</string>
+    <string name="clean_stat_used">已用</string>
+    <string name="clean_stat_cache">缓存</string>
+    <string name="clean_action_storage_details">存储详情</string>
+    <string name="clean_action_whitelist">白名单</string>
+    <string name="clean_action_live_cache">实时缓存</string>
+    <string name="clean_button_icon_desc">清理图标</string>
+    <string name="clean_start_button">开始清理</string>
+    <string name="clean_dialog_storage_details_title">存储空间详情</string>
+    <string name="clean_dialog_total_storage">总内部存储: %1$s</string>
+    <string name="clean_dialog_used_storage">已用存储: %1$s</string>
+    <string name="clean_dialog_clearable_cache">可清理缓存: %1$s</string>
+    <string name="clean_dialog_close">关闭</string>
+    <string name="clean_dialog_live_cache_title">实时缓存监控</string>
+    <string name="clean_dialog_live_cache_desc">实时缓存大小: %1$s。</string>
+    <string name="clean_dialog_ok">确定</string>
+
+    <!-- Sub-screens Extracted Strings -->
+    <string name="cd_back">返回</string>
+    <string name="cd_broom_icon">扫帚图标</string>
+    <string name="cd_whitelist_icon">白名单图标</string>
+    <string name="cd_remove">移除</string>
+    <string name="cd_add_app">添加应用</string>
+    <string name="cd_check_icon">勾选图标</string>
+    <string name="cd_toggle_icon">开关图标</string>
+    <string name="cd_accessibility_icon">无障碍 API 图标</string>
+    <string name="cd_success_icon">成功图标</string>
+    <string name="cd_usage_access_icon">使用情况权限图标</string>
+    <string name="cd_blueiris_app_icon">BlueIris 应用图标</string>
+    <string name="cd_notifications_icon">通知图标</string>
+    <string name="cd_checkmark_icon">对勾图标</string>
+
+    <string name="analyze_screen_title">分析</string>
+    <string name="analyze_cache_apps_count">缓存 (%1$d 个应用)</string>
+    <string name="analyze_no_cache_found">未找到缓存项</string>
+    <string name="analyze_clear_button">开始清理</string>
+
+    <string name="whitelist_title">白名单</string>
+    <string name="whitelist_empty_avoid_stop">添加应用以避免
+被强行停止</string>
+    <string name="whitelist_empty_avoid_clean">添加应用以避免
+被清理缓存</string>
+    <string name="whitelist_dialog_title_add">添加至白名单</string>
+    <string name="whitelist_dialog_title_selected">已选择 (%1$d)</string>
+    <string name="whitelist_dialog_all_apps_added">所有应用均已在白名单中。</string>
+    <string name="whitelist_dialog_add_btn">添加</string>
+    <string name="whitelist_dialog_add_count_btn">添加 (%1$d)</string>
+
+    <string name="history_title">历史记录</string>
+    <string name="history_today_stopped">今日已停止</string>
+    <string name="history_no_apps_stopped_today">今日未停止任何应用</string>
+    <string name="history_today_cleared">今日已清理</string>
+    <string name="history_period_today">今天</string>
+    <string name="history_period_yesterday">昨天</string>
+    <string name="history_period_last_7_days">最近 7 天</string>
+    <string name="history_period_last_30_days">最近 30 天</string>
+    <string name="history_period_tap_details">点击查看详情</string>
+    <string name="history_clear_all">清除全部</string>
+    <string name="history_period_summary_singular">共计: %1$d 个应用  |  %2$s 缓存</string>
+    <string name="history_period_summary_plural">共计: %1$d 个应用  |  %2$s 缓存</string>
+    <string name="history_no_cache_cleared_period">在此期间未清理缓存</string>
+    <string name="history_item_cache_size">缓存: %1$s</string>
+    <string name="history_dialog_clear_clean_msg">确定要清除所有清理历史记录吗？</string>
+    <string name="history_dialog_clear_stop_msg">确定要清除所有停止历史记录吗？</string>
+    <string name="history_stop_count_singular">%1$d 次</string>
+    <string name="history_stop_count_plural">%1$d 次</string>
+
+    <string name="done_count_apps_singular">1 个应用</string>
+    <string name="done_count_apps_plural">%1$d 个应用</string>
+    <string name="done_stopped_subtitle">已停止: %1$s</string>
+    <string name="done_cleaned_subtitle">已清理: %1$s</string>
+    <string name="done_button">完成</string>
+
+    <string name="permission_title">权限</string>
+    <string name="accessibility_permission_title">无障碍服务 API</string>
+    <string name="accessibility_permission_desc1">本应用使用此 API 自动执行清除缓存操作。</string>
+    <string name="accessibility_permission_desc2">通过此 API 访问的数据绝不会被收集或共享。</string>
+    <string name="btn_cancel_uppercase">取消</string>
+    <string name="btn_continue_uppercase">继续</string>
+
+    <string name="permission_success_title">配置成功！</string>
+    <string name="permission_success_desc1">恭喜，您可以开始使用了。</string>
+    <string name="permission_success_desc2">我们不会收集您的任何个人信息。</string>
+
+    <string name="usage_access_permission_title">使用情况访问权限</string>
+    <string name="usage_access_permission_desc1">本应用需要使用情况访问权限来检测已安装应用的大小。</string>
+    <string name="usage_access_permission_desc2">要启用它，请点击下方按钮。</string>
+
+    <string name="onboarding_privacy_note">继续操作即表示您同意
+BlueIris 的 %1$s</string>
+    <string name="btn_next">下一步</string>
+    <string name="btn_get_started">立即开始</string>
+    <string name="onboarding_page1_desc">清理所有应用的缓存，获取更多可用存储空间。</string>
+    <string name="onboarding_page2_title">缓存通知</string>
+    <string name="onboarding_page2_desc">当缓存过多时接收通知提醒。</string>
+    <string name="onboarding_page3_title">大功告成！</string>
+    <string name="onboarding_page3_desc">一切已成功配置，应用现已就绪。</string>
+</resources>

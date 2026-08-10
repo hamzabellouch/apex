@@ -172,8 +172,20 @@ fun MainScreen(
         installedApps.filter { it.isCleanable }
     }
 
-    val isIgnoreTinyCache = remember(prefs) {
-        prefs.getBoolean("ignore_tiny_cache", true)
+    var isIgnoreTinyCache by remember {
+        mutableStateOf(prefs.getBoolean("ignore_tiny_cache", false))
+    }
+
+    DisposableEffect(prefs) {
+        val listener = android.content.SharedPreferences.OnSharedPreferenceChangeListener { p, key ->
+            if (key == "ignore_tiny_cache") {
+                isIgnoreTinyCache = p.getBoolean("ignore_tiny_cache", false)
+            }
+        }
+        prefs.registerOnSharedPreferenceChangeListener(listener)
+        onDispose {
+            prefs.unregisterOnSharedPreferenceChangeListener(listener)
+        }
     }
 
     // ONLY apps that actually have cache (> 0 Bytes or >= 3 MB if ignore_tiny_cache enabled) for Clean actions (excluding clean whitelist)
@@ -221,6 +233,7 @@ fun MainScreen(
 
     // Dialog trigger
     var showAccessibilityPromptDialog by remember { mutableStateOf(false) }
+    var accessibilityPromptMode by remember { mutableStateOf(ServiceMode.CLEAR_CACHE) }
 
     var showOperationDoneScreen by remember { mutableStateOf(false) }
     var completedActionType by remember { mutableStateOf("STOP") }
@@ -592,6 +605,7 @@ fun MainScreen(
                                     if (!isUsageAccessGranted) {
                                         onRequestUsageAccess()
                                     } else if (!isAccessibilityEnabled) {
+                                        accessibilityPromptMode = ServiceMode.CLEAR_CACHE
                                         showAccessibilityPromptDialog = true
                                     } else {
                                          val packages = appsWithCacheOnly.map { it.packageName }
@@ -659,6 +673,7 @@ fun MainScreen(
                                                 if (!isUsageAccessGranted) {
                                                     onRequestUsageAccess()
                                                 } else if (!isAccessibilityEnabled) {
+                                                    accessibilityPromptMode = ServiceMode.FORCE_STOP
                                                     showAccessibilityPromptDialog = true
                                                 } else {
                                                     val packages = activeRunningUserApps.map { it.packageName }
@@ -684,6 +699,7 @@ fun MainScreen(
                                                 if (!isUsageAccessGranted) {
                                                     onRequestUsageAccess()
                                                 } else if (!isAccessibilityEnabled) {
+                                                    accessibilityPromptMode = ServiceMode.CLEAR_CACHE
                                                     showAccessibilityPromptDialog = true
                                                 } else {
                                                      val packages = appsWithCacheOnly.map { it.packageName }
@@ -702,27 +718,7 @@ fun MainScreen(
                                     MainTab.Apps -> {
                                         AppsScreen(
                                             installedApps = installedApps,
-                                            currentCleaningPackage = currentCleaningPackage,
-                                            onCleanSelectedApps = { selectedPackages ->
-                                                if (!isUsageAccessGranted) {
-                                                    onRequestUsageAccess()
-                                                } else if (!isAccessibilityEnabled) {
-                                                    showAccessibilityPromptDialog = true
-                                                } else {
-                                                    val stoppableCachePackages = installedApps
-                                                        .filter { it.packageName in selectedPackages && it.cacheBytes > 0L }
-                                                        .map { it.packageName }
-
-                                                     if (stoppableCachePackages.isNotEmpty()) {
-                                                         currentProcessingPackages = stoppableCachePackages
-                                                         completedCleanedBytes = installedApps.filter { it.packageName in stoppableCachePackages }.sumOf { it.cacheBytes }
-                                                         CacheCleanerAccessibilityService.startCleaning(context, stoppableCachePackages, mode = ServiceMode.CLEAR_CACHE)
-                                                         showCleaningOverlay = true
-                                                     } else {
-                                                        Toast.makeText(context, context.getString(R.string.toast_selected_apps_no_cache), Toast.LENGTH_SHORT).show()
-                                                    }
-                                                }
-                                            }
+                                            currentCleaningPackage = currentCleaningPackage
                                         )
                                     }
                                     MainTab.Menu -> {
@@ -748,6 +744,7 @@ fun MainScreen(
                         if (!isUsageAccessGranted) {
                             onRequestUsageAccess()
                         } else if (!isAccessibilityEnabled) {
+                            accessibilityPromptMode = ServiceMode.FORCE_STOP
                             showAccessibilityPromptDialog = true
                         } else {
                             val packages = activeRunningUserApps.map { it.packageName }
@@ -763,6 +760,7 @@ fun MainScreen(
                         if (!isUsageAccessGranted) {
                             onRequestUsageAccess()
                         } else if (!isAccessibilityEnabled) {
+                            accessibilityPromptMode = ServiceMode.CLEAR_CACHE
                             showAccessibilityPromptDialog = true
                         } else {
                             val packages = appsWithCacheOnly.map { it.packageName }
@@ -799,6 +797,10 @@ fun MainScreen(
             // Accessibility Service Permission Screen
             if (showAccessibilityPromptDialog && !isAccessibilityEnabled) {
                 AccessibilityPermissionScreen(
+                    descriptionResId = if (accessibilityPromptMode == ServiceMode.FORCE_STOP)
+                        R.string.accessibility_permission_desc1_stop
+                    else
+                        R.string.accessibility_permission_desc1,
                     onContinueClick = {
                         showAccessibilityPromptDialog = false
                         onRequestAccessibility()

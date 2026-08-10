@@ -1,4 +1,4 @@
-﻿package com.tkno.blueiris.ui.main
+package com.tkno.blueiris.ui.main
 
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.Image
@@ -15,7 +15,9 @@ import androidx.compose.material.icons.automirrored.filled.FormatListBulleted
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Android
 import androidx.compose.material.icons.filled.Check
+import androidx.compose.material.icons.filled.Clear
 import androidx.compose.material.icons.filled.Delete
+import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -54,10 +56,14 @@ fun WhitelistScreen(
 
     var showAddAppDialog by remember { mutableStateOf(false) }
     var selectedPackages by remember { mutableStateOf(setOf<String>()) }
+    var isDialogSearchOpen by remember { mutableStateOf(false) }
+    var dialogSearchQuery by remember { mutableStateOf("") }
 
     BackHandler(enabled = showAddAppDialog) {
         showAddAppDialog = false
         selectedPackages = emptySet()
+        isDialogSearchOpen = false
+        dialogSearchQuery = ""
     }
 
     val whitelistedApps = remember(allApps, whitelistedPackages) {
@@ -68,6 +74,17 @@ fun WhitelistScreen(
         allApps.filter { it.packageName !in whitelistedPackages }.sortedBy { it.name.lowercase() }
     }
 
+    val filteredAvailableAppsToAdd = remember(availableAppsToAdd, dialogSearchQuery) {
+        if (dialogSearchQuery.isBlank()) {
+            availableAppsToAdd
+        } else {
+            val query = dialogSearchQuery.trim().lowercase()
+            availableAppsToAdd.filter {
+                it.name.lowercase().contains(query) || it.packageName.lowercase().contains(query)
+            }
+        }
+    }
+
     Box(
         modifier = modifier
             .fillMaxSize()
@@ -76,13 +93,13 @@ fun WhitelistScreen(
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(16.dp)
+                .padding(start = 16.dp, end = 16.dp, top = 16.dp, bottom = 16.dp)
         ) {
             // Top Bar Header with Back Arrow and Title (Matching Stop & Clean screen top bar)
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(bottom = 20.dp),
+                    .padding(bottom = 18.dp),
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 IconButton(
@@ -151,7 +168,7 @@ fun WhitelistScreen(
                     modifier = Modifier
                         .fillMaxSize()
                         .weight(1f)
-                        .padding(horizontal = 16.dp, vertical = 8.dp),
+                        .padding(horizontal = 4.dp, vertical = 8.dp),
                     verticalArrangement = Arrangement.spacedBy(8.dp)
                 ) {
                     items(whitelistedApps, key = { it.packageName }) { app ->
@@ -233,6 +250,8 @@ fun WhitelistScreen(
         FloatingActionButton(
             onClick = {
                 selectedPackages = emptySet()
+                isDialogSearchOpen = false
+                dialogSearchQuery = ""
                 showAddAppDialog = true
             },
             containerColor = MaterialTheme.colorScheme.secondaryContainer,
@@ -256,29 +275,103 @@ fun WhitelistScreen(
                 onDismissRequest = {
                     showAddAppDialog = false
                     selectedPackages = emptySet()
+                    isDialogSearchOpen = false
+                    dialogSearchQuery = ""
                 },
                 title = {
-                    Text(
-                        text = if (selectedPackages.isEmpty()) stringResource(R.string.whitelist_dialog_title_add) else stringResource(R.string.whitelist_dialog_title_selected, selectedPackages.size),
-                        color = MaterialTheme.colorScheme.onSurface,
-                        fontSize = 18.sp,
-                        fontWeight = FontWeight.Bold
-                    )
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceBetween,
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Text(
+                            text = if (selectedPackages.isEmpty()) stringResource(R.string.whitelist_dialog_title_add) else stringResource(R.string.whitelist_dialog_title_selected, selectedPackages.size),
+                            color = MaterialTheme.colorScheme.onSurface,
+                            fontSize = 18.sp,
+                            fontWeight = FontWeight.Bold,
+                            modifier = Modifier.weight(1f)
+                        )
+                        IconButton(
+                            onClick = {
+                                isDialogSearchOpen = !isDialogSearchOpen
+                                if (!isDialogSearchOpen) {
+                                    dialogSearchQuery = ""
+                                }
+                            }
+                        ) {
+                            Icon(
+                                imageVector = Icons.Default.Search,
+                                contentDescription = stringResource(R.string.search_apps),
+                                tint = if (isDialogSearchOpen) accentBlue else MaterialTheme.colorScheme.onSurfaceVariant
+                            )
+                        }
+                    }
                 },
                 text = {
-                    if (availableAppsToAdd.isEmpty()) {
-                        Text(
-                            text = stringResource(R.string.whitelist_dialog_all_apps_added),
-                            color = MaterialTheme.colorScheme.onSurfaceVariant,
-                            fontSize = 14.sp
-                        )
-                    } else {
-                        LazyColumn(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .heightIn(max = 350.dp)
-                        ) {
-                            items(availableAppsToAdd, key = { it.packageName }) { app ->
+                    Column(modifier = Modifier.fillMaxWidth()) {
+                        if (isDialogSearchOpen) {
+                            OutlinedTextField(
+                                value = dialogSearchQuery,
+                                onValueChange = { dialogSearchQuery = it },
+                                placeholder = {
+                                    Text(
+                                        text = stringResource(R.string.search_apps),
+                                        fontSize = 14.sp,
+                                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                                    )
+                                },
+                                leadingIcon = {
+                                    Icon(
+                                        imageVector = Icons.Default.Search,
+                                        contentDescription = null,
+                                        tint = MaterialTheme.colorScheme.onSurfaceVariant
+                                    )
+                                },
+                                trailingIcon = {
+                                    if (dialogSearchQuery.isNotEmpty()) {
+                                        IconButton(onClick = { dialogSearchQuery = "" }) {
+                                            Icon(
+                                                imageVector = Icons.Default.Clear,
+                                                contentDescription = null,
+                                                tint = MaterialTheme.colorScheme.onSurfaceVariant
+                                            )
+                                        }
+                                    }
+                                },
+                                singleLine = true,
+                                shape = RoundedCornerShape(12.dp),
+                                colors = OutlinedTextFieldDefaults.colors(
+                                    focusedBorderColor = accentBlue,
+                                    unfocusedBorderColor = MaterialTheme.colorScheme.outlineVariant,
+                                    focusedContainerColor = MaterialTheme.colorScheme.surfaceContainerHigh,
+                                    unfocusedContainerColor = MaterialTheme.colorScheme.surfaceContainerHigh
+                                ),
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .padding(bottom = 12.dp)
+                            )
+                        }
+
+                        if (availableAppsToAdd.isEmpty()) {
+                            Text(
+                                text = stringResource(R.string.whitelist_dialog_all_apps_added),
+                                color = MaterialTheme.colorScheme.onSurfaceVariant,
+                                fontSize = 14.sp
+                            )
+                        } else if (filteredAvailableAppsToAdd.isEmpty()) {
+                            Text(
+                                text = stringResource(R.string.apps_no_apps_found),
+                                color = MaterialTheme.colorScheme.onSurfaceVariant,
+                                fontSize = 14.sp,
+                                modifier = Modifier.padding(vertical = 16.dp)
+                            )
+                        } else {
+                            LazyColumn(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .heightIn(max = 350.dp)
+                            ) {
+                                items(filteredAvailableAppsToAdd, key = { it.packageName }) { app ->
                                 val isSelected = app.packageName in selectedPackages
                                 Row(
                                     modifier = Modifier
@@ -356,13 +449,16 @@ fun WhitelistScreen(
                             }
                         }
                     }
-                },
-                containerColor = cardBg,
+                }
+            },
+            containerColor = cardBg,
                 dismissButton = {
                     TextButton(
                         onClick = {
                             showAddAppDialog = false
                             selectedPackages = emptySet()
+                            isDialogSearchOpen = false
+                            dialogSearchQuery = ""
                         }
                     ) {
                         Text(
@@ -379,6 +475,8 @@ fun WhitelistScreen(
                                 onAddPackages(selectedPackages)
                                 showAddAppDialog = false
                                 selectedPackages = emptySet()
+                                isDialogSearchOpen = false
+                                dialogSearchQuery = ""
                             }
                         },
                         enabled = selectedPackages.isNotEmpty(),

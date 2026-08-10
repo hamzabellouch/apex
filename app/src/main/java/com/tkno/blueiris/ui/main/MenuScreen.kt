@@ -12,7 +12,10 @@ import androidx.compose.animation.fadeOut
 import androidx.compose.animation.scaleIn
 import androidx.compose.animation.togetherWith
 import androidx.activity.compose.BackHandler
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.core.os.ConfigurationCompat
 import androidx.core.os.LocaleListCompat
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -284,7 +287,7 @@ fun GeneralSettingsPage(
     var showForceStopModeDialog by remember { mutableStateOf(false) }
 
     var cleaningMode by remember { mutableIntStateOf(prefs.getInt("cleaning_mode", 1)) }
-    var isIgnoreTinyCache by remember { mutableStateOf(prefs.getBoolean("ignore_tiny_cache", true)) }
+    var isIgnoreTinyCache by remember { mutableStateOf(prefs.getBoolean("ignore_tiny_cache", false)) }
     var showCleaningModeDialog by remember { mutableStateOf(false) }
 
     BasePreferencePage(
@@ -991,6 +994,19 @@ fun LanguagesPage(onNavigateBack: () -> Unit) {
         )
     }
 
+    val deviceLocale = remember {
+        ConfigurationCompat.getLocales(context.resources.configuration).get(0) ?: Locale.getDefault()
+    }
+
+    val isSystemLangSupported = remember(deviceLocale, allLanguagesList) {
+        val devTag = deviceLocale.toLanguageTag().lowercase()
+        val devLang = deviceLocale.language.lowercase()
+        allLanguagesList.any { (_, tag, _) ->
+            val t = tag.lowercase()
+            t == devTag || t == devLang || devTag.startsWith(t) || devLang == t.split("-")[0]
+        }
+    }
+
     fun setAppLanguage(langTag: String, locale: Locale?) {
         selectedLangTag = langTag
         prefs.edit().putString("app_language", langTag).apply()
@@ -1018,10 +1034,9 @@ fun LanguagesPage(onNavigateBack: () -> Unit) {
         Locale.setDefault(targetLocale)
         val config = context.resources.configuration
         config.setLocale(targetLocale)
+        config.setLayoutDirection(targetLocale)
         @Suppress("DEPRECATION")
         context.resources.updateConfiguration(config, context.resources.displayMetrics)
-
-        (context as? android.app.Activity)?.recreate()
     }
 
     Scaffold(
@@ -1054,7 +1069,7 @@ fun LanguagesPage(onNavigateBack: () -> Unit) {
                     .nestedScroll(scrollBehavior.nestedScrollConnection),
                 contentPadding = PaddingValues(
                     top = padding.calculateTopPadding(),
-                    bottom = padding.calculateBottomPadding() + 64.dp
+                    bottom = padding.calculateBottomPadding() + 16.dp
                 )
             ) {
                 item {
@@ -1075,6 +1090,7 @@ fun LanguagesPage(onNavigateBack: () -> Unit) {
                     PreferenceSingleChoiceItem(
                         text = stringResource(id = R.string.follow_system),
                         selected = selectedLangTag == "system",
+                        selectedColor = if (!isSystemLangSupported) androidx.compose.ui.graphics.Color(0xFFE53935) else null,
                         onClick = { setAppLanguage("system", null) },
                     )
                 }
@@ -1097,10 +1113,6 @@ fun LanguagesPage(onNavigateBack: () -> Unit) {
                         selected = selectedLangTag == langTag,
                         onClick = { setAppLanguage(langTag, locale) },
                     )
-                }
-
-                item {
-                    Spacer(modifier = Modifier.height(32.dp))
                 }
             }
         },
@@ -1489,11 +1501,7 @@ fun AboutPage(
     onNavigateToUpdatePage: () -> Unit = {},
     onNavigateToDonatePage: () -> Unit = {},
 ) {
-    val scrollBehavior =
-        TopAppBarDefaults.exitUntilCollapsedScrollBehavior(
-            rememberTopAppBarState(),
-            canScroll = { true },
-        )
+    val scrollBehavior = TopAppBarDefaults.exitUntilCollapsedScrollBehavior()
     val context = LocalContext.current
     val clipboardManager = LocalClipboardManager.current
 
@@ -1506,9 +1514,9 @@ fun AboutPage(
     AppUpdater(isAutoUpdateEnabled = isAutoUpdateEnabled)
 
     val versionName = try {
-        context.packageManager.getPackageInfo(context.packageName, 0).versionName ?: "0.0.2-beta"
+        context.packageManager.getPackageInfo(context.packageName, 0).versionName ?: "0.0.3-beta"
     } catch (e: Exception) {
-        "0.0.2-beta"
+        "0.0.3-beta"
     }
     val info = "App version: $versionName\nPackage name: ${context.packageName}\nDevice: Android ${android.os.Build.VERSION.RELEASE} (API ${android.os.Build.VERSION.SDK_INT})"
     val uriHandler = LocalUriHandler.current
@@ -1646,9 +1654,12 @@ fun CreditsPage(onNavigateBack: () -> Unit) {
 
     val creditsList = remember {
         listOf(
+            Triple("ReadYou", "GPL-3.0 License", "https://github.com/Ashinch/ReadYou"),
             Triple("Android Jetpack", "Apache License, Version 2.0", "https://github.com/androidx/androidx"),
-            Triple("Kotlin", "Apache License, Version 2.0", "https://kotlinlang.org/"),
-            Triple("Material Design 3", "Apache License, Version 2.0", "https://m3.material.io/"),
+            Triple("Kotlin", "Apache License, Version 2.0", "https://github.com/JetBrains/kotlin"),
+            Triple("kotlinx.serialization", "Apache License, Version 2.0", "https://github.com/Kotlin/kotlinx.serialization"),
+            Triple("OkHttp", "Apache License, Version 2.0", "https://github.com/square/okhttp"),
+            Triple("Material Design 3", "Apache License, Version 2.0", "https://github.com/material-components/material-components-android"),
             Triple("Material Icons", "Apache License, Version 2.0", "https://fonts.google.com/icons"),
             Triple("Accompanist", "Apache License, Version 2.0", "https://github.com/google/accompanist"),
             Triple("ZXing", "Apache License, Version 2.0", "https://github.com/zxing/zxing"),

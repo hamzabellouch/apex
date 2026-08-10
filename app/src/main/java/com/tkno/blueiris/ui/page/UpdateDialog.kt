@@ -1,12 +1,17 @@
-﻿package com.tkno.blueiris.ui.page
+package com.tkno.blueiris.ui.page
 
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.NewReleases
@@ -16,6 +21,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -25,11 +31,18 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.AnnotatedString
+import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.buildAnnotatedString
+import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.core.text.HtmlCompat
 import com.tkno.blueiris.R
 import com.tkno.blueiris.util.UpdateUtil
 import kotlinx.coroutines.Dispatchers
@@ -133,11 +146,7 @@ fun UpdateDialogImpl(
                                     .weight(1f, fill = false)
                                     .verticalScroll(rememberScrollState())
                             ) {
-                                Text(
-                                    text = releaseNote,
-                                    style = MaterialTheme.typography.bodyMedium,
-                                    color = MaterialTheme.colorScheme.onSurfaceVariant,
-                                )
+                                MarkdownText(markdown = releaseNote)
                                 Spacer(modifier = Modifier.height(8.dp))
                             }
                         }
@@ -182,4 +191,159 @@ fun UpdateDialog(
             }
         },
     )
+}
+
+@Composable
+fun MarkdownText(
+    markdown: String,
+    modifier: Modifier = Modifier,
+    color: Color = MaterialTheme.colorScheme.onSurfaceVariant
+) {
+    val parsedLines = remember(markdown) {
+        val cleanHtml = try {
+            HtmlCompat.fromHtml(markdown, HtmlCompat.FROM_HTML_MODE_COMPACT).toString()
+        } catch (e: Throwable) {
+            markdown
+        }
+        cleanHtml.lines()
+            .map { it.trim() }
+            .filterNot { it.isEmpty() && (it == "</p>" || it == "<p>") }
+    }
+
+    Column(modifier = modifier) {
+        parsedLines.forEach { line ->
+            val trimmed = line.trim()
+            if (trimmed.isEmpty()) {
+                Spacer(modifier = Modifier.height(4.dp))
+                return@forEach
+            }
+            when {
+                trimmed.startsWith("#") -> {
+                    val headingText = trimmed.dropWhile { it == '#' || it.isWhitespace() }
+                    Text(
+                        text = parseInlineMarkdown(headingText),
+                        style = MaterialTheme.typography.titleMedium,
+                        fontWeight = FontWeight.Bold,
+                        color = MaterialTheme.colorScheme.onSurface,
+                        modifier = Modifier.padding(top = 8.dp, bottom = 4.dp)
+                    )
+                }
+                trimmed.startsWith(">") -> {
+                    val quoteText = trimmed.removePrefix(">").trim()
+                    Surface(
+                        color = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.25f),
+                        shape = RoundedCornerShape(8.dp),
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(vertical = 4.dp)
+                    ) {
+                        Row(
+                            modifier = Modifier.padding(horizontal = 12.dp, vertical = 8.dp),
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            Box(
+                                modifier = Modifier
+                                    .width(3.5.dp)
+                                    .height(18.dp)
+                                    .background(MaterialTheme.colorScheme.primary, CircleShape)
+                            )
+                            Spacer(modifier = Modifier.width(10.dp))
+                            Text(
+                                text = parseInlineMarkdown(quoteText),
+                                style = MaterialTheme.typography.bodyMedium,
+                                fontWeight = FontWeight.SemiBold,
+                                color = MaterialTheme.colorScheme.onPrimaryContainer
+                            )
+                        }
+                    }
+                }
+                trimmed.startsWith("- ") || trimmed.startsWith("* ") || trimmed.startsWith("• ") -> {
+                    val bulletText = trimmed.substring(2).trim()
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(vertical = 3.dp, horizontal = 2.dp),
+                        verticalAlignment = Alignment.Top
+                    ) {
+                        Text(
+                            text = "• ",
+                            style = MaterialTheme.typography.bodyMedium,
+                            fontWeight = FontWeight.Bold,
+                            color = MaterialTheme.colorScheme.primary
+                        )
+                        Text(
+                            text = parseInlineMarkdown(bulletText),
+                            style = MaterialTheme.typography.bodyMedium,
+                            color = color
+                        )
+                    }
+                }
+                else -> {
+                    Text(
+                        text = parseInlineMarkdown(line),
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = color,
+                        modifier = Modifier.padding(vertical = 2.dp)
+                    )
+                }
+            }
+        }
+    }
+}
+
+fun parseInlineMarkdown(text: String): AnnotatedString {
+    return buildAnnotatedString {
+        var i = 0
+        val len = text.length
+        while (i < len) {
+            when {
+                text[i] == '`' -> {
+                    val end = text.indexOf('`', i + 1)
+                    if (end != -1) {
+                        pushStyle(
+                            SpanStyle(
+                                fontFamily = FontFamily.Monospace,
+                                fontWeight = FontWeight.Medium,
+                                background = Color(0x28808080)
+                            )
+                        )
+                        append(text.substring(i + 1, end))
+                        pop()
+                        i = end + 1
+                    } else {
+                        append(text[i])
+                        i++
+                    }
+                }
+                i + 1 < len && text[i] == '*' && text[i + 1] == '*' -> {
+                    val end = text.indexOf("**", i + 2)
+                    if (end != -1) {
+                        pushStyle(SpanStyle(fontWeight = FontWeight.Bold))
+                        append(text.substring(i + 2, end))
+                        pop()
+                        i = end + 2
+                    } else {
+                        append(text[i])
+                        i++
+                    }
+                }
+                text[i] == '*' -> {
+                    val end = text.indexOf('*', i + 1)
+                    if (end != -1) {
+                        pushStyle(SpanStyle(fontStyle = FontStyle.Italic))
+                        append(text.substring(i + 1, end))
+                        pop()
+                        i = end + 1
+                    } else {
+                        append(text[i])
+                        i++
+                    }
+                }
+                else -> {
+                    append(text[i])
+                    i++
+                }
+            }
+        }
+    }
 }

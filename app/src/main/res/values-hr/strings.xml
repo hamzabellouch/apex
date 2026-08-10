@@ -123,7 +123,7 @@
     <string name="permission_issue_desc">Direktoriji izvan Download/ i Documents/ nisu podržani</string>
     <string name="battery_configuration">Konfiguracija baterije</string>
     <string name="battery_configuration_desc">Zanemari optimizaciju baterije za ovu aplikaciju za preuzimanje u pozadini</string>
-    <string name="service_title">Blue Iris preuzima…</string>
+    <string name="service_title">BlueIris preuzima…</string>
     <string name="unknown_error">Nepoznata pogreška</string>
     <string name="translate">Prevedi</string>
     <string name="translate_desc">Pomozite u prevođenju ove aplikacije na Hosted Weblate</string>
@@ -169,7 +169,7 @@
     <string name="matrix_space">Matrix</string>
     <string name="sponsor">Sponzoriraj</string>
     <string name="sponsor_desc">Podržite ovu aplikaciju sponzoriranjem na GitHubu</string>
-    <string name="sponsor_msg">Blue Iris će uvijek biti besplatan i otvorenog koda za sve. Ako vam se sviđa, razmislite o sponzoriranju na GitHubu!</string>
+    <string name="sponsor_msg">BlueIris će uvijek biti besplatan i otvorenog koda za sve. Ako vam se sviđa, razmislite o sponzoriranju na GitHubu!</string>
     <string name="feedback">Povratne informacije</string>
     <string name="sponsors">Sponzori</string>
     <string name="instagram">Instagram</string>
@@ -217,14 +217,14 @@
     <string name="scan_history">Povijest skeniranja</string>
     <string name="no_scan_history_yet">Još nema povijesti skeniranja</string>
     <string name="scan_code">Skeniraj kod</string>
-    <string name="scanned_by_links">Skenirao Blue Iris</string>
+    <string name="scanned_by_links">Skenirao BlueIris</string>
     <string name="scan_qr_instruction">Skenirajte QR kodove pomoću kamere ili uvezite iz galerije</string>
     <string name="scan_now">Skeniraj sada</string>
     <string name="scanned_content">Skenirani sadržaj</string>
     <string name="feature_currently_unavailable">Ova značajka trenutačno nije dostupna.</string>
     <string name="contact">Kontakt</string>
-    <string name="contact_desc">Kontaktirajte razvijatelja za dodavanje novih značajki u Blue Iris</string>
-    <string name="links_issue_tracker">Blue Iris sustav za praćenje problema</string>
+    <string name="contact_desc">Kontaktirajte razvijatelja za dodavanje novih značajki u BlueIris</string>
+    <string name="links_issue_tracker">BlueIris sustav za praćenje problema</string>
     <string name="enter_url_error">Unesite URL</string>
     <string name="invalid_url_format">Nevaljani format URL-a. Unesite valjanu web adresu (npr. example.com).</string>
     <string name="copied_to_clipboard">Kopirano u međuodlagalište</string>
@@ -258,5 +258,189 @@
     <string name="early_access">Rano isprobavanje</string>
     <string name="pre_release_desc">Instalirajte predizdanja kako biste isprobali nove značajke i promjene.\n\nU ovim verzijama može biti nestabilnosti, pa vas molimo da nam pošaljete povratne informacije ako naiđete na probleme kako biste nam pomogli poboljšati aplikaciju.</string>
     <string name="update_directory">Direktorij ažuriranja</string>
-</resources>
 
+    
+    <!-- Navigation Tabs & Toasts -->
+    <string name="nav_stop">Zaustavi</string>
+    <string name="nav_clean">Očisti</string>
+    <string name="nav_apps">Aplikacije</string>
+    <string name="nav_menu">Izbornik</string>
+    <string name="toast_all_cache_cleaned">Svi međuspremnici su već očišćeni (0 KB)</string>
+    <string name="toast_all_bg_apps_stopped">Sve pozadinske aplikacije su već zaustavljene</string>
+    <string name="toast_selected_apps_no_cache">Odabrane aplikacije nemaju međuspremnik (0 KB)</string>
+
+    <!-- AppsScreen Filter & Sort -->
+    <string name="app_filter_all">Sve aplikacije</string>
+    <string name="app_filter_user">Korisničke aplikacije</string>
+    <string name="app_filter_system">Sistemske aplikacije</string>
+    <string name="app_sort_by_name">Po nazivu</string>
+    <string name="app_sort_by_date">Po datumu</string>
+    <string name="app_sort_by_size">Po veličini</string>
+    <string name="apps_screen_title">Aplikacije</string>
+    <string name="apps_listed_count">%1$d aplikacija na popisu</string>
+    <string name="cd_filter_apps">Filtriraj aplikacije</string>
+    <string name="cd_sort_apps">Razvrstaj aplikacije</string>
+    <string name="apps_no_apps_found">Nisu pronađene aplikacije za ovaj filtar</string>
+    <string name="cd_clear_selection">Očisti odabir</string>
+    <string name="apps_selected_count">Odabrano: %1$d</string>
+    <string name="cd_clean_selected_apps">Očisti odabrane aplikacije</string>
+    <string name="cd_selected">Odabrano</string>
+    <string name="app_size_prefix">Veličina: %1$s</string>
+    <string name="cd_go_to_details">Idi na pojedinosti</string>
+
+    <!-- App Detail Screen Strings -->
+    <string name="app_detail_version">Verzija: %1$s</string>
+    <string name="app_detail_apk_size">Veličina APK-a</string>
+    <string name="app_detail_install_date">Datum instalacije</string>
+    <string name="app_detail_last_update">Zadnje ažuriranje</string>
+    <string name="app_detail_requested_permissions">Zatražena dopuštenja</string>
+    <string name="app_detail_uninstall">Deinstaliraj</string>
+    <string name="app_detail_update">Ažuriraj</string>
+    <string name="app_detail_launch">Pokreni</string>
+    <string name="app_detail_app_info">INFORMACIJE O APLIKACIJI</string>
+    <string name="toast_cannot_launch_app">Nije moguće pokrenuti ovu aplikaciju</string>
+    <string name="toast_cannot_open_store">Nije moguće otvoriti trgovinu</string>
+
+    <!-- Speed & Performance Strings -->
+    <string name="performance_and_speed_title">Performanse i brzina</string>
+
+    <!-- Stop Process Strings -->
+    <string name="stop_process_title">Proces zaustavljanja</string>
+    <string name="force_stop_mode_title">Način prisilnog zaustavljanja</string>
+
+    <!-- Clean Process Strings -->
+    <string name="clean_process_title">Proces čišćenja</string>
+    <string name="cleaning_mode_title">Način čišćenja</string>
+    <string name="cleaning_mode_manual">Ručno</string>
+    <string name="cleaning_mode_automatic">Automatski</string>
+    <string name="cleaning_mode_ask_each_time">Pitaj svaki put</string>
+    <string name="ignore_tiny_cache_title">Zanemari mali međuspremnik</string>
+    <string name="ignore_tiny_cache_desc">Isključi aplikacije s manje od 3 MB međuspremnika</string>
+
+    <!-- StopScreen Strings -->
+    <string name="stop_title">Zaustavi</string>
+    <string name="stop_history_icon_desc">Povijest</string>
+    <string name="stop_gauge_apps">APLIKACIJE</string>
+    <string name="stop_gauge_background">Pozadina</string>
+    <string name="stop_gauge_zero">0</string>
+    <string name="stop_gauge_active_count">%1$d Aktivno</string>
+    <string name="stop_stat_running_title">Aktivno</string>
+    <string name="stop_stat_running_value">%1$d Aplikacija</string>
+    <string name="stop_stat_ram_used">Iskorišten RAM</string>
+    <string name="stop_stat_free_ram">Slobodan RAM</string>
+    <string name="stop_action_memory_info">Informacije o memoriji</string>
+    <string name="stop_action_whitelist">Bijela lista</string>
+    <string name="stop_action_running_apps">Aktivne aplikacije</string>
+    <string name="stop_button_icon_desc">Ikona zaustavljanja</string>
+    <string name="stop_start_button">POKRENI ZAUSTAVLJANJE</string>
+    <string name="stop_dialog_memory_title">Informacije o sistemskom RAM-u</string>
+    <string name="stop_dialog_total_ram">Ukupno RAM: %1$s</string>
+    <string name="stop_dialog_used_ram">Iskorišten RAM: %1$s (%2$d%%)</string>
+    <string name="stop_dialog_free_ram">Slobodan RAM: %1$s</string>
+    <string name="stop_dialog_close">ZATVORI</string>
+    <string name="stop_dialog_running_apps_title">Aktivne aplikacije (%1$d)</string>
+    <string name="stop_dialog_no_running_apps">Nema aktivnih pozadinskih aplikacija.</string>
+
+    <!-- CleanScreen Strings -->
+    <string name="clean_title">Očisti</string>
+    <string name="clean_history_icon_desc">Povijest</string>
+    <string name="clean_gauge_unit_mb">MB</string>
+    <string name="clean_gauge_system_cleaned">Sustav je očišćen</string>
+    <string name="clean_gauge_can_be_cleared">Može se očistiti</string>
+    <string name="clean_gauge_zero_mb">0 MB</string>
+    <string name="clean_gauge_current_mb">%1$s MB</string>
+    <string name="clean_stat_total">Ukupno</string>
+    <string name="clean_stat_used">Iskorišteno</string>
+    <string name="clean_stat_cache">Međuspremnik</string>
+    <string name="clean_action_storage_details">Pojedinosti o pohrani</string>
+    <string name="clean_action_whitelist">Bijela lista</string>
+    <string name="clean_action_live_cache">Međuspremnik uživo</string>
+    <string name="clean_button_icon_desc">Ikona čišćenja</string>
+    <string name="clean_start_button">POKRENI ČIŠĆENJE</string>
+    <string name="clean_dialog_storage_details_title">Pojedinosti o pohrani</string>
+    <string name="clean_dialog_total_storage">Ukupna unutarnja pohrana: %1$s</string>
+    <string name="clean_dialog_used_storage">Iskorištena pohrana: %1$s</string>
+    <string name="clean_dialog_clearable_cache">Međuspremnik za čišćenje: %1$s</string>
+    <string name="clean_dialog_close">ZATVORI</string>
+    <string name="clean_dialog_live_cache_title">Nadzor međuspremnika uživo</string>
+    <string name="clean_dialog_live_cache_desc">Veličina međuspremnika: %1$s.</string>
+    <string name="clean_dialog_ok">OK</string>
+
+    <!-- Sub-screens Extracted Strings -->
+    <string name="cd_back">Natrag</string>
+    <string name="cd_broom_icon">Ikona metle</string>
+    <string name="cd_whitelist_icon">Ikona bijele liste</string>
+    <string name="cd_remove">Ukloni</string>
+    <string name="cd_add_app">Dodaj aplikaciju</string>
+    <string name="cd_check_icon">Ikona kvačice</string>
+    <string name="cd_toggle_icon">Prekidač</string>
+    <string name="cd_accessibility_icon">Ikona pristupačnosti</string>
+    <string name="cd_success_icon">Ikona uspjeha</string>
+    <string name="cd_usage_access_icon">Ikona pristupa upotrebi</string>
+    <string name="cd_blueiris_app_icon">Ikona BlueIris</string>
+    <string name="cd_notifications_icon">Ikona obavijesti</string>
+    <string name="cd_checkmark_icon">Kvačica</string>
+
+    <string name="analyze_screen_title">Analiza</string>
+    <string name="analyze_cache_apps_count">Međuspremnik (%1$d Aplikacija)</string>
+    <string name="analyze_no_cache_found">Nema datoteka međuspremnika</string>
+    <string name="analyze_clear_button">OČISTI</string>
+
+    <string name="whitelist_title">Bijela lista</string>
+    <string name="whitelist_empty_avoid_stop">Dodajte aplikaciju kako biste izbjegli zaustavljanje</string>
+    <string name="whitelist_empty_avoid_clean">Dodajte aplikaciju kako biste izbjegli čišćenje</string>
+    <string name="whitelist_dialog_title_add">Dodaj na bijelu listu</string>
+    <string name="whitelist_dialog_title_selected">Odabrano (%1$d)</string>
+    <string name="whitelist_dialog_all_apps_added">Sve aplikacije su već na bijeloj listi.</string>
+    <string name="whitelist_dialog_add_btn">Dodaj</string>
+    <string name="whitelist_dialog_add_count_btn">Dodaj (%1$d)</string>
+
+    <string name="history_title">Povijest</string>
+    <string name="history_today_stopped">Zaustavljeno danas</string>
+    <string name="history_no_apps_stopped_today">Danas nema zaustavljenih aplikacija</string>
+    <string name="history_today_cleared">Očišćeno danas</string>
+    <string name="history_period_today">Danas</string>
+    <string name="history_period_yesterday">Jučer</string>
+    <string name="history_period_last_7_days">Zadnjih 7 dana</string>
+    <string name="history_period_last_30_days">Zadnjih 30 dana</string>
+    <string name="history_period_tap_details">Dodirnite za pojedinosti</string>
+    <string name="history_clear_all">Očisti sve</string>
+    <string name="history_period_summary_singular">Ukupno: %1$d aplikacija  |  %2$s Međuspremnik</string>
+    <string name="history_period_summary_plural">Ukupno: %1$d aplikacija  |  %2$s Međuspremnik</string>
+    <string name="history_no_cache_cleared_period">U ovom razdoblju nije očišćen međuspremnik</string>
+    <string name="history_item_cache_size">Međuspremnik: %1$s</string>
+    <string name="history_dialog_clear_clean_msg">Želite li obrisati povijest čišćenja?</string>
+    <string name="history_dialog_clear_stop_msg">Želite li obrisati povijest zaustavljanja?</string>
+    <string name="history_stop_count_singular">%1$d put</string>
+    <string name="history_stop_count_plural">%1$d puta</string>
+
+    <string name="done_count_apps_singular">1 Aplikacija</string>
+    <string name="done_count_apps_plural">%1$d Aplikacija</string>
+    <string name="done_stopped_subtitle">Zaustavljeno: %1$s</string>
+    <string name="done_cleaned_subtitle">Očišćeno: %1$s</string>
+    <string name="done_button">GOTOVO</string>
+
+    <string name="permission_title">Dopuštenje</string>
+    <string name="accessibility_permission_title">API usluge pristupačnosti</string>
+    <string name="accessibility_permission_desc1">Ova aplikacija koristi API za automatizaciju čišćenja međuspremnika.</string>
+    <string name="accessibility_permission_desc2">Podaci se nikada ne prikupljaju niti dijele.</string>
+    <string name="btn_cancel_uppercase">ODUSTANI</string>
+    <string name="btn_continue_uppercase">NASTAVI</string>
+
+    <string name="permission_success_title">Uspješno!</string>
+    <string name="permission_success_desc1">Čestitamo, spremni ste.</string>
+    <string name="permission_success_desc2">Ne prikupljamo vaše osobne podatke.</string>
+
+    <string name="usage_access_permission_title">Dopuštenje za pristup upotrebi</string>
+    <string name="usage_access_permission_desc1">Potreban je pristup podacima o upotrebi.</string>
+    <string name="usage_access_permission_desc2">Kliknite gumb u nastavku da biste ga omogućili.</string>
+
+    <string name="onboarding_privacy_note">Nastavkom prihvaćate pravila aplikacije BlueIris %1$s</string>
+    <string name="btn_next">DALJE</string>
+    <string name="btn_get_started">ZAPOČNI</string>
+    <string name="onboarding_page1_desc">Očistite međuspremnik svih aplikacija i oslobodite prostor.</string>
+    <string name="onboarding_page2_title">Obavijesti o međuspremniku</string>
+    <string name="onboarding_page2_desc">Primajte obavijesti kada ima previše međuspremnika.</string>
+    <string name="onboarding_page3_title">To je sve!</string>
+    <string name="onboarding_page3_desc">Sve je uspješno konfigurirano.</string>
+</resources>
