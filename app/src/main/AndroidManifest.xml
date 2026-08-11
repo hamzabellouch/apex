@@ -17,7 +17,7 @@
         android:supportsRtl="true"
         android:windowSoftInputMode="adjustResize"
         android:localeConfig="@xml/locales_config"
-        android:theme="@style/Theme.BlueIris">
+        android:theme="@style/Theme.Apex">
         
         <provider
             android:name="androidx.core.content.FileProvider"

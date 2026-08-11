@@ -1,176 +1,49 @@
-﻿<resources>
-    <string name="app_name">BlueIris</string>
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Apex</string>
     <string name="accessibility_service_description">ⵜⴰⵏⵓⴼⴰ ⴰⴷ ⴰⵔ ⵜⵙⵎⵓⵜⵜⵢ ⴰⵙⵏⵎⵍ ⴳ ⵜⵉⵙⵖⴰⵍ ⵏ ⵜⴰⵙⵏⵙⵉⵡⵉⵏ Android ⴰⴷ ⵜⵙⴼⴹ ⵜⴰⴽⴰⵛⵜ ⴷ ⴰⴷ ⵜⵙⴱⴷⴷ ⵜⴰⵙⵏⵙⵉⵡⵉⵏ ⴳ ⵜⴰⴷⴰⵡⵜ ⵙ ⵜⴰⵏⴼⵔⵓⵜ ⴷ ⵜⴰⴼⴰⵣⵜ.</string>
-    <string name="clear_cache">ⵙⴼⴹ ⵜⴰⴽⴰⵛⵜ</string>
-    <string name="storage">ⴰⵃⴹⵓ</string>
-    <string name="home">ⴰⵙⴰⵢⵔⵓ</string>
     <string name="apps">ⵜⴰⵙⵏⵙⵉⵡⵉⵏ</string>
     <string name="analyze">ⵙⵍⴹ</string>
-    <string name="permission_required">ⵜⵓⵔⴰⴳⵜ ⵜⵜⵡⴰⵙⵙⵜⵔⵜ</string>
-    <string name="cleaning_cache">ⴰⵙⴼⴹ ⵏ ⵜⴰⴽⴰⵛⵜ…</string>
     <string name="settings">ⵜⵉⵙⵖⴰⵍ</string>
-    <string name="download_settings_desc">General</string>
     <string name="download">ⴰⴳⵎ</string>
-    <string name="url_empty">ⴰⵙⵖⵏ ⵓⵔ ⵢⴻⵣⵎⵉ ⴰⴷ ⵢⵉⵍⵉ ⵢⵍⴰⵡ</string>
-    <string name="reset_success">ⵜⴽⴽⵙⵜ ⵜⵓⵏⵖⵉⵍⵜ ⵜⴰⵎⵙⴱⴷⴷⵜ ⴱⴰⵀⵔⴰ</string>
-    <string name="reset_failed">ⵓⵔ ⵢⵉⵣⵎⵉⵔ ⴰⴷ ⵢⵉⴽⴽⵙ ⵜⵓⵏⵖⵉⵍⵜ ⵜⴰⵎⵙⴱⴷⴷⵜ</string>
-    <string name="permission_denied">ⵜⵓⵔⴰⴳⵜ ⵜⵜⵡⴰⴳⴷⴰⵍ</string>
-    <string name="download_success_msg">ⵜⵎⴷⴰ ⵜⵓⴳⵎⵉⵜ</string>
-    <string name="download_error_msg">ⵓⵔ ⵢⵉⵣⵎⵉⵔ ⴰⴷ ⵢⴰⴳⵎ ⴰⴼⴰⵢⵍⵓ</string>
-    <string name="download_start_msg">ⴰⴳⴰⵎ ⵏ \"%1$s\"</string>
     <string name="general_settings">ⴰⵎⴰⵜⴰⵢ</string>
     <string name="language">ⵜⵓⵜⵍⴰⵢⵜ ⵏ ⵓⵙⵎⴰⵍ</string>
-    <string name="language_settings">ⵙⴱⴷⴷ ⵜⵓⵜⵍⴰⵢⵜ ⵏ ⵓⵙⵎⴰⵍ</string>
-    <string name="task_running">ⵜⵍⵍⴰ ⵜⴰⵡⵓⵔⵉ ⵏ ⵓⴳⴰⵎ ⵢⴰⴹⵏⵉ ⴽⵢⵉⵏ ⵜⴷⴷⴰ</string>
-    <string name="paste_msg">ⵙⵍⵖ URL</string>
-    <string name="paste_fail_msg">ⵓⵔ ⵢⵓⴼⵉ URL ⴳ ⵜⴰⴼⵍⵓⵃⵜ ⵏ ⵓⵙⵍⵖ</string>
-    <string name="delete_info">ⴽⴽⵙ?</string>
-    <string name="delete_info_msg">ⴽⴽⵙ \"%1$s\" ⴳ ⵓⵎⵣⵔⵓⵢ ⵏ ⵓⴳⴰⵎ ⵏⵏⴽ ⴱⴷⴷⴰ?</string>
     <string name="confirm">ⵜⴰⴽⴷ</string>
     <string name="dismiss">ⵙⵔⵙ</string>
-    <string name="downloads_history">ⵜⵓⴳⵎⵉⵡⵉⵏ</string>
-    <string name="audio">ⵉⵎⵙⵍⵉ</string>
-    <string name="link_copied">ⵜⵏⵖⴰⵍⵜ ⵜⴰⵏⴼⵓⵍⵜ ⴳ ⵜⴰⴼⵍⵓⵃⵜ ⵏ ⵓⵙⵍⵖ</string>
-    <string name="open_url">ⵕⵥ ⴰⵙⵖⵏ</string>
-    <string name="remove">ⴽⴽⵙ</string>
-    <string name="delete_file">ⴽⴽⵙ ⴰⴼⴰⵢⵍⵓ</string>
     <string name="about">ⴼ</string>
-    <string name="about_page">ⵜⵓⵏⵖⵉⵍⵜ, ⵜⵉⵏⵏⵓⵜⴼⴰ, ⴰⵣⴰⵢⵣ ⵓⵜⵓⵎⴰⵜⵉⴽ</string>
     <string name="back">ⵓⵖⵓⵍ</string>
     <string name="version">ⵜⵓⵏⵖⵉⵍⵜ</string>
     <string name="release_desc">ⴰⴳⴳⴰ strictly ⴳ ⵜⴰⵍⵖⵉⵡⵉⵏ ⵜⵉⵎⴰⵢⵏⵓⵜⵉⵏ</string>
     <string name="release">ⵜⵓⵏⵖⵉⵍⵜ ⵜⴰⵎⴰⵢⵏⵓⵜ</string>
     <string name="readme_desc">ⵥⵕ ⴰⵙⵉⵔⴰ ⵏ GitHub ⴷ ⵓⴼⴰⵢⵍⵓ README</string>
     <string name="readme" translatable="false">README</string>
-    <string name="video">ⴰⴼⵉⴷⵢⵓ</string>
-    <string name="image">ⵜⴰⵡⵍⴰⴼⵜ</string>
-    <string name="image_format">ⵜⴰⵍⵖⴰ ⵏ ⵜⵡⵍⴰⴼⵜ</string>
-    <string name="image_format_best">ⵜⴰⴼⴰⵣⵜ (ⵜⴰⵏⵚⵍⵉⵜ)</string>
-    <string name="image_format_jpg">JPEG (.jpg)</string>
-    <string name="image_format_png">PNG (.png)</string>
-    <string name="image_format_webp">WebP (.webp)</string>
-    <string name="image_quality">ⵜⴰⵖⴰⵔⴰ ⵏ ⵜⵡⵍⴰⴼⵜ</string>
-    <string name="image_quality_best">ⵜⴰⵖⴰⵔⴰ ⵜⴰⴼⴰⵣⵜ (ⵜⴰⵏⵚⵍⵉⵜ-100%)</string>
-    <string name="image_quality_high">ⵜⴰⵜⵜⵓⵢⵜ (85%)</string>
-    <string name="image_quality_medium">ⵜⴰⵏⴰⵎⵎⴰⵙⵜ (70%)</string>
-    <string name="image_quality_low">ⵜⴰⴳⵯⴷⵉⵣⵜ (50%)</string>
-    <string name="image_format_desc">ⵜⴰⵍⵖⴰ ⵜⴰⵎⵙⵎⵏⵉⴷⵜ ⵏ ⵜⵡⵍⴰⴼⵉⵏ ⵜⵉⵎⵓⴳⴰⵎⵉⵏ</string>
-    <string name="image_preset_desc">ⵜⴰⵍⵖⴰ: %1$s, ⵜⴰⵖⴰⵔⴰ: %2$s</string>
-    <string name="video_image_tab">ⴰⴼⵉⴷⵢⵓ / ⵜⴰⵡⵍⴰⴼⵜ</string>
-    <string name="checked">ⵜⵜⵡⴰⵙⵢⴰⴼⴰ</string>
     <string name="credits">ⵉⵙⵎⴷⵢⴰⵏⵏ</string>
     <string name="credits_desc">ⵉⵙⵎⴷⵢⴰⵏⵏ ⴷ ⵓⵙⵖⵏⵉⴼ ⵉⵍⵍⴻⵍ</string>
-    <string name="edit">ⴱⴷⴷⵍ</string>
-    <string name="start_execute">ⴱⴷⵓ ⴰⵙⵍⴽⵎ ⵏ ⵜⴰⵏⴰⴹⵜ</string>
-    <string name="advanced_settings">ⵜⵉⵎⵙⵖⴰⵍ ⵜⵉⵎⵙⵓⴳⴰⵔ</string>
-    <string name="print_details">ⴰⴼⵓⵖ ⵉⴼⵔⵓⵔⵉⵏ</string>
-    <string name="print_details_desc">ⴰⵔⴰ ⵜⵓⵣⵏⵉⵡⵉⵏ ⵜⵉⴼⵔⵓⵔⵉⵏ ⴷⵖ ⴰⴳⴰⵎ</string>
     <string name="display">ⴰⵙⵎⴰⵍ</string>
     <string name="display_settings">ⴰⵙⴰⵜⵉⵎ ⴰⴱⵔﻜⴰⵏ, ⵉⵏⵉ ⴰⴷⵉⵏⴰⵎⵉ, ⵜⵓⵜⵍⴰⵢⵉⵏ</string>
     <string name="dark_theme">ⴰⵙⴰⵜⵉⵎ ⴰⴱⵔﻜⴰⵏ</string>
     <string name="follow_system">ⴰⵏⴳⵔⴰⵡ</string>
-    <string name="follow_system_desc">ⴹⴼⴰⵔ ⵜⵉⵙⵖⴰⵍ ⵏ ⵓⵏⴳⵔⴰⵡ</string>
-    <string name="dark_theme_on_desc">ⵙⵅⴷⵎ ⴰⵙⴰⵜⵉⵎ ⴰⴱⵔﻜⴰⵏ ⴱⴷⴷⴰ</string>
-    <string name="dark_theme_off_desc">ⵙⵅⴷⵎ ⴰⵙⴰⵜⵉⵎ ⴰⵎⵍⵍⴰⵍ ⴱⴷⴷⴰ</string>
     <string name="on">ⵕⵥ</string>
     <string name="off">ⵇⵇⵏ</string>
     <string name="cancel">ⵙⵔⵙ</string>
-    <string name="settings_before_download">ⵙⴱⴷⴷ ⴷⴰⵜ ⵓⴳⴰⵎ</string>
-    <string name="settings_before_download_desc">ⵙⴱⴷⴷ ⵜⵉⴼⵔⴰⵏⵉⵏ ⴷⴰⵜ ⵓⴳⴰⵎ</string>
-    <string name="settings_before_download_text">ⵙⵖⵍ ⴰⴳⴰⵎ ⴰⴷ</string>
-    <string name="error_copied">ⵜⴰⵏⴼⴰⵍⵉⵜ ⵏ ⵓⵣⴳⴰⵍ ⵜⵏⵖⴰⵍ ⴳ ⵜⴰⴼⵍⵓⵃⵜ ⵏ ⵓⵙⵍⵖ</string>
-    <string name="thumbnail">ⵜⴰⵡⵍⴰⴼⵜ ⵜⴰⵎⵥⵢⴰⵏⵜ</string>
     <string name="paste">ⵙⵍⵖ</string>
-    <string name="edit_template_desc">ⴰⵖⴰⵔⴰⵙ ⵏ ⵓⴼⵓⵖ ⴷ URL ⴰⴷ ⵜⵏ ⵢⵉⵣⵢⵉⴷ ⵜⴰⵙⵏⵙⵉ.</string>
-    <string name="not_convert">ⵓⵔ ⵢⵉⵙⵏⴼⵉⵍ</string>
-    <string name="convert_to">ⵙⵏⴼⵍ ⵖⵔ %1$s</string>
-    <string name="format">ⵜⴰⵍⵖⴰ</string>
-    <string name="best_quality">ⵜⴰⵖⴰⵔⴰ ⵜⴰⴼⴰⵣⵜ</string>
-    <string name="best_audio_quality">ⵜⴰⵖⴰⵔⴰ ⵜⴰⴼⴰⵣⵜ ⵏ ⵉⵎⵙⵍⵉ</string>
-    <string name="not_specified">ⵓⵔ ⵢⵉⵜⵜⵡⴰⵙⵉⵏ (ⵡⵓⵖⵉⵍ)</string>
-    <string name="preferred_format_desc">ⵜⴰⵍⵖⴰ ⵜⴰⵎⵙⵎⵏⵉⴷⵜ  ⵓⴷ ⵍⵍⴰⵏⵜ ⵜⵉⴳⵜⵉⵡⵉⵏ</string>
-    <string name="start_download">ⴰⴳⵎ</string>
     <string name="close">ⵇⵇⵏ</string>
-    <string name="close_never_show_again">ⵓⵔ ⴰⵔ ⵜⵎⴰⵍⵜ ⵢⴰⴹⵏ</string>
-    <string name="user_guide">ⴰⵎⴰⵍⴰⵢ ⵏ ⵓⵎⵙⵅⴷⴰⵎ</string>
-    <string name="open_settings">ⵕⵥ ⵜⵉⵙⵖⴰⵍ</string>
-    <string name="paste_desc">ⴽⵍⵉⴽ ⴳ \"ⵙⵍⵖ\" ⴰⴷ ⵜⴰⵡⵉⵜ ⴰⵙⵖⵏ ⵏ ⵓⴼⵉⴷⵢⵓ ⴳ ⵜⴰⴼⵍⵓⵃⵜ ⵏ ⵓⵙⵍⵖ.</string>
-    <string name="download_desc">ⵉⵍⵎⵎⴰ ⴽⵍⵉⴽ ⴳ \"ⴰⴳⵎ\" ⴷⴼⴼⵉⵔ ⵓⵙⵖⵍ ⵏ ⵜⵉⵙⵖⴰⵍ.</string>
-    <string name="defaults">ⵡⵓⵖⵉⵍ</string>
-    <string name="channel_name">ⴰⴳⴰⵎ</string>
-    <string name="channel_description">ⴰⵎⵍ ⵉⴼⴰⵢⵍⵓⵜⵏ ⵉⵎⵓⴳⴰⵎⵏ ⴷ ⵓⵎⴰⵀⵉⵍ</string>
-    <string name="download_finish_notification">ⵜⵎⴷⴰ ⵜⵓⴳⵎⵉⵜ. ⴽⵍⵉⴽ ⴰⴷ ⵜⵕⵥⵜ.</string>
-    <string name="execute_command_notification">ⴰⵙⵍⴽⵎ ⵏ ⵜⵉⵏⴰⴹⵉⵏ ⵜⵉⵎⵙⵖⵍⵉⵏ…</string>
-    <string name="battery_settings_desc">ⵙⴱⴷⴷ ⵓⵙⵅⴷⵎ ⵏ ⵜⴰⵟⴰⵔⵉⵢⵜ ⵏ ⵜⴰⵙⵏⵙⵉ ⴰⴷ ⴳ \"ⵓⵔ ⵢⵉⵍⵉ ⵡⵓⵜⵜⵓ\" ⴳ ⵜⵉⵙⵖⴰⵍ ⵏ ⵓⵏⴳⵔⴰⵡ ⴰⴷ ⵜⴰⴳⵎⵜ ⴳ ⵜⴰⴷⴰⵡⵜ.</string>
-    <string name="options">ⵜⵉⴼⵔⴰⵏⵉⵏ</string>
-    <string name="additional_settings">ⵜⵉⵎⵙⵖⴰⵍ ⵜⵉⵎⵔⵏⴰⵏⵉⵏ</string>
-    <string name="share_fail_msg">ⵓⵔ ⵢⵉⵣⵎⵉⵔ ⴰⴷ ⵢⴰⴼ URL ⴳ ⵓⵎⴰⵢⵏⵓ ⵜⴱⴹⵉⵜ</string>
-    <string name="share_success_msg">ⵖⵔⴰ ⴰⵙⵖⵏ ⵏ ⵓⴼⵉⴷⵢⵓ ⴳ ⵓⵎⴰⵢⵏⵓ ⵜⴱⴹⵉⵜ…</string>
-    <string name="show_more_actions">ⵎⴰⵍ ⵜⵉⴳⵯⴰⵍ ⵢⴰⴹⵏ</string>
-    <string name="download_notification">ⵜⵓⵣⵉⵏⵜ ⵏ ⵓⴳⴰⵎ</string>
-    <string name="download_notification_desc">ⴰⵎⵍ ⵉⴼⴰⵢⵍⵓⵜⵏ ⵉⵎⵓⴳⴰⵎⵏ ⴷ ⵓⵎⴰⵀⵉⵍ</string>
-    <string name="fetching_playlist_info">ⴰⵡⴰⵢ ⵏ ⵉⵏⵖⵎⵉⵙⵏ ⵏ ⵜⴰⴱⴷⴰⵔⵜ ⵏ ⵓⵔⴰⵔ…</string>
-    <string name="from">ⴳ</string>
     <string name="to">ⴰⵔ</string>
-    <string name="invalid_index_range">ⵜⴰⵙⴽⵯⵍⵜ ⵏ ⵓⵎⴰⵜⴰⵔ ⵓⵔ ⵢⵉⵎⴷⵉⵏ</string>
-    <string name="playlist_indicator_text">ⴰⴳⴰⵎ ⵏ ⵜⴰⴱⴷⴰⵔⵜ ⵏ ⵓⵔⴰⵔ (%1$d/%2$d)…</string>
-    <string name="audio_directory">ⴰⴽⴰⵔⴰⵎ ⵏ ⵉⵎⵙⵍⵉ</string>
-    <string name="download_directory">ⴰⴽⴰⵔⴰⵎ ⵏ ⵓⴳⴰⵎ</string>
-    <string name="download_directory_desc">Select where to save files</string>
-    <string name="subdirectory">ⵃⴹⵓ ⴳ ⵓⴽⴰⵔⴰⵎ ⴰⴷⵓⵙⴰⵏ</string>
-    <string name="subdirectory_desc">ⵃⴹⵓ ⵉⴼⴰⵢⵍⵓⵜⵏ ⴳ ⵉⴽⴰⵔⴰⵎⵏ ⵙ ⵉⵙⵎⴰⵡⵏ ⵏ ⵉⴳⵔⴰⵏ</string>
-    <string name="permission_issue">ⵓⴳⵓⵔ ⵏ ⵜⵓⵔⴰⴳⵜ ⵏ ⵓⵃⴹⵓ</string>
-    <string name="permission_issue_desc">ⵉⴽⴰⵔⴰⵎⵏ ⴱⵕⵕⴰ ⵏ Download/ ⴷ Documents/ ⵓⵔ ⵜⵜⵡⴰⵙⵏⴰⵍⵏ</string>
-    <string name="battery_configuration">ⵜⴰⵙⵖⵍⵜ ⵏ ⵜⴰⵟⴰⵔⵉⵢⵜ</string>
-    <string name="battery_configuration_desc">ⵣⴳⵍ ⵜⴰⵙⵖⵍⵜ ⵏ ⵜⴰⵟⴰⵔⵉⵢⵜ ⵉ ⵜⴰⵙⵏⵙⵉ ⴰⴷ ⵜⴰⴳⵎⵜ ⴳ ⵜⴰⴷⴰⵡⵜ</string>
-    <string name="service_title">BlueIris ⴰⵔ ⵢⴰⴳⴰⵎ…</string>
-    <string name="unknown_error">ⴰⵣⴳⴰⵍ ⵓⵔ ⵢⵉⵜⵜⵡⴰⵙⵙⵏⵏ</string>
     <string name="translate">ⵙⵓⵖⵍ</string>
     <string name="translate_desc">ⴰⵡⵙ ⴳ ⵓⵙⵓⵖⵍ ⵏ ⵜⴰⵙⵏⵙⵉ ⴰⴷ ⴳ Hosted Weblate</string>
-    <string name="prefix">ⵜⴰⴼⵉⵔⵜ</string>
-    <string name="new_template">ⵜⴰⵍⵖⵉⵡⵜ ⵜⴰⵎⴰⵢⵏⵓⵜ</string>
-    <string name="template_label">ⵜⴰⵎⴰⵜⴰⵔⵜ</string>
-    <string name="remove_template">ⴽⴽⵙ?</string>
-    <string name="remove_template_desc">ⴽⴽⵙ \"%1$s\" ⴳ ⵜⴰⵍⵖⵉⵡⵉⵏ ⵏ ⵜⴰⵏⴰⴹⵜ ⴱⴷⴷⴰ?</string>
-    <string name="template_selection">ⴰⵙⵜⴰⵢ ⵏ ⵜⴰⵍⵖⵉⵡⵜ</string>
-    <string name="downloading_indicator_text">ⴰⴳⴰⵎ ⵉⴷⴷⴰ…</string>
-    <string name="task_canceled">ⵜⴰⵡⵓⵔⵉ ⵏ ⵓⴳⴰⵎ ⵜⵜⵡⴰⵙⵔⴰⵙ</string>
     <string name="github_issue">ⵓⴳⵓⵔ ⴳ GitHub</string>
     <string name="github_issue_desc">ⴰⵣⵏ ⵜⴰⵏⴼⴰⵍⵉⵜ ⵏ ⵓⵣⴳⴰⵍ ⵏⵖ ⵜⴰⵏⴰⴹⵜ ⵏ ⵜⵎⵀⵍⵜ ⵜⴰⵎⴰⵢⵏⵓⵜ</string>
     <string name="info_copied">ⵉⵏⵖⵎⵉⵙⵏ ⵜⵏⵖⴰⵍⵏ ⴳ ⵜⴰⴼⵍⵓⵃⵜ ⵏ ⵓⵙⵍⵖ</string>
     <string name="enable_auto_update">ⵕⵥ ⴰⵣⴰⵢⵣ ⵓⵜⵓⵎⴰⵜⵉⴽ</string>
     <string name="update_channel">ⵜⴰⵔⴳⴰ ⵏ ⵓⵣⴰⵢⵣ</string>
-    <string name="update_channel_desc">ⵙⴱⴷⴷ ⵜⵓⵏⵖⵉⵍⵉⵏ ⵏ ⵜⴰⵔⵎⵉⵜ ⴰⴷ ⵜⵥⵕⵜ ⵜⵉⵎⵀⵍⵉⵡⵉⵏ ⴷ ⵉⵙⵏⴼⵍⵉⵜⵏ ⵉⵎⴰⵢⵏⵓⵜⵏ.\n\nⴰⴷ ⵉⵍⵉⵏ ⵉⵣⴳⴰⵍⵏ ⴳ ⵜⵓⵏⵖⵉⵍⵉⵏ ⴰⴷ, ⴰⵣⵏ ⴰⵖ ⴷ ⵜⵉⵏⵏⵓⵜⴼⴰ ⵏⵏⴽ.</string>
-    <string name="status_enqueued">ⴳ ⵜⴰⴼⵍⵓⵃⵜ</string>
-    <string name="status_completed">ⵜⵎⴷⴰ</string>
-    <string name="status_downloading">ⴰⵔ ⵢⴰⴳⴰⵎ</string>
-    <string name="status_canceled">ⵜⵜⵡⴰⵙⵔⴰⵙ</string>
-    <string name="open_file">ⵕⵥ ⴰⴼⴰⵢⵍⵓ</string>
-    <string name="restart">ⴰⵍⵙ ⴰⵙⵍⴽⵎ</string>
-    <string name="status_error">ⴰⵣⴳⴰⵍ</string>
-    <string name="copy_link">ⵏⵖⵍ ⴰⵙⵖⵏ</string>
-    <string name="copy_error_report">ⵏⵖⵍ ⵜⴰⵏⴼⴰⵍⵉⵜ</string>
-    <string name="export_to_clipboard">ⵙⵓⴼⵖ ⵖⵔ ⵜⴰⴼⵍⵓⵃⵜ ⵏ ⵓⵙⵍⵖ</string>
-    <string name="import_from_clipboard">ⴽⵛⵎ ⴳ ⵜⴰⴼⵍⵓⵃⵜ ⵏ ⵓⵙⵍⵖ</string>
-    <string name="template_exported">%1$d ⵏ ⵜⴰⵍⵖⵉⵡⵉⵏ ⵜⵜⵡⴰⵙⵓⴼⵖⵏⵜ</string>
-    <string name="template_imported">%1$d ⵏ ⵜⴰⵍⵖⵉⵡⵉⵏ ⵜⵜⵡⴰⴽⵛⵎⵏⵜ</string>
-    <string name="download_task_count">%1$d ⵏ ⵜⵡⵓⵔⵉⵡⵉⵏ ⵏ ⵓⴳⴰⵎ</string>
-    <string name="recently_added">ⵜⵉⵎⵔⵏⵉⵏ ⵜⵉⵎⴰⵢⵏⵓⵜⵉⵏ</string>
-    <string name="delete_multiple_items_msg">ⴽⴽⵙ %1$d ⵏ ⵜⵖⴰⵡⵙⵉⵡⵉⵏ ⴳ ⵓⵎⵣⵔⵓⵢ ⵏ ⵓⴳⴰⵎ ⴱⴷⴷⴰ?</string>
     <string name="check_for_updates">ⵥⵕ ⵉⵣⴰⵢⵣⵏ</string>
     <string name="check_for_updates_desc">ⵥⵕ ⵜⵓⵏⵖⵉⵍⵜ ⵜⴰⵎⴰⵢⵏⵓⵜ ⴳ GitHub ⵓⵜⵓⵎⴰⵜⵉⴽ</string>
     <string name="app_up_to_date">ⵜⵓⵏⵖⵉⵍⵜ ⴰⴷ ⵜⴳⴰ ⵜⴰⵎⴰⵢⵏⵓⵜ</string>
     <string name="app_update_failed">ⵓⵔ ⵢⵉⵣⵎⵉⵔ ⴰⴷ ⵢⴰⴰⵣⵢⵣ ⵖⵔ ⵜⵓⵏⵖⵉⵍⵜ ⵜⴰⵎⴰⵢⵏⵓⵜ</string>
     <string name="update">ⴰⵣⴰⵢⵣ</string>
-    <string name="clear_temp_files">ⵙⴼⴹ ⵉⴼⴰⵢⵍⵓⵜⵏ ⵉⴽⵓⴷⴰⵏⵏ</string>
-    <string name="clear_temp_files_desc">ⴽⴽⵙ ⴽⵓⵍⵍⵓ ⵉⴼⴰⵢⵍⵓⵜⵏ ⵉⴽⵓⴷⴰⵏⵏ ⴳ ⵓⴽⴰⵔⴰⵎ ⴰⴽⵓⴷⴰⵏ</string>
-    <string name="clear_temp_files_count">ⵜⵜⵡⴰⴽⴽⵙⵏ %1$d ⵏ ⵉⴼⴰⵢⵍⵓⵜⵏ ⵉⴽⵓⴷⴰⵏⵏ</string>
     <string name="telegram_channel">Telegram</string>
-    <string name="matrix_space">Matrix</string>
     <string name="sponsor">ⴰⵍⴰⵍ</string>
-    <string name="sponsor_desc">ⵙⵏⴰⵍ ⵜⴰⵙⵏⵙⵉ ⴰⴷ ⵙ ⵓⵍⴰⵍ ⴳ GitHub</string>
-    <string name="sponsor_msg">BlueIris ⴰⴷ ⵢⵉⵍⵉ ⴱⴷⴷⴰ ⴱⴰⵟⵍ ⴷ ⴰⵍⴷⴰⵢ ⵢⵏⵏⵓⵕⵥⵎⵏ ⵉ ⴽⵓⵍⵍⵓ. ⵎⵎⴰⵔ ⵜⵃⵎⵍⵜ, ⵙⵏⴰⵍ ⴰⵏⴼⵍⵓⵍⵉ ⴳ GitHub!</string>
-    <string name="feedback">ⵜⵉⵏⵏⵓⵜⴼⴰ</string>
+    <string name="sponsor_msg">Apex ⴰⴷ ⵢⵉⵍⵉ ⴱⴷⴷⴰ ⴱⴰⵟⵍ ⴷ ⴰⵍⴷⴰⵢ ⵢⵏⵏⵓⵕⵥⵎⵏ ⵉ ⴽⵓⵍⵍⵓ. ⵎⵎⴰⵔ ⵜⵃⵎⵍⵜ, ⵙⵏⴰⵍ ⴰⵏⴼⵍⵓⵍⵉ ⴳ GitHub!</string>
     <string name="sponsors">ⵉⵏⴰⵍⴰⵏ</string>
     <string name="instagram">Instagram</string>
     <string name="instagram_desc">ⴹⴼⴰⵔ ⴰⵏⴼⵍⵓⵍⵉ ⴳ Instagram ⵉ ⵓⵎⴰⵢⵏⵓ</string>
@@ -195,59 +68,25 @@
     <string name="dynamic_color">ⵉⵏⵉ ⴰⴷⵉⵏⴰⵎⵉ</string>
     <string name="dynamic_color_desc">ⵙⵅⴷⵎ ⵉⵏⵉⵡⵏ ⵏ ⵜⵡⵍⴰⴼⵜ ⵏ ⵓⴳⴰⴷⵉⵔ ⴳ ⴰⵙⴰⵜⵉⵎ ⵏ ⵜⴰⵙⵏⵙⵉ</string>
     <string name="website">ⴰⵙⵉⵜ ⵡⵉⴱ</string>
-    <string name="look_and_feel"><![CDATA[ⴰⵙⵎⴰⵍ ⴷ ⵓⴼⵔⴰⵢ]]></string>
-    <string name="interface_and_interaction"><![CDATA[ⴰⵎⴰⵡⴰⵢ ⴷ ⵓⵎⵢⴰⵖ]]></string>
+    <string name="look_and_feel">ⴰⵙⵎⴰⵍ ⴷ ⵓⴼⵔⴰⵢ</string>
     <string name="auto_update">ⴰⵣⴰⵢⵣ ⵓⵜⵓⵎⴰⵜⵉⴽ</string>
     <string name="suggested">ⵜⴰⵏⴰⵎⵉⵜ</string>
     <string name="all_languages">ⴽⵓⵍⵍⵓ ⵜⵓⵜⵍⴰⵢⵉⵏ</string>
     <string name="trouble_shooting">ⴰⴼⵔⴰⵢ ⵏ ⵉⵣⴳⴰⵍⵏ</string>
     <string name="issue_tracker">ⴰⵎⴹⴼⵓⵕ ⵏ ⵉⵣⴳⴰⵍⵏ</string>
-    <string name="trouble_shooting_desc">ⵙⵖⵍ ⵉⵣⴳⴰⵍⵏ ⵉⵎⴰⵜⴰⵢⵏ ⴷ ⵥⵕ ⵉⵣⴳⴰⵍⵏ ⵜⵜⵡⴰⵙⵙⵏⵏⵉⵏ</string>
     <string name="issue_tracker_hint">ⵜⵓⴼⵉⵜ ⴰⵣⴳⴰⵍ? ⴷⴰⵜ ⵓⵣⵏ ⵏ ⵓⵣⴳⴰⵍ ⴰⵎⴰⵢⵏⵓ, ⵔⵣⵓ ⴳ ⵓⵎⴹⴼⵓⵕ ⵏ ⵉⵣⴳⴰⵍⵏ. ⴳⵉⵙⵏⵜ ⵉⵣⴳⴰⵍⵏ ⵜⵜⵡⴰⵙⵖⵍⵏⵜ ⴷ ⵜⵜⵡⴰⵔⴰⵏⵜ.</string>
-    <string name="short_url">URL ⵓⴳⵣⵉⵍ</string>
-    <string name="security">ⵜⴰⵏⴼⵔⵓⵜ</string>
-    <string name="qr_code">ⵜⴰⵏⴳⴰⵍⵜ QR</string>
     <string name="menu">ⵓⵎⵉⵖ</string>
-    <string name="scan_qr_code">ⵙⴼⴹ ⵜⴰⵏⴳⴰⵍⵜ QR</string>
-    <string name="qr_code_generator">ⴰⵎⵙⵏⴼⵍⵓⵍ ⵏ ⵜⴰⵏⴳⴰⵍⵜ QR</string>
-    <string name="costume_qr_code">ⵜⴰⵏⴳⴰⵍⵜ QR ⵜⴰⵎⵙⵖⵍⵜ</string>
     <string name="scan">ⵙⴼⴹ</string>
-    <string name="generate">ⵙⵏⴼⵍⵓⵍ</string>
-    <string name="costume">ⵜⴰⵎⵙⵖⵍⵜ</string>
-    <string name="scan_history">ⴰⵎⵣⵔⵓⵢ ⵏ ⵓⵙⴼⴹ</string>
-    <string name="no_scan_history_yet">ⵓⵔ ⵢⵉⵍⵉ ⴰⵎⵣⵔⵓⵢ ⵏ ⵓⵙⴼⴹ ⵖⵉⵍⴰ</string>
-    <string name="scan_code">ⵙⴼⴹ ⵜⴰⵏⴳⴰⵍⵜ</string>
-    <string name="scanned_by_links">ⵜⵜⵡⴰⵙⴼⴹ ⵙ BlueIris</string>
-    <string name="scan_qr_instruction">ⵙⴼⴹ ⵜⵉⵏⴳⴰⵍⵉⵏ QR ⵙ ⵜⴰⴽⴰⵎⵉⵔⴰ ⵏⵖ ⴽⵛⵎ ⴳ ⵜⴰⴼⵍⵓⵃⵜ ⵏ ⵜⵡⵍⴰⴼⵉⵏ</string>
-    <string name="scan_now">ⵙⴼⴹ ⵖⵉⵍⴰ</string>
-    <string name="scanned_content">ⴰⵎⴰⵢⵏⵓ ⵜⵜⵡⴰⵙⴼⴹⵏ</string>
-    <string name="feature_currently_unavailable">ⵜⴰⵎⵀⵍⵜ ⴰⴷ ⵓⵔ ⵜⵍⵉ ⴰⵙⵉⵍⵉ ⵖⵉⵍⴰ.</string>
     <string name="contact">ⴰⵏⵎⴰⵍⴰ</string>
-    <string name="contact_desc">ⴰⵡⴰⵢ ⴷ ⵓⵏⴼⵍⵓⵍⵉ ⴰⴷ ⵜⵔⵏⵓⵜ ⵜⵉⵎⵀⵍⵉⵡⵉⵏ ⵜⵉⵎⴰⵢⵏⵓⵜⵉⵏ ⴳ BlueIris</string>
-    <string name="links_issue_tracker">ⴰⵎⴹⴼⵓⵕ ⵏ ⵉⵣⴳⴰⵍⵏ ⵏ BlueIris</string>
-    <string name="enter_url_error">ⴽⵛⵎ URL ⴽⵢⵉⵏ</string>
-    <string name="invalid_url_format">ⵜⴰⵍⵖⴰ ⵏ URL ⵓⵔ ⵜⵉⵎⴷⵉⵏ. ⴽⵛⵎ ⴰⵏⵙⴰ ⵡⵉⴱ ⵢⵉⵎⴷⵉⵏ (ⴰⵎⴷⵢⴰ example.com).</string>
-    <string name="copied_to_clipboard">ⵜⵏⵖⴰⵍ ⴳ ⵜⴰⴼⵍⵓⵃⵜ ⵏ ⵓⵙⵍⵖ</string>
+    <string name="contact_desc">ⴰⵡⴰⵢ ⴷ ⵓⵏⴼⵍⵓⵍⵉ ⴰⴷ ⵜⵔⵏⵓⵜ ⵜⵉⵎⵀⵍⵉⵡⵉⵏ ⵜⵉⵎⴰⵢⵏⵓⵜⵉⵏ ⴳ Apex</string>
+    <string name="links_issue_tracker">ⴰⵎⴹⴼⵓⵕ ⵏ ⵉⵣⴳⴰⵍⵏ ⵏ Apex</string>
     <string name="clear_history">ⵙⴼⴹ ⴰⵎⵣⵔⵓⵢ</string>
-    <string name="no_qr_found_in_image">ⵓⵔ ⵜⵜⵡⴰⵢⴰⴼ ⵜⴰⵏⴳⴰⵍⵜ QR ⴳ ⵜⵡⵍⴰⴼⵜ ⵜⴰⵎⵙⵜⴰⵢⵜ</string>
-    <string name="copy">ⵏⵖⵍ</string>
-    <string name="destination">ⵜⴰⵙⴽⵯⵍⵜ</string>
-    <string name="source">ⴰⵖⴱⴰⵍⵓ</string>
-    <string name="generate_qr_for">ⵙⵏⴼⵍⵓⵍ ⵜⴰⵏⴳⴰⵍⵜ QR ⵉ...</string>
-    <string name="enter_text_or_url">ⴽⵛⵎ ⴰⴹⵕⵉⵚ ⵏⵖ URL</string>
-    <string name="enter_text_above_to_generate">ⴽⵛⵎ ⴰⴹⵕⵉⵚ ⴳ ⵓⴼⵍⵍⴰ ⴰⴷ ⵜⵙⵏⴼⵍⵓⵍⵜ</string>
-    <string name="save_qr_code">ⵃⴹⵓ ⵜⴰⵏⴳⴰⵍⵜ QR</string>
-    <string name="url_placeholder">http://example.com</string>
     <string name="contact_developer">ⴰⵏⵎⴰⵍⴰ ⴷ ⵓⵏⴼⵍⵓⵍⵉ</string>
     <string name="contact_developer_confirm">ⵜⵔⵉⵜ ⴰⴷ ⵜⵕⵥⵜ Gmail ⴰⴷ ⵜⴰⵡⵉⵜ ⴷ ⵓⵏⴼⵍⵓⵍⵉ?</string>
     <string name="github_stars">ⵉⵜⵔⴰⵏ ⵏ GitHub</string>
     <string name="github_stars_desc">ⵙⵏⴰⵍ ⵜⴰⵙⵏⵙⵉ ⴰⴷ ⵙ ⵓⴼⴽⴰ ⵏ ⵉⵜⵔⵉ ⴳ GitHub</string>
     <string name="package_name">ⵉⵙⵎ ⵏ ⵜⴰⴽⵎⴰⵎⵜ</string>
-    <string name="unshorten">ⵙⵙⵉⵔⵉⵡ URL ⵓⴳⵣⵉⵍ</string>
-    <string name="disclaimer_text">ⴰⵔ ⵏⵜⵜⴰⴽⴰ ⵜⴰⵙⵏⵙⵉ ⴰⴷ \"ⴰⵎ ⵎⴰ ⵜⵍⵍⴰ\", ⴰⵔ ⵏⵙⴽⴰⵔ ⵎⴰ ⴳ ⵏⵉⵣⵎⵉⵔ ⴰⴷ ⵜⵉⵍⵉ ⵜⴰⵡⵓⵔⵉ ⵜⴰⴼⴰⵣⵜ, ⵎⴰⵛⴰ ⵓⵔ ⵏⵣⵎⵉⵔ ⴰⴷ ⵏⵏⴰⵡⵍ ⴱⵍⵍⵉ ⴰⴷ ⵜⵉⵍⵉ ⴱⴷⴷⴰ ⵜⴰⵎⴷⵉⵏⵜ ⵏⵖ ⵡⴰⵔ ⴰⵣⴳⴰⵍ. ⵙ ⵓⵙⵅⴷⵎ ⵏ ⵜⴰⵙⵏⵙⵉ, ⵜⵇⴱⵍⵜ ⴰⵢⴰ ⴷ ⵜⵙⵙⵏⵜ ⴱⵍⵍⵉ ⵜⵙⵅⴷⴰⵎⵜ ⵜⴰⵙⵏⵙⵉ ⵙ ⵜⴰⵎⴰⵙⵉⵜ ⵏⵏⴽ.</string>
     <string name="privacy_policy">ⵜⴰⵙⵔⵜⵉⵜ ⵏ ⵜⴰⵏⴼⵔⵓⵜ</string>
-    <string name="view_licenses">ⵥⵕ ⵜⵓⵔⴰⴳⵉⵏ</string>
-    <string name="licenses">ⵜⵓⵔⴰⴳⵉⵏ</string>
     <string name="done">ⵜⵎⴷⴰ</string>
     <string name="downloading">ⴰⵔ ⵢⴰⴳⴰⵎ...</string>
     <string name="downloaded_successfully">ⵜⵜⵡⴰⴳⴰⵎⵜ ⴱⴰⵀⵔⴰ</string>
@@ -258,37 +97,18 @@
     <string name="early_access">ⴰⴽⵛⵓⵎ ⵓⵣⵙⵉⵔ</string>
     <string name="pre_release_desc">ⵙⴱⴷⴷ ⵜⵓⵏⵖⵉⵍⵉⵏ ⵏ ⵜⴰⵔⵎⵉⵜ ⴰⴷ ⵜⵥⵕⵜ ⵜⵉⵎⵀⵍⵉⵡⵉⵏ ⴷ ⵉⵙⵏⴼⵍⵉⵜⵏ ⵉⵎⴰⵢⵏⵓⵜⵏ.\n\nⴰⴷ ⵉⵍⵉⵏ ⵉⵣⴳⴰⵍⵏ ⴳ ⵜⵓⵏⵖⵉⵍⵉⵏ ⴰⴷ, ⴰⵣⵏ ⴰⵖ ⴷ ⵜⵉⵏⵏⵓⵜⴼⴰ ⵏⵏⴽ.</string>
     <string name="update_directory">ⴰⴽⴰⵔⴰⵎ ⵏ ⵓⵣⴰⵢⵣ</string>
-
-    
-    <!-- Navigation Tabs & Toasts -->
     <string name="nav_stop">ⴱⴷⴷ</string>
     <string name="nav_clean">ⵙⴼⴹ</string>
     <string name="nav_apps">ⵜⵉⵙⵏⵙⵉⵡⵉⵏ</string>
     <string name="nav_menu">ⵓⵎⵓⵖ</string>
     <string name="toast_all_cache_cleaned">ⴰⴽⴽⵯ ⵜⴰⴽⴰⵜⵓⵜ ⵜⴰⴼⵙⴰⵙⵜ ⵜⵙⴼⴹ (0 KB)</string>
     <string name="toast_all_bg_apps_stopped">ⴰⴽⴽⵯ ⵜⵉⵙⵏⵙⵉⵡⵉⵏ ⵏ ⵓⴷⵡⴰⵔ ⴱⴷⴷⵏⵜ</string>
-    <string name="toast_selected_apps_no_cache">ⵜⵉⵙⵏsⵉⵡⵉⵏ ⵜⵉⵎⵙⵜⵢⵉⵏ ⵓⵔ ⵍⵉⵏⵜ ⵜⴰⴽⴰⵜⵓⵜ (0 KB)</string>
-
-    <!-- AppsScreen Filter & Sort -->
-    <string name="app_filter_all">ⴰⴽⴽⵯ ⵜⵉⵙⵏⵙⵉⵡⵉⵏ</string>
-    <string name="app_filter_user">ⵜⵉⵙⵏⵙⵉⵡⵉⵏ ⵏ ⵓⵎⵙⵎⵔⵙ</string>
-    <string name="app_filter_system">ⵜⵉⵙⵏⵙⵉⵡⵉⵏ ⵏ ⵓⵏⴳⵔⴰⵡ</string>
-    <string name="app_sort_by_name">ⵙ ⵉⵙⵎ</string>
-    <string name="app_sort_by_date">ⵙ ⵓⵙⴰⴽⵓⴷ</string>
-    <string name="app_sort_by_size">ⵙ ⵜⵊⵓⵎⵎⴰ</string>
     <string name="apps_screen_title">ⵜⵉⵙⵏⵙⵉⵡⵉⵏ</string>
     <string name="apps_listed_count">%1$d ⵜⵉⵙⵏⵙⵉⵡⵉⵏ</string>
-    <string name="cd_filter_apps">ⵙⵜⵢ ⵜⵉⵙⵏⵙⵉⵡⵉⵏ</string>
-    <string name="cd_sort_apps">ⵙⵎⵎⵙⴽⵍ ⵜⵉⵙⵏⵙⵉⵡⵉⵏ</string>
     <string name="apps_no_apps_found">ⵓⵔ ⵜⵍⵍⵉ ⵜⵙⵏⵙⵉ ⴳ ⵓⵙⵜⴰⵢ ⴰⴷ</string>
     <string name="cd_clear_selection">ⴽⵙ ⴰⵙⵜⴰⵢ</string>
-    <string name="apps_selected_count">ⵜⵢⴰⵙⵜⵢⵏⵜ: %1$d</string>
-    <string name="cd_clean_selected_apps">ⵙⴼⴹ ⵜⵉⵙⵏⵙⵉⵡⵉⵏ ⵜⵉⵎⵙⵜⵢⵉⵏ</string>
-    <string name="cd_selected">ⵜⵢⴰⵙⵜⴰⵢ</string>
     <string name="app_size_prefix">ⵜⵊⵓⵎⵎⴰ: %1$s</string>
     <string name="cd_go_to_details">ⵣⵕ ⵜⵉⵍⵉⵜ</string>
-
-    <!-- App Detail Screen Strings -->
     <string name="app_detail_version">ⵜⴰⵏⴼⴰⵍⵉⵜ: %1$s</string>
     <string name="app_detail_apk_size">ⵜⵊⵓⵎⵎⴰ ⵏ APK</string>
     <string name="app_detail_install_date">ⴰⵙⴰⴽⵓⴷ ⵏ ⵓⵙⵔⴰﺱ</string>
@@ -300,15 +120,9 @@
     <string name="app_detail_app_info">ⵉⵏⵖⵎⵉⵙⵏ ⵏ ⵜⵙⵏⵙⵉ</string>
     <string name="toast_cannot_launch_app">ⵓⵔ ⵉⵣⴹⴰⵔ ⴰ ⵉⵙⴽⵔ ⵜⴰⵙⵏⵙⵉ ⴰⴷ</string>
     <string name="toast_cannot_open_store">ⵓⵔ ⵉⵣⴹⴰⵔ ⴰ ⵉⵔⵥⵎ ⴰⵙⴰⵔⵓ</string>
-
-    <!-- Speed & Performance Strings -->
     <string name="performance_and_speed_title">ⵜⴰⴼⵔⴰⵙⵜ ⴷ ⵜⵣⵍⴰ</string>
-
-    <!-- Stop Process Strings -->
     <string name="stop_process_title">ⵜⴰⵡⵓⵔⵉ ⵏ ⵓⴱⴷⴷⴰⵡ</string>
     <string name="force_stop_mode_title">ⴰⵙⴽⴰⵔ ⵏ ⵓⴱⴷⴷⴰⵡ ⵓⵛⵛⵉⵍ</string>
-
-    <!-- Clean Process Strings -->
     <string name="clean_process_title">ⵜⴰⵡⵓⵔⵉ ⵏ ⵓⵙⴼⴹ</string>
     <string name="cleaning_mode_title">ⴰⵙⴽⴰⵔ ⵏ ⵓⵙⴼⴹ</string>
     <string name="cleaning_mode_manual">ⵙ ⵓⴼⵓⵙ</string>
@@ -316,8 +130,6 @@
     <string name="cleaning_mode_ask_each_time">ⵙⵇⵙⵉ ⴳ ⴽⵓ ⵜⵉⴽⴽⵍⵜ</string>
     <string name="ignore_tiny_cache_title">ⵣⴳⵍ ⵜⴰⴽⴰⵜⵓⵜ ⵜⴰⵎⵥⵢⴰⵏⵜ</string>
     <string name="ignore_tiny_cache_desc">ⴽⵙ ⵜⵉⵙⵏⵙⵉⵡⵉⵏ ⵍⵍⵉ ⵍⵉⵏⵜ ⴷⴰⵡ 3 MB</string>
-
-    <!-- StopScreen Strings -->
     <string name="stop_title">ⴱⴷⴷ</string>
     <string name="stop_history_icon_desc">ⴰⵎⵣⴰⵔⵓⵢ</string>
     <string name="stop_gauge_apps">ⵜⵉⵙⵏⵙⵉⵡⵉⵏ</string>
@@ -340,15 +152,10 @@
     <string name="stop_dialog_close">ⵇⵇⵏ</string>
     <string name="stop_dialog_running_apps_title">ⵜⵉⵙⵏⵙⵉⵡⵉⵏ ⵜⵉⵔⵎⴰⵏⵉⵏ (%1$d)</string>
     <string name="stop_dialog_no_running_apps">ⵓⵔ ⵜⵍⵍⵉ ⵜⵙⵏⵙⵉ ⵜⵉⵔⵎⴰⵏⵜ ⴳ ⵓⴷⵡⴰⵔ.</string>
-
-    <!-- CleanScreen Strings -->
     <string name="clean_title">ⵙⴼⴹ</string>
     <string name="clean_history_icon_desc">ⴰⵎⵣⴰⵔⵓⵢ</string>
-    <string name="clean_gauge_unit_mb">MB</string>
     <string name="clean_gauge_system_cleaned">ⴰⵏⴳⵔⴰⵡ ⵉⵙⴼⴹ</string>
     <string name="clean_gauge_can_be_cleared">ⵉⵣⴹⴰⵔ ⴰⵢ ⵉⵙⴼⴹ</string>
-    <string name="clean_gauge_zero_mb">0 MB</string>
-    <string name="clean_gauge_current_mb">%1$s MB</string>
     <string name="clean_stat_total">ⴰⴽⴽⵯ</string>
     <string name="clean_stat_used">ⵉⵜⵜⵓⵙⵎⵔⵙ</string>
     <string name="clean_stat_cache">ⵜⴰⴽⴰⵜⵓⵜ</string>
@@ -365,8 +172,6 @@
     <string name="clean_dialog_live_cache_title">ⴰⵎⴰⵙⵙⴰⵏ ⵏ ⵜⴽⴰⵜⵓⵜ</string>
     <string name="clean_dialog_live_cache_desc">ⵜⵊⵓⵎⵎⴰ ⵏ ⵜⴽⴰⵜⵓⵜ: %1$s.</string>
     <string name="clean_dialog_ok">ⵢⴰⵀ</string>
-
-    <!-- Sub-screens Extracted Strings -->
     <string name="cd_back">ⵓⵖⵓⵍ</string>
     <string name="cd_broom_icon">ⵜⴰⵙⴼⴹⵜ</string>
     <string name="cd_whitelist_icon">ⵓⵎⵓⵖ ⵓⵎⵍⵉⵍ</string>
@@ -377,15 +182,13 @@
     <string name="cd_accessibility_icon">ⵜⴰⵏⴼⴰⵍⵉⵜ</string>
     <string name="cd_success_icon">ⵜⴰⵎⴰⵜⴰⵔⵜ</string>
     <string name="cd_usage_access_icon">ⵜⵓⵔⴰⴳⵜ</string>
-    <string name="cd_blueiris_app_icon">BlueIris</string>
+    <string name="cd_apex_app_icon">Apex</string>
     <string name="cd_notifications_icon">ⵜⴰⵎⴰⵜⴰⵔⵜ</string>
     <string name="cd_checkmark_icon">ⵜⴰⵎⴰⵜⴰⵔⵜ</string>
-
     <string name="analyze_screen_title">ⵜⴰⵙⵍⴹⵜ</string>
     <string name="analyze_cache_apps_count">ⵜⴰⴽⴰⵜⵓⵜ (%1$d ⵜⵉⵙⵏⵙⵉⵡⵉⵏ)</string>
     <string name="analyze_no_cache_found">ⵓⵔ ⵜⵢⴰⴼⴰⵏⵜ ⵜⵓⴼⴰⵢⵉⵏ</string>
     <string name="analyze_clear_button">ⵙⴼⴹ</string>
-
     <string name="whitelist_title">ⵓⵎⵓⵖ ⵓⵎⵍⵉⵍ</string>
     <string name="whitelist_empty_avoid_stop">ⵔⵏⵓ ⵜⴰⵙⵏⵙⵉ ⴰⴼⴰⴷ ⵓⵔ ⵜⴱⴷⴷ</string>
     <string name="whitelist_empty_avoid_clean">ⵔⵏⵓ ⵜⴰⵙⵏⵙⵉ ⴰⴼⴰⴷ ⵓⵔ ⵜⵙⴼⴹ</string>
@@ -394,10 +197,8 @@
     <string name="whitelist_dialog_all_apps_added">ⴰⴽⴽⵯ ⵜⵉⵙⵏⵙⵉⵡⵉⵏ ⵍⵍⴰⵏⵜ ⴳ ⵓⵎⵓⵖ.</string>
     <string name="whitelist_dialog_add_btn">ⵔⵏⵓ</string>
     <string name="whitelist_dialog_add_count_btn">ⵔⵏⵓ (%1$d)</string>
-
     <string name="history_title">ⴰⵎⵣⵔⵓⵢ</string>
     <string name="history_today_stopped">ⴱⴷⴷⵏⵜ ⴰⵙⵙ ⴰⴷ</string>
-    <string name="history_no_apps_stopped_today">ⵓⵔ ⵜⴱⴷⴷ ⵜⴰⵙⵏⵙⵉ ⴰⵙⵙ ⴰⴷ</string>
     <string name="history_today_cleared">ⵜⵢⴰⵙⴼⴹⵏⵜ ⴰⵙⵙ ⴰⴷ</string>
     <string name="history_period_today">ⴰⵙⵙ ⴰⴷ</string>
     <string name="history_period_yesterday">איⴹⵍⵉ</string>
@@ -413,29 +214,23 @@
     <string name="history_dialog_clear_stop_msg">ⵉⵙ ⵜⵔⵉⴹ ⴰ ⵜⴽⵙⴹ ⴰⵎⵣⵔⵓⵢ ⵏ ⵓⴱⴷⴷⴰⵡ؟</string>
     <string name="history_stop_count_singular">%1$d ⵜⵉⴽⴽⵍⵜ</string>
     <string name="history_stop_count_plural">%1$d ⵜⵉⴽⴽⴰⵍ</string>
-
     <string name="done_count_apps_singular">1 ⵜⴰⵙⵏⵙⵉ</string>
     <string name="done_count_apps_plural">%1$d ⵜⵉⵙⵏsⵉⵡⵉⵏ</string>
     <string name="done_stopped_subtitle">ⴱⴷⴷⵏⵜ: %1$s</string>
     <string name="done_cleaned_subtitle">ⵜⵢⴰⵙⴼⴹⵏⵜ: %1$s</string>
     <string name="done_button">ⵉⵎⴷⴰ</string>
-
     <string name="permission_title">ⵜⵓⵔⴰⴳⵜ</string>
     <string name="accessibility_permission_title">API ⵏ ⵜⵏⵓⴼⵍⵉⵜ</string>
     <string name="accessibility_permission_desc1">ⵜⴰⵙⵏⵙⵉ ⴰⴷ ⵜⵙⵎⵔⵙ API ⴰⴼⴰⴷ ⴰ ⵜⵙⴼⴹ ⵜⴰⴽⴰⵜⵓⵜ.</string>
     <string name="accessibility_permission_desc2">ⵉⴼⴽⴰ ⵓⵔ ⵜⵜⵓⵎⵢⴰⵙⴰⵏ ⵓⵔ ⵜⵜⵓⴱⴹⴰⵏ.</string>
     <string name="btn_cancel_uppercase">ⵙⵔⴻⵎ</string>
     <string name="btn_continue_uppercase">ⴽⵎⵍ</string>
-
     <string name="permission_success_title">ⵉⵎⴷⴰ!</string>
     <string name="permission_success_desc1">ⴰⵢⵢⵓⵣ, ⵜⵊⴷⴷⴰⴷⵜ.</string>
     <string name="permission_success_desc2">ⵓⵔ ⵏⵜⵜⴰⴳⵯⴰ ⵉⵏⵖⵎⵉⵙⵏ ⵉⵎⵙⵎⵔⵙⴰⵏ.</string>
-
     <string name="usage_access_permission_title">ⵜⵓⵔⴰⴳⵜ ⵏ ⵓⵙⵎⵔⵙ</string>
     <string name="usage_access_permission_desc1">ⵜⵓⵔⴰⴳⵜ ⵏ ⵓⵙⵎⵔⵙ ⵜⴰⵎⵜⵜⵉⵜ.</string>
     <string name="usage_access_permission_desc2">ⴰⴷⵉ ⵜⴰⵙⴰⵔⵓⵜ ⴷⴰⵡⵓⴷ ⴰⴼⴰⴷ ⴰ ⵜⵙⴽⵔⴹ.</string>
-
-    <string name="onboarding_privacy_note">ⵙ ⵓⴽⵎⴰⵍ, ⵜⵇⴱⵍⴹ ⵜⵉⴼⴰⴷⵉⵡⵉⵏ ⵏ BlueIris %1$s</string>
     <string name="btn_next">ⵢⴰⴹⵏ</string>
     <string name="btn_get_started">ⴱⴷⵓ</string>
     <string name="onboarding_page1_desc">ⵙⴼⴹ ⵜⴰⴽⴰⵜⵓⵜ ⵏ ⵜⵙⵏⵙⵉⵡⵉⵏ ⴰⴽⴽⵯ.</string>

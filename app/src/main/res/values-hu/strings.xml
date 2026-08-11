@@ -1,176 +1,49 @@
-﻿<resources>
-    <string name="app_name">BlueIris</string>
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Apex</string>
     <string name="accessibility_service_description">Ez a szolgáltatás automatizálja a navigációt az Android alkalmazások beállításaiban a gyorsítótár biztonságos és hatékony ürítéséhez, valamint a háttéralkalmazások leállításához.</string>
-    <string name="clear_cache">Gyorsítótár ürítése</string>
-    <string name="storage">Tárhely</string>
-    <string name="home">Kezdőlap</string>
     <string name="apps">Alkalmazások</string>
     <string name="analyze">Elemzés</string>
-    <string name="permission_required">Engedély szükséges</string>
-    <string name="cleaning_cache">Gyorsítótár ürítése…</string>
     <string name="settings">Beállítások</string>
-    <string name="download_settings_desc">General</string>
     <string name="download">Letöltés</string>
-    <string name="url_empty">A hivatkozás nem lehet üres</string>
-    <string name="reset_success">A telepített verzió sikeresen eltávolítva</string>
-    <string name="reset_failed">A telepített verzió eltávolítása sikertelen</string>
-    <string name="permission_denied">Engedély megtagadva</string>
-    <string name="download_success_msg">Letöltés befejeződött</string>
-    <string name="download_error_msg">Fájl letöltése sikertelen</string>
-    <string name="download_start_msg">Letöltés: \"%1$s\"</string>
     <string name="general_settings">Általános</string>
     <string name="language">Megjelenítési nyelv</string>
-    <string name="language_settings">Megjelenítési nyelv beállítása</string>
-    <string name="task_running">Egy letöltési feladat már folyamatban van</string>
-    <string name="paste_msg">URL beillesztése</string>
-    <string name="paste_fail_msg">Nem található hivatkozás a vágólapon</string>
-    <string name="delete_info">Eltávolítás?</string>
-    <string name="delete_info_msg">Véglegesen eltávolítja a következőt a letöltési előzményekből: \"%1$s\"?</string>
     <string name="confirm">Megerősítés</string>
     <string name="dismiss">Mégse</string>
-    <string name="downloads_history">Letöltések</string>
-    <string name="audio">Hang</string>
-    <string name="link_copied">Hivatkozás másolva a vágólapra</string>
-    <string name="open_url">Hivatkozás megnyitása</string>
-    <string name="remove">Eltávolítás</string>
-    <string name="delete_file">Fájl törlése</string>
     <string name="about">Névjegy</string>
-    <string name="about_page">Verzió, visszajelzés, automatikus frissítés</string>
     <string name="back">Vissza</string>
     <string name="version">Verzió</string>
     <string name="release_desc">Változásnaplók és új verziók keresése</string>
     <string name="release">Legújabb kiadás</string>
     <string name="readme_desc">A GitHub tárhely és a README megtekintése</string>
     <string name="readme" translatable="false">README</string>
-    <string name="video">Videó</string>
-    <string name="image">Kép</string>
-    <string name="image_format">Képformátum</string>
-    <string name="image_format_best">Legjobb (eredeti)</string>
-    <string name="image_format_jpg">JPEG (.jpg)</string>
-    <string name="image_format_png">PNG (.png)</string>
-    <string name="image_format_webp">WebP (.webp)</string>
-    <string name="image_quality">Képminőség</string>
-    <string name="image_quality_best">Legjobb minőség (eredeti-100%)</string>
-    <string name="image_quality_high">Magas (85%)</string>
-    <string name="image_quality_medium">Közepes (70%)</string>
-    <string name="image_quality_low">Alacsony (50%)</string>
-    <string name="image_format_desc">A letöltött képek preferált kimeneti formátuma</string>
-    <string name="image_preset_desc">Formátum: %1$s, Minőség: %2$s</string>
-    <string name="video_image_tab">Videó / Kép</string>
-    <string name="checked">Ellenőrizve</string>
     <string name="credits">Köszönetnyilvánítás</string>
     <string name="credits_desc">Köszönetnyilvánítás és szabad szoftverek</string>
-    <string name="edit">Szerkesztés</string>
-    <string name="start_execute">Parancs végrehajtásának indítása</string>
-    <string name="advanced_settings">Haladó</string>
-    <string name="print_details">Részletes kimenet</string>
-    <string name="print_details_desc">Részletes üzenetek megjelenítése letöltéskor</string>
     <string name="display">Megjelenítés</string>
     <string name="display_settings">Sötét téma, dinamikus szín, nyelvek</string>
     <string name="dark_theme">Sötét téma</string>
     <string name="follow_system">Rendszer</string>
-    <string name="follow_system_desc">Rendszer témabeállításainak követése</string>
-    <string name="dark_theme_on_desc">Mindig sötét téma használata</string>
-    <string name="dark_theme_off_desc">Mindig világos téma használata</string>
     <string name="on">Be</string>
     <string name="off">Ki</string>
     <string name="cancel">Mégse</string>
-    <string name="settings_before_download">Konfigurálás letöltés előtt</string>
-    <string name="settings_before_download_desc">Beállítások konfigurálása a letöltés előtt</string>
-    <string name="settings_before_download_text">Letöltés testreszabása</string>
-    <string name="error_copied">Hibajelentés másolva a vágólapra</string>
-    <string name="thumbnail">Bélyegkép</string>
     <string name="paste">Beillesztés</string>
-    <string name="edit_template_desc">A kimeneti útvonalat és az URL-t az alkalmazás adja hozzá.</string>
-    <string name="not_convert">Nincs átalakítva</string>
-    <string name="convert_to">Átalakítás erre: %1$s</string>
-    <string name="format">Formátum</string>
-    <string name="best_quality">Legjobb minőség</string>
-    <string name="best_audio_quality">Legjobb hangminőség</string>
-    <string name="not_specified">Nincs megadva (alapértelmezett)</string>
-    <string name="preferred_format_desc">Preferált formátum, ha több is rendelkezésre áll</string>
-    <string name="start_download">Letöltés</string>
     <string name="close">Bezárás</string>
-    <string name="close_never_show_again">Ne jelenjen meg újra</string>
-    <string name="user_guide">Felhasználói útmutató</string>
-    <string name="open_settings">Beállítások megnyitása</string>
-    <string name="paste_desc">Kattintson a \"Beillesztés\" gombra a videó hivatkozásának beillesztéséhez a vágólapról.</string>
-    <string name="download_desc">Ezután kattintson a \"Letöltés\" gombra a beállítások megadása után.</string>
-    <string name="defaults">Alapértelmezett</string>
-    <string name="channel_name">Letöltés</string>
-    <string name="channel_description">Értesítés a letöltött fájlokról és a haladásról</string>
-    <string name="download_finish_notification">Letöltés befejeződött. Koppintson a megnyitáshoz.</string>
-    <string name="execute_command_notification">Egyéni parancsok futtatása…</string>
-    <string name="battery_settings_desc">Kérjük, állítsa az alkalmazás akkumulátorhasználatát \"Korlátlan\" értékre a rendszerbeállításokban a háttérben történő letöltéshez.</string>
-    <string name="options">Opciók</string>
-    <string name="additional_settings">További beállítások</string>
-    <string name="share_fail_msg">Nem sikerült hivatkozást találni a megosztott tartalomban</string>
-    <string name="share_success_msg">Videó hivatkozásának olvasása a megosztott tartalomból…</string>
-    <string name="show_more_actions">További műveletek megjelenítése</string>
-    <string name="download_notification">Letöltési értesítés</string>
-    <string name="download_notification_desc">Értesítés a letöltött fájlokról és a haladásról</string>
-    <string name="fetching_playlist_info">Lejátszási lista információinak lekérése…</string>
-    <string name="from">Kezdet</string>
     <string name="to">Vég</string>
-    <string name="invalid_index_range">Érvénytelen tartomány</string>
-    <string name="playlist_indicator_text">Lejátszási lista letöltése (%1$d/%2$d)…</string>
-    <string name="audio_directory">Hang mappa</string>
-    <string name="download_directory">Letöltési könyvtár</string>
-    <string name="download_directory_desc">Select where to save files</string>
-    <string name="subdirectory">Mentés alkönyvtárba</string>
-    <string name="subdirectory_desc">Fájlok mentése a megfelelő mezők alapján elnevezett mappákba</string>
-    <string name="permission_issue">Tárhelyengedély-probléma</string>
-    <string name="permission_issue_desc">A Download/ és a Documents/ mappákon kívüli könyvtárak nem támogatottak</string>
-    <string name="battery_configuration">Akkumulátor beállítása</string>
-    <string name="battery_configuration_desc">Akkumulátor-optimalizálás mellőzése a háttérben történő letöltéshez</string>
-    <string name="service_title">Az BlueIris letöltést végez…</string>
-    <string name="unknown_error">Ismeretlen hiba</string>
     <string name="translate">Fordítás</string>
     <string name="translate_desc">Segítsen lefordítani az alkalmazást a Hosted Weblate-en</string>
-    <string name="prefix">Előtag</string>
-    <string name="new_template">Új sablon</string>
-    <string name="template_label">Címke</string>
-    <string name="remove_template">Eltávolítás?</string>
-    <string name="remove_template_desc">Véglegesen eltávolítja a(z) \"%1$s\" parancssablont?</string>
-    <string name="template_selection">Sablon kiválasztása</string>
-    <string name="downloading_indicator_text">Letöltés folyamatban…</string>
-    <string name="task_canceled">Letöltési feladat megszakítva</string>
     <string name="github_issue">GitHub hibaügy</string>
     <string name="github_issue_desc">Hibajelentés vagy funkciókérés beküldése</string>
     <string name="info_copied">Információ másolva a vágólapra</string>
     <string name="enable_auto_update">Automatikus frissítés engedélyezése</string>
     <string name="update_channel">Frissítési csatorna</string>
-    <string name="update_channel_desc">Telepítse a kiadás előtti verziókat az új funkciók és módosítások előzetes megtekintéséhez.\n\nEzekben a verziókban előfordulhat instabilitás, ezért kérjük, bátran küldjön visszajelzést, ha problémát tapasztal.</string>
-    <string name="status_enqueued">Várakozási sorban</string>
-    <string name="status_completed">Befejezve</string>
-    <string name="status_downloading">Letöltés</string>
-    <string name="status_canceled">Megszakítva</string>
-    <string name="open_file">Fájl megnyitása</string>
-    <string name="restart">Újraindítás</string>
-    <string name="status_error">Hiba</string>
-    <string name="copy_link">Hivatkozás másolása</string>
-    <string name="copy_error_report">Jelentés másolása</string>
-    <string name="export_to_clipboard">Exportálás a vágólapra</string>
-    <string name="import_from_clipboard">Importálás a vágólapról</string>
-    <string name="template_exported">%1$d sablon exportálva</string>
-    <string name="template_imported">%1$d sablon importálva</string>
-    <string name="download_task_count">%1$d letöltési feladat</string>
-    <string name="recently_added">Legutóbb hozzáadott</string>
-    <string name="delete_multiple_items_msg">Véglegesen eltávolít %1$d elemet a letöltési előzményekből?</string>
     <string name="check_for_updates">Frissítések keresése</string>
     <string name="check_for_updates_desc">A legújabb verzió automatikus keresése a GitHubon</string>
     <string name="app_up_to_date">A jelenlegi verzió naprakész</string>
     <string name="app_update_failed">Nem sikerült frissíteni a legújabb verzióra</string>
     <string name="update">Frissítés</string>
-    <string name="clear_temp_files">Ideiglenes fájlok törlése</string>
-    <string name="clear_temp_files_desc">Az összes ideiglenes fájl törlése az ideiglenes könyvtárból</string>
-    <string name="clear_temp_files_count">%1$d ideiglenes fájl törölve</string>
     <string name="telegram_channel">Telegram</string>
-    <string name="matrix_space">Matrix</string>
     <string name="sponsor">Támogatás</string>
-    <string name="sponsor_desc">Támogassa ezt az alkalmazást a GitHubon</string>
-    <string name="sponsor_msg">Az BlueIris a jövőben is mindig ingyenes és nyílt forráskódú marad mindenki számára. Ha tetszik, kérjük, fontolja meg a támogatásomat a GitHubon!</string>
-    <string name="feedback">Visszajelzés</string>
+    <string name="sponsor_msg">Az Apex a jövőben is mindig ingyenes és nyílt forráskódú marad mindenki számára. Ha tetszik, kérjük, fontolja meg a támogatásomat a GitHubon!</string>
     <string name="sponsors">Támogatók</string>
     <string name="instagram">Instagram</string>
     <string name="instagram_desc">kövesse a fejlesztőt az Instagramon a további frissítésekért</string>
@@ -195,59 +68,25 @@
     <string name="dynamic_color">Dinamikus szín</string>
     <string name="dynamic_color_desc">Háttérkép színeinek alkalmazása az alkalmazás témájára</string>
     <string name="website">Weboldal</string>
-    <string name="look_and_feel"><![CDATA[Megjelenés & hangulat]]></string>
-    <string name="interface_and_interaction"><![CDATA[Felület & interakció]]></string>
+    <string name="look_and_feel">Megjelenés &amp; hangulat</string>
     <string name="auto_update">Automatikus frissítés</string>
     <string name="suggested">Ajánlott</string>
     <string name="all_languages">Minden nyelv</string>
     <string name="trouble_shooting">Hibaelhárítás</string>
     <string name="issue_tracker">Hibakövető</string>
-    <string name="trouble_shooting_desc">Gyakori hibák javítása és az ismert problémák ellenőrzése</string>
     <string name="issue_tracker_hint">Hibába ütközött? Mielőtt új problémát jelentene, kérjük, keressen a hibakövetőnkben. Számos gyakori problémát már megoldottunk és dokumentáltunk ott.</string>
-    <string name="short_url">Rövid URL</string>
-    <string name="security">Biztonság</string>
-    <string name="qr_code">QR-kód</string>
     <string name="menu">Menü</string>
-    <string name="scan_qr_code">QR-kód beolvasása</string>
-    <string name="qr_code_generator">QR-kód generáló</string>
-    <string name="costume_qr_code">Egyéni QR-kód</string>
     <string name="scan">Beolvasás</string>
-    <string name="generate">Generálás</string>
-    <string name="costume">Egyéni</string>
-    <string name="scan_history">Beolvasási előzmények</string>
-    <string name="no_scan_history_yet">Még nincsenek beolvasási előzmények</string>
-    <string name="scan_code">Kód beolvasása</string>
-    <string name="scanned_by_links">Az BlueIris által beolvasva</string>
-    <string name="scan_qr_instruction">QR-kódok beolvasása kamerával vagy importálása a galériából</string>
-    <string name="scan_now">Beolvasás most</string>
-    <string name="scanned_content">Beolvasott tartalom</string>
-    <string name="feature_currently_unavailable">Ez a funkció jelenleg nem érhető el.</string>
     <string name="contact">Kapcsolat</string>
-    <string name="contact_desc">Lépjen kapcsolatba a fejlesztővel új funkciók hozzáadásához az BlueIris alkalmazásban</string>
-    <string name="links_issue_tracker">BlueIris hibakövető</string>
-    <string name="enter_url_error">Kérjük, adjon meg egy URL-címet</string>
-    <string name="invalid_url_format">Érvénytelen URL-formátum. Kérjük, adjon meg egy érvényes webcímet (pl. example.com).</string>
-    <string name="copied_to_clipboard">Másolva a vágólapra</string>
+    <string name="contact_desc">Lépjen kapcsolatba a fejlesztővel új funkciók hozzáadásához az Apex alkalmazásban</string>
+    <string name="links_issue_tracker">Apex hibakövető</string>
     <string name="clear_history">Előzmények törlése</string>
-    <string name="no_qr_found_in_image">Nem található QR-kód a kiválasztott képen</string>
-    <string name="copy">Másolás</string>
-    <string name="destination">Cél</string>
-    <string name="source">Forrás</string>
-    <string name="generate_qr_for">QR-kód generálása ehhez...</string>
-    <string name="enter_text_or_url">Szöveg vagy URL megadása</string>
-    <string name="enter_text_above_to_generate">Generáláshoz adja meg a fenti szöveget</string>
-    <string name="save_qr_code">QR-kód mentése</string>
-    <string name="url_placeholder">http://example.com</string>
     <string name="contact_developer">Kapcsolat a fejlesztővel</string>
     <string name="contact_developer_confirm">Meg szeretné nyitni a Gmailt a fejlesztővel való kapcsolatfelvételhez?</string>
     <string name="github_stars">GitHub csillagok</string>
     <string name="github_stars_desc">Támogassa az alkalmazást egy csillaggal a GitHubon</string>
     <string name="package_name">Csomagnév</string>
-    <string name="unshorten">Kibontás</string>
-    <string name="disclaimer_text">Ezt az alkalmazást „jelen állapotában” biztosítjuk, ami azt jelenti, hogy mindent megteszünk a zökkenőmentes működésért, de nem garantálhatjuk, hogy mindig tökéletes vagy hibamentes lesz. Az alkalmazás használatával elfogadja ezt, és tudomásul veszi, hogy saját felelősségére használja.</string>
     <string name="privacy_policy">Adatvédelmi irányelvek</string>
-    <string name="view_licenses">Licencek megtekintése</string>
-    <string name="licenses">Licencek</string>
     <string name="done">Kész</string>
     <string name="downloading">Letöltés…</string>
     <string name="downloaded_successfully">Sikeresen letöltve</string>
@@ -258,37 +97,18 @@
     <string name="early_access">Korai hozzáférés</string>
     <string name="pre_release_desc">Telepítse a kiadás előtti verziókat az új funkciók és módosítások előzetes megtekintéséhez.\n\nEzekben a verziókban előfordulhat instabilitás, ezért kérjük, bátran küldjön visszajelzést, ha problémát tapasztal, hogy segítsen javítani az alkalmazást a jövőben.</string>
     <string name="update_directory">Könyvtár frissítése</string>
-
-    
-    <!-- Navigation Tabs & Toasts -->
     <string name="nav_stop">Leállítás</string>
     <string name="nav_clean">Tisztítás</string>
     <string name="nav_apps">Alkalmazások</string>
     <string name="nav_menu">Menü</string>
     <string name="toast_all_cache_cleaned">Minden gyorsítótár tisztítva van (0 KB)</string>
     <string name="toast_all_bg_apps_stopped">Minden háttéralkalmazás leállítva</string>
-    <string name="toast_selected_apps_no_cache">A kiválasztott alkalmazásoknak nincs gyorsítótára (0 KB)</string>
-
-    <!-- AppsScreen Filter & Sort -->
-    <string name="app_filter_all">Összes alkalmazás</string>
-    <string name="app_filter_user">Felhasználói alkalmazások</string>
-    <string name="app_filter_system">Rendszeralkalmazások</string>
-    <string name="app_sort_by_name">Név szerint</string>
-    <string name="app_sort_by_date">Dátum szerint</string>
-    <string name="app_sort_by_size">Méret szerint</string>
     <string name="apps_screen_title">Alkalmazások</string>
     <string name="apps_listed_count">%1$d alkalmazás a listában</string>
-    <string name="cd_filter_apps">Alkalmazások szűrése</string>
-    <string name="cd_sort_apps">Alkalmazások rendezése</string>
     <string name="apps_no_apps_found">Nem található alkalmazás a szűrőhöz</string>
     <string name="cd_clear_selection">Kijelölés törlése</string>
-    <string name="apps_selected_count">Kijelölve: %1$d</string>
-    <string name="cd_clean_selected_apps">Kijelölt alkalmazások tisztítása</string>
-    <string name="cd_selected">Kijelölve</string>
     <string name="app_size_prefix">Méret: %1$s</string>
     <string name="cd_go_to_details">Részletek megtekintése</string>
-
-    <!-- App Detail Screen Strings -->
     <string name="app_detail_version">Verzió: %1$s</string>
     <string name="app_detail_apk_size">APK mérete</string>
     <string name="app_detail_install_date">Telepítés dátuma</string>
@@ -300,15 +120,9 @@
     <string name="app_detail_app_info">ALKALMAZÁS INFO</string>
     <string name="toast_cannot_launch_app">Nem lehet elindítani az alkalmazást</string>
     <string name="toast_cannot_open_store">Nem lehet megnyitni az áruház oldalát</string>
-
-    <!-- Speed & Performance Strings -->
     <string name="performance_and_speed_title">Teljesítmény és Sebesség</string>
-
-    <!-- Stop Process Strings -->
     <string name="stop_process_title">Leállítási folyamat</string>
     <string name="force_stop_mode_title">Kényszerített leállítási mód</string>
-
-    <!-- Clean Process Strings -->
     <string name="clean_process_title">Tisztítási folyamat</string>
     <string name="cleaning_mode_title">Tisztítási mód</string>
     <string name="cleaning_mode_manual">Kézi</string>
@@ -316,8 +130,6 @@
     <string name="cleaning_mode_ask_each_time">Kérdezzen rá mindig</string>
     <string name="ignore_tiny_cache_title">Kis gyorsítótár figyelmen kívül hagyása</string>
     <string name="ignore_tiny_cache_desc">Kivéve a 3 MB alatti gyorsítótárral rendelkező alkalmazásokat</string>
-
-    <!-- StopScreen Strings -->
     <string name="stop_title">Leállítás</string>
     <string name="stop_history_icon_desc">Előzmények</string>
     <string name="stop_gauge_apps">ALKALMAZÁSOK</string>
@@ -340,15 +152,10 @@
     <string name="stop_dialog_close">BEZÁRÁS</string>
     <string name="stop_dialog_running_apps_title">Futó alkalmazások (%1$d)</string>
     <string name="stop_dialog_no_running_apps">Nincsenek aktív háttéralkalmazások.</string>
-
-    <!-- CleanScreen Strings -->
     <string name="clean_title">Tisztítás</string>
     <string name="clean_history_icon_desc">Előzmények</string>
-    <string name="clean_gauge_unit_mb">MB</string>
     <string name="clean_gauge_system_cleaned">Rendszer megtisztítva</string>
     <string name="clean_gauge_can_be_cleared">Tisztítható</string>
-    <string name="clean_gauge_zero_mb">0 MB</string>
-    <string name="clean_gauge_current_mb">%1$s MB</string>
     <string name="clean_stat_total">Összesen</string>
     <string name="clean_stat_used">Használt</string>
     <string name="clean_stat_cache">Gyorsítótár</string>
@@ -365,8 +172,6 @@
     <string name="clean_dialog_live_cache_title">Élő gyorsítótár figyelő</string>
     <string name="clean_dialog_live_cache_desc">Élő gyorsítótár mérete: %1$s.</string>
     <string name="clean_dialog_ok">OK</string>
-
-    <!-- Sub-screens Extracted Strings -->
     <string name="cd_back">Vissza</string>
     <string name="cd_broom_icon">Seprű ikon</string>
     <string name="cd_whitelist_icon">Engedélyezési lista ikon</string>
@@ -377,15 +182,13 @@
     <string name="cd_accessibility_icon">Kisegítő lehetőségek ikon</string>
     <string name="cd_success_icon">Siker ikon</string>
     <string name="cd_usage_access_icon">Használati hozzáférés ikon</string>
-    <string name="cd_blueiris_app_icon">BlueIris ikon</string>
+    <string name="cd_apex_app_icon">Apex ikon</string>
     <string name="cd_notifications_icon">Értesítés ikon</string>
     <string name="cd_checkmark_icon">Pipa</string>
-
     <string name="analyze_screen_title">Elemzés</string>
     <string name="analyze_cache_apps_count">Gyorsítótár (%1$d Alkalmazás)</string>
     <string name="analyze_no_cache_found">Nem találhatók gyorsítótár fájlok</string>
     <string name="analyze_clear_button">TISZTÍTÁS</string>
-
     <string name="whitelist_title">Engedélyezési lista</string>
     <string name="whitelist_empty_avoid_stop">Adjon hozzá egy alkalmazást a leállítás elkerüléséhez</string>
     <string name="whitelist_empty_avoid_clean">Adjon hozzá egy alkalmazást a tisztítás elkerüléséhez</string>
@@ -394,10 +197,8 @@
     <string name="whitelist_dialog_all_apps_added">Minden alkalmazás rajta van a listán.</string>
     <string name="whitelist_dialog_add_btn">Hozzáadás</string>
     <string name="whitelist_dialog_add_count_btn">Hozzáadás (%1$d)</string>
-
     <string name="history_title">Előzmények</string>
     <string name="history_today_stopped">Ma leállítva</string>
-    <string name="history_no_apps_stopped_today">Ma nem volt leállított alkalmazás</string>
     <string name="history_today_cleared">Ma megtisztítva</string>
     <string name="history_period_today">Ma</string>
     <string name="history_period_yesterday">Tegnap</string>
@@ -413,29 +214,23 @@
     <string name="history_dialog_clear_stop_msg">Törölni szeretné a leállítási előzményeket?</string>
     <string name="history_stop_count_singular">%1$d alkalommal</string>
     <string name="history_stop_count_plural">%1$d alkalommal</string>
-
     <string name="done_count_apps_singular">1 Alkalmazás</string>
     <string name="done_count_apps_plural">%1$d Alkalmazás</string>
     <string name="done_stopped_subtitle">Leállítva: %1$s</string>
     <string name="done_cleaned_subtitle">Megtisztítva: %1$s</string>
     <string name="done_button">KÉSZ</string>
-
     <string name="permission_title">Engedély</string>
     <string name="accessibility_permission_title">Kisegítő lehetőségek API</string>
     <string name="accessibility_permission_desc1">Ez az alkalmazás az API-t használja a tisztítás automatizálásához.</string>
     <string name="accessibility_permission_desc2">Az adatok soha nem kerülnek gyűjtésre vagy megosztásra.</string>
     <string name="btn_cancel_uppercase">MÉGSE</string>
     <string name="btn_continue_uppercase">FOLYTATÁS</string>
-
     <string name="permission_success_title">Sikeres!</string>
     <string name="permission_success_desc1">Gratulálunk, készen áll.</string>
     <string name="permission_success_desc2">Nem gyűjtünk személyes adatokat.</string>
-
     <string name="usage_access_permission_title">Használati hozzáférési engedély</string>
     <string name="usage_access_permission_desc1">Használati adatokhoz való hozzáférés szükséges.</string>
     <string name="usage_access_permission_desc2">Kattintson az alábbi gombra az engedélyezéshez.</string>
-
-    <string name="onboarding_privacy_note">A folytatással elfogadja a BlueIris %1$s</string>
     <string name="btn_next">TOVÁBB</string>
     <string name="btn_get_started">KEZDÉS</string>
     <string name="onboarding_page1_desc">Tisztítsa meg az alkalmazások gyorsítótárát több helyért.</string>

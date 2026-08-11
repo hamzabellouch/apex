@@ -1,176 +1,49 @@
-﻿<resources>
-    <string name="app_name">BlueIris</string>
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Apex</string>
     <string name="accessibility_service_description">บริการนี้ช่วยดำเนินการนำทางในการตั้งค่าแอป Android โดยอัตโนมัติเพื่อล้างแคชและหยุดแอปในเบื้องหลังอย่างปลอดภัยและมีประสิทธิภาพ</string>
-    <string name="clear_cache">ล้างแคช</string>
-    <string name="storage">พื้นที่จัดเก็บข้อมูล</string>
-    <string name="home">หน้าแรก</string>
     <string name="apps">แอป</string>
     <string name="analyze">วิเคราะห์</string>
-    <string name="permission_required">จำเป็นต้องได้รับสิทธิ์</string>
-    <string name="cleaning_cache">กำลังล้างแคช…</string>
     <string name="settings">การตั้งค่า</string>
-    <string name="download_settings_desc">General</string>
     <string name="download">ดาวน์โหลด</string>
-    <string name="url_empty">ลิงก์ต้องไม่อยู่ในสภาพว่างเปล่า</string>
-    <string name="reset_success">ลบเวอร์ชันที่ติดตั้งเรียบร้อยแล้ว</string>
-    <string name="reset_failed">ลบเวอร์ชันที่ติดตั้งไม่สำเร็จ</string>
-    <string name="permission_denied">การเข้าถึงถูกปฏิเสธ</string>
-    <string name="download_success_msg">ดาวน์โหลดเสร็จสมบูรณ์</string>
-    <string name="download_error_msg">ไม่สามารถดาวน์โหลดไฟล์ได้</string>
-    <string name="download_start_msg">ดาวน์โหลด \"%1$s\"</string>
     <string name="general_settings">ทั่วไป</string>
     <string name="language">ภาษาที่แสดง</string>
-    <string name="language_settings">ตั้งค่าภาษาที่แสดง</string>
-    <string name="task_running">มีงานดาวน์โหลดกำลังทำงานอยู่แล้ว</string>
-    <string name="paste_msg">วาง URL</string>
-    <string name="paste_fail_msg">ไม่พบ URL ในคลิปบอร์ด</string>
-    <string name="delete_info">ลบออกหรือไม่?</string>
-    <string name="delete_info_msg">ลบ \"%1$s\" ออกจากประวัติการดาวน์โหลดถาวรหรือไม่?</string>
     <string name="confirm">ยืนยัน</string>
     <string name="dismiss">ยกเลิก</string>
-    <string name="downloads_history">การดาวน์โหลด</string>
-    <string name="audio">เสียง</string>
-    <string name="link_copied">คัดลอกลิงก์ไปยังคลิปบอร์ดแล้ว</string>
-    <string name="open_url">เปิดลิงก์</string>
-    <string name="remove">ลบออก</string>
-    <string name="delete_file">ลบไฟล์</string>
     <string name="about">เกี่ยวกับ</string>
-    <string name="about_page">เวอร์ชัน, ข้อเสนอแนะ, อัปเดตอัตโนมัติ</string>
     <string name="back">ย้อนกลับ</string>
     <string name="version">เวอร์ชัน</string>
     <string name="release_desc">ตรวจสอบบันทึกการเปลี่ยนแปลงและเวอร์ชันใหม่</string>
     <string name="release">เวอร์ชันล่าสุด</string>
     <string name="readme_desc">ตรวจสอบ GitHub และไฟล์ README</string>
     <string name="readme" translatable="false">README</string>
-    <string name="video">วิดีโอ</string>
-    <string name="image">รูปภาพ</string>
-    <string name="image_format">รูปแบบรูปภาพ</string>
-    <string name="image_format_best">ดีที่สุด (ต้นฉบับ)</string>
-    <string name="image_format_jpg">JPEG (.jpg)</string>
-    <string name="image_format_png">PNG (.png)</string>
-    <string name="image_format_webp">WebP (.webp)</string>
-    <string name="image_quality">คุณภาพรูปภาพ</string>
-    <string name="image_quality_best">คุณภาพดีที่สุด (ต้นฉบับ-100%)</string>
-    <string name="image_quality_high">สูง (85%)</string>
-    <string name="image_quality_medium">ปานกลาง (70%)</string>
-    <string name="image_quality_low">ต่ำ (50%)</string>
-    <string name="image_format_desc">รูปแบบผลลัพธ์ที่ต้องการสำหรับรูปภาพที่ดาวน์โหลด</string>
-    <string name="image_preset_desc">รูปแบบ: %1$s, คุณภาพ: %2$s</string>
-    <string name="video_image_tab">วิดีโอ / รูปภาพ</string>
-    <string name="checked">ตรวจสอบแล้ว</string>
     <string name="credits">เครดิต</string>
     <string name="credits_desc">เครดิตและซอฟต์แวร์เสรี</string>
-    <string name="edit">แก้ไข</string>
-    <string name="start_execute">เริ่มเรียกใช้คำสั่ง</string>
-    <string name="advanced_settings">ขั้นสูง</string>
-    <string name="print_details">ผลลัพธ์โดยละเอียด</string>
-    <string name="print_details_desc">แสดงข้อความโดยละเอียดขณะดาวน์โหลด</string>
     <string name="display">การแสดงผล</string>
     <string name="display_settings">ธีมมืด, สีไดนามิก, ภาษา</string>
     <string name="dark_theme">ธีมมืด</string>
     <string name="follow_system">ระบบ</string>
-    <string name="follow_system_desc">ตามการตั้งค่าธีมของระบบ</string>
-    <string name="dark_theme_on_desc">ใช้ธีมมืดเสมอ</string>
-    <string name="dark_theme_off_desc">ใช้ธีมสว่างเสมอ</string>
     <string name="on">เปิด</string>
     <string name="off">ปิด</string>
     <string name="cancel">ยกเลิก</string>
-    <string name="settings_before_download">ตั้งค่าก่อนดาวน์โหลด</string>
-    <string name="settings_before_download_desc">ปรับการตั้งค่าตามต้องการก่อนดาวน์โหลด</string>
-    <string name="settings_before_download_text">ปรับแต่งการดาวน์โหลดนี้</string>
-    <string name="error_copied">คัดลอกรายงานข้อผิดพลาดไปยังคลิปบอร์ดแล้ว</string>
-    <string name="thumbnail">ภาพย่อ</string>
     <string name="paste">วาง</string>
-    <string name="edit_template_desc">พาธผลลัพธ์และ URL จะถูกเพิ่มโดยแอป</string>
-    <string name="not_convert">ไม่แปลง</string>
-    <string name="convert_to">แปลงเป็น %1$s</string>
-    <string name="format">รูปแบบ</string>
-    <string name="best_quality">คุณภาพดีที่สุด</string>
-    <string name="best_audio_quality">คุณภาพเสียงดีที่สุด</string>
-    <string name="not_specified">ไม่ระบุ (เริ่มต้น)</string>
-    <string name="preferred_format_desc">รูปแบบที่ต้องการเมื่อมีหลายตัวเลือก</string>
-    <string name="start_download">ดาวน์โหลด</string>
     <string name="close">ปิด</string>
-    <string name="close_never_show_again">ไม่ต้องแสดงอีก</string>
-    <string name="user_guide">คู่มือการใช้งาน</string>
-    <string name="open_settings">เปิดการตั้งค่า</string>
-    <string name="paste_desc">คลิก \"วาง\" เพื่อรับลิงก์วิดีโอจากคลิปบอร์ดของคุณ</string>
-    <string name="download_desc">จากนั้นคลิก \"ดาวน์โหลด\" หลังจากปรับตั้งค่าแล้ว</string>
-    <string name="defaults">ค่าเริ่มต้น</string>
-    <string name="channel_name">การดาวน์โหลด</string>
-    <string name="channel_description">แจ้งเตือนไฟล์ที่ดาวน์โหลดและความคืบหน้า</string>
-    <string name="download_finish_notification">ดาวน์โหลดเสร็จสิ้น แตะเพื่อเปิด</string>
-    <string name="execute_command_notification">กำลังเรียกใช้คำสั่งกำหนดเอง…</string>
-    <string name="battery_settings_desc">โปรดตั้งค่าการใช้แบตเตอรี่ของแอปนี้เป็น \"ไม่จำกัด\" ในการตั้งค่าระบบเพื่อดาวน์โหลดในเบื้องหลัง</string>
-    <string name="options">ตัวเลือก</string>
-    <string name="additional_settings">การตั้งค่าเพิ่มเติม</string>
-    <string name="share_fail_msg">ไม่สามารถจับคู่ URL จากเนื้อหาที่แชร์</string>
-    <string name="share_success_msg">กำลังอ่านลิงก์วิดีโอจากเนื้อหาที่แชร์…</string>
-    <string name="show_more_actions">แสดงการดำเนินการเพิ่มเติม</string>
-    <string name="download_notification">การแจ้งเตือนการดาวน์โหลด</string>
-    <string name="download_notification_desc">แจ้งเตือนไฟล์ที่ดาวน์โหลดและความคืบหน้า</string>
-    <string name="fetching_playlist_info">กำลังดึงข้อมูลเพลย์ลิสต์…</string>
-    <string name="from">เริ่มต้น</string>
     <string name="to">สิ้นสุด</string>
-    <string name="invalid_index_range">ช่วงดัชนีไม่ถูกต้อง</string>
-    <string name="playlist_indicator_text">กำลังดาวน์โหลดเพลย์ลิสต์ (%1$d/%2$d)…</string>
-    <string name="audio_directory">โฟลเดอร์เสียง</string>
-    <string name="download_directory">ไดเรกทอรีดาวน์โหลด</string>
-    <string name="download_directory_desc">Select where to save files</string>
-    <string name="subdirectory">บันทึกลงในไดเรกทอรีย่อย</string>
-    <string name="subdirectory_desc">บันทึกไฟล์ในโฟลเดอร์ตามชื่อฟิลด์ที่เกี่ยวข้อง</string>
-    <string name="permission_issue">ปัญหาการเข้าถึงพื้นที่จัดเก็บข้อมูล</string>
-    <string name="permission_issue_desc">ไม่รองรับไดเรกทอรีภายนอก Download/ และ Documents/</string>
-    <string name="battery_configuration">การตั้งค่าแบตเตอรี่</string>
-    <string name="battery_configuration_desc">ข้ามการประหยัดแบตเตอรี่สำหรับแอปนี้เพื่อดาวน์โหลดในเบื้องหลัง</string>
-    <string name="service_title">BlueIris กำลังดาวน์โหลด…</string>
-    <string name="unknown_error">ข้อผิดพลาดที่ไม่รู้จัก</string>
     <string name="translate">แปลภาษา</string>
     <string name="translate_desc">ช่วยแปลแอปนี้บน Hosted Weblate</string>
-    <string name="prefix">คำนำหน้า</string>
-    <string name="new_template">เทมเพลตใหม่</string>
-    <string name="template_label">ป้ายชื่อ</string>
-    <string name="remove_template">ลบออกหรือไม่?</string>
-    <string name="remove_template_desc">ลบ \"%1$s\" ออกจากเทมเพลตคำสั่งถาวรหรือไม่?</string>
-    <string name="template_selection">การเลือกเทมเพลต</string>
-    <string name="downloading_indicator_text">กำลังดำเนินการดาวน์โหลด…</string>
-    <string name="task_canceled">ยกเลิกงานดาวน์โหลดแล้ว</string>
     <string name="github_issue">รายงานปัญหาบน GitHub</string>
     <string name="github_issue_desc">ส่งรายงานข้อผิดพลาดหรือคำขอฟีเจอร์ใหม่</string>
     <string name="info_copied">คัดลอกข้อมูลไปยังคลิปบอร์ดแล้ว</string>
     <string name="enable_auto_update">เปิดใช้งานการอัปเดตอัตโนมัติ</string>
     <string name="update_channel">ช่องทางการอัปเดต</string>
-    <string name="update_channel_desc">ติดตั้งเวอร์ชันทดสอบล่วงหน้าเพื่อลองใช้ฟีเจอร์และการเปลี่ยนแปลงใหม่ๆ\n\nเวอร์ชันเหล่านี้อาจมีความไม่เสถียร ดังนั้นโปรดอย่าลังเลที่จะส่งข้อเสนอแนะหากพบปัญหาเพื่อช่วยเราปรับปรุงแอป</string>
-    <string name="status_enqueued">อยู่ในคิว</string>
-    <string name="status_completed">เสร็จสิ้น</string>
-    <string name="status_downloading">กำลังดาวน์โหลด</string>
-    <string name="status_canceled">ยกเลิกแล้ว</string>
-    <string name="open_file">เปิดไฟล์</string>
-    <string name="restart">เริ่มใหม่</string>
-    <string name="status_error">ข้อผิดพลาด</string>
-    <string name="copy_link">คัดลอกลิงก์</string>
-    <string name="copy_error_report">คัดลอกรายงาน</string>
-    <string name="export_to_clipboard">ส่งออกไปยังคลิปบอร์ด</string>
-    <string name="import_from_clipboard">นำเข้าจากคลิปบอร์ด</string>
-    <string name="template_exported">ส่งออก %1$d เทมเพลตแล้ว</string>
-    <string name="template_imported">นำเข้า %1$d เทมเพลตแล้ว</string>
-    <string name="download_task_count">งานดาวน์โหลด %1$d งาน</string>
-    <string name="recently_added">เพิ่มล่าสุด</string>
-    <string name="delete_multiple_items_msg">ลบ %1$d รายการออกจากประวัติการดาวน์โหลดถาวรหรือไม่?</string>
     <string name="check_for_updates">ตรวจสอบการอัปเดต</string>
     <string name="check_for_updates_desc">ตรวจสอบเวอร์ชันล่าสุดบน GitHub โดยอัตโนมัติ</string>
     <string name="app_up_to_date">เวอร์ชันปัจจุบันเป็นเวอร์ชันล่าสุดแล้ว</string>
     <string name="app_update_failed">อัปเดตเป็นเวอร์ชันล่าสุดไม่สำเร็จ</string>
     <string name="update">อัปเดต</string>
-    <string name="clear_temp_files">ล้างไฟล์ชั่วคราว</string>
-    <string name="clear_temp_files_desc">ลบไฟล์ชั่วคราวทั้งหมดออกจากไดเรกทอรีชั่วคราว</string>
-    <string name="clear_temp_files_count">ลบไฟล์ชั่วคราว %1$d ไฟล์แล้ว</string>
     <string name="telegram_channel">Telegram</string>
-    <string name="matrix_space">Matrix</string>
     <string name="sponsor">สนับสนุน</string>
-    <string name="sponsor_desc">สนับสนุนแอปนี้ด้วยการเป็นสปอนเซอร์บน GitHub</string>
-    <string name="sponsor_msg">BlueIris จะเปิดให้ใช้งานฟรีและเป็นโอเพ่นซอร์สเสมอ หากคุณชอบโปรดพิจารณาสนับสนุนผู้พัฒนาบน GitHub!</string>
-    <string name="feedback">ข้อเสนอแนะ</string>
+    <string name="sponsor_msg">Apex จะเปิดให้ใช้งานฟรีและเป็นโอเพ่นซอร์สเสมอ หากคุณชอบโปรดพิจารณาสนับสนุนผู้พัฒนาบน GitHub!</string>
     <string name="sponsors">ผู้สนับสนุน</string>
     <string name="instagram">Instagram</string>
     <string name="instagram_desc">ติดตามผู้พัฒนาบน Instagram สำหรับการอัปเดตเพิ่มเติม</string>
@@ -195,59 +68,25 @@
     <string name="dynamic_color">สีไดนามิก</string>
     <string name="dynamic_color_desc">ใช้สีจากภาพพื้นหลังกับธีมของแอป</string>
     <string name="website">เว็บไซต์</string>
-    <string name="look_and_feel"><![CDATA[รูปลักษณ์และความรู้สึก]]></string>
-    <string name="interface_and_interaction"><![CDATA[อินเทอร์เฟซและการโต้ตอบ]]></string>
+    <string name="look_and_feel">รูปลักษณ์และความรู้สึก</string>
     <string name="auto_update">อัปเดตอัตโนมัติ</string>
     <string name="suggested">แนะนำ</string>
     <string name="all_languages">ทุกภาษา</string>
     <string name="trouble_shooting">การแก้ไขปัญหา</string>
     <string name="issue_tracker">ตัวติดตามปัญหา</string>
-    <string name="trouble_shooting_desc">แก้ข้อผิดพลาดทั่วไปและตรวจสอบปัญหาที่ทราบ</string>
     <string name="issue_tracker_hint">พบข้อผิดพลาดหรือไม่? ก่อนที่จะรายงานปัญหาใหม่ โปรดค้นหาในตัวติดตามปัญหาของเรา ปัญหาทั่วไปหลายประการได้รับการแก้ไขและบันทึกไว้ที่นั่นแล้ว</string>
-    <string name="short_url">URL สั้น</string>
-    <string name="security">ความปลอดภัย</string>
-    <string name="qr_code">คิวอาร์โค้ด</string>
     <string name="menu">เมนู</string>
-    <string name="scan_qr_code">สแกนคิวอาร์โค้ด</string>
-    <string name="qr_code_generator">เครื่องมือสร้างคิวอาร์โค้ด</string>
-    <string name="costume_qr_code">คิวอาร์โค้ดแบบกำหนดเอง</string>
     <string name="scan">สแกน</string>
-    <string name="generate">สร้าง</string>
-    <string name="costume">ปรับแต่ง</string>
-    <string name="scan_history">ประวัติการสแกน</string>
-    <string name="no_scan_history_yet">ยังไม่มีประวัติการสแกน</string>
-    <string name="scan_code">สแกนโค้ด</string>
-    <string name="scanned_by_links">สแกนโดย BlueIris</string>
-    <string name="scan_qr_instruction">สแกนคิวอาร์โค้ดโดยใช้กล้องหรือนำเข้าจากแกลเลอรี</string>
-    <string name="scan_now">สแกนเลย</string>
-    <string name="scanned_content">เนื้อหาที่สแกน</string>
-    <string name="feature_currently_unavailable">ฟีเจอร์นี้ยังไม่พร้อมใช้งานในขณะนี้</string>
     <string name="contact">ติดต่อ</string>
-    <string name="contact_desc">ติดต่อผู้พัฒนาเพื่อเพิ่มฟีเจอร์ใหม่ใน BlueIris</string>
-    <string name="links_issue_tracker">ตัวติดตามปัญหาของ BlueIris</string>
-    <string name="enter_url_error">โปรดป้อน URL</string>
-    <string name="invalid_url_format">รูปแบบ URL ไม่ถูกต้อง โปรดป้อนที่อยู่เว็บที่ถูกต้อง (เช่น example.com)</string>
-    <string name="copied_to_clipboard">คัดลอกไปยังคลิปบอร์ดแล้ว</string>
+    <string name="contact_desc">ติดต่อผู้พัฒนาเพื่อเพิ่มฟีเจอร์ใหม่ใน Apex</string>
+    <string name="links_issue_tracker">ตัวติดตามปัญหาของ Apex</string>
     <string name="clear_history">ล้างประวัติ</string>
-    <string name="no_qr_found_in_image">ไม่พบคิวอาร์โค้ดในภาพที่เลือก</string>
-    <string name="copy">คัดลอก</string>
-    <string name="destination">ปลายทาง</string>
-    <string name="source">ต้นทาง</string>
-    <string name="generate_qr_for">สร้างคิวอาร์โค้ดสำหรับ...</string>
-    <string name="enter_text_or_url">ป้อนข้อความหรือ URL</string>
-    <string name="enter_text_above_to_generate">ป้อนข้อความด้านบนเพื่อสร้าง</string>
-    <string name="save_qr_code">บันทึกคิวอาร์โค้ด</string>
-    <string name="url_placeholder">http://example.com</string>
     <string name="contact_developer">ติดต่อผู้พัฒนา</string>
     <string name="contact_developer_confirm">คุณต้องการเปิด Gmail เพื่อติดต่อผู้พัฒนาหรือไม่?</string>
     <string name="github_stars">ดาว GitHub</string>
     <string name="github_stars_desc">สนับสนุนแอปนี้ด้วยการให้ดาวบน GitHub</string>
     <string name="package_name">ชื่อแพ็กเกจ</string>
-    <string name="unshorten">ยกเลิกการย่อ URL</string>
-    <string name="disclaimer_text">เราให้บริการแอปนี้ \"ตามสภาพ\" หมายความว่าเราพยายามอย่างเต็มที่เพื่อให้บริการทำงานอย่างราบรื่น แต่เราไม่สามารถรับประกันได้ว่าจะสมบูรณ์แบบหรือไม่มีข้อผิดพลาดเสมอไป การใช้แอปนี้แสดงว่าคุณยินยอมและเข้าใจว่าคุณกำลังใช้งานด้วยความเสี่ยงของคุณเอง</string>
     <string name="privacy_policy">นโยบายความเป็นส่วนตัว</string>
-    <string name="view_licenses">ดูใบอนุญาต</string>
-    <string name="licenses">ใบอนุญาต</string>
     <string name="done">เสร็จสิ้น</string>
     <string name="downloading">กำลังดาวน์โหลด...</string>
     <string name="downloaded_successfully">ดาวน์โหลดสำเร็จแล้ว</string>
@@ -258,37 +97,18 @@
     <string name="early_access">การเข้าถึงก่อนใคร</string>
     <string name="pre_release_desc">ติดตั้งเวอร์ชันทดสอบล่วงหน้าเพื่อลองใช้ฟีเจอร์และการเปลี่ยนแปลงใหม่ๆ\n\nเวอร์ชันเหล่านี้อาจมีความไม่เสถียร ดังนั้นโปรดอย่าลังเลที่จะส่งข้อเสนอแนะหากพบปัญหาเพื่อช่วยเราปรับปรุงแอป</string>
     <string name="update_directory">ไดเรกทอรีอัปเดต</string>
-
-    
-    <!-- Navigation Tabs & Toasts -->
     <string name="nav_stop">หยุด</string>
     <string name="nav_clean">ล้าง</string>
     <string name="nav_apps">แอป</string>
     <string name="nav_menu">เมนู</string>
     <string name="toast_all_cache_cleaned">All cache items are already cleaned (0 KB)</string>
     <string name="toast_all_bg_apps_stopped">All background apps are already stopped</string>
-    <string name="toast_selected_apps_no_cache">Selected apps have no cache items (0 KB)</string>
-
-    <!-- AppsScreen Filter & Sort -->
-    <string name="app_filter_all">แอป</string>
-    <string name="app_filter_user">แอป</string>
-    <string name="app_filter_system">แอป</string>
-    <string name="app_sort_by_name">By Name</string>
-    <string name="app_sort_by_date">By Date</string>
-    <string name="app_sort_by_size">By App Size</string>
     <string name="apps_screen_title">แอป</string>
     <string name="apps_listed_count">%1$d apps listed</string>
-    <string name="cd_filter_apps">Filter Apps</string>
-    <string name="cd_sort_apps">Sort Apps</string>
     <string name="apps_no_apps_found">No apps found for this filter</string>
     <string name="cd_clear_selection">Clear Selection</string>
-    <string name="apps_selected_count">Selected: %1$d</string>
-    <string name="cd_clean_selected_apps">Clean Selected Apps</string>
-    <string name="cd_selected">Selected</string>
     <string name="app_size_prefix">Size: %1$s</string>
     <string name="cd_go_to_details">Go to Details</string>
-
-    <!-- App Detail Screen Strings -->
     <string name="app_detail_version">Version: %1$s</string>
     <string name="app_detail_apk_size">Apk size</string>
     <string name="app_detail_install_date">Install date</string>
@@ -300,15 +120,9 @@
     <string name="app_detail_app_info">APP INFO</string>
     <string name="toast_cannot_launch_app">Cannot launch this application</string>
     <string name="toast_cannot_open_store">Cannot open store page</string>
-
-    <!-- Speed & Performance Strings -->
     <string name="performance_and_speed_title">Performance &amp; Speed</string>
-
-    <!-- Stop Process Strings -->
     <string name="stop_process_title">Stop process</string>
     <string name="force_stop_mode_title">Force stop Mode</string>
-
-    <!-- Clean Process Strings -->
     <string name="clean_process_title">Clean process</string>
     <string name="cleaning_mode_title">Cleaning mode</string>
     <string name="cleaning_mode_manual">Manual</string>
@@ -316,8 +130,6 @@
     <string name="cleaning_mode_ask_each_time">Ask each time</string>
     <string name="ignore_tiny_cache_title">Ignore Tiny Cache</string>
     <string name="ignore_tiny_cache_desc">Eliminate all apps that have below 3 MB Cache</string>
-
-    <!-- StopScreen Strings -->
     <string name="stop_title">หยุด</string>
     <string name="stop_history_icon_desc">History</string>
     <string name="stop_gauge_apps">APPS</string>
@@ -340,15 +152,10 @@
     <string name="stop_dialog_close">CLOSE</string>
     <string name="stop_dialog_running_apps_title">Running Apps (%1$d)</string>
     <string name="stop_dialog_no_running_apps">No active running background apps.</string>
-
-    <!-- CleanScreen Strings -->
     <string name="clean_title">ล้าง</string>
     <string name="clean_history_icon_desc">History</string>
-    <string name="clean_gauge_unit_mb">MB</string>
     <string name="clean_gauge_system_cleaned">System cleaned</string>
     <string name="clean_gauge_can_be_cleared">Can be cleared</string>
-    <string name="clean_gauge_zero_mb">0 MB</string>
-    <string name="clean_gauge_current_mb">%1$s MB</string>
     <string name="clean_stat_total">Total</string>
     <string name="clean_stat_used">Used</string>
     <string name="clean_stat_cache">Cache</string>
@@ -365,8 +172,6 @@
     <string name="clean_dialog_live_cache_title">Live Cache Monitor</string>
     <string name="clean_dialog_live_cache_desc">Live cache size: %1$s. Scanned in real-time.</string>
     <string name="clean_dialog_ok">OK</string>
-
-    <!-- Sub-screens Extracted Strings -->
     <string name="cd_back">Back</string>
     <string name="cd_broom_icon">Broom Icon</string>
     <string name="cd_whitelist_icon">Whitelist Icon</string>
@@ -377,15 +182,13 @@
     <string name="cd_accessibility_icon">Accessibility API Icon</string>
     <string name="cd_success_icon">Success Icon</string>
     <string name="cd_usage_access_icon">Usage Access Icon</string>
-    <string name="cd_blueiris_app_icon">BlueIris App Icon</string>
+    <string name="cd_apex_app_icon">Apex App Icon</string>
     <string name="cd_notifications_icon">Notifications Icon</string>
     <string name="cd_checkmark_icon">Checkmark Icon</string>
-
     <string name="analyze_screen_title">วิเคราะห์</string>
     <string name="analyze_cache_apps_count">Cache (%1$d Apps)</string>
     <string name="analyze_no_cache_found">No cache items found</string>
     <string name="analyze_clear_button">เริ่มการล้าง</string>
-
     <string name="whitelist_title">ไวท์ลิสต์</string>
     <string name="whitelist_empty_avoid_stop">Add an app to avoid\nforce stopping</string>
     <string name="whitelist_empty_avoid_clean">Add an app to avoid\ncache cleaning</string>
@@ -394,10 +197,8 @@
     <string name="whitelist_dialog_all_apps_added">All apps are already in the whitelist.</string>
     <string name="whitelist_dialog_add_btn">Add</string>
     <string name="whitelist_dialog_add_count_btn">Add (%1$d)</string>
-
     <string name="history_title">ประวัติ</string>
     <string name="history_today_stopped">Today Stopped</string>
-    <string name="history_no_apps_stopped_today">No apps stopped today</string>
     <string name="history_today_cleared">Today Cleared</string>
     <string name="history_period_today">Today</string>
     <string name="history_period_yesterday">Yesterday</string>
@@ -413,32 +214,26 @@
     <string name="history_dialog_clear_stop_msg">Are you sure you want to clear all stop history records?</string>
     <string name="history_stop_count_singular">%1$d time</string>
     <string name="history_stop_count_plural">%1$d times</string>
-
     <string name="done_count_apps_singular">1 App</string>
     <string name="done_count_apps_plural">%1$d Apps</string>
     <string name="done_stopped_subtitle">Stopped: %1$s</string>
     <string name="done_cleaned_subtitle">Cleaned: %1$s</string>
     <string name="done_button">เสร็จสิ้น</string>
-
     <string name="permission_title">Permission</string>
     <string name="accessibility_permission_title">Accessibility Service API</string>
     <string name="accessibility_permission_desc1">This app uses this API to automate the clear-cache operation. The service temporarily accesses window content, including interactive windows, to locate specific buttons in the system settings and may perform automated gestures such as clicks or scrolling to complete the process.</string>
     <string name="accessibility_permission_desc2">Data accessed through this API will never be collected or shared.</string>
     <string name="btn_cancel_uppercase">CANCEL</string>
     <string name="btn_continue_uppercase">CONTINUE</string>
-
     <string name="permission_success_title">Successful!</string>
     <string name="permission_success_desc1">Congratulations, you are ready to go.</string>
     <string name="permission_success_desc2">We don\'t collect any of your personal or personally identifiable information.</string>
-
     <string name="usage_access_permission_title">Usage Access Permission</string>
     <string name="usage_access_permission_desc1">This app requires the Usage Data Access permission to detect the size of app, data and cache of the installed apps.</string>
-    <string name="usage_access_permission_desc2">To enable it, click the button below and allow permission for BlueIris.</string>
-
-    <string name="onboarding_privacy_note">By proceeding, you confirm you accept\nBlueIris\'s %1$s</string>
+    <string name="usage_access_permission_desc2">To enable it, click the button below and allow permission for Apex.</string>
     <string name="btn_next">NEXT</string>
     <string name="btn_get_started">GET STARTED</string>
-    <string name="onboarding_page1_desc">Clear cache of all apps and get more available storage space with the help of BlueIris.</string>
+    <string name="onboarding_page1_desc">Clear cache of all apps and get more available storage space with the help of Apex.</string>
     <string name="onboarding_page2_title">Cache Notifications</string>
     <string name="onboarding_page2_desc">Get notification whenever you have too much cache. This will help you to track cache in notification.</string>
     <string name="onboarding_page3_title">That’s all!</string>

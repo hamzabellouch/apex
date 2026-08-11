@@ -1,26 +1,18 @@
+<?xml version='1.0' encoding='utf-8'?>
 <resources>
-    <string name="app_name">BlueIris</string>
+    <string name="app_name">إيبكس</string>
     <string name="accessibility_service_description">تُؤتمت هذه الخدمة التنقل في إعدادات تطبيقات Android لمسح ذاكرة التخزين المؤقت وإيقاف التطبيقات في الخلفية بأمان وكفاءة.</string>
-    <string name="clear_cache">مسح ذاكرة التخزين المؤقت</string>
-    <string name="storage">التخزين</string>
-    <string name="home">الرئيسية</string>
     <string name="apps">التطبيقات</string>
     <string name="analyze">تحليل</string>
-    <string name="permission_required">الإذن مطلوب</string>
-    <string name="cleaning_cache">جاري مسح ذاكرة التخزين المؤقت…</string>
     <string name="settings">الإعدادات</string>
-    <string name="download_settings_desc">عام</string>
     <string name="general_settings_desc">تفضيلات وخيارات التطبيق</string>
     <string name="download">تنزيل</string>
-    <string name="url_empty">لا يمكن أن يكون الرابط فارغاً</string>
-    <string name="permission_denied">تم رفض الإذن</string>
     <string name="general_settings">عام</string>
     <string name="boost_mode">وضع التوربو (Turbo)</string>
     <string name="boost_mode_desc">تسريع عملية الإيقاف والتنظيف التلقائي للأجهزة الحديثة</string>
     <string name="custom_speed_mode">سرعة مخصصة</string>
     <string name="custom_speed_mode_desc">تفعيل تكوين التوقيت المخصص لعمليات الإيقاف والتنظيف</string>
     <string name="custom_speed_settings">تعديل السرعات المخصصة</string>
-    <string name="custom_speed_settings_desc">تعديل التأخيرات والتوقيتات لعمليات الإيقاف والتنظيف بشكل مستقل</string>
     <string name="stop_section_title">توقيتات إيقاف التطبيقات (Stop)</string>
     <string name="clean_section_title">توقيتات تنظيف الكاش (Clean)</string>
     <string name="scan_delay_title">معدل الفحص الدائري</string>
@@ -30,157 +22,42 @@
     <string name="step_pause_title">تأخير التصفح داخل التخزين</string>
     <string name="restore_defaults">استعادة القيم الافتراضية</string>
     <string name="language">لغة العرض</string>
-    <string name="language_settings">ضبط لغة العرض</string>
-    <string name="task_running">هناك مهمة تنزيل قيد التشغيل بالفعل</string>
-    <string name="paste_msg">لصق الرابط</string>
-    <string name="paste_fail_msg">تعذر مطابقة الرابط في الحافظة</string>
-    <string name="delete_info">إزالة؟</string>
-    <string name="delete_info_msg">هل تريد إزالة \"%1$s\" من سجل التنزيل نهائياً؟</string>
     <string name="confirm">تأكيد</string>
     <string name="dismiss">إلغاء</string>
-    <string name="downloads_history">التنزيلات</string>
-    <string name="audio">صوت</string>
-    <string name="link_copied">تم نسخ الرابط إلى الحافظة</string>
-    <string name="open_url">فتح الرابط</string>
-    <string name="remove">إزالة</string>
-    <string name="delete_file">حذف الملف</string>
     <string name="about">حول التطبيق</string>
-    <string name="about_page">الإصدار، الملاحظات، التحديث التلقائي</string>
     <string name="back">رجوع</string>
     <string name="version">الإصدار</string>
     <string name="release_desc">البحث عن سجل التغييرات والإصدارات الجديدة</string>
     <string name="release">أحدث إصدار</string>
     <string name="readme_desc">التحقق من مستودع GitHub وملف README</string>
     <string name="readme" translatable="false">README</string>
-    <string name="video">فيديو</string>
-    <string name="image">صورة</string>
-    <string name="image_format">صيغة الصورة</string>
-    <string name="image_format_best">الأفضل (الأصلي)</string>
-    <string name="image_format_jpg">JPEG (.jpg)</string>
-    <string name="image_format_png">PNG (.png)</string>
-    <string name="image_format_webp">WebP (.webp)</string>
-    <string name="image_quality">جودة الصورة</string>
-    <string name="image_quality_best">أفضل جودة (الأصلي-100%)</string>
-    <string name="image_quality_high">عالية (85%)</string>
-    <string name="image_quality_medium">متوسطة (70%)</string>
-    <string name="image_quality_low">منخفضة (50%)</string>
-    <string name="image_format_desc">صيغة الإخراج المفضلة للصور المنزلة</string>
-    <string name="image_preset_desc">الصيغة: %1$s، الجودة: %2$s</string>
-    <string name="video_image_tab">فيديو / صورة</string>
-    <string name="checked">تم الفحص</string>
     <string name="credits">الشكر والتقدير</string>
     <string name="credits_desc">الحقوق والبرمجيات الحرة</string>
-    <string name="edit">تعديل</string>
-    <string name="start_execute">بدء تنفيذ الأمر</string>
-    <string name="advanced_settings">متقدم</string>
-    <string name="print_details">مخرجات تفصيلية</string>
-    <string name="print_details_desc">طباعة رسائل تفصيلية أثناء التنزيل</string>
     <string name="display">العرض</string>
     <string name="display_settings">المظهر الداكن، الألوان الديناميكية، اللغات</string>
     <string name="dark_theme">المظهر الداكن</string>
     <string name="follow_system">النظام</string>
-    <string name="follow_system_desc">اتباع إعدادات مظهر النظام</string>
-    <string name="dark_theme_on_desc">استخدام المظهر الداكن دائماً</string>
-    <string name="dark_theme_off_desc">استخدام المظهر الفاتح دائماً</string>
     <string name="on">مفعل</string>
     <string name="off">معطل</string>
     <string name="cancel">إلغاء</string>
-    <string name="settings_before_download">الإعداد قبل التنزيل</string>
-    <string name="settings_before_download_desc">ضبط التفضيلات قبل التنزيل</string>
-    <string name="settings_before_download_text">ضبط هذا التنزيل</string>
-    <string name="error_copied">تم نسخ تقرير الخطأ إلى الحافظة</string>
-    <string name="thumbnail">صورة مصغرة</string>
     <string name="paste">لصق</string>
-    <string name="edit_template_desc">سيتم إضافة مسار الإخراج والرابط بواسطة التطبيق.</string>
-    <string name="not_convert">بدون تحويل</string>
-    <string name="convert_to">تحويل إلى %1$s</string>
-    <string name="format">الصيغة</string>
-    <string name="best_quality">أفضل جودة</string>
-    <string name="best_audio_quality">أفضل جودة صوت</string>
-    <string name="not_specified">غير محدد (الافتراضي)</string>
-    <string name="preferred_format_desc">الصيغة المفضلة عند توفر عدة صيغ</string>
-    <string name="start_download">تنزيل</string>
     <string name="close">إغلاق</string>
-    <string name="close_never_show_again">عدم الإظهار مرة أخرى</string>
-    <string name="user_guide">دليل المستخدم</string>
-    <string name="open_settings">فتح الإعدادات</string>
-    <string name="paste_desc">انقر على \"لصق\" للحصول على رابط الفيديو من الحافظة.</string>
-    <string name="download_desc">ثم انقر على \"تنزيل\" بعد ضبط إعداداته.</string>
-    <string name="defaults">الافتراضي</string>
-    <string name="channel_name">التنزيل</string>
-    <string name="channel_description">الإشعارات الخاصة بالملفات المنزلة والتقدم</string>
-    <string name="download_finish_notification">اكتمل التنزيل. انقر للفتح.</string>
-    <string name="execute_command_notification">جاري تشغيل الأوامر المخصصة…</string>
-    <string name="battery_settings_desc">يرجى ضبط استخدام البطارية لهذا التطبيق على \"غير مقيد\" في إعدادات النظام للتنزيل في الخلفية.</string>
-    <string name="options">الخيارات</string>
-    <string name="additional_settings">إعدادات إضافية</string>
-    <string name="share_fail_msg">تعذر مطابقة الرابط من المحتوى المشارك</string>
-    <string name="share_success_msg">جاري قراءة رابط الفيديو من المحتوى المشارك…</string>
-    <string name="show_more_actions">إظهار المزيد من الإجراءات</string>
-    <string name="download_notification">إشعارات التنزيل</string>
-    <string name="download_notification_desc">الإشعارات الخاصة بالملفات المنزلة والتقدم</string>
-    <string name="fetching_playlist_info">جاري جلب معلومات قائمة التشغيل…</string>
-    <string name="from">البداية</string>
     <string name="to">النهاية</string>
-    <string name="invalid_index_range">نطاق الفهرس غير صالح</string>
-    <string name="playlist_indicator_text">جاري تنزيل قائمة التشغيل (%1$d/%2$d)…</string>
-    <string name="audio_directory">مجلد الصوت</string>
-    <string name="download_directory">دليل التنزيل</string>
-    <string name="download_directory_desc">اختر مكان حفظ الملفات</string>
-    <string name="subdirectory">الحفظ في مجلد فرعي</string>
-    <string name="subdirectory_desc">حفظ الملفات في مجلدات مسمّاة حسب الحقول المعنية</string>
-    <string name="permission_issue">مشكلة في إذن التخزين</string>
-    <string name="permission_issue_desc">المجلدات خارج Download/ و Documents/ غير مدعومة</string>
-    <string name="battery_configuration">تكوين البطارية</string>
-    <string name="battery_configuration_desc">تجاهل تحسين البطارية لهذا التطبيق للتنزيل في الخلفية</string>
-    <string name="service_title">BlueIris يقوم بالتنزيل…</string>
-    <string name="unknown_error">خطأ غير معروف</string>
     <string name="translate">ترجمة</string>
     <string name="translate_desc">المساعدة في ترجمة هذا التطبيق على Hosted Weblate</string>
-    <string name="prefix">البادئة</string>
-    <string name="new_template">قالب جديد</string>
-    <string name="template_label">التسمية</string>
-    <string name="remove_template">إزالة؟</string>
-    <string name="remove_template_desc">هل تريد إزالة \"%1$s\" من قوالب الأوامر نهائياً؟</string>
-    <string name="template_selection">اختيار القالب</string>
-    <string name="downloading_indicator_text">التنزيل قيد التقدم…</string>
-    <string name="task_canceled">تم إلغاء مهمة التنزيل</string>
     <string name="github_issue">مشكلة في GitHub</string>
     <string name="github_issue_desc">تقديم إبلاغ عن خطأ أو طلب ميزة جديدة</string>
     <string name="info_copied">تم نسخ المعلومات إلى الحافظة</string>
     <string name="enable_auto_update">تفعيل التحديث التلقائي</string>
     <string name="update_channel">قناة التحديث</string>
-    <string name="update_channel_desc">تثبيت الإصدارات التجريبية للمعاينة المسبقة للميزات والتغييرات الجديدة.\n\nقد تكون هناك بعض عدم الاستقرار في هذه الإصدارات، لذا يرجى عدم التردد في تقديم ملاحظاتك إذا واجهت أي مشاكل لمساعدتنا في تحسين التطبيق للمستقبل.</string>
-    <string name="status_enqueued">في الانتظار</string>
-    <string name="status_completed">مكتمل</string>
-    <string name="status_downloading">جاري التنزيل</string>
-    <string name="status_canceled">ملغى</string>
-    <string name="open_file">فتح الملف</string>
-    <string name="restart">إعادة التشغيل</string>
-    <string name="status_error">خطأ</string>
-    <string name="copy_link">نسخ الرابط</string>
-    <string name="copy_error_report">نسخ التقرير</string>
-    <string name="export_to_clipboard">تصدير إلى الحافظة</string>
-    <string name="import_from_clipboard">استيراد من الحافظة</string>
-    <string name="template_exported">تم تصدير %1$d قالب(قوالب)</string>
-    <string name="template_imported">تم استيراد %1$d قالب(قوالب)</string>
-    <string name="download_task_count">%1$d مهمة(مهام) تنزيل</string>
-    <string name="recently_added">أضيفت مؤخراً</string>
-    <string name="delete_multiple_items_msg">هل تريد إزالة %1$d عنصر(عناصر) من سجل التنزيل نهائياً؟</string>
     <string name="check_for_updates">التحقق من وجود تحديثات</string>
     <string name="check_for_updates_desc">التحقق تلقائياً من وجود أحدث إصدار على GitHub</string>
     <string name="app_up_to_date">الإصدار الحالي محدث</string>
     <string name="app_update_failed">فشل التحديث إلى أحدث إصدار</string>
     <string name="update">تحديث</string>
-    <string name="clear_temp_files">مسح الملفات المؤقتة</string>
-    <string name="clear_temp_files_desc">حذف جميع الملفات المؤقتة من المجلد المؤقت</string>
-    <string name="clear_temp_files_count">تم حذف %1$d ملف(ملفات) مؤقتة</string>
     <string name="telegram_channel">تليجرام</string>
-    <string name="matrix_space">ماتريكس</string>
     <string name="sponsor">دعم المشروع</string>
-    <string name="sponsor_desc">دعم هذا التطبيق عن طريق الرعاية على GitHub</string>
-    <string name="sponsor_msg">سيكون تطبيق BlueIris دائماً مجانياً ومفتوح المصدر في المستقبل للجميع. إذا أعجبك، يرجى النظر في رعايتي على GitHub!</string>
-    <string name="feedback">الآراء والملاحظات</string>
+    <string name="sponsor_msg">سيكون تطبيق إيبكس دائماً مجانياً ومفتوح المصدر في المستقبل للجميع. إذا أعجبك، يرجى النظر في رعايتي على GitHub!</string>
     <string name="sponsors">الداعمون</string>
     <string name="instagram">إنستغرام</string>
     <string name="instagram_desc">تابع المطور على إنستغرام لمزيد من التحديثات</string>
@@ -205,63 +82,26 @@
     <string name="dynamic_color">اللون الديناميكي</string>
     <string name="dynamic_color_desc">تطبيق ألوان خلفية الشاشة على مظهر التطبيق</string>
     <string name="website">الموقع الإلكتروني</string>
-    <string name="look_and_feel"><![CDATA[المظهر والحس الفني]]></string>
-    <string name="interface_and_interaction"><![CDATA[الواجهة والتفاعل]]></string>
+    <string name="look_and_feel">المظهر والحس الفني</string>
     <string name="auto_update">التحديث التلقائي</string>
     <string name="suggested">المقترحة</string>
     <string name="all_languages">كل اللغات</string>
     <string name="trouble_shooting">استكشاف الأخطاء وإصلاحها</string>
     <string name="issue_tracker">متتبع المشاكل</string>
-    <string name="trouble_shooting_desc">إصلاح الأخطاء الشائعة والتحقق من المشاكل المعروفة</string>
     <string name="issue_tracker_hint">هل واجهت خطأً؟ قبل الإبلاغ عن مشكلة جديدة، يرجى البحث في متتبع المشاكل الخاص بنا. تم توثيق وإصلاح العديد من المشاكل الشائعة هناك.</string>
-    <string name="short_url">رابط قصير</string>
-    <string name="security">الأمان</string>
-    <string name="qr_code">رمز QR</string>
     <string name="menu">القائمة</string>
     <string name="menu_options_listed_count">%1$d خيارات في القائمة</string>
-    <string name="scan_qr_code">مسح رمز QR</string>
-    <string name="qr_code_generator">مولد رمز QR</string>
-    <string name="costume_qr_code">رمز QR مخصص</string>
     <string name="scan">مسح</string>
-    <string name="generate">إنشاء</string>
-    <string name="costume">مخصص</string>
-    <string name="scan_history">سجل المسح</string>
-    <string name="no_scan_history_yet">لا يوجد سجل مسح حتى الآن</string>
-    <string name="scan_code">مسح الرمز</string>
-    <string name="scanned_by_links">تم المسح بواسطة BlueIris</string>
-    <string name="scan_qr_instruction">قم بمسح رموز QR باستخدام الكاميرا أو الاستيراد من المعرض</string>
-    <string name="scan_now">إمسح الآن</string>
-    <string name="scanned_content">المحتوى الممسوح</string>
-    <string name="feature_currently_unavailable">هذه الميزة غير متاحة حالياً.</string>
     <string name="contact">الاتصال</string>
-    <string name="contact_desc">تواصل مع المطور لإضافة ميزات جديدة في BlueIris</string>
-    <string name="links_issue_tracker">متتبع مشاكل BlueIris</string>
-    <string name="enter_url_error">يرجى إدخال رابط URL</string>
-    <string name="invalid_url_format">تدوين URL غير صالح. يرجى إدخال عنوان ويب صالح (مثال: example.com).</string>
-    <string name="no_internet_error">لا يوجد اتصال بالإنترنت. يرجى التحقق من الشبكة والمحاولة مرة أخرى.</string>
-    <string name="cannot_resolve_domain">تعذر التعرف على النطاق. يرجى التحقق من عنوان URL.</string>
-    <string name="connection_timeout">انتهت مهلة الاتصال. يرجى المحاولة مرة أخرى.</string>
-    <string name="copied_to_clipboard">تم النسخ إلى الحافظة</string>
+    <string name="contact_desc">تواصل مع المطور لإضافة ميزات جديدة في إيبكس</string>
+    <string name="links_issue_tracker">متتبع مشاكل إيبكس</string>
     <string name="clear_history">مسح السجل</string>
-    <string name="no_qr_found_in_image">لم يتم العثور على رمز QR في الصورة المحددة</string>
-    <string name="copy">نسخ</string>
-    <string name="destination">الوجهة</string>
-    <string name="source">المصدر</string>
-    <string name="generate_qr_for">إنشاء رمز QR لـ...</string>
-    <string name="enter_text_or_url">أدخل النص أو رابط URL</string>
-    <string name="enter_text_above_to_generate">أدخل النص أعلاه للإنشاء</string>
-    <string name="save_qr_code">حفظ رمز QR</string>
-    <string name="url_placeholder">http://example.com</string>
     <string name="contact_developer">الاتصال بالمطور</string>
     <string name="contact_developer_confirm">هل تريد فتح Gmail للاتصال بالمطور؟</string>
     <string name="github_stars">نجوم GitHub</string>
     <string name="github_stars_desc">دعم هذا التطبيق بإضافة نجمة على GitHub</string>
     <string name="package_name">اسم الحزمة</string>
-    <string name="unshorten">إزالة الاختصار</string>
-    <string name="disclaimer_text">نقدم هذا التطبيق \"كما هو\"، مما يعني أننا نبذل قصارى جهدنا للحفاظ على سير الأمور بسلاسة، ولكن لا يمكننا تقديم وعود بأنه سيكون دائماً مثالياً أو خالياً من الأخطاء. باستخدام التطبيق، فإنك توافق على ذلك وتفهم أنك تستخدمه على مسؤوليتك الخاصة.</string>
     <string name="privacy_policy">سياسة الخصوصية</string>
-    <string name="view_licenses">عرض التراخيص</string>
-    <string name="licenses">التراخيص</string>
     <string name="done">تم</string>
     <string name="downloading">جاري التنزيل...</string>
     <string name="downloaded_successfully">تم التنزيل بنجاح</string>
@@ -271,42 +111,19 @@
     <string name="preview">معاينة</string>
     <string name="early_access">الوصول المبكر</string>
     <string name="pre_release_desc">تثبيت الإصدارات التجريبية للمعاينة المسبقة للميزات والتغييرات الجديدة.\n\nقد تكون هناك بعض عدم الاستقرار في هذه الإصدارات، لذا يرجى عدم التردد في تقديم ملاحظاتك إذا واجهت أي مشاكل لمساعدتنا في تحسين التطبيق للمستقبل.</string>
-    <string name="download_error_msg">فشل التنزيل</string>
-    <string name="download_start_msg">بدأ التنزيل</string>
-    <string name="download_success_msg">نجح التنزيل</string>
-    <string name="reset_failed">فشلت إعادة الضبط</string>
-    <string name="reset_success">نجحت إعادة الضبط</string>
     <string name="update_directory">دليل التحديث</string>
-
-    <!-- Navigation Tabs & Toasts -->
     <string name="nav_stop">إيقاف</string>
     <string name="nav_clean">تنظيف</string>
     <string name="nav_apps">التطبيقات</string>
     <string name="nav_menu">القائمة</string>
     <string name="toast_all_cache_cleaned">جميع ملفات التخزين المؤقت منظفة بالفعل (0 ك.بايت)</string>
     <string name="toast_all_bg_apps_stopped">جميع تطبيقات الخلفية متوقفة بالفعل</string>
-    <string name="toast_selected_apps_no_cache">التطبيقات المحددة لا تحتوي على ملفات تخزين مؤقت (0 ك.بايت)</string>
-
-    <!-- AppsScreen Filter & Sort -->
-    <string name="app_filter_all">كل التطبيقات</string>
-    <string name="app_filter_user">تطبيقات المستخدم</string>
-    <string name="app_filter_system">تطبيقات النظام</string>
-    <string name="app_sort_by_name">حسب الاسم</string>
-    <string name="app_sort_by_date">حسب التاريخ</string>
-    <string name="app_sort_by_size">حسب حجم التطبيق</string>
     <string name="apps_screen_title">التطبيقات</string>
     <string name="apps_listed_count">%1$d تطبيق في القائمة</string>
-    <string name="cd_filter_apps">تصفية التطبيقات</string>
-    <string name="cd_sort_apps">ترتيب التطبيقات</string>
     <string name="apps_no_apps_found">لم يتم العثور على تطبيقات لهذا المرشح</string>
     <string name="cd_clear_selection">إلغاء التحديد</string>
-    <string name="apps_selected_count">تم تحديد: %1$d</string>
-    <string name="cd_clean_selected_apps">تنظيف التطبيقات المحددة</string>
-    <string name="cd_selected">محدد</string>
     <string name="app_size_prefix">الحجم: %1$s</string>
     <string name="cd_go_to_details">الانتقال إلى التفاصيل</string>
-
-    <!-- App Detail Screen Strings -->
     <string name="app_detail_version">الإصدار: %1$s</string>
     <string name="app_detail_apk_size">حجم الـ APK</string>
     <string name="app_detail_install_date">تاريخ التثبيت</string>
@@ -318,15 +135,9 @@
     <string name="app_detail_app_info">معلومات التطبيق</string>
     <string name="toast_cannot_launch_app">تعذر تشغيل هذا التطبيق</string>
     <string name="toast_cannot_open_store">تعذر فتح صفحة المتجر</string>
-
-    <!-- Speed & Performance Strings -->
     <string name="performance_and_speed_title">الأداء والسرعة</string>
-
-    <!-- Stop Process Strings -->
     <string name="stop_process_title">عملية الإيقاف</string>
     <string name="force_stop_mode_title">وضع الإيقاف الإجباري</string>
-
-    <!-- Clean Process Strings -->
     <string name="clean_process_title">عملية التنظيف</string>
     <string name="cleaning_mode_title">وضع التنظيف</string>
     <string name="cleaning_mode_manual">يدوي</string>
@@ -334,8 +145,6 @@
     <string name="cleaning_mode_ask_each_time">السؤال في كل مرة</string>
     <string name="ignore_tiny_cache_title">تجاهل التخزين المؤقت الصغير</string>
     <string name="ignore_tiny_cache_desc">استبعاد جميع التطبيقات التي يقل التخزين المؤقت فيها عن 3 ميغابايت</string>
-
-    <!-- StopScreen Strings -->
     <string name="stop_title">إيقاف</string>
     <string name="stop_history_icon_desc">السجل</string>
     <string name="stop_gauge_apps">تطبيقات</string>
@@ -358,15 +167,10 @@
     <string name="stop_dialog_close">إغلاق</string>
     <string name="stop_dialog_running_apps_title">التطبيقات قيد التشغيل (%1$d)</string>
     <string name="stop_dialog_no_running_apps">لا توجد تطبيقات نشطة تعمل في الخلفية.</string>
-
-    <!-- CleanScreen Strings -->
     <string name="clean_title">تنظيف</string>
     <string name="clean_history_icon_desc">السجل</string>
-    <string name="clean_gauge_unit_mb">ميجابايت</string>
     <string name="clean_gauge_system_cleaned">النظام نظيف</string>
     <string name="clean_gauge_can_be_cleared">يمكن تنظيفه</string>
-    <string name="clean_gauge_zero_mb">0 ميجابايت</string>
-    <string name="clean_gauge_current_mb">%1$s ميجابايت</string>
     <string name="clean_stat_total">الإجمالي</string>
     <string name="clean_stat_used">المستخدم</string>
     <string name="clean_stat_cache">التخزين المؤقت</string>
@@ -383,8 +187,6 @@
     <string name="clean_dialog_live_cache_title">مراقب التخزين المؤقت المباشر</string>
     <string name="clean_dialog_live_cache_desc">حجم التخزين المؤقت المباشر: %1$s. تم الفحص في الوقت الفعلي.</string>
     <string name="clean_dialog_ok">موافق</string>
-
-    <!-- Sub-screens Extracted Strings -->
     <string name="cd_back">رجوع</string>
     <string name="cd_broom_icon">رمز المكنسة</string>
     <string name="cd_whitelist_icon">رمز القائمة البيضاء</string>
@@ -395,15 +197,13 @@
     <string name="cd_accessibility_icon">رمز إمكانية الوصول</string>
     <string name="cd_success_icon">رمز النجاح</string>
     <string name="cd_usage_access_icon">رمز الوصول لبيانات الاستخدام</string>
-    <string name="cd_blueiris_app_icon">رمز تطبيق BlueIris</string>
+    <string name="cd_apex_app_icon">رمز تطبيق إيبكس</string>
     <string name="cd_notifications_icon">رمز الإشعارات</string>
     <string name="cd_checkmark_icon">رمز علامة الصح</string>
-
     <string name="analyze_screen_title">تحليل</string>
     <string name="analyze_cache_apps_count">ذاكرة التخزين المؤقت (%1$d تطبيق)</string>
     <string name="analyze_no_cache_found">لم يتم العثور على عناصر في ذاكرة التخزين المؤقت</string>
     <string name="analyze_clear_button">تنظيف</string>
-
     <string name="whitelist_title">القائمة البيضاء</string>
     <string name="whitelist_empty_avoid_stop">أضف تطبيقًا لتجنب\nالإيقاف الإجباري</string>
     <string name="whitelist_empty_avoid_clean">أضف تطبيقًا لتجنب\nتنظيف ذاكرة التخزين المؤقت</string>
@@ -413,7 +213,6 @@
     <string name="whitelist_dialog_add_btn">إضافة</string>
     <string name="whitelist_dialog_add_count_btn">إضافة (%1$d)</string>
     <string name="search_apps">البحث عن تطبيق…</string>
-
     <string name="filter_and_sort">التصفية والفرز</string>
     <string name="show_system_apps">إظهار تطبيقات النظام</string>
     <string name="filter_by">التصفية حسب</string>
@@ -425,12 +224,9 @@
     <string name="sort_by_size">الحجم</string>
     <string name="sort_by_last_used">آخر استخدام</string>
     <string name="sort_by_last_updated">آخر تحديث</string>
-    <string name="btn_ok">موافق</string>
-
     <string name="history_title">السجل</string>
     <string name="history_today_stopped">تم إيقافها اليوم</string>
     <string name="history_stop_unit">Apps</string>
-    <string name="history_no_apps_stopped_today">لم يتم إيقاف أي تطبيقات اليوم</string>
     <string name="history_today_cleared">تم تنظيفها اليوم</string>
     <string name="history_period_today">اليوم</string>
     <string name="history_period_yesterday">الأمس</string>
@@ -449,13 +245,11 @@
     <string name="history_dialog_clear_stop_msg">هل أنت تأكد من أنك تريد مسح جميع سجلات عمليات الإيقاف؟</string>
     <string name="history_stop_count_singular">مرة واحدة</string>
     <string name="history_stop_count_plural">%1$d مرات</string>
-
     <string name="done_count_apps_singular">تطبيق واحد</string>
     <string name="done_count_apps_plural">%1$d تطبيقات</string>
     <string name="done_stopped_subtitle">تم الإيقاف: %1$s</string>
     <string name="done_cleaned_subtitle">تم التنظيف: %1$s</string>
     <string name="done_button">تم</string>
-
     <string name="permission_title">الأذونات</string>
     <string name="accessibility_permission_title">خدمة إمكانية الوصول (API)</string>
     <string name="accessibility_permission_desc1">يستخدم هذا التطبيق هذه الواجهة لأتمتة عملية مسح ذاكرة التخزين المؤقت. تصل الخدمة مؤقتًا إلى محتوى الشاشة، بما في ذلك النوافذ التفاعلية، لتحديد أزرار معينة في إعدادات النظام وقد تفرّض إيماءات آلية مثل النقرات أو التمرير لإكمال العملية.</string>
@@ -463,19 +257,15 @@
     <string name="accessibility_permission_desc2">لن يتم تجميع البيانات التي يتم الوصول إليها عبر هذه الواجهة أو مشاركتها بأي شكل من الأشكال.</string>
     <string name="btn_cancel_uppercase">إلغاء</string>
     <string name="btn_continue_uppercase">متابعة</string>
-
     <string name="permission_success_title">تم بنجاح!</string>
     <string name="permission_success_desc1">تهانينا، أنت جاهز للبدء الآن.</string>
     <string name="permission_success_desc2">نحن لا نجمع أيًا من معلوماتك الشخصية أو التعريفية على الإطلاق.</string>
-
     <string name="usage_access_permission_title">إذن الوصول إلى بيانات الاستخدام</string>
     <string name="usage_access_permission_desc1">يتطلب هذا التطبيق إذن الوصول إلى بيانات الاستخدام لاكتشاف حجم التطبيقات والبيانات وذاكرة التخزين المؤقت للتطبيقات المثبتة.</string>
-    <string name="usage_access_permission_desc2">لتفعيله، انقر فوق الزر أدناه وامنح الإذن لتطبيق BlueIris.</string>
-
-    <string name="onboarding_privacy_note">بالمتابعة، فإنك تؤكد موافقتك على\n%1$s الخاص بـ BlueIris</string>
+    <string name="usage_access_permission_desc2">لتفعيله، انقر فوق الزر أدناه وامنح الإذن لتطبيق إيبكس.</string>
     <string name="btn_next">التالي</string>
     <string name="btn_get_started">ابدأ الآن</string>
-    <string name="onboarding_page1_desc">قم بمسح ذاكرة التخزين المؤقت لجميع التطبيقات واحصل على مساحة تخزين إضافية بمساعدة BlueIris.</string>
+    <string name="onboarding_page1_desc">قم بمسح ذاكرة التخزين المؤقت لجميع التطبيقات واحصل على مساحة تخزين إضافية بمساعدة إيبكس.</string>
     <string name="onboarding_page2_title">إشعارات التخزين المؤقت</string>
     <string name="onboarding_page2_desc">احصل على إشعار عندما تتراكم ذاكرة التخزين المؤقت بشكل كبير. سيساعدك هذا على تتبع التخزين المؤقت عبر الإشعارات.</string>
     <string name="onboarding_page3_title">هذا كل شيء!</string>

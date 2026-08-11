@@ -1,176 +1,49 @@
-﻿<resources>
-    <string name="app_name">BlueIris</string>
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Apex</string>
     <string name="accessibility_service_description">Αυτή η υπηρεσία αυτοματοποιεί την πλοήγηση στις ρυθμίσεις εφαρμογών Android για την ασφαλή και αποτελεσματική εκκαθάριση της κρυφής μνήμης και τη διακοπή εφαρμογών παρασκηνίου.</string>
-    <string name="clear_cache">Εκκαθάριση κρυφής μνήμης</string>
-    <string name="storage">Αποθηκευτικός χώρος</string>
-    <string name="home">Αρχική</string>
     <string name="apps">Εφαρμογές</string>
     <string name="analyze">Ανάλυση</string>
-    <string name="permission_required">Απαιτείται άδεια</string>
-    <string name="cleaning_cache">Εκκαθάριση κρυφής μνήμης...</string>
     <string name="settings">Ρυθμίσεις</string>
-    <string name="download_settings_desc">General</string>
     <string name="download">Λήψη</string>
-    <string name="url_empty">Ο σύνδεσμος δεν μπορεί να είναι κενός</string>
-    <string name="reset_success">Επιτυχής αφαίρεση της εγκατεστημένης έκδοσης</string>
-    <string name="reset_failed">Αποτυχία αφαίρεσης της εγκατεστημένης έκδοσης</string>
-    <string name="permission_denied">Δεν δόθηκε άδεια</string>
-    <string name="download_success_msg">Η λήψη ολοκληρώθηκε</string>
-    <string name="download_error_msg">Δεν ήταν δυνατή η λήψη του αρχείου</string>
-    <string name="download_start_msg">Λήψη \"%1$s\"</string>
     <string name="general_settings">Γενικά</string>
     <string name="language">Γλώσσα εμφάνισης</string>
-    <string name="language_settings">Ορισμός γλώσσας εμφάνισης</string>
-    <string name="task_running">Μια υπάρχουσα εργασία λήψης εκτελείται ήδη</string>
-    <string name="paste_msg">Επικόλληση URL</string>
-    <string name="paste_fail_msg">Δεν ήταν δυνατή η αντιστοίχιση του URL στο πρόχειρο</string>
-    <string name="delete_info">Αφαίρεση;</string>
-    <string name="delete_info_msg">Οριστική αφαίρεση του \"%1$s\" από το ιστορικό λήψεών σας;</string>
     <string name="confirm">Επιβεβαίωση</string>
     <string name="dismiss">Ακύρωση</string>
-    <string name="downloads_history">Λήψεις</string>
-    <string name="audio">Ήχος</string>
-    <string name="link_copied">Ο σύνδεσμος αντιγράφηκε στο πρόχειρο</string>
-    <string name="open_url">Άνοιγμα συνδέσμου</string>
-    <string name="remove">Αφαίρεση</string>
-    <string name="delete_file">Διαγραφή αρχείου</string>
     <string name="about">Σχετικά</string>
-    <string name="about_page">Έκδοση, σχόλια, αυτόματη ενημέρωση</string>
     <string name="back">Πίσω</string>
     <string name="version">Έκδοση</string>
     <string name="release_desc">Αναζητήστε αρχεία αλλαγών και νέες εκδόσεις</string>
     <string name="release">Τελευταία έκδοση</string>
     <string name="readme_desc">Ελέγξτε το αποθετήριο GitHub και το README</string>
     <string name="readme" translatable="false">README</string>
-    <string name="video">Βίντεο</string>
-    <string name="image">Εικόνα</string>
-    <string name="image_format">Μορφή εικόνας</string>
-    <string name="image_format_best">Καλύτερη (πρωτότυπο)</string>
-    <string name="image_format_jpg">JPEG (.jpg)</string>
-    <string name="image_format_png">PNG (.png)</string>
-    <string name="image_format_webp">WebP (.webp)</string>
-    <string name="image_quality">Ποιότητα εικόνας</string>
-    <string name="image_quality_best">Καλύτερη ποιότητα (πρωτότυπο-100%)</string>
-    <string name="image_quality_high">Υψηλή (85%)</string>
-    <string name="image_quality_medium">Μεσαία (70%)</string>
-    <string name="image_quality_low">Χαμηλή (50%)</string>
-    <string name="image_format_desc">Προτιμώμενη μορφή εξόδου για τις ληφθείσες εικόνες</string>
-    <string name="image_preset_desc">Μορφή: %1$s, Ποιότητα: %2$s</string>
-    <string name="video_image_tab">Βίντεο / Εικόνα</string>
-    <string name="checked">Επιλεγμένο</string>
     <string name="credits">Συντελεστές</string>
     <string name="credits_desc">Συντελεστές και ελεύθερο λογισμικό</string>
-    <string name="edit">Επεξεργασία</string>
-    <string name="start_execute">Έναρξη εκτέλεσης εντολής</string>
-    <string name="advanced_settings">Για προχωρημένους</string>
-    <string name="print_details">Λεπτομερής έξοδος</string>
-    <string name="print_details_desc">Εκτύπωση λεπτομερών μηνυμάτων κατά τη λήψη</string>
     <string name="display">Εμφάνιση</string>
     <string name="display_settings">Σκούρο θέμα, δυναμικό χρώμα, γλώσσες</string>
     <string name="dark_theme">Σκούρο θέμα</string>
     <string name="follow_system">Σύστημα</string>
-    <string name="follow_system_desc">Ακολουθήστε τις ρυθμίσεις θέματος συστήματος</string>
-    <string name="dark_theme_on_desc">Χρήση πάντα σκούρου θέματος</string>
-    <string name="dark_theme_off_desc">Χρήση πάντα φωτεινού θέματος</string>
     <string name="on">Ενεργό</string>
     <string name="off">Ανενεργό</string>
     <string name="cancel">Ακύρωση</string>
-    <string name="settings_before_download">Διαμόρφωση πριν τη λήψη</string>
-    <string name="settings_before_download_desc">Διαμόρφωση προτιμήσεων πριν από τη λήψη</string>
-    <string name="settings_before_download_text">Προσαρμογή αυτής της λήψης</string>
-    <string name="error_copied">Η αναφορά σφάλματος αντιγράφηκε στο πρόχειρο</string>
-    <string name="thumbnail">Μικρογραφία</string>
     <string name="paste">Επικόλληση</string>
-    <string name="edit_template_desc">Η διαδρομή εξόδου και το URL θα προστεθούν από την εφαρμογή.</string>
-    <string name="not_convert">Χωρίς μετατροπή</string>
-    <string name="convert_to">Μετατροπή σε %1$s</string>
-    <string name="format">Μορφή</string>
-    <string name="best_quality">Καλύτερη ποιότητα</string>
-    <string name="best_audio_quality">Καλύτερη ποιότητα ήχου</string>
-    <string name="not_specified">Δεν καθορίστηκε (προεπιλογή)</string>
-    <string name="preferred_format_desc">Προτιμώμενη μορφή όταν παρέχονται πολλαπλές</string>
-    <string name="start_download">Λήψη</string>
     <string name="close">Κλείσιμο</string>
-    <string name="close_never_show_again">Να μην εμφανιστεί ξανά</string>
-    <string name="user_guide">Οδηγός χρήστη</string>
-    <string name="open_settings">Άνοιγμα ρυθμίσεων</string>
-    <string name="paste_desc">Κάντε κλικ στο \"Επικόλληση\" για να λάβετε το σύνδεσμο βίντεο από το πρόχειρό σας.</string>
-    <string name="download_desc">Στη συνέχεια, κάντε κλικ στο \"Λήψη\" αφού προσαρμόσετε τις ρυθμίσεις του.</string>
-    <string name="defaults">Προεπιλογή</string>
-    <string name="channel_name">Λήψη</string>
-    <string name="channel_description">Ειδοποίηση για ληφθέντα αρχεία και πρόοδο</string>
-    <string name="download_finish_notification">Η λήψη ολοκληρώθηκε. Πατήστε για άνοιγμα.</string>
-    <string name="execute_command_notification">Εκτέλεση προσαρμοσμένων εντολών…</string>
-    <string name="battery_settings_desc">Ορίστε τη χρήση μπαταρίας αυτής της εφαρμογής σε \"Χωρίς περιορισμούς\" στις ρυθμίσεις συστήματος για λήψη στο υπόβαθρο.</string>
-    <string name="options">Επιλογές</string>
-    <string name="additional_settings">Πρόσθετες ρυθμίσεις</string>
-    <string name="share_fail_msg">Αδυναμία αντιστοίχισης URL από το κοινόχρηστο περιεχόμενο</string>
-    <string name="share_success_msg">Ανάγνωση συνδέσμου βίντεο από το κοινόχρηστο περιεχόμενο…</string>
-    <string name="show_more_actions">Εμφάνιση περισσότερων ενεργειών</string>
-    <string name="download_notification">Ειδοποίηση λήψης</string>
-    <string name="download_notification_desc">Ειδοποίηση για ληφθέντα αρχεία και πρόοδο</string>
-    <string name="fetching_playlist_info">Ανάκτηση πληροφοριών λίστας αναπαραγωγής…</string>
-    <string name="from">Έναρξη</string>
     <string name="to">Τέλος</string>
-    <string name="invalid_index_range">Μη έγκυρο εύρος ευρετηρίου</string>
-    <string name="playlist_indicator_text">Λήψη λίστας αναπαραγωγής (%1$d/%2$d)…</string>
-    <string name="audio_directory">Φάκελος ήχου</string>
-    <string name="download_directory">Κατάλογος λήψεων</string>
-    <string name="download_directory_desc">Select where to save files</string>
-    <string name="subdirectory">Αποθήκευση σε υποκατάλογο</string>
-    <string name="subdirectory_desc">Αποθήκευση αρχείων σε φακέλους με ονόματα ανάλογα με τα αντίστοιχα πεδία</string>
-    <string name="permission_issue">Πρόβλημα άδειας αποθήκευσης</string>
-    <string name="permission_issue_desc">Οι κατάλογοι εκτός των Download/ και Documents/ δεν υποστηρίζονται</string>
-    <string name="battery_configuration">Διαμόρφωση μπαταρίας</string>
-    <string name="battery_configuration_desc">Παράβλεψη βελτιστοποίησης μπαταρίας για αυτήν την εφαρμογή για λήψη στο υπόβαθρο</string>
-    <string name="service_title">Το BlueIris πραγματοποιεί λήψη…</string>
-    <string name="unknown_error">Άγνωστο σφάλμα</string>
     <string name="translate">Μετάφραση</string>
     <string name="translate_desc">Βοηθήστε στη μετάφραση αυτής της εφαρμογής στο Hosted Weblate</string>
-    <string name="prefix">Πρόθεμα</string>
-    <string name="new_template">Νέο πρότυπο</string>
-    <string name="template_label">Ετικέτα</string>
-    <string name="remove_template">Αφαίρεση;</string>
-    <string name="remove_template_desc">Οριστική αφαίρεση του \"%1$s\" από τα πρότυπα εντολών;</string>
-    <string name="template_selection">Επιλογή προτύπου</string>
-    <string name="downloading_indicator_text">Λήψη σε εξέλιξη…</string>
-    <string name="task_canceled">Η εργασία λήψης ακυρώθηκε</string>
     <string name="github_issue">Ζήτημα GitHub</string>
     <string name="github_issue_desc">Υποβολή ζητήματος για αναφορά σφάλματος ή αίτημα λειτουργίας</string>
     <string name="info_copied">Οι πληροφορίες αντιγράφηκαν στο πρόχειρο</string>
     <string name="enable_auto_update">Ενεργοποίηση αυτόματης ενημέρωσης</string>
     <string name="update_channel">Κανάλι ενημέρωσης</string>
-    <string name="update_channel_desc">Εγκαταστήστε δοκιμαστικές εκδόσεις για να προεπισκοπήσετε νέες λειτουργίες και αλλαγές.\n\nΘα υπάρχει κάποια αστάθεια σε αυτές τις εκδόσεις, επομένως μην διστάσετε να μας στείλετε σχόλια εάν αντιμετωπίσετε προβλήματα για να μας βοηθήσετε να βελτιώσουμε την εφαρμογή.</string>
-    <string name="status_enqueued">Σε αναμονή</string>
-    <string name="status_completed">Ολοκληρώθηκε</string>
-    <string name="status_downloading">Γίνεται λήψη</string>
-    <string name="status_canceled">Ακυρώθηκε</string>
-    <string name="open_file">Άνοιγμα αρχείου</string>
-    <string name="restart">Επανεκκίνηση</string>
-    <string name="status_error">Σφάλμα</string>
-    <string name="copy_link">Αντιγραφή συνδέσμου</string>
-    <string name="copy_error_report">Αντιγραφή αναφοράς</string>
-    <string name="export_to_clipboard">Εξαγωγή στο πρόχειρο</string>
-    <string name="import_from_clipboard">Εισαγωγή από το πρόχειρο</string>
-    <string name="template_exported">Εξήχθησαν %1$d πρότυπα</string>
-    <string name="template_imported">Εισήχθησαν %1$d πρότυπα</string>
-    <string name="download_task_count">%1$d Εργασίες λήψης</string>
-    <string name="recently_added">Προστέθηκαν πρόσφατα</string>
-    <string name="delete_multiple_items_msg">Οριστική αφαίρεση %1$d στοιχείων από το ιστορικό λήψεών σας;</string>
     <string name="check_for_updates">Έλεγχος για ενημερώσεις</string>
     <string name="check_for_updates_desc">Αυτόματος έλεγχος για την τελευταία έκδοση στο GitHub</string>
     <string name="app_up_to_date">Η τρέχουσα έκδοση είναι ενημερωμένη</string>
     <string name="app_update_failed">Αποτυχία ενημέρωσης στην τελευταία έκδοση</string>
     <string name="update">Ενημέρωση</string>
-    <string name="clear_temp_files">Εκκαθάριση προσωρινών αρχείων</string>
-    <string name="clear_temp_files_desc">Διαγραφή όλων των προσωρινών αρχείων από τον προσωρινό κατάλογο</string>
-    <string name="clear_temp_files_count">Διαγράφηκαν %1$d προσωρινά αρχεία</string>
     <string name="telegram_channel">Telegram</string>
-    <string name="matrix_space">Matrix</string>
     <string name="sponsor">Χορηγία</string>
-    <string name="sponsor_desc">Υποστηρίξτε αυτήν την εφαρμογή κάνοντας χορηγία στο GitHub</string>
-    <string name="sponsor_msg">Το BlueIris θα είναι πάντα δωρεάν και ανοιχτού κώδικα στο μέλλον για όλους. Αν σας αρέσει, σκεφτείτε να με υποστηρίξετε στο GitHub!</string>
-    <string name="feedback">Σχόλια</string>
+    <string name="sponsor_msg">Το Apex θα είναι πάντα δωρεάν και ανοιχτού κώδικα στο μέλλον για όλους. Αν σας αρέσει, σκεφτείτε να με υποστηρίξετε στο GitHub!</string>
     <string name="sponsors">Χορηγοί</string>
     <string name="instagram">Instagram</string>
     <string name="instagram_desc">ακολουθήστε τον προγραμματιστή στο Instagram για περισσότερες ενημερώσεις</string>
@@ -195,59 +68,25 @@
     <string name="dynamic_color">Δυναμικό χρώμα</string>
     <string name="dynamic_color_desc">Εφαρμογή χρωμάτων από τα φόντα στο θέμα της εφαρμογής</string>
     <string name="website">Ιστότοπος</string>
-    <string name="look_and_feel"><![CDATA[Εμφάνιση & αίσθηση]]></string>
-    <string name="interface_and_interaction"><![CDATA[Διεπαφή & αλληλεπίδραση]]></string>
+    <string name="look_and_feel">Εμφάνιση &amp; αίσθηση</string>
     <string name="auto_update">Αυτόματη ενημέρωση</string>
     <string name="suggested">Προτεινόμενα</string>
     <string name="all_languages">Όλες οι γλώσσες</string>
     <string name="trouble_shooting">Αντιμετώπιση προβλημάτων</string>
     <string name="issue_tracker">Παρακολούθηση ζητημάτων</string>
-    <string name="trouble_shooting_desc">Διόρθωση συνηθισμένων σφαλμάτων και έλεγχος για γνωστά ζητήματα</string>
     <string name="issue_tracker_hint">Αντιμετωπίσατε κάποιο σφάλμα; Πριν αναφέρετε ένα νέο ζήτημα, αναζητήστε στην παρακολούθηση ζητημάτων. Πολλά συνηθισμένα προβλήματα έχουν ήδη αντιμετωπιστεί και τεκμηριωθεί εκεί.</string>
-    <string name="short_url">Σύντομο URL</string>
-    <string name="security">Ασφάλεια</string>
-    <string name="qr_code">Κωδικός QR</string>
     <string name="menu">Μενού</string>
-    <string name="scan_qr_code">Σάρωση κωδικού QR</string>
-    <string name="qr_code_generator">Γεννήτρια κωδικών QR</string>
-    <string name="costume_qr_code">Προσαρμοσμένος κωδικός QR</string>
     <string name="scan">Σάρωση</string>
-    <string name="generate">Δημιουργία</string>
-    <string name="costume">Προσαρμογή</string>
-    <string name="scan_history">Ιστορικό σαρώσεων</string>
-    <string name="no_scan_history_yet">Δεν υπάρχει ιστορικό σαρώσεων ακόμα</string>
-    <string name="scan_code">Σάρωση κωδικού</string>
-    <string name="scanned_by_links">Σαρώθηκε από το BlueIris</string>
-    <string name="scan_qr_instruction">Σαρώστε κωδικούς QR χρησιμοποιώντας την κάμερα ή εισαγάγετε από τη συλλογή</string>
-    <string name="scan_now">Σάρωση τώρα</string>
-    <string name="scanned_content">Περιεχόμενο που σαρώθηκε</string>
-    <string name="feature_currently_unavailable">Αυτή η λειτουργία δεν είναι διαθέσιμη προς το παρόν.</string>
     <string name="contact">Επικοινωνία</string>
-    <string name="contact_desc">Επικοινωνήστε με τον προγραμματιστή για να προσθέσει νέες λειτουργίες στο BlueIris</string>
-    <string name="links_issue_tracker">Παρακολούθηση ζητημάτων BlueIris</string>
-    <string name="enter_url_error">Παρακαλώ εισαγάγετε ένα URL</string>
-    <string name="invalid_url_format">Μη έγκυρη μορφή URL. Παρακαλώ εισαγάγετε μια έγκυρη διεύθυνση ιστού (π.χ. example.com).</string>
-    <string name="copied_to_clipboard">Αντιγράφηκε στο πρόχειρο</string>
+    <string name="contact_desc">Επικοινωνήστε με τον προγραμματιστή για να προσθέσει νέες λειτουργίες στο Apex</string>
+    <string name="links_issue_tracker">Παρακολούθηση ζητημάτων Apex</string>
     <string name="clear_history">Εκκαθάριση ιστορικού</string>
-    <string name="no_qr_found_in_image">Δεν βρέθηκε κωδικός QR στην επιλεγμένη εικόνα</string>
-    <string name="copy">Αντιγραφή</string>
-    <string name="destination">Προορισμός</string>
-    <string name="source">Πηγή</string>
-    <string name="generate_qr_for">Δημιουργία κωδικού QR για...</string>
-    <string name="enter_text_or_url">Εισαγάγετε κείμενο ή URL</string>
-    <string name="enter_text_above_to_generate">Εισαγάγετε κείμενο παραπάνω για δημιουργία</string>
-    <string name="save_qr_code">Αποθήκευση κωδικού QR</string>
-    <string name="url_placeholder">http://example.com</string>
     <string name="contact_developer">Επικοινωνία με τον Προγραμματιστή</string>
     <string name="contact_developer_confirm">Θέλετε να ανοίξετε το Gmail για να επικοινωνήσετε με τον προγραμματιστή;</string>
     <string name="github_stars">Αστέρια GitHub</string>
     <string name="github_stars_desc">Υποστηρίξτε αυτήν την εφαρμογή δίνοντας ένα αστέρι στο GitHub</string>
     <string name="package_name">Όνομα πακέτου</string>
-    <string name="unshorten">Αποσύντμηση URL</string>
-    <string name="disclaimer_text">Παρέχουμε αυτήν την εφαρμογή \"ως έχει\", που σημαίνει ότι κάνουμε το καλύτερο δυνατό για να διατηρούμε τα πράγματα ομαλά, αλλά δεν μπορούμε να υποσχεθούμε ότι θα είναι πάντα τέλεια ή χωρίς σφάλματα. Χρησιμοποιώντας την εφαρμογή, δηλώνετε ότι συμφωνείτε με αυτό και κατανοείτε ότι τη χρησιμοποιείτε με δική σας ευθύνη.</string>
     <string name="privacy_policy">Πολιτική απορρήτου</string>
-    <string name="view_licenses">Προβολή αδειών χρήσης</string>
-    <string name="licenses">Άδειες χρήσης</string>
     <string name="done">Ολοκληρώθηκε</string>
     <string name="downloading">Γίνεται λήψη...</string>
     <string name="downloaded_successfully">Η λήψη ολοκληρώθηκε με επιτυχία</string>
@@ -258,37 +97,18 @@
     <string name="early_access">Πρώιμη πρόσβαση</string>
     <string name="pre_release_desc">Εγκαταστήστε δοκιμαστικές εκδόσεις για να προεπισκοπήσετε νέες λειτουργίες και αλλαγές.\n\nΘα υπάρχει κάποια αστάθεια σε αυτές τις εκδόσεις, επομένως μην διστάσετε να μας στείλετε σχόλια εάν αντιμετωπίσετε προβλήματα για να μας βοηθήσετε να βελτιώσουμε την εφαρμογή.</string>
     <string name="update_directory">Κατάλογος ενημέρωσης</string>
-
-    
-    <!-- Navigation Tabs & Toasts -->
     <string name="nav_stop">Διακοπή</string>
     <string name="nav_clean">Καθαρισμός</string>
     <string name="nav_apps">Εφαρμογές</string>
     <string name="nav_menu">Μενού</string>
     <string name="toast_all_cache_cleaned">Όλη η κρυφή μνήμη έχει καθαριστεί (0 KB)</string>
     <string name="toast_all_bg_apps_stopped">Όλες οι εφαρμογές παρασκηνίου έχουν σταματήσει</string>
-    <string name="toast_selected_apps_no_cache">Οι επιλεγμένες εφαρμογές δεν έχουν κρυφή μνήμη (0 KB)</string>
-
-    <!-- AppsScreen Filter & Sort -->
-    <string name="app_filter_all">Όλες οι εφαρμογές</string>
-    <string name="app_filter_user">Εφαρμογές χρήστη</string>
-    <string name="app_filter_system">Εφαρμογές συστήματος</string>
-    <string name="app_sort_by_name">Κατά όνομα</string>
-    <string name="app_sort_by_date">Κατά ημερομηνία</string>
-    <string name="app_sort_by_size">Κατά μέγεθος</string>
     <string name="apps_screen_title">Εφαρμογές</string>
     <string name="apps_listed_count">%1$d εφαρμογές στη λίστα</string>
-    <string name="cd_filter_apps">Φιλτράρισμα εφαρμογών</string>
-    <string name="cd_sort_apps">Ταξινόμηση εφαρμογών</string>
     <string name="apps_no_apps_found">Δεν βρέθηκαν εφαρμογές για αυτό το φίλτρο</string>
     <string name="cd_clear_selection">Καθαρισμός επιλογής</string>
-    <string name="apps_selected_count">Επιλέχθηκαν: %1$d</string>
-    <string name="cd_clean_selected_apps">Καθαρισμός επιλεγμένων εφαρμογών</string>
-    <string name="cd_selected">Επιλέχθηκε</string>
     <string name="app_size_prefix">Μέγεθος: %1$s</string>
     <string name="cd_go_to_details">Μετάβαση στις λεπτομέρειες</string>
-
-    <!-- App Detail Screen Strings -->
     <string name="app_detail_version">Έκδοση: %1$s</string>
     <string name="app_detail_apk_size">Μέγεθος APK</string>
     <string name="app_detail_install_date">Ημερομηνία εγκατάστασης</string>
@@ -300,15 +120,9 @@
     <string name="app_detail_app_info">ΠΛΗΡΟΦΟΡΙΕΣ ΕΦΑΡΜΟΓΗΣ</string>
     <string name="toast_cannot_launch_app">Αδυναμία εκκίνησης αυτής της εφαρμογής</string>
     <string name="toast_cannot_open_store">Αδυναμία ανοίγματος της σελίδας του καταστήματος</string>
-
-    <!-- Speed & Performance Strings -->
     <string name="performance_and_speed_title">Απόδοση &amp; Ταχύτητα</string>
-
-    <!-- Stop Process Strings -->
     <string name="stop_process_title">Διαδικασία διακοπής</string>
     <string name="force_stop_mode_title">Λειτουργία αναγκαστικής διακοπής</string>
-
-    <!-- Clean Process Strings -->
     <string name="clean_process_title">Διαδικασία καθαρισμού</string>
     <string name="cleaning_mode_title">Λειτουργία καθαρισμού</string>
     <string name="cleaning_mode_manual">Χειροκίνητα</string>
@@ -316,8 +130,6 @@
     <string name="cleaning_mode_ask_each_time">Ερώτηση κάθε φορά</string>
     <string name="ignore_tiny_cache_title">Παράβλεψη μικρής κρυφής μνήμης</string>
     <string name="ignore_tiny_cache_desc">Εξαίρεση εφαρμογών με κρυφή μνήμη κάτω από 3 MB</string>
-
-    <!-- StopScreen Strings -->
     <string name="stop_title">Διακοπή</string>
     <string name="stop_history_icon_desc">Ιστορικό</string>
     <string name="stop_gauge_apps">ΕΦΑΡΜΟΓΕΣ</string>
@@ -340,15 +152,10 @@
     <string name="stop_dialog_close">ΚΛΕΙΣΙΜΟ</string>
     <string name="stop_dialog_running_apps_title">Εφαρμογές σε εκτέλεση (%1$d)</string>
     <string name="stop_dialog_no_running_apps">Δεν υπάρχουν ενεργές εφαρμογές παρασκηνίου.</string>
-
-    <!-- CleanScreen Strings -->
     <string name="clean_title">Καθαρισμός</string>
     <string name="clean_history_icon_desc">Ιστορικό</string>
-    <string name="clean_gauge_unit_mb">MB</string>
     <string name="clean_gauge_system_cleaned">Το σύστημα καθαρίστηκε</string>
     <string name="clean_gauge_can_be_cleared">Μπορεί να καθαριστεί</string>
-    <string name="clean_gauge_zero_mb">0 MB</string>
-    <string name="clean_gauge_current_mb">%1$s MB</string>
     <string name="clean_stat_total">Σύνολο</string>
     <string name="clean_stat_used">Χρησιμοποιείται</string>
     <string name="clean_stat_cache">Κρυφή μνήμη</string>
@@ -365,8 +172,6 @@
     <string name="clean_dialog_live_cache_title">Παρακολούθηση ζωντανής κρυφής μνήμης</string>
     <string name="clean_dialog_live_cache_desc">Μέγεθος κρυφής μνήμης: %1$s.</string>
     <string name="clean_dialog_ok">OK</string>
-
-    <!-- Sub-screens Extracted Strings -->
     <string name="cd_back">Πίσω</string>
     <string name="cd_broom_icon">Εικονίδιο σκούπας</string>
     <string name="cd_whitelist_icon">Εικονίδιο λευκής λίστας</string>
@@ -377,15 +182,13 @@
     <string name="cd_accessibility_icon">Εικονίδιο προσβασιμότητας</string>
     <string name="cd_success_icon">Εικονίδιο επιτυχίας</string>
     <string name="cd_usage_access_icon">Εικονίδιο πρόσβασης χρήσης</string>
-    <string name="cd_blueiris_app_icon">Εικονίδιο BlueIris</string>
+    <string name="cd_apex_app_icon">Εικονίδιο Apex</string>
     <string name="cd_notifications_icon">Εικονίδιο ειδοποιήσεων</string>
     <string name="cd_checkmark_icon">Σημάδι ελέγχου</string>
-
     <string name="analyze_screen_title">Ανάλυση</string>
     <string name="analyze_cache_apps_count">Κρυφή μνήμη (%1$d Εφαρμογές)</string>
     <string name="analyze_no_cache_found">Δεν βρέθηκαν αρχεία κρυφής μνήμης</string>
     <string name="analyze_clear_button">ΚΑΘΑΡΙΣΜΟΣ</string>
-
     <string name="whitelist_title">Λευκή λίστα</string>
     <string name="whitelist_empty_avoid_stop">Προσθέστε μια εφαρμογή για να αποφύγετε τη διακοπή</string>
     <string name="whitelist_empty_avoid_clean">Προσθέστε μια εφαρμογή για να αποφύγετε τον καθαρισμό</string>
@@ -394,10 +197,8 @@
     <string name="whitelist_dialog_all_apps_added">Όλες οι εφαρμογές είναι ήδη στη λευκή λίστα.</string>
     <string name="whitelist_dialog_add_btn">Προσθήκη</string>
     <string name="whitelist_dialog_add_count_btn">Προσθήκη (%1$d)</string>
-
     <string name="history_title">Ιστορικό</string>
     <string name="history_today_stopped">Σταμάτησαν σήμερα</string>
-    <string name="history_no_apps_stopped_today">Καμία εφαρμογή δεν σταμάτησε σήμερα</string>
     <string name="history_today_cleared">Καθαρίστηκαν σήμερα</string>
     <string name="history_period_today">Σήμερα</string>
     <string name="history_period_yesterday">Χθες</string>
@@ -413,29 +214,23 @@
     <string name="history_dialog_clear_stop_msg">Θέλετε να διαγράψετε το ιστορικό διακοπής;</string>
     <string name="history_stop_count_singular">%1$d φορά</string>
     <string name="history_stop_count_plural">%1$d φορές</string>
-
     <string name="done_count_apps_singular">1 Εφαρμογή</string>
     <string name="done_count_apps_plural">%1$d Εφαρμογές</string>
     <string name="done_stopped_subtitle">Σταμάτησαν: %1$s</string>
     <string name="done_cleaned_subtitle">Καθαρίστηκαν: %1$s</string>
     <string name="done_button">ΤΕΛΟΣ</string>
-
     <string name="permission_title">Άδεια</string>
     <string name="accessibility_permission_title">API Υπηρεσίας Προσβασιμότητας</string>
     <string name="accessibility_permission_desc1">Αυτή η εφαρμογή χρησιμοποιεί το API για την αυτοματοποίηση του καθαρισμού.</string>
     <string name="accessibility_permission_desc2">Τα δεδομένα δεν συλλέγονται και δεν κοινοποιούνται ποτέ.</string>
     <string name="btn_cancel_uppercase">ΑΚΥΡΩΣΗ</string>
     <string name="btn_continue_uppercase">ΣΥΝΕΧΕΙΑ</string>
-
     <string name="permission_success_title">Επιτυχία!</string>
     <string name="permission_success_desc1">Συγχαρητήρια, είστε έτοιμοι.</string>
     <string name="permission_success_desc2">Δεν συλλέγουμε προσωπικές πληροφορίες.</string>
-
     <string name="usage_access_permission_title">Άδεια Πρόσβασης Χρήσης</string>
     <string name="usage_access_permission_desc1">Απαιτείται άδεια πρόσβασης στα δεδομένα χρήσης.</string>
     <string name="usage_access_permission_desc2">Κάντε κλικ στο κουμπί παρακάτω για ενεργοποίηση.</string>
-
-    <string name="onboarding_privacy_note">Συνεχίζοντας αποδέχεστε τους όρους του BlueIris %1$s</string>
     <string name="btn_next">ΕΠΟΜΕΝΟ</string>
     <string name="btn_get_started">ΞΕΚΙΝΗΣΤΕ</string>
     <string name="onboarding_page1_desc">Καθαρίστε την κρυφή μνήμη όλων των εφαρμογών για περισσότερο χώρο.</string>

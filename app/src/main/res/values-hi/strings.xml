@@ -1,176 +1,49 @@
-﻿<resources>
-    <string name="app_name">BlueIris</string>
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Apex</string>
     <string name="accessibility_service_description">यह सेवा सुरक्षित और कुशलता से कैशे साफ़ करने और पृष्ठभूमि ऐप्स को रोकने के लिए एंड्रॉइड ऐप सेटिंग्स में नेविगेशन को स्वचालित करती है।</string>
-    <string name="clear_cache">कैशे साफ़ करें</string>
-    <string name="storage">स्टोरेज</string>
-    <string name="home">होम</string>
     <string name="apps">ऐप्स</string>
     <string name="analyze">विश्लेषण करें</string>
-    <string name="permission_required">अनुमति आवश्यक है</string>
-    <string name="cleaning_cache">कैशे साफ़ किया जा रहा है...</string>
     <string name="settings">सेटिंग्स</string>
-    <string name="download_settings_desc">General</string>
     <string name="download">डाउनलोड</string>
-    <string name="url_empty">लिंक खाली नहीं हो सकता</string>
-    <string name="reset_success">इंस्टॉल किया गया संस्करण सफलतापूर्वक हटा दिया गया</string>
-    <string name="reset_failed">इंस्टॉल किया गया संस्करण हटाने में विफल</string>
-    <string name="permission_denied">अनुमति अस्वीकृत</string>
-    <string name="download_success_msg">डाउनलोड समाप्त हुआ</string>
-    <string name="download_error_msg">फ़ाइल डाउनलोड नहीं की जा सकी</string>
-    <string name="download_start_msg">\"%1$s\" डाउनलोड करें</string>
     <string name="general_settings">सामान्य</string>
     <string name="language">डिस्प्ले भाषा</string>
-    <string name="language_settings">डिस्प्ले भाषा सेट करें</string>
-    <string name="task_running">एक मौजूदा डाउनलोड कार्य पहले से ही चल रहा है</string>
-    <string name="paste_msg">URL पेस्ट करें</string>
-    <string name="paste_fail_msg">क्लिपबोर्ड में URL से मिलान नहीं हो सका</string>
-    <string name="delete_info">हटाएं?</string>
-    <string name="delete_info_msg">अपने डाउनलोड इतिहास से \"%1$s\" को स्थायी रूप से हटाएं?</string>
     <string name="confirm">पुष्टि करें</string>
     <string name="dismiss">रद्द करें</string>
-    <string name="downloads_history">डाउनलोड</string>
-    <string name="audio">ऑडियो</string>
-    <string name="link_copied">लिंक क्लिपबोर्ड पर कॉपी किया गया</string>
-    <string name="open_url">लिंक खोलें</string>
-    <string name="remove">हटाएं</string>
-    <string name="delete_file">फ़ाइल हटाएं</string>
     <string name="about">के बारे में</string>
-    <string name="about_page">संस्करण, फ़ीडबैक, ऑटो अपडेट</string>
     <string name="back">वापस</string>
     <string name="version">संस्करण</string>
     <string name="release_desc">परिवर्तन लॉग और नए संस्करण खोजें</string>
     <string name="release">नवीनतम रिलीज़</string>
     <string name="readme_desc">GitHub रिपॉजिटरी और README जांचें</string>
     <string name="readme" translatable="false">README</string>
-    <string name="video">वीडियो</string>
-    <string name="image">इमेज</string>
-    <string name="image_format">इमेज फ़ॉर्मेट</string>
-    <string name="image_format_best">सर्वश्रेष्ठ (मूल)</string>
-    <string name="image_format_jpg">JPEG (.jpg)</string>
-    <string name="image_format_png">PNG (.png)</string>
-    <string name="image_format_webp">WebP (.webp)</string>
-    <string name="image_quality">इमेज गुणवत्ता</string>
-    <string name="image_quality_best">सर्वश्रेष्ठ गुणवत्ता (मूल-100%)</string>
-    <string name="image_quality_high">उच्च (85%)</string>
-    <string name="image_quality_medium">मध्यम (70%)</string>
-    <string name="image_quality_low">निम्न (50%)</string>
-    <string name="image_format_desc">डाउनलोड की गई इमेज के लिए पसंदीदा आउटपुट फ़ॉर्मेट</string>
-    <string name="image_preset_desc">फ़ॉर्मेट: %1$s, गुणवत्ता: %2$s</string>
-    <string name="video_image_tab">वीडियो / इमेज</string>
-    <string name="checked">चयनित</string>
     <string name="credits">श्रेय</string>
     <string name="credits_desc">श्रेय और मुफ़्त सॉफ़्टवेयर</string>
-    <string name="edit">संपादित करें</string>
-    <string name="start_execute">कमांड चलाना शुरू करें</string>
-    <string name="advanced_settings">उन्नत</string>
-    <string name="print_details">विस्तृत आउटपुट</string>
-    <string name="print_details_desc">डाउनलोड करते समय विस्तृत संदेश प्रिंट करें</string>
     <string name="display">डिस्प्ले</string>
     <string name="display_settings">डार्क थीम, डायनेमिक रंग, भाषाएं</string>
     <string name="dark_theme">डार्क थीम</string>
     <string name="follow_system">सिस्टम</string>
-    <string name="follow_system_desc">सिस्टम थीम सेटिंग्स का पालन करें</string>
-    <string name="dark_theme_on_desc">हमेशा डार्क थीम का उपयोग करें</string>
-    <string name="dark_theme_off_desc">हमेशा लाइट थीम का उपयोग करें</string>
     <string name="on">चालू</string>
     <string name="off">बंद</string>
     <string name="cancel">रद्द करें</string>
-    <string name="settings_before_download">डाउनलोड करने से पहले कॉन्फ़िगर करें</string>
-    <string name="settings_before_download_desc">डाउनलोड करने से पहले प्राथमिकताएं कॉन्फ़िगर करें</string>
-    <string name="settings_before_download_text">इस डाउनलोड को समायोजित करें</string>
-    <string name="error_copied">त्रुटि रिपोर्ट क्लिपबोर्ड पर कॉपी की गई</string>
-    <string name="thumbnail">थंबनेल</string>
     <string name="paste">पेस्ट करें</string>
-    <string name="edit_template_desc">आउटपुट पाथ और URL ऐप द्वारा जोड़े जाएंगे।</string>
-    <string name="not_convert">अपरिवर्तित</string>
-    <string name="convert_to">%1$s में बदलें</string>
-    <string name="format">फ़ॉर्मेट</string>
-    <string name="best_quality">सर्वश्रेष्ठ गुणवत्ता</string>
-    <string name="best_audio_quality">सर्वश्रेष्ठ ऑडियो गुणवत्ता</string>
-    <string name="not_specified">निर्दिष्ट नहीं है (डिफ़ॉल्ट)</string>
-    <string name="preferred_format_desc">अनेक प्रदान किए जाने पर पसंदीदा फ़ॉर्मेट</string>
-    <string name="start_download">डाउनलोड</string>
     <string name="close">बंद करें</string>
-    <string name="close_never_show_again">फिर से न दिखाएं</string>
-    <string name="user_guide">उपयोगकर्ता निर्देशिका</string>
-    <string name="open_settings">सेटिंग्स खोलें</string>
-    <string name="paste_desc">अपने क्लिपबोर्ड से वीडियो लिंक प्राप्त करने के लिए \"पेस्ट करें\" पर क्लिक करें।</string>
-    <string name="download_desc">फिर इसकी सेटिंग्स समायोजित करने के बाद \"डाउनलोड\" पर क्लिक करें।</string>
-    <string name="defaults">डिफ़ॉल्ट</string>
-    <string name="channel_name">डाउनलोड</string>
-    <string name="channel_description">डाउनलोड की गई फ़ाइलों और प्रगति की सूचना दें</string>
-    <string name="download_finish_notification">डाउनलोड समाप्त हुआ। खोलने के लिए टैप करें।</string>
-    <string name="execute_command_notification">कस्टम कमांड चलाए जा रहे हैं…</string>
-    <string name="battery_settings_desc">पृष्ठभूमि में डाउनलोड करने के लिए कृपया सिस्टम सेटिंग्स में इस ऐप का बैटरी उपयोग \"अप्रतिबंधित\" पर सेट करें।</string>
-    <string name="options">विकल्प</string>
-    <string name="additional_settings">अतिरिक्त सेटिंग्स</string>
-    <string name="share_fail_msg">साझा की गई सामग्री से URL का मिलान करने में असमर्थ</string>
-    <string name="share_success_msg">साझा की गई सामग्री से वीडियो लिंक पढ़ा जा रहा है…</string>
-    <string name="show_more_actions">अधिक कार्रवाइयां दिखाएं</string>
-    <string name="download_notification">डाउनलोड सूचना</string>
-    <string name="download_notification_desc">डाउनलोड की गई फ़ाइलों और प्रगति की सूचना दें</string>
-    <string name="fetching_playlist_info">प्लेलिस्ट जानकारी प्राप्त की जा रही है…</string>
-    <string name="from">प्रारंभ</string>
     <string name="to">समाप्त</string>
-    <string name="invalid_index_range">अमान्य इंडेक्स सीमा</string>
-    <string name="playlist_indicator_text">प्लेलिस्ट डाउनलोड हो रही है (%1$d/%2$d)…</string>
-    <string name="audio_directory">ऑडियो फ़ोल्डर</string>
-    <string name="download_directory">डाउनलोड डायरेक्टरी</string>
-    <string name="download_directory_desc">Select where to save files</string>
-    <string name="subdirectory">उप-डायरेक्टरी में सहेजें</string>
-    <string name="subdirectory_desc">संबंधित फ़ील्ड के रूप में नामित फ़ोल्डरों में फ़ाइलें सहेजें</string>
-    <string name="permission_issue">स्टोरेज अनुमति समस्या</string>
-    <string name="permission_issue_desc">Download/ और Documents/ के बाहर की डायरेक्टरी समर्थित नहीं हैं</string>
-    <string name="battery_configuration">बैटरी कॉन्फ़िगरेशन</string>
-    <string name="battery_configuration_desc">पृष्ठभूमि में डाउनलोड करने के लिए इस ऐप के लिए बैटरी ऑप्टिमाइज़ेशन को नज़रअंदाज़ करें</string>
-    <string name="service_title">BlueIris डाउनलोड कर रहा है…</string>
-    <string name="unknown_error">अज्ञात त्रुटि</string>
     <string name="translate">अनुवाद करें</string>
     <string name="translate_desc">Hosted Weblate पर इस ऐप का अनुवाद करने में मदद करें</string>
-    <string name="prefix">उपसर्ग</string>
-    <string name="new_template">नया टेम्पलेट</string>
-    <string name="template_label">लेबल</string>
-    <string name="remove_template">हटाएं?</string>
-    <string name="remove_template_desc">कमांड टेम्पलेट्स से \"%1$s\" को स्थायी रूप से हटाएं?</string>
-    <string name="template_selection">टेम्पलेट चयन</string>
-    <string name="downloading_indicator_text">डाउनलोड प्रगति पर है…</string>
-    <string name="task_canceled">डाउनलोड कार्य रद्द कर दिया गया</string>
     <string name="github_issue">GitHub इश्यू</string>
     <string name="github_issue_desc">बग रिपोर्ट या फ़ीचर अनुरोध के लिए इश्यू सबमिट करें</string>
     <string name="info_copied">जानकारी क्लिपबोर्ड पर कॉपी की गई</string>
     <string name="enable_auto_update">ऑटो अपडेट सक्षम करें</string>
     <string name="update_channel">अपडेट चैनल</string>
-    <string name="update_channel_desc">नई सुविधाओं और परिवर्तनों का पूर्वावलोकन करने के लिए प्री-रिलीज़ बिल्ड इंस्टॉल करें।\n\nइन संस्करणों में कुछ अस्थिरता होगी, इसलिए यदि आपको ऐप को बेहतर बनाने में हमारी मदद करने के लिए कोई समस्या आती है तो कृपया हमें फ़ीडबैक देने में संकोच न करें।</string>
-    <string name="status_enqueued">कतारबद्ध</string>
-    <string name="status_completed">समाप्त</string>
-    <string name="status_downloading">डाउनलोड हो रहा है</string>
-    <string name="status_canceled">रद्द कर दिया गया</string>
-    <string name="open_file">फ़ाइल खोलें</string>
-    <string name="restart">पुनः प्रारंभ करें</string>
-    <string name="status_error">त्रुटि</string>
-    <string name="copy_link">लिंक कॉपी करें</string>
-    <string name="copy_error_report">रिपोर्ट कॉपी करें</string>
-    <string name="export_to_clipboard">क्लिपबोर्ड पर निर्यात करें</string>
-    <string name="import_from_clipboard">आयात करें</string>
-    <string name="template_exported">%1$d टेम्पलेट निर्यात किए गए</string>
-    <string name="template_imported">%1$d टेम्पलेट आयात किए गए</string>
-    <string name="download_task_count">%1$d डाउनलोड कार्य</string>
-    <string name="recently_added">हाल ही में जोड़े गए</string>
-    <string name="delete_multiple_items_msg">अपने डाउनलोड इतिहास से %1$d आइटम को स्थायी रूप से हटाएं?</string>
     <string name="check_for_updates">अपडेट की जांच करें</string>
     <string name="check_for_updates_desc">GitHub पर स्वचालित रूप से नवीनतम संस्करण की जांच करें</string>
     <string name="app_up_to_date">वर्तमान संस्करण अद्यतन है</string>
     <string name="app_update_failed">नवीनतम संस्करण में अपडेट करने में विफल</string>
     <string name="update">अपडेट करें</string>
-    <string name="clear_temp_files">अस्थायी फ़ाइलें साफ़ करें</string>
-    <string name="clear_temp_files_desc">अस्थायी डायरेक्टरी से सभी अस्थायी फ़ाइलें हटाएं</string>
-    <string name="clear_temp_files_count">%1$d अस्थायी फ़ाइलें हटाई गईं</string>
     <string name="telegram_channel">Telegram</string>
-    <string name="matrix_space">Matrix</string>
     <string name="sponsor">स्पॉन्सर करें</string>
-    <string name="sponsor_desc">GitHub पर स्पॉन्सर करके इस ऐप का समर्थन करें</string>
-    <string name="sponsor_msg">BlueIris भविष्य में सभी के लिए हमेशा मुफ़्त और ओपन सोर्स रहेगा। यदि आप इसे पसंद करते हैं, तो कृपया GitHub पर मुझे स्पॉन्सर करने पर विचार करें!</string>
-    <string name="feedback">फ़ीडबैक</string>
+    <string name="sponsor_msg">Apex भविष्य में सभी के लिए हमेशा मुफ़्त और ओपन सोर्स रहेगा। यदि आप इसे पसंद करते हैं, तो कृपया GitHub पर मुझे स्पॉन्सर करने पर विचार करें!</string>
     <string name="sponsors">स्पॉन्सर</string>
     <string name="instagram">Instagram</string>
     <string name="instagram_desc">अधिक अपडेट के लिए डेवलपर को Instagram पर फ़ॉलो करें</string>
@@ -195,59 +68,25 @@
     <string name="dynamic_color">डायनेमिक रंग</string>
     <string name="dynamic_color_desc">वॉलपेपर से रंगों को ऐप थीम पर लागू करें</string>
     <string name="website">वेबसाइट</string>
-    <string name="look_and_feel"><![CDATA[दिखावट & अनुभव]]></string>
-    <string name="interface_and_interaction"><![CDATA[इंटरफ़ेस & इंटरेक्शन]]></string>
+    <string name="look_and_feel">दिखावट &amp; अनुभव</string>
     <string name="auto_update">ऑटो अपडेट</string>
     <string name="suggested">सुझाया गया</string>
     <string name="all_languages">सभी भाषाएं</string>
     <string name="trouble_shooting">समस्या निवारण</string>
     <string name="issue_tracker">इश्यू ट्रैकर</string>
-    <string name="trouble_shooting_desc">सामान्य त्रुटियों को ठीक करें और ज्ञात समस्याओं की जांच करें</string>
     <string name="issue_tracker_hint">किसी त्रुटि का सामना करना पड़ा? नई समस्या की रिपोर्ट करने से पहले, कृपया हमारे इश्यू ट्रैकर में खोजें। कई सामान्य समस्याओं का वहां पहले ही समाधान और दस्तावेजीकरण किया जा चुका है।</string>
-    <string name="short_url">छोटा URL</string>
-    <string name="security">सुरक्षा</string>
-    <string name="qr_code">क्यूआर कोड</string>
     <string name="menu">मेनू</string>
-    <string name="scan_qr_code">क्यूआर कोड स्कैन करें</string>
-    <string name="qr_code_generator">क्यूआर कोड जनरेटर</string>
-    <string name="costume_qr_code">कस्टम क्यूआर कोड</string>
     <string name="scan">स्कैन करें</string>
-    <string name="generate">जनरेट करें</string>
-    <string name="costume">कस्टम</string>
-    <string name="scan_history">स्कैन इतिहास</string>
-    <string name="no_scan_history_yet">अभी तक कोई स्कैन इतिहास नहीं है</string>
-    <string name="scan_code">कोड स्कैन करें</string>
-    <string name="scanned_by_links">BlueIris द्वारा स्कैन किया गया</string>
-    <string name="scan_qr_instruction">कैमरा का उपयोग करके क्यूआर कोड स्कैन करें या गैलरी से आयात करें</string>
-    <string name="scan_now">अभी स्कैन करें</string>
-    <string name="scanned_content">स्कैन की गई सामग्री</string>
-    <string name="feature_currently_unavailable">यह सुविधा वर्तमान में अनुपलब्ध है।</string>
     <string name="contact">संपर्क करें</string>
-    <string name="contact_desc">BlueIris में नई सुविधाएँ जोड़ने के लिए डेवलपर से संपर्क करें</string>
-    <string name="links_issue_tracker">BlueIris इश्यू ट्रैकर</string>
-    <string name="enter_url_error">कृपया एक URL दर्ज करें</string>
-    <string name="invalid_url_format">अमान्य URL फ़ॉर्मेट। कृपया एक वैध वेब पता दर्ज करें (जैसे example.com)।</string>
-    <string name="copied_to_clipboard">क्लिपबोर्ड पर कॉपी किया गया</string>
+    <string name="contact_desc">Apex में नई सुविधाएँ जोड़ने के लिए डेवलपर से संपर्क करें</string>
+    <string name="links_issue_tracker">Apex इश्यू ट्रैकर</string>
     <string name="clear_history">इतिहास साफ़ करें</string>
-    <string name="no_qr_found_in_image">चयनित छवि में कोई क्यूआर कोड नहीं मिला</string>
-    <string name="copy">कॉपी करें</string>
-    <string name="destination">गंतव्य</string>
-    <string name="source">स्रोत</string>
-    <string name="generate_qr_for">के लिए क्यूआर कोड जनरेट करें...</string>
-    <string name="enter_text_or_url">टेक्स्ट या URL दर्ज करें</string>
-    <string name="enter_text_above_to_generate">जनरेट करने के लिए ऊपर टेक्स्ट दर्ज करें</string>
-    <string name="save_qr_code">क्यूआर कोड सहेजें</string>
-    <string name="url_placeholder">http://example.com</string>
     <string name="contact_developer">डेवलपर से संपर्क करें</string>
     <string name="contact_developer_confirm">क्या आप डेवलपर से संपर्क करने के लिए Gmail खोलना चाहते हैं?</string>
     <string name="github_stars">GitHub स्टार्स</string>
     <string name="github_stars_desc">GitHub पर स्टार देकर इस ऐप का समर्थन करें</string>
     <string name="package_name">पैकेज का नाम</string>
-    <string name="unshorten">URL अनशॉर्ट करें</string>
-    <string name="disclaimer_text">हम यह ऐप \"जैसी है वैसी\" प्रदान करते हैं, जिसका अर्थ है कि हम चीजों को सुचारू रूप से चलाने के लिए अपना सर्वश्रेष्ठ प्रयास करते हैं, लेकिन हम यह वादा नहीं कर सकते कि यह हमेशा सही या त्रुटि-मुक्त होगी। ऐप का उपयोग करके, आप सहमति व्यक्त करते हैं और समझते हैं कि आप इसका उपयोग अपने जोखिम पर कर रहे हैं।</string>
     <string name="privacy_policy">गोपनीयता नीति</string>
-    <string name="view_licenses">लाइसेंस देखें</string>
-    <string name="licenses">लाइसेंस</string>
     <string name="done">हो गया</string>
     <string name="downloading">डाउनलोड हो रहा है...</string>
     <string name="downloaded_successfully">सफलतापूर्वक डाउनलोड किया गया</string>
@@ -258,37 +97,18 @@
     <string name="early_access">अग्रिम पहुँच</string>
     <string name="pre_release_desc">नई सुविधाओं और परिवर्तनों का पूर्वावलोकन करने के लिए प्री-रिलीज़ बिल्ड इंस्टॉल करें।\n\nइन संस्करणों में कुछ अस्थिरता होगी, इसलिए यदि आपको ऐप को बेहतर बनाने में हमारी मदद करने के लिए कोई समस्या आती है तो कृपया हमें फ़ीडबैक देने में संकोच न करें।</string>
     <string name="update_directory">अपडेट डायरेक्टरी</string>
-
-    
-    <!-- Navigation Tabs & Toasts -->
     <string name="nav_stop">रोकें</string>
     <string name="nav_clean">सफ़ाई</string>
     <string name="nav_apps">ऐप्स</string>
     <string name="nav_menu">मेनू</string>
     <string name="toast_all_cache_cleaned">सभी कैश फ़ाइलें पहले से ही साफ़ हैं (0 KB)</string>
     <string name="toast_all_bg_apps_stopped">सभी बैकग्राउंड ऐप्स पहले से रोक दिए गए हैं</string>
-    <string name="toast_selected_apps_no_cache">चयनित ऐप्स में कोई कैश नहीं है (0 KB)</string>
-
-    <!-- AppsScreen Filter & Sort -->
-    <string name="app_filter_all">सभी ऐप्स</string>
-    <string name="app_filter_user">उपयोगकर्ता ऐप्स</string>
-    <string name="app_filter_system">सिस्टम ऐप्स</string>
-    <string name="app_sort_by_name">नाम के अनुसार</string>
-    <string name="app_sort_by_date">तारीख के अनुसार</string>
-    <string name="app_sort_by_size">आकार के अनुसार</string>
     <string name="apps_screen_title">ऐप्स</string>
     <string name="apps_listed_count">%1$d ऐप्स सूचीबद्ध हैं</string>
-    <string name="cd_filter_apps">ऐप्स फ़िल्टर करें</string>
-    <string name="cd_sort_apps">ऐप्स क्रमबद्ध करें</string>
     <string name="apps_no_apps_found">इस फ़िल्टर के लिए कोई ऐप नहीं मिला</string>
     <string name="cd_clear_selection">चयन साफ़ करें</string>
-    <string name="apps_selected_count">चयनित: %1$d</string>
-    <string name="cd_clean_selected_apps">चयनित ऐप्स साफ़ करें</string>
-    <string name="cd_selected">चयनित</string>
     <string name="app_size_prefix">आकार: %1$s</string>
     <string name="cd_go_to_details">विवरण पर जाएं</string>
-
-    <!-- App Detail Screen Strings -->
     <string name="app_detail_version">संस्करण: %1$s</string>
     <string name="app_detail_apk_size">APK आकार</string>
     <string name="app_detail_install_date">स्थापना की तारीख</string>
@@ -300,15 +120,9 @@
     <string name="app_detail_app_info">ऐप जानकारी</string>
     <string name="toast_cannot_launch_app">इस एप्लिकेशन को शुरू नहीं किया जा सकता</string>
     <string name="toast_cannot_open_store">स्टोर पेज नहीं खोला जा सकता</string>
-
-    <!-- Speed & Performance Strings -->
     <string name="performance_and_speed_title">प्रदर्शन और गति</string>
-
-    <!-- Stop Process Strings -->
     <string name="stop_process_title">रोकने की प्रक्रिया</string>
     <string name="force_stop_mode_title">बलपूर्वक रोकने का मोड</string>
-
-    <!-- Clean Process Strings -->
     <string name="clean_process_title">सफ़ाई प्रक्रिया</string>
     <string name="cleaning_mode_title">सफ़ाई मोड</string>
     <string name="cleaning_mode_manual">मैनुअल</string>
@@ -316,8 +130,6 @@
     <string name="cleaning_mode_ask_each_time">हर बार पूछें</string>
     <string name="ignore_tiny_cache_title">छोटे कैश को नजरअंदाज करें</string>
     <string name="ignore_tiny_cache_desc">3 MB से कम कैश वाले ऐप्स को छोड़ दें</string>
-
-    <!-- StopScreen Strings -->
     <string name="stop_title">रोकें</string>
     <string name="stop_history_icon_desc">इतिहास</string>
     <string name="stop_gauge_apps">ऐप्स</string>
@@ -340,15 +152,10 @@
     <string name="stop_dialog_close">बंद करें</string>
     <string name="stop_dialog_running_apps_title">चल रहे ऐप्स (%1$d)</string>
     <string name="stop_dialog_no_running_apps">कोई सक्रिय बैकग्राउंड ऐप नहीं है।</string>
-
-    <!-- CleanScreen Strings -->
     <string name="clean_title">सफ़ाई</string>
     <string name="clean_history_icon_desc">इतिहास</string>
-    <string name="clean_gauge_unit_mb">MB</string>
     <string name="clean_gauge_system_cleaned">सिस्टम साफ़ हो गया</string>
     <string name="clean_gauge_can_be_cleared">साफ़ किया जा सकता है</string>
-    <string name="clean_gauge_zero_mb">0 MB</string>
-    <string name="clean_gauge_current_mb">%1$s MB</string>
     <string name="clean_stat_total">कुल</string>
     <string name="clean_stat_used">प्रयुक्त</string>
     <string name="clean_stat_cache">कैश</string>
@@ -365,8 +172,6 @@
     <string name="clean_dialog_live_cache_title">लाइव कैश मॉनिटर</string>
     <string name="clean_dialog_live_cache_desc">लाइव कैश आकार: %1$s।</string>
     <string name="clean_dialog_ok">ठीक है</string>
-
-    <!-- Sub-screens Extracted Strings -->
     <string name="cd_back">वापस</string>
     <string name="cd_broom_icon">झाडू का आइकन</string>
     <string name="cd_whitelist_icon">व्हाइटलिस्ट आइकन</string>
@@ -377,15 +182,13 @@
     <string name="cd_accessibility_icon">एक्सेसिबिलिटी आइकन</string>
     <string name="cd_success_icon">सफलता आइकन</string>
     <string name="cd_usage_access_icon">उपयोग पहुंच आइकन</string>
-    <string name="cd_blueiris_app_icon">BlueIris आइकन</string>
+    <string name="cd_apex_app_icon">Apex आइकन</string>
     <string name="cd_notifications_icon">सूचना आइकन</string>
     <string name="cd_checkmark_icon">चेक चिह्न</string>
-
     <string name="analyze_screen_title">विश्लेषण</string>
     <string name="analyze_cache_apps_count">कैश (%1$d ऐप्स)</string>
     <string name="analyze_no_cache_found">कोई कैश फ़ाइल नहीं मिली</string>
     <string name="analyze_clear_button">साफ़ करें</string>
-
     <string name="whitelist_title">व्हाइटलिस्ट</string>
     <string name="whitelist_empty_avoid_stop">रोकने से बचने के लिए ऐप जोड़ें</string>
     <string name="whitelist_empty_avoid_clean">कैश सफ़ाई से बचने के लिए ऐप जोड़ें</string>
@@ -394,10 +197,8 @@
     <string name="whitelist_dialog_all_apps_added">सभी ऐप्स पहले से ही व्हाइटलिस्ट में हैं।</string>
     <string name="whitelist_dialog_add_btn">जोड़ें</string>
     <string name="whitelist_dialog_add_count_btn">जोड़ें (%1$d)</string>
-
     <string name="history_title">इतिहास</string>
     <string name="history_today_stopped">आज रोके गए</string>
-    <string name="history_no_apps_stopped_today">आज कोई ऐप नहीं रोका गया</string>
     <string name="history_today_cleared">आज साफ़ किए गए</string>
     <string name="history_period_today">आज</string>
     <string name="history_period_yesterday">कल</string>
@@ -413,29 +214,23 @@
     <string name="history_dialog_clear_stop_msg">क्या आप रोकने का इतिहास मिटाना चाहते हैं?</string>
     <string name="history_stop_count_singular">%1$d बार</string>
     <string name="history_stop_count_plural">%1$d बार</string>
-
     <string name="done_count_apps_singular">1 ऐप</string>
     <string name="done_count_apps_plural">%1$d ऐप्स</string>
     <string name="done_stopped_subtitle">रोके गए: %1$s</string>
     <string name="done_cleaned_subtitle">साफ़ किए गए: %1$s</string>
     <string name="done_button">संपन्न</string>
-
     <string name="permission_title">अनुमति</string>
     <string name="accessibility_permission_title">एक्सेसिबिलिटी सेवा API</string>
     <string name="accessibility_permission_desc1">यह ऐप ऑटोमेशन के लिए API का उपयोग करता है।</string>
     <string name="accessibility_permission_desc2">डेटा कभी भी एकत्र या साझा नहीं किया जाता है।</string>
     <string name="btn_cancel_uppercase">रद्द करें</string>
     <string name="btn_continue_uppercase">जारी रखें</string>
-
     <string name="permission_success_title">सफल!</string>
     <string name="permission_success_desc1">बधाई हो, आप तैयार हैं।</string>
     <string name="permission_success_desc2">हम व्यक्तिगत जानकारी एकत्र नहीं करते हैं।</string>
-
     <string name="usage_access_permission_title">उपयोग पहुंच अनुमति</string>
     <string name="usage_access_permission_desc1">उपयोग डेटा तक पहुंच की अनुमति आवश्यक है।</string>
     <string name="usage_access_permission_desc2">सक्षम करने के लिए नीचे दिए गए बटन पर क्लिक करें।</string>
-
-    <string name="onboarding_privacy_note">आगे बढ़कर, आप स्वीकार करते हैं BlueIris %1$s</string>
     <string name="btn_next">अगला</string>
     <string name="btn_get_started">शुरू करें</string>
     <string name="onboarding_page1_desc">सभी ऐप्स का कैश साफ़ करें और अधिक स्पेस पाएं।</string>

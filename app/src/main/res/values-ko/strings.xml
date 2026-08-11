@@ -1,176 +1,49 @@
-﻿<resources>
-    <string name="app_name">BlueIris</string>
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Apex</string>
     <string name="accessibility_service_description">이 서비스는 캐시를 정리하고 백그라운드 앱을 안전하고 효율적으로 종료하기 위해 Android 앱 설정에서의 탐색을 자동화합니다.</string>
-    <string name="clear_cache">캐시 정리</string>
-    <string name="storage">저장공간</string>
-    <string name="home">홈</string>
     <string name="apps">앱</string>
     <string name="analyze">분석</string>
-    <string name="permission_required">권한 필요</string>
-    <string name="cleaning_cache">캐시 정리 중...</string>
     <string name="settings">설정</string>
-    <string name="download_settings_desc">General</string>
     <string name="download">다운로드</string>
-    <string name="url_empty">링크는 비어 있을 수 없습니다</string>
-    <string name="reset_success">설치된 버전을 성공적으로 제거했습니다</string>
-    <string name="reset_failed">설치된 버전을 제거하지 못했습니다</string>
-    <string name="permission_denied">권한이 거부되었습니다</string>
-    <string name="download_success_msg">다운로드 완료</string>
-    <string name="download_error_msg">파일을 다운로드할 수 없습니다</string>
-    <string name="download_start_msg">\"%1$s\" 다운로드 중</string>
     <string name="general_settings">일반</string>
     <string name="language">표시 언어</string>
-    <string name="language_settings">표시 언어 설정</string>
-    <string name="task_running">기존 다운로드 작업이 이미 실행 중입니다</string>
-    <string name="paste_msg">URL 붙여넣기</string>
-    <string name="paste_fail_msg">클립보드에서 URL을 찾을 수 없습니다</string>
-    <string name="delete_info">삭제하시겠습니까?</string>
-    <string name="delete_info_msg">다운로드 기록에서 \"%1$s\"을(를) 영구히 삭제하시겠습니까?</string>
     <string name="confirm">확인</string>
     <string name="dismiss">취소</string>
-    <string name="downloads_history">다운로드</string>
-    <string name="audio">오디오</string>
-    <string name="link_copied">링크가 클립보드에 복사되었습니다</string>
-    <string name="open_url">링크 열기</string>
-    <string name="remove">삭제</string>
-    <string name="delete_file">파일 삭제</string>
     <string name="about">정보</string>
-    <string name="about_page">버전, 피드백, 자동 업데이트</string>
     <string name="back">뒤로</string>
     <string name="version">버전</string>
     <string name="release_desc">변경 사항 및 새 버전 확인</string>
     <string name="release">최신 릴리스</string>
     <string name="readme_desc">GitHub 저장소 및 README 확인</string>
     <string name="readme" translatable="false">README</string>
-    <string name="video">동영상</string>
-    <string name="image">이미지</string>
-    <string name="image_format">이미지 형식</string>
-    <string name="image_format_best">최고 (원본)</string>
-    <string name="image_format_jpg">JPEG (.jpg)</string>
-    <string name="image_format_png">PNG (.png)</string>
-    <string name="image_format_webp">WebP (.webp)</string>
-    <string name="image_quality">이미지 화질</string>
-    <string name="image_quality_best">최고 화질 (원본-100%)</string>
-    <string name="image_quality_high">높음 (85%)</string>
-    <string name="image_quality_medium">중간 (70%)</string>
-    <string name="image_quality_low">낮음 (50%)</string>
-    <string name="image_format_desc">다운로드한 이미지의 선호하는 출력 형식</string>
-    <string name="image_preset_desc">형식: %1$s, 화질: %2$s</string>
-    <string name="video_image_tab">동영상 / 이미지</string>
-    <string name="checked">선택됨</string>
     <string name="credits">크레딧</string>
     <string name="credits_desc">크레딧 및 자유 소프트웨어</string>
-    <string name="edit">편집</string>
-    <string name="start_execute">명령 실행 시작</string>
-    <string name="advanced_settings">고급</string>
-    <string name="print_details">상세 출력</string>
-    <string name="print_details_desc">다운로드 시 상세 메시지 출력</string>
     <string name="display">디스플레이</string>
     <string name="display_settings">다크 테마, 동적 색상, 언어</string>
     <string name="dark_theme">다크 테마</string>
     <string name="follow_system">시스템</string>
-    <string name="follow_system_desc">시스템 테마 설정 따르기</string>
-    <string name="dark_theme_on_desc">항상 다크 테마 사용</string>
-    <string name="dark_theme_off_desc">항상 라이트 테마 사용</string>
     <string name="on">켜짐</string>
     <string name="off">꺼짐</string>
     <string name="cancel">취소</string>
-    <string name="settings_before_download">다운로드 전 설정</string>
-    <string name="settings_before_download_desc">다운로드하기 전에 기본 설정 구성</string>
-    <string name="settings_before_download_text">이 다운로드 조정</string>
-    <string name="error_copied">오류 보고서가 클립보드에 복사되었습니다</string>
-    <string name="thumbnail">썸네일</string>
     <string name="paste">붙여넣기</string>
-    <string name="edit_template_desc">출력 경로와 URL은 앱에서 추가됩니다.</string>
-    <string name="not_convert">변환하지 않음</string>
-    <string name="convert_to">%1$s(으)로 변환</string>
-    <string name="format">형식</string>
-    <string name="best_quality">최고 화질</string>
-    <string name="best_audio_quality">최고 음질</string>
-    <string name="not_specified">지정되지 않음 (기본값)</string>
-    <string name="preferred_format_desc">여러 개가 제공되는 경우 선호하는 형식</string>
-    <string name="start_download">다운로드</string>
     <string name="close">닫기</string>
-    <string name="close_never_show_again">다시 표시하지 않음</string>
-    <string name="user_guide">사용자 가이드</string>
-    <string name="open_settings">설정 열기</string>
-    <string name="paste_desc">클립보드에서 동영상 링크를 가져오려면 \"붙여넣기\"를 클릭하세요.</string>
-    <string name="download_desc">그런 다음 설정을 조정한 후 \"다운로드\"를 클릭하세요.</string>
-    <string name="defaults">기본값</string>
-    <string name="channel_name">다운로드</string>
-    <string name="channel_description">다운로드된 파일 및 진행 상황 알림</string>
-    <string name="download_finish_notification">다운로드가 완료되었습니다. 탭하여 열기.</string>
-    <string name="execute_command_notification">사용자 지정 명령 실행 중…</string>
-    <string name="battery_settings_desc">백그라운드에서 다운로드하려면 시스템 설정에서 이 앱의 배터리 사용량을 \"제한 없음\"으로 설정하세요.</string>
-    <string name="options">옵션</string>
-    <string name="additional_settings">추가 설정</string>
-    <string name="share_fail_msg">공유된 콘텐츠에서 URL을 일치시킬 수 없습니다</string>
-    <string name="share_success_msg">공유된 콘텐츠에서 동영상 링크 읽는 중…</string>
-    <string name="show_more_actions">더 많은 작업 보기</string>
-    <string name="download_notification">다운로드 알림</string>
-    <string name="download_notification_desc">다운로드된 파일 및 진행 상황 알림</string>
-    <string name="fetching_playlist_info">재생목록 정보 가져오는 중…</string>
-    <string name="from">시작</string>
     <string name="to">끝</string>
-    <string name="invalid_index_range">유효하지 않은 인덱스 범위</string>
-    <string name="playlist_indicator_text">재생목록 다운로드 중 (%1$d/%2$d)…</string>
-    <string name="audio_directory">오디오 폴더</string>
-    <string name="download_directory">다운로드 디렉터리</string>
-    <string name="download_directory_desc">Select where to save files</string>
-    <string name="subdirectory">하위 디렉터리에 저장</string>
-    <string name="subdirectory_desc">각각의 필드 이름으로 지정된 폴더에 파일 저장</string>
-    <string name="permission_issue">저장소 권한 문제</string>
-    <string name="permission_issue_desc">Download/ 및 Documents/ 외의 디렉터리는 지원되지 않습니다</string>
-    <string name="battery_configuration">배터리 구성</string>
-    <string name="battery_configuration_desc">백그라운드에서 다운로드하려면 이 앱의 배터리 최적화를 무시하세요</string>
-    <string name="service_title">BlueIris에서 다운로드 중…</string>
-    <string name="unknown_error">알 수 없는 오류</string>
     <string name="translate">번역</string>
     <string name="translate_desc">Hosted Weblate에서 이 앱의 번역을 도와주세요</string>
-    <string name="prefix">접두사</string>
-    <string name="new_template">새 템플릿</string>
-    <string name="template_label">레이블</string>
-    <string name="remove_template">삭제하시겠습니까?</string>
-    <string name="remove_template_desc">명령 템플릿에서 \"%1$s\"을(를) 영구히 삭제하시겠습니까?</string>
-    <string name="template_selection">템플릿 선택</string>
-    <string name="downloading_indicator_text">다운로드 진행 중…</string>
-    <string name="task_canceled">다운로드 작업 취소됨</string>
     <string name="github_issue">GitHub 이슈</string>
     <string name="github_issue_desc">버그 보고 또는 기능 요청을 위한 이슈 제출</string>
     <string name="info_copied">정보가 클립보드에 복사되었습니다</string>
     <string name="enable_auto_update">자동 업데이트 활성화</string>
     <string name="update_channel">업데이트 채널</string>
-    <string name="update_channel_desc">새로운 기능과 변경 사항을 미리 보려면 사전 릴리스 빌드를 설치하세요.\n\n이러한 버전에는 약간의 불안정성이 있을 수 있으므로 앱 개선에 도움이 되도록 문제가 발생하면 주저하지 말고 피드백을 보내주세요.</string>
-    <string name="status_enqueued">대기 중</string>
-    <string name="status_completed">완료됨</string>
-    <string name="status_downloading">다운로드 중</string>
-    <string name="status_canceled">취소됨</string>
-    <string name="open_file">파일 열기</string>
-    <string name="restart">다시 시작</string>
-    <string name="status_error">오류</string>
-    <string name="copy_link">링크 복사</string>
-    <string name="copy_error_report">보고서 복사</string>
-    <string name="export_to_clipboard">클립보드로 내보내기</string>
-    <string name="import_from_clipboard">클립보드에서 가져오기</string>
-    <string name="template_exported">%1$d개의 템플릿을 내보냈습니다</string>
-    <string name="template_imported">%1$d개의 템플릿을 가져왔습니다</string>
-    <string name="download_task_count">%1$d개의 다운로드 작업</string>
-    <string name="recently_added">최근 추가됨</string>
-    <string name="delete_multiple_items_msg">다운로드 기록에서 %1$d개의 항목을 영구히 삭제하시겠습니까?</string>
     <string name="check_for_updates">업데이트 확인</string>
     <string name="check_for_updates_desc">GitHub에서 최신 버전을 자동으로 확인</string>
     <string name="app_up_to_date">현재 버전이 최신 상태입니다</string>
     <string name="app_update_failed">최신 버전으로 업데이트하지 못했습니다</string>
     <string name="update">업데이트</string>
-    <string name="clear_temp_files">임시 파일 지우기</string>
-    <string name="clear_temp_files_desc">임시 디렉터리에서 모든 임시 파일 삭제</string>
-    <string name="clear_temp_files_count">%1$d개의 임시 파일을 삭제했습니다</string>
     <string name="telegram_channel">Telegram</string>
-    <string name="matrix_space">Matrix</string>
     <string name="sponsor">스폰서</string>
-    <string name="sponsor_desc">GitHub에서 스폰서가 되어 이 앱을 지원하세요</string>
-    <string name="sponsor_msg">BlueIris는 앞으로도 모두를 위해 항상 무료이자 오픈 소스로 유지될 것입니다. 마음에 드신다면 GitHub에서 저를 후원해 보세요!</string>
-    <string name="feedback">피드백</string>
+    <string name="sponsor_msg">Apex는 앞으로도 모두를 위해 항상 무료이자 오픈 소스로 유지될 것입니다. 마음에 드신다면 GitHub에서 저를 후원해 보세요!</string>
     <string name="sponsors">스폰서</string>
     <string name="instagram">Instagram</string>
     <string name="instagram_desc">더 많은 업데이트를 받으려면 Instagram에서 개발자를 팔로우하세요</string>
@@ -195,59 +68,25 @@
     <string name="dynamic_color">동적 색상</string>
     <string name="dynamic_color_desc">배경화면의 색상을 앱 테마에 적용</string>
     <string name="website">웹사이트</string>
-    <string name="look_and_feel"><![CDATA[모양 & 느낌]]></string>
-    <string name="interface_and_interaction"><![CDATA[인터페이스 & 상호작용]]></string>
+    <string name="look_and_feel">모양 &amp; 느낌</string>
     <string name="auto_update">자동 업데이트</string>
     <string name="suggested">추천</string>
     <string name="all_languages">모든 언어</string>
     <string name="trouble_shooting">문제 해결</string>
     <string name="issue_tracker">이슈 트래커</string>
-    <string name="trouble_shooting_desc">일반적인 오류를 수정하고 알려진 문제를 확인합니다</string>
     <string name="issue_tracker_hint">오류가 발생했나요? 새 이슈를 보고하기 전에 이슈 트래커를 검색해 보세요. 많은 일반적인 문제가 이미 해결되고 문서화되어 있습니다.</string>
-    <string name="short_url">단축 URL</string>
-    <string name="security">보안</string>
-    <string name="qr_code">QR 코드</string>
     <string name="menu">메뉴</string>
-    <string name="scan_qr_code">QR 코드 스캔</string>
-    <string name="qr_code_generator">QR 코드 생성기</string>
-    <string name="costume_qr_code">사용자 지정 QR 코드</string>
     <string name="scan">스캔</string>
-    <string name="generate">생성</string>
-    <string name="costume">사용자 지정</string>
-    <string name="scan_history">스캔 기록</string>
-    <string name="no_scan_history_yet">아직 스캔 기록이 없습니다</string>
-    <string name="scan_code">코드 스캔</string>
-    <string name="scanned_by_links">BlueIris에서 스캔함</string>
-    <string name="scan_qr_instruction">카메라 또는 갤러리에서 가져와 QR 코드를 스캔하세요</string>
-    <string name="scan_now">지금 스캔</string>
-    <string name="scanned_content">스캔된 콘텐츠</string>
-    <string name="feature_currently_unavailable">현재 사용할 수 없습니다.</string>
     <string name="contact">문의하기</string>
-    <string name="contact_desc">BlueIris에 새로운 기능을 추가하려면 개발자에게 문의하세요</string>
-    <string name="links_issue_tracker">BlueIris 이슈 트래커</string>
-    <string name="enter_url_error">URL을 입력해 주세요</string>
-    <string name="invalid_url_format">유효하지 않은 URL 형식입니다. 올바른 웹 주소를 입력해 주세요 (예: example.com).</string>
-    <string name="copied_to_clipboard">클립보드에 복사되었습니다</string>
+    <string name="contact_desc">Apex에 새로운 기능을 추가하려면 개발자에게 문의하세요</string>
+    <string name="links_issue_tracker">Apex 이슈 트래커</string>
     <string name="clear_history">기록 지우기</string>
-    <string name="no_qr_found_in_image">선택한 이미지에서 QR 코드를 찾을 수 없습니다</string>
-    <string name="copy">복사</string>
-    <string name="destination">저장 위치</string>
-    <string name="source">원본</string>
-    <string name="generate_qr_for">다음 대상의 QR 코드 생성...</string>
-    <string name="enter_text_or_url">텍스트 또는 URL 입력</string>
-    <string name="enter_text_above_to_generate">생성하려면 위에 텍스트를 입력하세요</string>
-    <string name="save_qr_code">QR 코드 저장</string>
-    <string name="url_placeholder">http://example.com</string>
     <string name="contact_developer">개발자에게 문의</string>
     <string name="contact_developer_confirm">개발자에게 문의하기 위해 Gmail을 여시겠습니까?</string>
     <string name="github_stars">GitHub 스타</string>
     <string name="github_stars_desc">GitHub에서 스타를 눌러 이 앱을 지원하세요</string>
     <string name="package_name">패키지 이름</string>
-    <string name="unshorten">단축 URL 해제</string>
-    <string name="disclaimer_text">이 앱은 \"있는 그대로\" 제공됩니다. 원활한 작동을 위해 최선을 다하고 있지만, 항상 완벽하거나 오류가 없음을 보장할 수는 없습니다. 앱을 사용함으로써 귀하는 이에 동의하며 스스로의 책임 하에 사용하는 것임을 이해합니다.</string>
     <string name="privacy_policy">개인정보 처리방침</string>
-    <string name="view_licenses">라이선스 보기</string>
-    <string name="licenses">라이선스</string>
     <string name="done">완료</string>
     <string name="downloading">다운로드 중...</string>
     <string name="downloaded_successfully">성공적으로 다운로드됨</string>
@@ -258,37 +97,18 @@
     <string name="early_access">사전 체험판</string>
     <string name="pre_release_desc">새로운 기능과 변경 사항을 미리 보려면 사전 릴리스 빌드를 설치하세요.\n\n이러한 버전에는 약간의 불안정성이 있을 수 있으므로 앱 개선에 도움이 되도록 문제가 발생하면 주저하지 말고 피드백을 보내주세요.</string>
     <string name="update_directory">업데이트 디렉터리</string>
-
-    
-    <!-- Navigation Tabs & Toasts -->
     <string name="nav_stop">중지</string>
     <string name="nav_clean">청소</string>
     <string name="nav_apps">앱</string>
     <string name="nav_menu">메뉴</string>
     <string name="toast_all_cache_cleaned">모든 캐시가 이미 정리되었습니다 (0 KB)</string>
     <string name="toast_all_bg_apps_stopped">모든 백그라운드 앱이 이미 중지되었습니다</string>
-    <string name="toast_selected_apps_no_cache">선택한 앱에 캐시가 없습니다 (0 KB)</string>
-
-    <!-- AppsScreen Filter & Sort -->
-    <string name="app_filter_all">모든 앱</string>
-    <string name="app_filter_user">사용자 앱</string>
-    <string name="app_filter_system">시스템 앱</string>
-    <string name="app_sort_by_name">이름순</string>
-    <string name="app_sort_by_date">날짜순</string>
-    <string name="app_sort_by_size">크기순</string>
     <string name="apps_screen_title">앱</string>
     <string name="apps_listed_count">%1$d개 앱 목록</string>
-    <string name="cd_filter_apps">앱 필터링</string>
-    <string name="cd_sort_apps">앱 정렬</string>
     <string name="apps_no_apps_found">이 필터에 해당하는 앱이 없습니다</string>
     <string name="cd_clear_selection">선택 해제</string>
-    <string name="apps_selected_count">선택됨: %1$d</string>
-    <string name="cd_clean_selected_apps">선택한 앱 정리</string>
-    <string name="cd_selected">선택됨</string>
     <string name="app_size_prefix">크기: %1$s</string>
     <string name="cd_go_to_details">상세 보기</string>
-
-    <!-- App Detail Screen Strings -->
     <string name="app_detail_version">버전: %1$s</string>
     <string name="app_detail_apk_size">APK 크기</string>
     <string name="app_detail_install_date">설치 날짜</string>
@@ -300,15 +120,9 @@
     <string name="app_detail_app_info">앱 정보</string>
     <string name="toast_cannot_launch_app">이 애플리케이션을 실행할 수 없습니다</string>
     <string name="toast_cannot_open_store">스토어 페이지를 열 수 없습니다</string>
-
-    <!-- Speed & Performance Strings -->
     <string name="performance_and_speed_title">성능 및 속도</string>
-
-    <!-- Stop Process Strings -->
     <string name="stop_process_title">중지 프로세스</string>
     <string name="force_stop_mode_title">강제 중지 모드</string>
-
-    <!-- Clean Process Strings -->
     <string name="clean_process_title">청소 프로세스</string>
     <string name="cleaning_mode_title">청소 모드</string>
     <string name="cleaning_mode_manual">수동</string>
@@ -316,8 +130,6 @@
     <string name="cleaning_mode_ask_each_time">매번 확인</string>
     <string name="ignore_tiny_cache_title">작은 캐시 무시</string>
     <string name="ignore_tiny_cache_desc">3 MB 미만의 캐시를 가진 앱 제외</string>
-
-    <!-- StopScreen Strings -->
     <string name="stop_title">중지</string>
     <string name="stop_history_icon_desc">기록</string>
     <string name="stop_gauge_apps">앱</string>
@@ -340,15 +152,10 @@
     <string name="stop_dialog_close">닫기</string>
     <string name="stop_dialog_running_apps_title">실행 중인 앱 (%1$d)</string>
     <string name="stop_dialog_no_running_apps">실행 중인 백그라운드 앱이 없습니다.</string>
-
-    <!-- CleanScreen Strings -->
     <string name="clean_title">청소</string>
     <string name="clean_history_icon_desc">기록</string>
-    <string name="clean_gauge_unit_mb">MB</string>
     <string name="clean_gauge_system_cleaned">시스템 깨끗함</string>
     <string name="clean_gauge_can_be_cleared">정리 가능</string>
-    <string name="clean_gauge_zero_mb">0 MB</string>
-    <string name="clean_gauge_current_mb">%1$s MB</string>
     <string name="clean_stat_total">전체</string>
     <string name="clean_stat_used">사용됨</string>
     <string name="clean_stat_cache">캐시</string>
@@ -365,8 +172,6 @@
     <string name="clean_dialog_live_cache_title">실시간 캐시 모니터</string>
     <string name="clean_dialog_live_cache_desc">실시간 캐시 크기: %1$s.</string>
     <string name="clean_dialog_ok">확인</string>
-
-    <!-- Sub-screens Extracted Strings -->
     <string name="cd_back">뒤로</string>
     <string name="cd_broom_icon">빗자루 아이콘</string>
     <string name="cd_whitelist_icon">화이트리스트 아이콘</string>
@@ -377,15 +182,13 @@
     <string name="cd_accessibility_icon">접근성 아이콘</string>
     <string name="cd_success_icon">성공 아이콘</string>
     <string name="cd_usage_access_icon">사용 권한 아이콘</string>
-    <string name="cd_blueiris_app_icon">BlueIris 아이콘</string>
+    <string name="cd_apex_app_icon">Apex 아이콘</string>
     <string name="cd_notifications_icon">알림 아이콘</string>
     <string name="cd_checkmark_icon">체크 표시</string>
-
     <string name="analyze_screen_title">분석</string>
     <string name="analyze_cache_apps_count">캐시 (%1$d개 앱)</string>
     <string name="analyze_no_cache_found">캐시 파일을 찾을 수 없습니다</string>
     <string name="analyze_clear_button">정리</string>
-
     <string name="whitelist_title">화이트리스트</string>
     <string name="whitelist_empty_avoid_stop">강제 중지를 방지하려면 앱을 추가하세요</string>
     <string name="whitelist_empty_avoid_clean">캐시 정리를 방지하려면 앱을 추가하세요</string>
@@ -394,10 +197,8 @@
     <string name="whitelist_dialog_all_apps_added">모든 앱이 이미 목록에 있습니다.</string>
     <string name="whitelist_dialog_add_btn">추가</string>
     <string name="whitelist_dialog_add_count_btn">추가 (%1$d)</string>
-
     <string name="history_title">기록</string>
     <string name="history_today_stopped">오늘 중지됨</string>
-    <string name="history_no_apps_stopped_today">오늘 중지된 앱이 없습니다</string>
     <string name="history_today_cleared">오늘 정리됨</string>
     <string name="history_period_today">오늘</string>
     <string name="history_period_yesterday">어제</string>
@@ -413,29 +214,23 @@
     <string name="history_dialog_clear_stop_msg">중지 기록을 삭제하시겠습니까?</string>
     <string name="history_stop_count_singular">%1$d회</string>
     <string name="history_stop_count_plural">%1$d회</string>
-
     <string name="done_count_apps_singular">1개 앱</string>
     <string name="done_count_apps_plural">%1$d개 앱</string>
     <string name="done_stopped_subtitle">중지됨: %1$s</string>
     <string name="done_cleaned_subtitle">정리됨: %1$s</string>
     <string name="done_button">완료</string>
-
     <string name="permission_title">권한</string>
     <string name="accessibility_permission_title">접근성 서비스 API</string>
     <string name="accessibility_permission_desc1">이 앱은 자동으로 캐시를 정리하기 위해 API를 사용합니다.</string>
     <string name="accessibility_permission_desc2">데이터는 수집되거나 공유되지 않습니다.</string>
     <string name="btn_cancel_uppercase">취소</string>
     <string name="btn_continue_uppercase">계속</string>
-
     <string name="permission_success_title">완료!</string>
     <string name="permission_success_desc1">축하합니다. 준비가 되었습니다.</string>
     <string name="permission_success_desc2">개인 정보를 수집하지 않습니다.</string>
-
     <string name="usage_access_permission_title">사용 정보 접근 권한</string>
     <string name="usage_access_permission_desc1">사용 정보 접근 권한이 필요합니다.</string>
     <string name="usage_access_permission_desc2">아래 버튼을 눌러 활성화하세요.</string>
-
-    <string name="onboarding_privacy_note">계속 진행하면 BlueIris 약관에 동의하게 됩니다 %1$s</string>
     <string name="btn_next">다음</string>
     <string name="btn_get_started">시작하기</string>
     <string name="onboarding_page1_desc">모든 앱의 캐시를 정리하고 공간을 확보하세요.</string>

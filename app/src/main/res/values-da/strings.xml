@@ -1,176 +1,49 @@
-﻿<resources>
-    <string name="app_name">BlueIris</string>
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Apex</string>
     <string name="accessibility_service_description">Denne tjeneste automatiserer navigation i Android-appindstillinger for sikkert og effektivt at rydde cache og stoppe baggrundsapps.</string>
-    <string name="clear_cache">Ryd cache</string>
-    <string name="storage">Lager</string>
-    <string name="home">Hjem</string>
     <string name="apps">Apps</string>
     <string name="analyze">Analyser</string>
-    <string name="permission_required">Tilladelse kræves</string>
-    <string name="cleaning_cache">Rydder cache...</string>
     <string name="settings">Indstillinger</string>
-    <string name="download_settings_desc">General</string>
     <string name="download">Download</string>
-    <string name="url_empty">Linket kan ikke være tomt</string>
-    <string name="reset_success">Den installerede version blev fjernet</string>
-    <string name="reset_failed">Kunne ikke fjerne den installerede version</string>
-    <string name="permission_denied">Adgang nægtet</string>
-    <string name="download_success_msg">Download fuldført</string>
-    <string name="download_error_msg">Kunne ikke downloade filen</string>
-    <string name="download_start_msg">Downloader \"%1$s\"</string>
     <string name="general_settings">Generelt</string>
     <string name="language">Visningssprog</string>
-    <string name="language_settings">Indstil visningssprog</string>
-    <string name="task_running">En eksisterende downloadopgave kører allerede</string>
-    <string name="paste_msg">Indsæt URL</string>
-    <string name="paste_fail_msg">Kunne ikke matche URL\'en i udklipsholderen</string>
-    <string name="delete_info">Fjern?</string>
-    <string name="delete_info_msg">Vil du fjerne \"%1$s\" fra din downloadhistorik permanent?</string>
     <string name="confirm">Bekræft</string>
     <string name="dismiss">Annuller</string>
-    <string name="downloads_history">Downloads</string>
-    <string name="audio">Lyd</string>
-    <string name="link_copied">Link kopieret til udklipsholder</string>
-    <string name="open_url">Åbn link</string>
-    <string name="remove">Fjern</string>
-    <string name="delete_file">Slet fil</string>
     <string name="about">Om</string>
-    <string name="about_page">Version, feedback, automatisk opdatering</string>
     <string name="back">Tilbage</string>
     <string name="version">Version</string>
     <string name="release_desc">Se efter ændringslogge og nye versioner</string>
     <string name="release">Seneste udgave</string>
     <string name="readme_desc">Tjek GitHub-repository og README</string>
     <string name="readme" translatable="false">README</string>
-    <string name="video">Video</string>
-    <string name="image">Billede</string>
-    <string name="image_format">Billedformat</string>
-    <string name="image_format_best">Bedste (original)</string>
-    <string name="image_format_jpg">JPEG (.jpg)</string>
-    <string name="image_format_png">PNG (.png)</string>
-    <string name="image_format_webp">WebP (.webp)</string>
-    <string name="image_quality">Billedkvalitet</string>
-    <string name="image_quality_best">Bedste kvalitet (original-100%)</string>
-    <string name="image_quality_high">Høj (85%)</string>
-    <string name="image_quality_medium">Medium (70%)</string>
-    <string name="image_quality_low">Lav (50%)</string>
-    <string name="image_format_desc">Foretrukket outputformat for downloadede billeder</string>
-    <string name="image_preset_desc">Format: %1$s, Kvalitet: %2$s</string>
-    <string name="video_image_tab">Video / Billede</string>
-    <string name="checked">Kontrolleret</string>
     <string name="credits">Kreditter</string>
     <string name="credits_desc">Kreditter og fri software</string>
-    <string name="edit">Rediger</string>
-    <string name="start_execute">Start udførelse af kommando</string>
-    <string name="advanced_settings">Avanceret</string>
-    <string name="print_details">Detaljeret output</string>
-    <string name="print_details_desc">Udskriv detaljerede meddelelser under download</string>
     <string name="display">Visning</string>
     <string name="display_settings">Mørkt tema, dynamisk farve, sprog</string>
     <string name="dark_theme">Mørkt tema</string>
     <string name="follow_system">System</string>
-    <string name="follow_system_desc">Følg systemets temaindstillinger</string>
-    <string name="dark_theme_on_desc">Brug altid mørkt tema</string>
-    <string name="dark_theme_off_desc">Brug altid lyst tema</string>
     <string name="on">Til</string>
     <string name="off">Fra</string>
     <string name="cancel">Annuller</string>
-    <string name="settings_before_download">Konfigurer før download</string>
-    <string name="settings_before_download_desc">Tilpas indstillinger før download</string>
-    <string name="settings_before_download_text">Juster denne download</string>
-    <string name="error_copied">Fejlrapport kopieret til udklipsholder</string>
-    <string name="thumbnail">Miniaturebillede</string>
     <string name="paste">Indsæt</string>
-    <string name="edit_template_desc">Outputsti og URL tilføjes af appen.</string>
-    <string name="not_convert">Ukonverteret</string>
-    <string name="convert_to">Konverter til %1$s</string>
-    <string name="format">Format</string>
-    <string name="best_quality">Bedste kvalitet</string>
-    <string name="best_audio_quality">Bedste lydkvalitet</string>
-    <string name="not_specified">Ikke angivet (standard)</string>
-    <string name="preferred_format_desc">Foretrukket format, når der tilbydes flere</string>
-    <string name="start_download">Download</string>
     <string name="close">Luk</string>
-    <string name="close_never_show_again">Vis ikke igen</string>
-    <string name="user_guide">Brugervejledning</string>
-    <string name="open_settings">Åbn indstillinger</string>
-    <string name="paste_desc">Klik på \"Indsæt\" for at hente videolinket fra din udklipsholder.</string>
-    <string name="download_desc">Klik derefter på \"Download\" efter justering af indstillingerne.</string>
-    <string name="defaults">Standard</string>
-    <string name="channel_name">Download</string>
-    <string name="channel_description">Underret om downloadede filer og fremskridt</string>
-    <string name="download_finish_notification">Download fuldført. Tryk for at åbne.</string>
-    <string name="execute_command_notification">Kører brugerdefinerede kommandoer…</string>
-    <string name="battery_settings_desc">Indstil denne apps batteriforbrug til \"Ubegrænset\" i systemindstillingerne for at downloade i baggrunden.</string>
-    <string name="options">Indstillinger</string>
-    <string name="additional_settings">Yderligere indstillinger</string>
-    <string name="share_fail_msg">Kunne ikke finde URL fra delt indhold</string>
-    <string name="share_success_msg">Læser videolink fra delt indhold…</string>
-    <string name="show_more_actions">Vis flere handlinger</string>
-    <string name="download_notification">Downloadnotifikation</string>
-    <string name="download_notification_desc">Underret om downloadede filer og fremskridt</string>
-    <string name="fetching_playlist_info">Henter oplysninger om afspilningsliste…</string>
-    <string name="from">Start</string>
     <string name="to">Slut</string>
-    <string name="invalid_index_range">Ugyldigt indeksinterval</string>
-    <string name="playlist_indicator_text">Downloader afspilningsliste (%1$d/%2$d)…</string>
-    <string name="audio_directory">Lydmappe</string>
-    <string name="download_directory">Downloadmappe</string>
-    <string name="download_directory_desc">Select where to save files</string>
-    <string name="subdirectory">Gem i undermappe</string>
-    <string name="subdirectory_desc">Gem filer i mapper navngivet efter de respektive felter</string>
-    <string name="permission_issue">Lageradgangsproblem</string>
-    <string name="permission_issue_desc">Mapper uden for Download/ og Documents/ understøttes ikke</string>
-    <string name="battery_configuration">Batterikonfiguration</string>
-    <string name="battery_configuration_desc">Ignorer batterioptimering for denne app for at downloade i baggrunden</string>
-    <string name="service_title">BlueIris downloader…</string>
-    <string name="unknown_error">Ukendt fejl</string>
     <string name="translate">Oversæt</string>
     <string name="translate_desc">Hjælp med at oversætte denne app på Hosted Weblate</string>
-    <string name="prefix">Præfiks</string>
-    <string name="new_template">Ny skabelon</string>
-    <string name="template_label">Etiket</string>
-    <string name="remove_template">Fjern?</string>
-    <string name="remove_template_desc">Vil du fjerne \"%1$s\" permanent fra kommandoskabeloner?</string>
-    <string name="template_selection">Valg af skabelon</string>
-    <string name="downloading_indicator_text">Download i gang…</string>
-    <string name="task_canceled">Downloadopgave annulleret</string>
     <string name="github_issue">GitHub-problem</string>
     <string name="github_issue_desc">Indsend en fejlrapport eller anmodning om funktion</string>
     <string name="info_copied">Oplysninger kopieret til udklipsholder</string>
     <string name="enable_auto_update">Aktiver automatisk opdatering</string>
     <string name="update_channel">Opdateringskanal</string>
-    <string name="update_channel_desc">Installer prøveversioner for at afprøve nye funktioner og ændringer.\n\nDer vil være en vis ustabilitet i disse versioner, så tøv ikke med at give os feedback, hvis du oplever problemer.</string>
-    <string name="status_enqueued">I kø</string>
-    <string name="status_completed">Færdig</string>
-    <string name="status_downloading">Downloader</string>
-    <string name="status_canceled">Annulleret</string>
-    <string name="open_file">Åbn fil</string>
-    <string name="restart">Genstart</string>
-    <string name="status_error">Fejl</string>
-    <string name="copy_link">Kopier link</string>
-    <string name="copy_error_report">Kopier rapport</string>
-    <string name="export_to_clipboard">Eksporter til udklipsholder</string>
-    <string name="import_from_clipboard">Importer fra udklipsholder</string>
-    <string name="template_exported">Eksporterede %1$d skabelon(er)</string>
-    <string name="template_imported">Importerede %1$d skabelon(er)</string>
-    <string name="download_task_count">%1$d downloadopgave(r)</string>
-    <string name="recently_added">Senest tilføjet</string>
-    <string name="delete_multiple_items_msg">Vil du fjerne %1$d element(er) fra din downloadhistorik permanent?</string>
     <string name="check_for_updates">Søg efter opdateringer</string>
     <string name="check_for_updates_desc">Søg automatisk efter den nyeste version på GitHub</string>
     <string name="app_up_to_date">Den nuværende version er opdateret</string>
     <string name="app_update_failed">Kunne ikke opdatere til den nyeste version</string>
     <string name="update">Opdater</string>
-    <string name="clear_temp_files">Ryd midlertidige filer</string>
-    <string name="clear_temp_files_desc">Slet alle midlertidige filer fra den midlertidige mappe</string>
-    <string name="clear_temp_files_count">Slettede %1$d midlertidige fil(er)</string>
     <string name="telegram_channel">Telegram</string>
-    <string name="matrix_space">Matrix</string>
     <string name="sponsor">Sponsorer</string>
-    <string name="sponsor_desc">Støt denne app ved at sponsorere på GitHub</string>
-    <string name="sponsor_msg">BlueIris vil altid være gratis og med åben kildekode for alle. Hvis du kan lide den, kan du overveje at sponsorere mig på GitHub!</string>
-    <string name="feedback">Feedback</string>
+    <string name="sponsor_msg">Apex vil altid være gratis og med åben kildekode for alle. Hvis du kan lide den, kan du overveje at sponsorere mig på GitHub!</string>
     <string name="sponsors">Sponsorer</string>
     <string name="instagram">Instagram</string>
     <string name="instagram_desc">følg udvikleren på Instagram for flere opdateringer</string>
@@ -195,59 +68,25 @@
     <string name="dynamic_color">Dynamisk farve</string>
     <string name="dynamic_color_desc">Anvend farver fra baggrundsbilledet på app-temaet</string>
     <string name="website">Hjemmeside</string>
-    <string name="look_and_feel"><![CDATA[Udseende & fornemmelse]]></string>
-    <string name="interface_and_interaction"><![CDATA[Grænseflade & interaktion]]></string>
+    <string name="look_and_feel">Udseende &amp; fornemmelse</string>
     <string name="auto_update">Automatisk opdatering</string>
     <string name="suggested">Foreslået</string>
     <string name="all_languages">Alle sprog</string>
     <string name="trouble_shooting">Fejlfinding</string>
     <string name="issue_tracker">Fejlsporing</string>
-    <string name="trouble_shooting_desc">Løs almindelige fejl og tjek kendte problemer</string>
     <string name="issue_tracker_hint">Har du opdaget en fejl? Før du rapporterer et nyt problem, bedes du søge i vores fejlsporing. Mange almindelige problemer er allerede blevet løst og dokumenteret der.</string>
-    <string name="short_url">Kort URL</string>
-    <string name="security">Sikkerhed</string>
-    <string name="qr_code">QR-kode</string>
     <string name="menu">Menu</string>
-    <string name="scan_qr_code">Scan QR-kode</string>
-    <string name="qr_code_generator">QR-kodegenerator</string>
-    <string name="costume_qr_code">Tilpasset QR-kode</string>
     <string name="scan">Scan</string>
-    <string name="generate">Generer</string>
-    <string name="costume">Tilpas</string>
-    <string name="scan_history">Scanningshistorik</string>
-    <string name="no_scan_history_yet">Ingen scanningshistorik endnu</string>
-    <string name="scan_code">Scan kode</string>
-    <string name="scanned_by_links">Scannet af BlueIris</string>
-    <string name="scan_qr_instruction">Scan QR-koder med kameraet eller importer fra galleriet</string>
-    <string name="scan_now">Scan nu</string>
-    <string name="scanned_content">Scannet indhold</string>
-    <string name="feature_currently_unavailable">Dette er i øjeblikket utilgængeligt.</string>
     <string name="contact">Kontakt</string>
-    <string name="contact_desc">Kontakt udvikleren for at tilføje nye funktioner i BlueIris</string>
-    <string name="links_issue_tracker">BlueIris Fejlsporing</string>
-    <string name="enter_url_error">Indtast venligst en URL</string>
-    <string name="invalid_url_format">Ugyldigt URL-format. Indtast venligst en gyldig webadresse (f.eks. example.com).</string>
-    <string name="copied_to_clipboard">Kopieret til udklipsholder</string>
+    <string name="contact_desc">Kontakt udvikleren for at tilføje nye funktioner i Apex</string>
+    <string name="links_issue_tracker">Apex Fejlsporing</string>
     <string name="clear_history">Ryd historik</string>
-    <string name="no_qr_found_in_image">Ingen QR-kode fundet i det valgte billede</string>
-    <string name="copy">Kopier</string>
-    <string name="destination">Destination</string>
-    <string name="source">Kilde</string>
-    <string name="generate_qr_for">Generer QR-kode til…</string>
-    <string name="enter_text_or_url">Indtast tekst eller URL</string>
-    <string name="enter_text_above_to_generate">Indtast tekst ovenfor for at generere</string>
-    <string name="save_qr_code">Gem QR-kode</string>
-    <string name="url_placeholder">http://example.com</string>
     <string name="contact_developer">Kontakt udvikleren</string>
     <string name="contact_developer_confirm">Vil du åbne Gmail for at kontakte udvikleren?</string>
     <string name="github_stars">GitHub-stjerner</string>
     <string name="github_stars_desc">Støt denne app ved at give den en stjerne på GitHub</string>
     <string name="package_name">Pakkenavn</string>
-    <string name="unshorten">Udfold kort URL</string>
-    <string name="disclaimer_text">Vi leverer denne app \"som den er\", hvilket betyder, at vi gør vores bedste for at holde tingene kørende glat, men vi kan ikke love, at den altid vil være perfekt eller fejlfri. Ved at bruge appen accepterer du, at du bruger den på eget ansvar.</string>
     <string name="privacy_policy">Privatlivspolitik</string>
-    <string name="view_licenses">Vis licenser</string>
-    <string name="licenses">Licenser</string>
     <string name="done">Færdig</string>
     <string name="downloading">Downloader…</string>
     <string name="downloaded_successfully">Downloadet med succes</string>
@@ -258,37 +97,18 @@
     <string name="early_access">Tidlig adgang</string>
     <string name="pre_release_desc">Installer prøveversioner for at afprøve nye funktioner og ændringer.\n\nDer vil være en vis ustabilitet i disse versioner, så tøv ikke med at give os feedback, hvis du oplever problemer.</string>
     <string name="update_directory">Opdateringsmappe</string>
-
-    
-    <!-- Navigation Tabs & Toasts -->
     <string name="nav_stop">Stop</string>
     <string name="nav_clean">Rens</string>
     <string name="nav_apps">Apps</string>
     <string name="nav_menu">Menu</string>
     <string name="toast_all_cache_cleaned">Al cache er allerede renset (0 KB)</string>
     <string name="toast_all_bg_apps_stopped">Alle baggrunds-apps er allerede stoppet</string>
-    <string name="toast_selected_apps_no_cache">Valgte apps har ingen cache (0 KB)</string>
-
-    <!-- AppsScreen Filter & Sort -->
-    <string name="app_filter_all">Alle apps</string>
-    <string name="app_filter_user">Bruger-apps</string>
-    <string name="app_filter_system">System-apps</string>
-    <string name="app_sort_by_name">Efter navn</string>
-    <string name="app_sort_by_date">Efter dato</string>
-    <string name="app_sort_by_size">Efter størrelse</string>
     <string name="apps_screen_title">Apps</string>
     <string name="apps_listed_count">%1$d apps på listen</string>
-    <string name="cd_filter_apps">Filtrer apps</string>
-    <string name="cd_sort_apps">Sorter apps</string>
     <string name="apps_no_apps_found">Ingen apps fundet for dette filter</string>
     <string name="cd_clear_selection">Ryd valg</string>
-    <string name="apps_selected_count">Valgt: %1$d</string>
-    <string name="cd_clean_selected_apps">Rens valgte apps</string>
-    <string name="cd_selected">Valgt</string>
     <string name="app_size_prefix">Størrelse: %1$s</string>
     <string name="cd_go_to_details">Gå til detaljer</string>
-
-    <!-- App Detail Screen Strings -->
     <string name="app_detail_version">Version: %1$s</string>
     <string name="app_detail_apk_size">APK-størrelse</string>
     <string name="app_detail_install_date">Installationsdato</string>
@@ -300,15 +120,9 @@
     <string name="app_detail_app_info">APP-INFO</string>
     <string name="toast_cannot_launch_app">Kan ikke starte denne app</string>
     <string name="toast_cannot_open_store">Kan ikke åbne butiksside</string>
-
-    <!-- Speed & Performance Strings -->
     <string name="performance_and_speed_title">Ydeevne &amp; Hastighed</string>
-
-    <!-- Stop Process Strings -->
     <string name="stop_process_title">Stopproces</string>
     <string name="force_stop_mode_title">Tving stop-tilstand</string>
-
-    <!-- Clean Process Strings -->
     <string name="clean_process_title">Renseproces</string>
     <string name="cleaning_mode_title">Rensetilstand</string>
     <string name="cleaning_mode_manual">Manuel</string>
@@ -316,8 +130,6 @@
     <string name="cleaning_mode_ask_each_time">Spørg hver gang</string>
     <string name="ignore_tiny_cache_title">Ignorer lille cache</string>
     <string name="ignore_tiny_cache_desc">Udelad apps med under 3 MB cache</string>
-
-    <!-- StopScreen Strings -->
     <string name="stop_title">Stop</string>
     <string name="stop_history_icon_desc">Historik</string>
     <string name="stop_gauge_apps">APPS</string>
@@ -340,15 +152,10 @@
     <string name="stop_dialog_close">LUK</string>
     <string name="stop_dialog_running_apps_title">Kørende apps (%1$d)</string>
     <string name="stop_dialog_no_running_apps">Ingen aktive baggrunds-apps.</string>
-
-    <!-- CleanScreen Strings -->
     <string name="clean_title">Rens</string>
     <string name="clean_history_icon_desc">Historik</string>
-    <string name="clean_gauge_unit_mb">MB</string>
     <string name="clean_gauge_system_cleaned">Systemet er renset</string>
     <string name="clean_gauge_can_be_cleared">Kan renses</string>
-    <string name="clean_gauge_zero_mb">0 MB</string>
-    <string name="clean_gauge_current_mb">%1$s MB</string>
     <string name="clean_stat_total">I alt</string>
     <string name="clean_stat_used">Brugt</string>
     <string name="clean_stat_cache">Cache</string>
@@ -365,8 +172,6 @@
     <string name="clean_dialog_live_cache_title">Live-cache-overvågning</string>
     <string name="clean_dialog_live_cache_desc">Live-cache-størrelse: %1$s.</string>
     <string name="clean_dialog_ok">OK</string>
-
-    <!-- Sub-screens Extracted Strings -->
     <string name="cd_back">Tilbage</string>
     <string name="cd_broom_icon">Koste-ikon</string>
     <string name="cd_whitelist_icon">Hvidliste-ikon</string>
@@ -377,15 +182,13 @@
     <string name="cd_accessibility_icon">Tilgængeligheds-ikon</string>
     <string name="cd_success_icon">Succes-ikon</string>
     <string name="cd_usage_access_icon">Brugsadgangs-ikon</string>
-    <string name="cd_blueiris_app_icon">BlueIris-ikon</string>
+    <string name="cd_apex_app_icon">Apex-ikon</string>
     <string name="cd_notifications_icon">Meddelelses-ikon</string>
     <string name="cd_checkmark_icon">Flueben</string>
-
     <string name="analyze_screen_title">Analyser</string>
     <string name="analyze_cache_apps_count">Cache (%1$d Apps)</string>
     <string name="analyze_no_cache_found">Ingen cache-filer fundet</string>
     <string name="analyze_clear_button">RENS</string>
-
     <string name="whitelist_title">Hvidliste</string>
     <string name="whitelist_empty_avoid_stop">Tilføj en app for at undgå stop</string>
     <string name="whitelist_empty_avoid_clean">Tilføj en app for at undgå cacherensning</string>
@@ -394,10 +197,8 @@
     <string name="whitelist_dialog_all_apps_added">Alle apps er allerede på hvidlisten.</string>
     <string name="whitelist_dialog_add_btn">Tilføj</string>
     <string name="whitelist_dialog_add_count_btn">Tilføj (%1$d)</string>
-
     <string name="history_title">Historik</string>
     <string name="history_today_stopped">Stoppet i dag</string>
-    <string name="history_no_apps_stopped_today">Ingen apps stoppet i dag</string>
     <string name="history_today_cleared">Renset i dag</string>
     <string name="history_period_today">I dag</string>
     <string name="history_period_yesterday">I går</string>
@@ -413,29 +214,23 @@
     <string name="history_dialog_clear_stop_msg">Vil du rydde stophistorikken?</string>
     <string name="history_stop_count_singular">%1$d gang</string>
     <string name="history_stop_count_plural">%1$d gange</string>
-
     <string name="done_count_apps_singular">1 App</string>
     <string name="done_count_apps_plural">%1$d Apps</string>
     <string name="done_stopped_subtitle">Stoppet: %1$s</string>
     <string name="done_cleaned_subtitle">Renset: %1$s</string>
     <string name="done_button">UDFØRT</string>
-
     <string name="permission_title">Tilladelse</string>
     <string name="accessibility_permission_title">Tilgængelighedstjeneste-API</string>
     <string name="accessibility_permission_desc1">Denne app bruger API til at automatisere cacherensning.</string>
     <string name="accessibility_permission_desc2">Data indsamles eller deles aldrig.</string>
     <string name="btn_cancel_uppercase">ANNULLER</string>
     <string name="btn_continue_uppercase">FORTSÆT</string>
-
     <string name="permission_success_title">Succes!</string>
     <string name="permission_success_desc1">Tillykke, du er klar.</string>
     <string name="permission_success_desc2">Vi indsamler ikke personlige oplysninger.</string>
-
     <string name="usage_access_permission_title">Brugsadgangstilladelse</string>
     <string name="usage_access_permission_desc1">Der kræves brugsadgangstilladelse.</string>
     <string name="usage_access_permission_desc2">Klik på knappen nedenfor for at aktivere.</string>
-
-    <string name="onboarding_privacy_note">Ved at fortsætte accepterer du BlueIris %1$s</string>
     <string name="btn_next">NÆSTE</string>
     <string name="btn_get_started">KOM I GANG</string>
     <string name="onboarding_page1_desc">Rens cache for alle apps og få mere plads.</string>

@@ -1,176 +1,49 @@
-﻿<resources>
-    <string name="app_name">BlueIris</string>
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Apex</string>
     <string name="accessibility_service_description">Deze service automatiseert de navigatie in Android-app-instellingen om de cache te wissen en achtergrond-apps veilig en efficiënt te stoppen.</string>
-    <string name="clear_cache">Cache wissen</string>
-    <string name="storage">Opslag</string>
-    <string name="home">Start</string>
     <string name="apps">Apps</string>
     <string name="analyze">Analyseren</string>
-    <string name="permission_required">Machtiging vereist</string>
-    <string name="cleaning_cache">Cache wissen...</string>
     <string name="settings">Instellingen</string>
-    <string name="download_settings_desc">General</string>
     <string name="download">Downloaden</string>
-    <string name="url_empty">De link mag niet leeg zijn</string>
-    <string name="reset_success">Geïnstalleerde versie succesvol verwijderd</string>
-    <string name="reset_failed">Verwijderen van de geïnstalleerde versie is mislukt</string>
-    <string name="permission_denied">Toegang geweigerd</string>
-    <string name="download_success_msg">Downloaden voltooid</string>
-    <string name="download_error_msg">Kan het bestand niet downloaden</string>
-    <string name="download_start_msg">Downloaden van \"%1$s\"</string>
     <string name="general_settings">Algemeen</string>
     <string name="language">Weergavetaal</string>
-    <string name="language_settings">Weergavetaal instellen</string>
-    <string name="task_running">Er wordt al een downloadtaak uitgevoerd</string>
-    <string name="paste_msg">URL plakken</string>
-    <string name="paste_fail_msg">Kan de URL op het klembord niet overeenkomen</string>
-    <string name="delete_info">Verwijderen?</string>
-    <string name="delete_info_msg">Wilt u \"%1$s\" definitief uit uw downloadgeschiedenis verwijderen?</string>
     <string name="confirm">Bevestigen</string>
     <string name="dismiss">Annuleren</string>
-    <string name="downloads_history">Downloads</string>
-    <string name="audio">Audio</string>
-    <string name="link_copied">Link gekopieerd naar klembord</string>
-    <string name="open_url">Link openen</string>
-    <string name="remove">Verwijderen</string>
-    <string name="delete_file">Bestand verwijderen</string>
     <string name="about">Over</string>
-    <string name="about_page">Versie, feedback, automatische updates</string>
     <string name="back">Terug</string>
     <string name="version">Versie</string>
     <string name="release_desc">Zoek naar wijzigingslogs en nieuwe versies</string>
     <string name="release">Nieuwste uitgave</string>
     <string name="readme_desc">Bekijk de GitHub-repository en de README</string>
     <string name="readme" translatable="false">README</string>
-    <string name="video">Video</string>
-    <string name="image">Afbeelding</string>
-    <string name="image_format">Afbeeldingsindeling</string>
-    <string name="image_format_best">Beste (origineel)</string>
-    <string name="image_format_jpg">JPEG (.jpg)</string>
-    <string name="image_format_png">PNG (.png)</string>
-    <string name="image_format_webp">WebP (.webp)</string>
-    <string name="image_quality">Afbeeldingskwaliteit</string>
-    <string name="image_quality_best">Beste kwaliteit (origineel-100%)</string>
-    <string name="image_quality_high">Hoog (85%)</string>
-    <string name="image_quality_medium">Gemiddeld (70%)</string>
-    <string name="image_quality_low">Laag (50%)</string>
-    <string name="image_format_desc">Voorkeursindeling voor gedownloade afbeeldingen</string>
-    <string name="image_preset_desc">Indeling: %1$s, Kwaliteit: %2$s</string>
-    <string name="video_image_tab">Video / Afbeelding</string>
-    <string name="checked">Gecontroleerd</string>
     <string name="credits">Vermeldingen</string>
     <string name="credits_desc">Vermeldingen en vrije software</string>
-    <string name="edit">Bewerken</string>
-    <string name="start_execute">Uitvoeren van opdracht starten</string>
-    <string name="advanced_settings">Geavanceerd</string>
-    <string name="print_details">Gedetailleerde uitvoer</string>
-    <string name="print_details_desc">Toon gedetailleerde berichten tijdens het downloaden</string>
     <string name="display">Weergave</string>
     <string name="display_settings">Donker thema, dynamische kleur, talen</string>
     <string name="dark_theme">Donker thema</string>
     <string name="follow_system">Systeem</string>
-    <string name="follow_system_desc">Volg de thema-instellingen van het systeem</string>
-    <string name="dark_theme_on_desc">Altijd donker thema gebruiken</string>
-    <string name="dark_theme_off_desc">Altijd licht thema gebruiken</string>
     <string name="on">Aan</string>
     <string name="off">Uit</string>
     <string name="cancel">Annuleren</string>
-    <string name="settings_before_download">Configureren voor downloaden</string>
-    <string name="settings_before_download_desc">Voorkeuren aanpassen voordat u downloadt</string>
-    <string name="settings_before_download_text">Deze download aanpassen</string>
-    <string name="error_copied">Foutrapport gekopieerd naar klembord</string>
-    <string name="thumbnail">Miniatuurafbeelding</string>
     <string name="paste">Plakken</string>
-    <string name="edit_template_desc">Uitvoerpad en URL worden door de app toegevoegd.</string>
-    <string name="not_convert">Niet geconverteerd</string>
-    <string name="convert_to">Converteren naar %1$s</string>
-    <string name="format">Indeling</string>
-    <string name="best_quality">Beste kwaliteit</string>
-    <string name="best_audio_quality">Beste audiokwaliteit</string>
-    <string name="not_specified">Niet opgegeven (standaard)</string>
-    <string name="preferred_format_desc">Voorkeursindeling wanneer er meerdere beschikbaar zijn</string>
-    <string name="start_download">Downloaden</string>
     <string name="close">Sluiten</string>
-    <string name="close_never_show_again">Niet meer tonen</string>
-    <string name="user_guide">Gebruikershandleiding</string>
-    <string name="open_settings">Instellingen openen</string>
-    <string name="paste_desc">Klik op \"Plakken\" om de videolink van uw klembord te halen.</string>
-    <string name="download_desc">Klik vervolgens op \"Downloaden\" nadat u de instellingen heeft aangepast.</string>
-    <string name="defaults">Standaard</string>
-    <string name="channel_name">Downloaden</string>
-    <string name="channel_description">Melden van gedownloade bestanden en voortgang</string>
-    <string name="download_finish_notification">Downloaden voltooid. Tik om te openen.</string>
-    <string name="execute_command_notification">Aangepaste opdrachten uitvoeren…</string>
-    <string name="battery_settings_desc">Stel het batterijgebruik van deze app in op \"Onbeperkt\" in de systeeminstellingen om op de achtergrond te downloaden.</string>
-    <string name="options">Opties</string>
-    <string name="additional_settings">Aanvullende instellingen</string>
-    <string name="share_fail_msg">Kan geen URL vinden in gedeelde inhoud</string>
-    <string name="share_success_msg">Videolink uit gedeelde inhoud lezen…</string>
-    <string name="show_more_actions">Meer acties tonen</string>
-    <string name="download_notification">Downloadmelding</string>
-    <string name="download_notification_desc">Melden van gedownloade bestanden en voortgang</string>
-    <string name="fetching_playlist_info">Afspeellijstinformatie ophalen…</string>
-    <string name="from">Van</string>
     <string name="to">Tot</string>
-    <string name="invalid_index_range">Ongeldig indexbereik</string>
-    <string name="playlist_indicator_text">Afspeellijst downloaden (%1$d/%2$d)…</string>
-    <string name="audio_directory">Audiomap</string>
-    <string name="download_directory">Downloadmap</string>
-    <string name="download_directory_desc">Select where to save files</string>
-    <string name="subdirectory">Opslaan in submap</string>
-    <string name="subdirectory_desc">Bestanden opslaan in mappen vernoemd naar de respectievelijke velden</string>
-    <string name="permission_issue">Opslagmachtigingsprobleem</string>
-    <string name="permission_issue_desc">Mappen buiten Download/ en Documents/ worden niet ondersteund</string>
-    <string name="battery_configuration">Batterijconfiguratie</string>
-    <string name="battery_configuration_desc">Negeer batterijoptimalisatie voor deze app om op de achtergrond te downloaden</string>
-    <string name="service_title">BlueIris is bezig met downloaden…</string>
-    <string name="unknown_error">Onbekende fout</string>
     <string name="translate">Vertalen</string>
     <string name="translate_desc">Help deze app te vertalen op Hosted Weblate</string>
-    <string name="prefix">Voorvoegsel</string>
-    <string name="new_template">Nieuwe sjabloon</string>
-    <string name="template_label">Label</string>
-    <string name="remove_template">Verwijderen?</string>
-    <string name="remove_template_desc">Wilt u \"%1$s\" definitief uit de opdrachtsjablonen verwijderen?</string>
-    <string name="template_selection">Sjabloonselectie</string>
-    <string name="downloading_indicator_text">Bezig met downloaden…</string>
-    <string name="task_canceled">Downloadtaak geannuleerd</string>
     <string name="github_issue">GitHub-probleem</string>
     <string name="github_issue_desc">Meld een fout of vraag een nieuwe functie aan</string>
     <string name="info_copied">Informatie gekopieerd naar klembord</string>
     <string name="enable_auto_update">Automatisch bijwerken inschakelen</string>
     <string name="update_channel">Bijwerk-kanaal</string>
-    <string name="update_channel_desc">Installeer bètaversies om nieuwe functies en wijzigingen uit te proberen.\n\nEr kan enige onstabiliteit zijn in deze versies, dus aarzel niet om ons feedback te geven als u problemen ondervindt.</string>
-    <string name="status_enqueued">In wachtrij</string>
-    <string name="status_completed">Voltooid</string>
-    <string name="status_downloading">Downloaden</string>
-    <string name="status_canceled">Geannuleerd</string>
-    <string name="open_file">Bestand openen</string>
-    <string name="restart">Herstarten</string>
-    <string name="status_error">Fout</string>
-    <string name="copy_link">Link kopiëren</string>
-    <string name="copy_error_report">Rapport kopiëren</string>
-    <string name="export_to_clipboard">Exporteren naar klembord</string>
-    <string name="import_from_clipboard">Importeren vanaf klembord</string>
-    <string name="template_exported">%1$d sjabloon/sjablonen geëxporteerd</string>
-    <string name="template_imported">%1$d sjabloon/sjablonen geïmporteerd</string>
-    <string name="download_task_count">%1$d downloadtaak/taken</string>
-    <string name="recently_added">Recent toegevoegd</string>
-    <string name="delete_multiple_items_msg">Wilt u %1$d item(s) definitief uit uw downloadgeschiedenis verwijderen?</string>
     <string name="check_for_updates">Controleren op updates</string>
     <string name="check_for_updates_desc">Automatisch op GitHub controleren op de nieuwste versie</string>
     <string name="app_up_to_date">De huidige versie is up-to-date</string>
     <string name="app_update_failed">Bijwerken naar de nieuwste versie is mislukt</string>
     <string name="update">Bijwerken</string>
-    <string name="clear_temp_files">Tijdelijke bestanden wissen</string>
-    <string name="clear_temp_files_desc">Verwijder alle tijdelijke bestanden uit de tijdelijke map</string>
-    <string name="clear_temp_files_count">%1$d tijdelijk(e) bestand(en) verwijderd</string>
     <string name="telegram_channel">Telegram</string>
-    <string name="matrix_space">Matrix</string>
     <string name="sponsor">Sponsor</string>
-    <string name="sponsor_desc">Ondersteun deze app door te sponsoren op GitHub</string>
-    <string name="sponsor_msg">BlueIris zal in de toekomst altijd gratis en open source blijven voor iedereen. Als u het leuk vindt, overweeg dan om mij te sponsoren op GitHub!</string>
-    <string name="feedback">Feedback</string>
+    <string name="sponsor_msg">Apex zal in de toekomst altijd gratis en open source blijven voor iedereen. Als u het leuk vindt, overweeg dan om mij te sponsoren op GitHub!</string>
     <string name="sponsors">Sponsoren</string>
     <string name="instagram">Instagram</string>
     <string name="instagram_desc">volg de ontwikkelaar op Instagram voor meer updates</string>
@@ -195,59 +68,25 @@
     <string name="dynamic_color">Dynamische kleur</string>
     <string name="dynamic_color_desc">Kleuren van de achtergrondtoepassing toepassen op het app-thema</string>
     <string name="website">Website</string>
-    <string name="look_and_feel"><![CDATA[Uiterlijk & sfeer]]></string>
-    <string name="interface_and_interaction"><![CDATA[Interface & interactie]]></string>
+    <string name="look_and_feel">Uiterlijk &amp; sfeer</string>
     <string name="auto_update">Automatische update</string>
     <string name="suggested">Aanbevolen</string>
     <string name="all_languages">Alle talen</string>
     <string name="trouble_shooting">Probleemoplossing</string>
     <string name="issue_tracker">Probleemtracker</string>
-    <string name="trouble_shooting_desc">Los veelvoorkomende fouten op en controleer bekende problemen</string>
     <string name="issue_tracker_hint">Een fout tegengekomen? Zoek eerst in onze probleemtracker voordat u een nieuw probleem meldt. Veel veelvoorkomende problemen zijn daar al behandeld en gedocumenteerd.</string>
-    <string name="short_url">Korte URL</string>
-    <string name="security">Beveiliging</string>
-    <string name="qr_code">QR-code</string>
     <string name="menu">Menu</string>
-    <string name="scan_qr_code">QR-code scannen</string>
-    <string name="qr_code_generator">QR-codegenerator</string>
-    <string name="costume_qr_code">Aangepaste QR-code</string>
     <string name="scan">Scannen</string>
-    <string name="generate">Genereren</string>
-    <string name="costume">Aanpassen</string>
-    <string name="scan_history">Scangeschiedenis</string>
-    <string name="no_scan_history_yet">Nog geen scangeschiedenis</string>
-    <string name="scan_code">Code scannen</string>
-    <string name="scanned_by_links">Gescand door BlueIris</string>
-    <string name="scan_qr_instruction">Scan QR-codes met de camera of importeer uit de galerij</string>
-    <string name="scan_now">Nu scannen</string>
-    <string name="scanned_content">Gescande inhoud</string>
-    <string name="feature_currently_unavailable">Dit is momenteel niet beschikbaar.</string>
     <string name="contact">Contact</string>
-    <string name="contact_desc">Neem contact op met de ontwikkelaar om nieuwe functies toe te voegen aan BlueIris</string>
-    <string name="links_issue_tracker">BlueIris Probleemtracker</string>
-    <string name="enter_url_error">Voer een URL in</string>
-    <string name="invalid_url_format">Ongeldige URL-indeling. Voer een geldig webadres in (bijv. example.com).</string>
-    <string name="copied_to_clipboard">Gekopieerd naar klembord</string>
+    <string name="contact_desc">Neem contact op met de ontwikkelaar om nieuwe functies toe te voegen aan Apex</string>
+    <string name="links_issue_tracker">Apex Probleemtracker</string>
     <string name="clear_history">Geschiedenis wissen</string>
-    <string name="no_qr_found_in_image">Geen QR-code gevonden in de geselecteerde afbeelding</string>
-    <string name="copy">Kopiëren</string>
-    <string name="destination">Bestemming</string>
-    <string name="source">Bron</string>
-    <string name="generate_qr_for">QR-code genereren voor…</string>
-    <string name="enter_text_or_url">Voer tekst of URL in</string>
-    <string name="enter_text_above_to_generate">Voer hierboven tekst in om te genereren</string>
-    <string name="save_qr_code">QR-code opslaan</string>
-    <string name="url_placeholder">http://example.com</string>
     <string name="contact_developer">Contact opnemen met ontwikkelaar</string>
     <string name="contact_developer_confirm">Wilt u Gmail openen om contact op te nemen met de ontwikkelaar?</string>
     <string name="github_stars">GitHub-sterren</string>
     <string name="github_stars_desc">Steun deze app door een ster te geven op GitHub</string>
     <string name="package_name">Pakketnaam</string>
-    <string name="unshorten">Korte URL uitvouwen</string>
-    <string name="disclaimer_text">We bieden deze app \"zoals hij is\" aan, wat betekent dat we ons best doen om alles soepel te laten verlopen, maar we kunnen niet beloven dat hij altijd perfect of foutloos zal zijn. Door de app te gebruiken, geeft u aan dat u daarmee akkoord gaat en begrijpt dat u deze op eigen risico gebruikt.</string>
     <string name="privacy_policy">Privacybeleid</string>
-    <string name="view_licenses">Licenties bekijken</string>
-    <string name="licenses">Licenties</string>
     <string name="done">Klaar</string>
     <string name="downloading">Downloaden…</string>
     <string name="downloaded_successfully">Met succes gedownload</string>
@@ -258,37 +97,18 @@
     <string name="early_access">Vroege toegang</string>
     <string name="pre_release_desc">Installeer bètaversies om nieuwe functies en wijzigingen uit te proberen.\n\nEr kan enige onstabiliteit zijn in deze versies, dus aarzel niet om ons feedback te geven als u problemen ondervindt.</string>
     <string name="update_directory">Update-map</string>
-
-    
-    <!-- Navigation Tabs & Toasts -->
     <string name="nav_stop">Stoppen</string>
     <string name="nav_clean">Schoonmaken</string>
     <string name="nav_apps">Apps</string>
     <string name="nav_menu">Menu</string>
     <string name="toast_all_cache_cleaned">Alle cache-items zijn al schoongemaakt (0 KB)</string>
     <string name="toast_all_bg_apps_stopped">Alle achtergrondapps zijn al gestopt</string>
-    <string name="toast_selected_apps_no_cache">Geselecteerde apps hebben geen cache (0 KB)</string>
-
-    <!-- AppsScreen Filter & Sort -->
-    <string name="app_filter_all">Alle apps</string>
-    <string name="app_filter_user">Gebruikersapps</string>
-    <string name="app_filter_system">Systeemapps</string>
-    <string name="app_sort_by_name">Op naam</string>
-    <string name="app_sort_by_date">Op datum</string>
-    <string name="app_sort_by_size">Op grootte</string>
     <string name="apps_screen_title">Apps</string>
     <string name="apps_listed_count">%1$d apps vermeld</string>
-    <string name="cd_filter_apps">Apps filteren</string>
-    <string name="cd_sort_apps">Apps sorteren</string>
     <string name="apps_no_apps_found">Geen apps gevonden voor dit filter</string>
     <string name="cd_clear_selection">Selectie wissen</string>
-    <string name="apps_selected_count">Geselecteerd: %1$d</string>
-    <string name="cd_clean_selected_apps">Geselecteerde apps schoonmaken</string>
-    <string name="cd_selected">Geselecteerd</string>
     <string name="app_size_prefix">Grootte: %1$s</string>
     <string name="cd_go_to_details">Ga naar details</string>
-
-    <!-- App Detail Screen Strings -->
     <string name="app_detail_version">Versie: %1$s</string>
     <string name="app_detail_apk_size">APK-grootte</string>
     <string name="app_detail_install_date">Installatiedatum</string>
@@ -300,15 +120,9 @@
     <string name="app_detail_app_info">APP-INFO</string>
     <string name="toast_cannot_launch_app">Kan deze app niet starten</string>
     <string name="toast_cannot_open_store">Kan winkelpagina niet openen</string>
-
-    <!-- Speed & Performance Strings -->
     <string name="performance_and_speed_title">Prestaties &amp; Snelheid</string>
-
-    <!-- Stop Process Strings -->
     <string name="stop_process_title">Stopproces</string>
     <string name="force_stop_mode_title">Gedwongen stoppen-modus</string>
-
-    <!-- Clean Process Strings -->
     <string name="clean_process_title">Schoonmaakproces</string>
     <string name="cleaning_mode_title">Schoonmaakmodus</string>
     <string name="cleaning_mode_manual">Handmatig</string>
@@ -316,8 +130,6 @@
     <string name="cleaning_mode_ask_each_time">Elke keer vragen</string>
     <string name="ignore_tiny_cache_title">Kleine cache negeren</string>
     <string name="ignore_tiny_cache_desc">Apps met minder dan 3 MB cache uitsluiten</string>
-
-    <!-- StopScreen Strings -->
     <string name="stop_title">Stoppen</string>
     <string name="stop_history_icon_desc">Geschiedenis</string>
     <string name="stop_gauge_apps">APPS</string>
@@ -340,15 +152,10 @@
     <string name="stop_dialog_close">SLUITEN</string>
     <string name="stop_dialog_running_apps_title">Actieve apps (%1$d)</string>
     <string name="stop_dialog_no_running_apps">Geen actieve achtergrondapps.</string>
-
-    <!-- CleanScreen Strings -->
     <string name="clean_title">Schoonmaken</string>
     <string name="clean_history_icon_desc">Geschiedenis</string>
-    <string name="clean_gauge_unit_mb">MB</string>
     <string name="clean_gauge_system_cleaned">Systeem is schoongemaakt</string>
     <string name="clean_gauge_can_be_cleared">Kan worden schoongemaakt</string>
-    <string name="clean_gauge_zero_mb">0 MB</string>
-    <string name="clean_gauge_current_mb">%1$s MB</string>
     <string name="clean_stat_total">Totaal</string>
     <string name="clean_stat_used">Gebruikt</string>
     <string name="clean_stat_cache">Cache</string>
@@ -365,8 +172,6 @@
     <string name="clean_dialog_live_cache_title">Live-cachemonitor</string>
     <string name="clean_dialog_live_cache_desc">Live-cachegrootte: %1$s.</string>
     <string name="clean_dialog_ok">OK</string>
-
-    <!-- Sub-screens Extracted Strings -->
     <string name="cd_back">Terug</string>
     <string name="cd_broom_icon">Bezem-icoon</string>
     <string name="cd_whitelist_icon">Witte lijst-icoon</string>
@@ -377,15 +182,13 @@
     <string name="cd_accessibility_icon">Toegankelijkheid-icoon</string>
     <string name="cd_success_icon">Succes-icoon</string>
     <string name="cd_usage_access_icon">Gebruikstoegang-icoon</string>
-    <string name="cd_blueiris_app_icon">BlueIris-icoon</string>
+    <string name="cd_apex_app_icon">Apex-icoon</string>
     <string name="cd_notifications_icon">Meldingen-icoon</string>
     <string name="cd_checkmark_icon">Vinkje</string>
-
     <string name="analyze_screen_title">Analyseren</string>
     <string name="analyze_cache_apps_count">Cache (%1$d Apps)</string>
     <string name="analyze_no_cache_found">Geen cachebestanden gevonden</string>
     <string name="analyze_clear_button">WISSEN</string>
-
     <string name="whitelist_title">Witte lijst</string>
     <string name="whitelist_empty_avoid_stop">Voeg een app toe om stoppen te voorkomen</string>
     <string name="whitelist_empty_avoid_clean">Voeg een app toe om schonen te voorkomen</string>
@@ -394,10 +197,8 @@
     <string name="whitelist_dialog_all_apps_added">Alle apps staan al op de witte lijst.</string>
     <string name="whitelist_dialog_add_btn">Toevoegen</string>
     <string name="whitelist_dialog_add_count_btn">Toevoegen (%1$d)</string>
-
     <string name="history_title">Geschiedenis</string>
     <string name="history_today_stopped">Vandaag gestopt</string>
-    <string name="history_no_apps_stopped_today">Vandaag geen apps gestopt</string>
     <string name="history_today_cleared">Vandaag schoongemaakt</string>
     <string name="history_period_today">Vandaag</string>
     <string name="history_period_yesterday">Gisteren</string>
@@ -413,29 +214,23 @@
     <string name="history_dialog_clear_stop_msg">Wilt u de stopgeschiedenis wissen?</string>
     <string name="history_stop_count_singular">%1$d keer</string>
     <string name="history_stop_count_plural">%1$d keer</string>
-
     <string name="done_count_apps_singular">1 App</string>
     <string name="done_count_apps_plural">%1$d Apps</string>
     <string name="done_stopped_subtitle">Gestopt: %1$s</string>
     <string name="done_cleaned_subtitle">Schoongemaakt: %1$s</string>
     <string name="done_button">KLAAR</string>
-
     <string name="permission_title">Machtiging</string>
     <string name="accessibility_permission_title">Toegankelijkheidsservice-API</string>
     <string name="accessibility_permission_desc1">Deze app gebruikt de API om het schonen van de cache te automatiseren.</string>
     <string name="accessibility_permission_desc2">Gegevens worden nooit verzameld of gedeeld.</string>
     <string name="btn_cancel_uppercase">ANNULLEREN</string>
     <string name="btn_continue_uppercase">DOORGAAN</string>
-
     <string name="permission_success_title">Gelukt!</string>
     <string name="permission_success_desc1">Gefeliciteerd, u bent klaar.</string>
     <string name="permission_success_desc2">Wij verzamelen geen persoonlijke gegevens.</string>
-
     <string name="usage_access_permission_title">Machtiging voor gebruikstoegang</string>
     <string name="usage_access_permission_desc1">Gebruikstoegangsmachtiging is vereist.</string>
     <string name="usage_access_permission_desc2">Klik op de onderstaande knop om in te schakelen.</string>
-
-    <string name="onboarding_privacy_note">Door door te gaan accepteert u het beleid van BlueIris %1$s</string>
     <string name="btn_next">VOLGENDE</string>
     <string name="btn_get_started">AAN DE SLAG</string>
     <string name="onboarding_page1_desc">Opschonen van cache van alle apps voor meer opslagruimte.</string>

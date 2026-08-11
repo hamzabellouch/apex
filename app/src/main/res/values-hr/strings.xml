@@ -1,176 +1,49 @@
-﻿<resources>
-    <string name="app_name">BlueIris</string>
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Apex</string>
     <string name="accessibility_service_description">Ova usluga automatizira navigaciju u postavkama Android aplikacija kako bi sigurno i učinkovito očistila predmemoriju i zaustavila aplikacije u pozadini.</string>
-    <string name="clear_cache">Očisti predmemoriju</string>
-    <string name="storage">Pohrana</string>
-    <string name="home">Početna</string>
     <string name="apps">Aplikacije</string>
     <string name="analyze">Analiziraj</string>
-    <string name="permission_required">Potrebno dopuštenje</string>
-    <string name="cleaning_cache">Čišćenje predmemorije…</string>
     <string name="settings">Postavke</string>
-    <string name="download_settings_desc">General</string>
     <string name="download">Preuzmi</string>
-    <string name="url_empty">Veza ne može biti prazna</string>
-    <string name="reset_success">Uspješno uklonjena instalirana verzija</string>
-    <string name="reset_failed">Neuspješno uklanjanje instalirane verzije</string>
-    <string name="permission_denied">Pristup odbijen</string>
-    <string name="download_success_msg">Preuzimanje završeno</string>
-    <string name="download_error_msg">Nije moguće preuzeti datoteku</string>
-    <string name="download_start_msg">Preuzimanje \"%1$s\"</string>
     <string name="general_settings">Općenito</string>
     <string name="language">Jezik prikaza</string>
-    <string name="language_settings">Postavi jezik prikaza</string>
-    <string name="task_running">Postojeći zadatak preuzimanja već se izvodi</string>
-    <string name="paste_msg">Zalijepi URL</string>
-    <string name="paste_fail_msg">Nije moguće pronaći odgovarajući URL u međuodlagalištu</string>
-    <string name="delete_info">Ukloniti?</string>
-    <string name="delete_info_msg">Želite li trajno ukloniti \"%1$s\" iz povijesti preuzimanja?</string>
     <string name="confirm">Potvrdi</string>
     <string name="dismiss">Odustani</string>
-    <string name="downloads_history">Preuzimanja</string>
-    <string name="audio">Zvuk</string>
-    <string name="link_copied">Veza je kopirana u međuodlagalište</string>
-    <string name="open_url">Otvori vezu</string>
-    <string name="remove">Ukloni</string>
-    <string name="delete_file">Izbriši datoteku</string>
     <string name="about">O aplikaciji</string>
-    <string name="about_page">Verzija, povratne informacije, automatsko ažuriranje</string>
     <string name="back">Natrag</string>
     <string name="version">Verzija</string>
     <string name="release_desc">Potražite zapise o promjenama i nove verzije</string>
     <string name="release">Najnovije izdanje</string>
     <string name="readme_desc">Provjerite GitHub repozitorij i README</string>
     <string name="readme" translatable="false">README</string>
-    <string name="video">Videozapis</string>
-    <string name="image">Slika</string>
-    <string name="image_format">Format slike</string>
-    <string name="image_format_best">Najbolji (izvorni)</string>
-    <string name="image_format_jpg">JPEG (.jpg)</string>
-    <string name="image_format_png">PNG (.png)</string>
-    <string name="image_format_webp">WebP (.webp)</string>
-    <string name="image_quality">Kvaliteta slike</string>
-    <string name="image_quality_best">Najbolja kvaliteta (izvorna-100%)</string>
-    <string name="image_quality_high">Visoka (85%)</string>
-    <string name="image_quality_medium">Srednja (70%)</string>
-    <string name="image_quality_low">Niska (50%)</string>
-    <string name="image_format_desc">Željeni izlazni format za preuzete slike</string>
-    <string name="image_preset_desc">Format: %1$s, Kvaliteta: %2$s</string>
-    <string name="video_image_tab">Videozapis / Slika</string>
-    <string name="checked">Provjereno</string>
     <string name="credits">Zasluge</string>
     <string name="credits_desc">Zasluge i slobodni softver</string>
-    <string name="edit">Uredi</string>
-    <string name="start_execute">Započni izvršavanje naredbe</string>
-    <string name="advanced_settings">Napredno</string>
-    <string name="print_details">Detaljan ispis</string>
-    <string name="print_details_desc">Ispisuj detaljne poruke tijekom preuzimanja</string>
     <string name="display">Prikaz</string>
     <string name="display_settings">Tamna tema, dinamična boja, jezici</string>
     <string name="dark_theme">Tamna tema</string>
     <string name="follow_system">Sustav</string>
-    <string name="follow_system_desc">Prati postavke teme sustava</string>
-    <string name="dark_theme_on_desc">Uvijek koristi tamnu temu</string>
-    <string name="dark_theme_off_desc">Uvijek koristi svijetlu temu</string>
     <string name="on">Uključeno</string>
     <string name="off">Isključeno</string>
     <string name="cancel">Odustani</string>
-    <string name="settings_before_download">Konfiguracija prije preuzimanja</string>
-    <string name="settings_before_download_desc">Prilagodite postavke prije preuzimanja</string>
-    <string name="settings_before_download_text">Prilagodi ovo preuzimanje</string>
-    <string name="error_copied">Izvješće o pogrešci kopirano je u međuodlagalište</string>
-    <string name="thumbnail">Minijatura</string>
     <string name="paste">Zalijepi</string>
-    <string name="edit_template_desc">Izlaznu putanju i URL dodat će aplikacija.</string>
-    <string name="not_convert">Nepretvoreno</string>
-    <string name="convert_to">Pretvori u %1$s</string>
-    <string name="format">Format</string>
-    <string name="best_quality">Najbolja kvaliteta</string>
-    <string name="best_audio_quality">Najbolja kvaliteta zvuka</string>
-    <string name="not_specified">Nije navedeno (zadano)</string>
-    <string name="preferred_format_desc">Željeni format kada je ponuđeno više formata</string>
-    <string name="start_download">Preuzmi</string>
     <string name="close">Zatvori</string>
-    <string name="close_never_show_again">Ne prikazuj više</string>
-    <string name="user_guide">Korisnički priručnik</string>
-    <string name="open_settings">Otvori postavke</string>
-    <string name="paste_desc">Kliknite \"Zalijepi\" kako biste dohvatili vezu videozapisa iz međuodlagališta.</string>
-    <string name="download_desc">Zatim kliknite \"Preuzmi\" nakon prilagodbe postavki.</string>
-    <string name="defaults">Zadano</string>
-    <string name="channel_name">Preuzimanje</string>
-    <string name="channel_description">Obavijesti o preuzetim datotekama i napretku</string>
-    <string name="download_finish_notification">Preuzimanje završeno. Dodirnite za otvaranje.</string>
-    <string name="execute_command_notification">Pokretanje prilagođenih naredbi…</string>
-    <string name="battery_settings_desc">Postavite potrošnju baterije ove aplikacije na \"Neograničeno\" u postavksma sustava kako biste preuzimali u pozadini.</string>
-    <string name="options">Opcije</string>
-    <string name="additional_settings">Dodatne postavke</string>
-    <string name="share_fail_msg">Nije moguće pronaći URL iz dijeljenog sadržaja</string>
-    <string name="share_success_msg">Čitanje veze videozapisa iz dijeljenog sadržaja…</string>
-    <string name="show_more_actions">Prikaži više radnji</string>
-    <string name="download_notification">Obavijest o preuzimanju</string>
-    <string name="download_notification_desc">Obavijesti o preuzetim datotekama i napretku</string>
-    <string name="fetching_playlist_info">Dohvaćanje informacija o popisu za reprodukciju…</string>
-    <string name="from">Početak</string>
     <string name="to">Kraj</string>
-    <string name="invalid_index_range">Nevaljani raspon indeksa</string>
-    <string name="playlist_indicator_text">Preuzimanje popisa za reprodukciju (%1$d/%2$d)…</string>
-    <string name="audio_directory">Mapa za zvuk</string>
-    <string name="download_directory">Direktorij za preuzimanje</string>
-    <string name="download_directory_desc">Select where to save files</string>
-    <string name="subdirectory">Spremi u poddirektorij</string>
-    <string name="subdirectory_desc">Spremi datoteke u mape nazvane prema odgovarajućim poljima</string>
-    <string name="permission_issue">Problem s dopuštenjem pohrane</string>
-    <string name="permission_issue_desc">Direktoriji izvan Download/ i Documents/ nisu podržani</string>
-    <string name="battery_configuration">Konfiguracija baterije</string>
-    <string name="battery_configuration_desc">Zanemari optimizaciju baterije za ovu aplikaciju za preuzimanje u pozadini</string>
-    <string name="service_title">BlueIris preuzima…</string>
-    <string name="unknown_error">Nepoznata pogreška</string>
     <string name="translate">Prevedi</string>
     <string name="translate_desc">Pomozite u prevođenju ove aplikacije na Hosted Weblate</string>
-    <string name="prefix">Prefiks</string>
-    <string name="new_template">Novi predložak</string>
-    <string name="template_label">Oznaka</string>
-    <string name="remove_template">Ukloniti?</string>
-    <string name="remove_template_desc">Želite li trajno ukloniti \"%1$s\" iz predložaka naredbi?</string>
-    <string name="template_selection">Odabir predloška</string>
-    <string name="downloading_indicator_text">Preuzimanje u tijeku…</string>
-    <string name="task_canceled">Zadatak preuzimanja otkazan</string>
     <string name="github_issue">GitHub problem</string>
     <string name="github_issue_desc">Pošaljite prijavu pogreške ili zahtjev za novom značajkom</string>
     <string name="info_copied">Informacije su kopirane u međuodlagalište</string>
     <string name="enable_auto_update">Omogući automatsko ažuriranje</string>
     <string name="update_channel">Kanal ažuriranja</string>
-    <string name="update_channel_desc">Instalirajte predizdanja kako biste isprobali nove značajke i promjene.\n\nU ovim verzijama može biti nestabilnosti, pa vas molimo da nam pošaljete povratne informacije ako naiđete na probleme kako biste nam pomogli poboljšati aplikaciju.</string>
-    <string name="status_enqueued">U redu čekanja</string>
-    <string name="status_completed">Završeno</string>
-    <string name="status_downloading">Preuzimanje</string>
-    <string name="status_canceled">Otkazano</string>
-    <string name="open_file">Otvori datoteku</string>
-    <string name="restart">Ponovno pokreni</string>
-    <string name="status_error">Pogreška</string>
-    <string name="copy_link">Kopiraj vezu</string>
-    <string name="copy_error_report">Kopiraj izvješće</string>
-    <string name="export_to_clipboard">Izvezi u međuodlagalište</string>
-    <string name="import_from_clipboard">Uvezi iz međuodlagališta</string>
-    <string name="template_exported">Izvezen(o) %1$d predložak(a)</string>
-    <string name="template_imported">Uvezen(o) %1$d predložak(a)</string>
-    <string name="download_task_count">%1$d zadatak(a) preuzimanja</string>
-    <string name="recently_added">Nedavno dodano</string>
-    <string name="delete_multiple_items_msg">Želite li trajno ukloniti %1$d stavku/stavke iz povijesti preuzimanja?</string>
     <string name="check_for_updates">Provjeri ažuriranja</string>
     <string name="check_for_updates_desc">Automatski provjeri najnoviju verziju na GitHubu</string>
     <string name="app_up_to_date">Trenutačna verzija je najnovija</string>
     <string name="app_update_failed">Neuspješno ažuriranje na najnoviju verziju</string>
     <string name="update">Ažuriraj</string>
-    <string name="clear_temp_files">Očisti privremene datoteke</string>
-    <string name="clear_temp_files_desc">Izbrišite sve privremene datoteke iz privremenog direktorija</string>
-    <string name="clear_temp_files_count">Izbrisano %1$d privremenih datoteka</string>
     <string name="telegram_channel">Telegram</string>
-    <string name="matrix_space">Matrix</string>
     <string name="sponsor">Sponzoriraj</string>
-    <string name="sponsor_desc">Podržite ovu aplikaciju sponzoriranjem na GitHubu</string>
-    <string name="sponsor_msg">BlueIris će uvijek biti besplatan i otvorenog koda za sve. Ako vam se sviđa, razmislite o sponzoriranju na GitHubu!</string>
-    <string name="feedback">Povratne informacije</string>
+    <string name="sponsor_msg">Apex će uvijek biti besplatan i otvorenog koda za sve. Ako vam se sviđa, razmislite o sponzoriranju na GitHubu!</string>
     <string name="sponsors">Sponzori</string>
     <string name="instagram">Instagram</string>
     <string name="instagram_desc">pratite razvijatelja na Instagramu za više ažuriranja</string>
@@ -195,59 +68,25 @@
     <string name="dynamic_color">Dinamična boja</string>
     <string name="dynamic_color_desc">Primijeni boje s pozadine na temu aplikacije</string>
     <string name="website">Web-stranica</string>
-    <string name="look_and_feel"><![CDATA[Izgled & dojam]]></string>
-    <string name="interface_and_interaction"><![CDATA[Sučelje & interakcija]]></string>
+    <string name="look_and_feel">Izgled &amp; dojam</string>
     <string name="auto_update">Automatsko ažuriranje</string>
     <string name="suggested">Predloženo</string>
     <string name="all_languages">Svi jezici</string>
     <string name="trouble_shooting">Rješavanje problema</string>
     <string name="issue_tracker">Praćenje problema</string>
-    <string name="trouble_shooting_desc">Riješite uobičajene pogreške i provjerite poznate probleme</string>
     <string name="issue_tracker_hint">Naišli ste na pogrešku? Prije prijave novog problema, pretražite naš sustav za praćenje problema. Mnogi uobičajeni problemi već su tamo riješeni i dokumentirani.</string>
-    <string name="short_url">Skraćeni URL</string>
-    <string name="security">Sigurnost</string>
-    <string name="qr_code">QR kod</string>
     <string name="menu">Izbornik</string>
-    <string name="scan_qr_code">Skeniraj QR kod</string>
-    <string name="qr_code_generator">Generator QR koda</string>
-    <string name="costume_qr_code">Prilagođeni QR kod</string>
     <string name="scan">Skeniraj</string>
-    <string name="generate">Generiraj</string>
-    <string name="costume">Prilagodi</string>
-    <string name="scan_history">Povijest skeniranja</string>
-    <string name="no_scan_history_yet">Još nema povijesti skeniranja</string>
-    <string name="scan_code">Skeniraj kod</string>
-    <string name="scanned_by_links">Skenirao BlueIris</string>
-    <string name="scan_qr_instruction">Skenirajte QR kodove pomoću kamere ili uvezite iz galerije</string>
-    <string name="scan_now">Skeniraj sada</string>
-    <string name="scanned_content">Skenirani sadržaj</string>
-    <string name="feature_currently_unavailable">Ova značajka trenutačno nije dostupna.</string>
     <string name="contact">Kontakt</string>
-    <string name="contact_desc">Kontaktirajte razvijatelja za dodavanje novih značajki u BlueIris</string>
-    <string name="links_issue_tracker">BlueIris sustav za praćenje problema</string>
-    <string name="enter_url_error">Unesite URL</string>
-    <string name="invalid_url_format">Nevaljani format URL-a. Unesite valjanu web adresu (npr. example.com).</string>
-    <string name="copied_to_clipboard">Kopirano u međuodlagalište</string>
+    <string name="contact_desc">Kontaktirajte razvijatelja za dodavanje novih značajki u Apex</string>
+    <string name="links_issue_tracker">Apex sustav za praćenje problema</string>
     <string name="clear_history">Očisti povijest</string>
-    <string name="no_qr_found_in_image">Nije pronađen QR kod na odabranoj slici</string>
-    <string name="copy">Kopiraj</string>
-    <string name="destination">Odredište</string>
-    <string name="source">Izvor</string>
-    <string name="generate_qr_for">Generiraj QR kod za…</string>
-    <string name="enter_text_or_url">Unesite tekst ili URL</string>
-    <string name="enter_text_above_to_generate">Unesite tekst iznad za generiranje</string>
-    <string name="save_qr_code">Spremi QR kod</string>
-    <string name="url_placeholder">http://example.com</string>
     <string name="contact_developer">Kontaktirajte razvijatelja</string>
     <string name="contact_developer_confirm">Želite li otvoriti Gmail kako biste kontaktirali razvijatelja?</string>
     <string name="github_stars">GitHub zvjezdice</string>
     <string name="github_stars_desc">Podržite ovu aplikaciju dajući joj zvjezdicu na GitHubu</string>
     <string name="package_name">Naziv paketa</string>
-    <string name="unshorten">Odskrati URL</string>
-    <string name="disclaimer_text">Ova aplikacija nudi se \"kakva jest\", što znači da dajemo sve od sebe da sve radi glatko, ali ne možemo jamčiti da će uvijek biti savršeno ili bez pogrešaka. Upotrebom aplikacije pristajete na to i razumijete da je upotrebljavate na vlastitu odgovornost.</string>
     <string name="privacy_policy">Pravila privatnosti</string>
-    <string name="view_licenses">Prikaži licence</string>
-    <string name="licenses">Licence</string>
     <string name="done">Gotovo</string>
     <string name="downloading">Preuzimanje…</string>
     <string name="downloaded_successfully">Uspješno preuzeto</string>
@@ -258,37 +97,18 @@
     <string name="early_access">Rano isprobavanje</string>
     <string name="pre_release_desc">Instalirajte predizdanja kako biste isprobali nove značajke i promjene.\n\nU ovim verzijama može biti nestabilnosti, pa vas molimo da nam pošaljete povratne informacije ako naiđete na probleme kako biste nam pomogli poboljšati aplikaciju.</string>
     <string name="update_directory">Direktorij ažuriranja</string>
-
-    
-    <!-- Navigation Tabs & Toasts -->
     <string name="nav_stop">Zaustavi</string>
     <string name="nav_clean">Očisti</string>
     <string name="nav_apps">Aplikacije</string>
     <string name="nav_menu">Izbornik</string>
     <string name="toast_all_cache_cleaned">Svi međuspremnici su već očišćeni (0 KB)</string>
     <string name="toast_all_bg_apps_stopped">Sve pozadinske aplikacije su već zaustavljene</string>
-    <string name="toast_selected_apps_no_cache">Odabrane aplikacije nemaju međuspremnik (0 KB)</string>
-
-    <!-- AppsScreen Filter & Sort -->
-    <string name="app_filter_all">Sve aplikacije</string>
-    <string name="app_filter_user">Korisničke aplikacije</string>
-    <string name="app_filter_system">Sistemske aplikacije</string>
-    <string name="app_sort_by_name">Po nazivu</string>
-    <string name="app_sort_by_date">Po datumu</string>
-    <string name="app_sort_by_size">Po veličini</string>
     <string name="apps_screen_title">Aplikacije</string>
     <string name="apps_listed_count">%1$d aplikacija na popisu</string>
-    <string name="cd_filter_apps">Filtriraj aplikacije</string>
-    <string name="cd_sort_apps">Razvrstaj aplikacije</string>
     <string name="apps_no_apps_found">Nisu pronađene aplikacije za ovaj filtar</string>
     <string name="cd_clear_selection">Očisti odabir</string>
-    <string name="apps_selected_count">Odabrano: %1$d</string>
-    <string name="cd_clean_selected_apps">Očisti odabrane aplikacije</string>
-    <string name="cd_selected">Odabrano</string>
     <string name="app_size_prefix">Veličina: %1$s</string>
     <string name="cd_go_to_details">Idi na pojedinosti</string>
-
-    <!-- App Detail Screen Strings -->
     <string name="app_detail_version">Verzija: %1$s</string>
     <string name="app_detail_apk_size">Veličina APK-a</string>
     <string name="app_detail_install_date">Datum instalacije</string>
@@ -300,15 +120,9 @@
     <string name="app_detail_app_info">INFORMACIJE O APLIKACIJI</string>
     <string name="toast_cannot_launch_app">Nije moguće pokrenuti ovu aplikaciju</string>
     <string name="toast_cannot_open_store">Nije moguće otvoriti trgovinu</string>
-
-    <!-- Speed & Performance Strings -->
     <string name="performance_and_speed_title">Performanse i brzina</string>
-
-    <!-- Stop Process Strings -->
     <string name="stop_process_title">Proces zaustavljanja</string>
     <string name="force_stop_mode_title">Način prisilnog zaustavljanja</string>
-
-    <!-- Clean Process Strings -->
     <string name="clean_process_title">Proces čišćenja</string>
     <string name="cleaning_mode_title">Način čišćenja</string>
     <string name="cleaning_mode_manual">Ručno</string>
@@ -316,8 +130,6 @@
     <string name="cleaning_mode_ask_each_time">Pitaj svaki put</string>
     <string name="ignore_tiny_cache_title">Zanemari mali međuspremnik</string>
     <string name="ignore_tiny_cache_desc">Isključi aplikacije s manje od 3 MB međuspremnika</string>
-
-    <!-- StopScreen Strings -->
     <string name="stop_title">Zaustavi</string>
     <string name="stop_history_icon_desc">Povijest</string>
     <string name="stop_gauge_apps">APLIKACIJE</string>
@@ -340,15 +152,10 @@
     <string name="stop_dialog_close">ZATVORI</string>
     <string name="stop_dialog_running_apps_title">Aktivne aplikacije (%1$d)</string>
     <string name="stop_dialog_no_running_apps">Nema aktivnih pozadinskih aplikacija.</string>
-
-    <!-- CleanScreen Strings -->
     <string name="clean_title">Očisti</string>
     <string name="clean_history_icon_desc">Povijest</string>
-    <string name="clean_gauge_unit_mb">MB</string>
     <string name="clean_gauge_system_cleaned">Sustav je očišćen</string>
     <string name="clean_gauge_can_be_cleared">Može se očistiti</string>
-    <string name="clean_gauge_zero_mb">0 MB</string>
-    <string name="clean_gauge_current_mb">%1$s MB</string>
     <string name="clean_stat_total">Ukupno</string>
     <string name="clean_stat_used">Iskorišteno</string>
     <string name="clean_stat_cache">Međuspremnik</string>
@@ -365,8 +172,6 @@
     <string name="clean_dialog_live_cache_title">Nadzor međuspremnika uživo</string>
     <string name="clean_dialog_live_cache_desc">Veličina međuspremnika: %1$s.</string>
     <string name="clean_dialog_ok">OK</string>
-
-    <!-- Sub-screens Extracted Strings -->
     <string name="cd_back">Natrag</string>
     <string name="cd_broom_icon">Ikona metle</string>
     <string name="cd_whitelist_icon">Ikona bijele liste</string>
@@ -377,15 +182,13 @@
     <string name="cd_accessibility_icon">Ikona pristupačnosti</string>
     <string name="cd_success_icon">Ikona uspjeha</string>
     <string name="cd_usage_access_icon">Ikona pristupa upotrebi</string>
-    <string name="cd_blueiris_app_icon">Ikona BlueIris</string>
+    <string name="cd_apex_app_icon">Ikona Apex</string>
     <string name="cd_notifications_icon">Ikona obavijesti</string>
     <string name="cd_checkmark_icon">Kvačica</string>
-
     <string name="analyze_screen_title">Analiza</string>
     <string name="analyze_cache_apps_count">Međuspremnik (%1$d Aplikacija)</string>
     <string name="analyze_no_cache_found">Nema datoteka međuspremnika</string>
     <string name="analyze_clear_button">OČISTI</string>
-
     <string name="whitelist_title">Bijela lista</string>
     <string name="whitelist_empty_avoid_stop">Dodajte aplikaciju kako biste izbjegli zaustavljanje</string>
     <string name="whitelist_empty_avoid_clean">Dodajte aplikaciju kako biste izbjegli čišćenje</string>
@@ -394,10 +197,8 @@
     <string name="whitelist_dialog_all_apps_added">Sve aplikacije su već na bijeloj listi.</string>
     <string name="whitelist_dialog_add_btn">Dodaj</string>
     <string name="whitelist_dialog_add_count_btn">Dodaj (%1$d)</string>
-
     <string name="history_title">Povijest</string>
     <string name="history_today_stopped">Zaustavljeno danas</string>
-    <string name="history_no_apps_stopped_today">Danas nema zaustavljenih aplikacija</string>
     <string name="history_today_cleared">Očišćeno danas</string>
     <string name="history_period_today">Danas</string>
     <string name="history_period_yesterday">Jučer</string>
@@ -413,29 +214,23 @@
     <string name="history_dialog_clear_stop_msg">Želite li obrisati povijest zaustavljanja?</string>
     <string name="history_stop_count_singular">%1$d put</string>
     <string name="history_stop_count_plural">%1$d puta</string>
-
     <string name="done_count_apps_singular">1 Aplikacija</string>
     <string name="done_count_apps_plural">%1$d Aplikacija</string>
     <string name="done_stopped_subtitle">Zaustavljeno: %1$s</string>
     <string name="done_cleaned_subtitle">Očišćeno: %1$s</string>
     <string name="done_button">GOTOVO</string>
-
     <string name="permission_title">Dopuštenje</string>
     <string name="accessibility_permission_title">API usluge pristupačnosti</string>
     <string name="accessibility_permission_desc1">Ova aplikacija koristi API za automatizaciju čišćenja međuspremnika.</string>
     <string name="accessibility_permission_desc2">Podaci se nikada ne prikupljaju niti dijele.</string>
     <string name="btn_cancel_uppercase">ODUSTANI</string>
     <string name="btn_continue_uppercase">NASTAVI</string>
-
     <string name="permission_success_title">Uspješno!</string>
     <string name="permission_success_desc1">Čestitamo, spremni ste.</string>
     <string name="permission_success_desc2">Ne prikupljamo vaše osobne podatke.</string>
-
     <string name="usage_access_permission_title">Dopuštenje za pristup upotrebi</string>
     <string name="usage_access_permission_desc1">Potreban je pristup podacima o upotrebi.</string>
     <string name="usage_access_permission_desc2">Kliknite gumb u nastavku da biste ga omogućili.</string>
-
-    <string name="onboarding_privacy_note">Nastavkom prihvaćate pravila aplikacije BlueIris %1$s</string>
     <string name="btn_next">DALJE</string>
     <string name="btn_get_started">ZAPOČNI</string>
     <string name="onboarding_page1_desc">Očistite međuspremnik svih aplikacija i oslobodite prostor.</string>

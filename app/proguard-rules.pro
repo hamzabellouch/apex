@@ -21,6 +21,6 @@
 -keepclassmembers class **$serializer {
     *** INSTANCE;
 }
--keep class com.tkno.blueiris.util.UpdateUtil** { *; }
--keep class com.tkno.blueiris.ui.page.settings.about.** { *; }
+-keep class com.tkno.apex.util.UpdateUtil** { *; }
+-keep class com.tkno.apex.ui.page.settings.about.** { *; }
 

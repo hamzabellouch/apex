@@ -1,4 +1,4 @@
-# BlueIris
+# Apex
 
 <h3 align="center"> Modern, Privacy-First Android Cache Cleaner & System Storage Optimizer.</h3>
 
@@ -6,40 +6,40 @@
 Reclaim storage space and optimize system memory with automated, privacy-first Android cache cleaning.
 </p>
 
-<img width="5504" height="3072" alt="BlueIris" src="https://github.com/user-attachments/assets/5f45f01b-f2f7-415c-8202-13a58ff63364" />
+<img width="5504" height="3072" alt="Apex" src="https://github.com/user-attachments/assets/5f45f01b-f2f7-415c-8202-13a58ff63364" />
 
 
 
 ## Overview
 
-**BlueIris** is a modern, high-performance, and privacy-focused Android application designed to help users inspect storage usage, clear app cache, and optimize system memory (RAM). 
+**Apex** is a modern, high-performance, and privacy-focused Android application designed to help users inspect storage usage, clear app cache, and optimize system memory (RAM). 
 
-Unlike traditional cleaning apps filled with ads and background trackers, BlueIris operates **100% on-device** without collecting or transmitting any personal data. It leverages native Android system APIs (`StorageStatsManager`, `UsageStatsManager`) alongside an automated `AccessibilityService` to perform seamless batch cache clearing and app force-stopping without needing root access.
+Unlike traditional cleaning apps filled with ads and background trackers, Apex operates **100% on-device** without collecting or transmitting any personal data. It leverages native Android system APIs (`StorageStatsManager`, `UsageStatsManager`) alongside an automated `AccessibilityService` to perform seamless batch cache clearing and app force-stopping without needing root access.
 
-BlueIris is built following **Modern Android Development (MAD)** standards with Kotlin and Jetpack Compose to ensure maximum responsiveness, battery efficiency, and a clean Material Design 3 user interface.
+Apex is built following **Modern Android Development (MAD)** standards with Kotlin and Jetpack Compose to ensure maximum responsiveness, battery efficiency, and a clean Material Design 3 user interface.
 
 
 
 ## Screenshots
 
-BlueIris UI & Features:
+Apex UI & Features:
 
 <div align="center">
   <div>
-    <img src="https://github.com/hamzabellouch/blueiris/blob/main/Images/1.jpg" width="30%" />
-    <img src="https://github.com/hamzabellouch/blueiris/blob/main/Images/2.jpg" width="30%" />
-    <img src="https://github.com/hamzabellouch/blueiris/blob/main/Images/3.jpg" width="30%" />
-    <img src="https://github.com/hamzabellouch/blueiris/blob/main/Images/4.jpg" width="30%" />
-    <img src="https://github.com/hamzabellouch/blueiris/blob/main/Images/5.jpg" width="30%" />
-    <img src="https://github.com/hamzabellouch/blueiris/blob/main/Images/6.jpg" width="30%" />
-    <img src="https://github.com/hamzabellouch/blueiris/blob/main/Images/7.jpg" width="30%" />
-    <img src="https://github.com/hamzabellouch/blueiris/blob/main/Images/8.jpg" width="30%" />
-    <img src="https://github.com/hamzabellouch/blueiris/blob/main/Images/9.jpg" width="30%" />
-    <img src="https://github.com/hamzabellouch/blueiris/blob/main/Images/10.jpg" width="30%" />
-    <img src="https://github.com/hamzabellouch/blueiris/blob/main/Images/11.jpg" width="30%" />
-    <img src="https://github.com/hamzabellouch/blueiris/blob/main/Images/12.jpg" width="30%" />
-    <img src="https://github.com/hamzabellouch/blueiris/blob/main/Images/13.jpg" width="30%" />
-    <img src="https://github.com/hamzabellouch/blueiris/blob/main/Images/14.jpg" width="30%" />
+    <img src="https://github.com/hamzabellouch/apex/blob/main/Images/1.jpg" width="30%" />
+    <img src="https://github.com/hamzabellouch/apex/blob/main/Images/2.jpg" width="30%" />
+    <img src="https://github.com/hamzabellouch/apex/blob/main/Images/3.jpg" width="30%" />
+    <img src="https://github.com/hamzabellouch/apex/blob/main/Images/4.jpg" width="30%" />
+    <img src="https://github.com/hamzabellouch/apex/blob/main/Images/5.jpg" width="30%" />
+    <img src="https://github.com/hamzabellouch/apex/blob/main/Images/6.jpg" width="30%" />
+    <img src="https://github.com/hamzabellouch/apex/blob/main/Images/7.jpg" width="30%" />
+    <img src="https://github.com/hamzabellouch/apex/blob/main/Images/8.jpg" width="30%" />
+    <img src="https://github.com/hamzabellouch/apex/blob/main/Images/9.jpg" width="30%" />
+    <img src="https://github.com/hamzabellouch/apex/blob/main/Images/10.jpg" width="30%" />
+    <img src="https://github.com/hamzabellouch/apex/blob/main/Images/11.jpg" width="30%" />
+    <img src="https://github.com/hamzabellouch/apex/blob/main/Images/12.jpg" width="30%" />
+    <img src="https://github.com/hamzabellouch/apex/blob/main/Images/13.jpg" width="30%" />
+    <img src="https://github.com/hamzabellouch/apex/blob/main/Images/14.jpg" width="30%" />
   </div>
 </div>
 
@@ -61,7 +61,7 @@ BlueIris UI & Features:
 
 ## 🛠 Tech Stack & Architecture
 
-BlueIris follows clean code architecture principles for maintainability, high performance, and minimal memory usage:
+Apex follows clean code architecture principles for maintainability, high performance, and minimal memory usage:
 
 * **Language & Concurrency:** `100% Kotlin`, `Coroutines`, & `StateFlow`
 * **UI Framework:** `Jetpack Compose` with `Material Design 3` & `Dynamic Color` (Material You)
@@ -77,7 +77,7 @@ BlueIris follows clean code architecture principles for maintainability, high pe
 ## 🔥 Installation
 
 1. Go to the Releases page:
-   https://github.com/hamzabellouch/blueiris/releases
+   https://github.com/hamzabellouch/apex/releases
 
 2. Download the latest `.apk` file.
 
@@ -89,7 +89,7 @@ BlueIris follows clean code architecture principles for maintainability, high pe
 
 
 >To build Omicron locally, make sure you have the latest version of Android Studio installed.
->1. Clone the repository: `git clone https://github.com/hamzabellouch/blueiris.git`
+>1. Clone the repository: `git clone https://github.com/hamzabellouch/apex.git`
 >2. Open the project in Android Studio.
 >3. Sync Gradle dependencies.
 >4. Build and run the application on your device or emulator.

@@ -5,10 +5,10 @@ plugins {
 }
 
 android {
-    namespace = "com.tkno.blueiris"
+    namespace = "com.tkno.apex"
     compileSdk = 37
     defaultConfig {
-        applicationId = "com.tkno.blueiris"
+        applicationId = "com.tkno.apex"
         minSdk = 24 // Supports Android 7.0 (API 24), Android 8.0 (API 26/Oreo), Android 9 through Android 15+
         targetSdk = 36
         versionCode = 3
@@ -47,7 +47,7 @@ android {
 androidComponents {
     onVariants { variant ->
         variant.outputs.forEach { output ->
-            output.outputFileName.set("BlueIris-v0.0.3-beta-${variant.name}.apk")
+            output.outputFileName.set("Apex-v0.0.3-beta-${variant.name}.apk")
         }
     }
 }

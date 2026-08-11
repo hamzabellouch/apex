@@ -1,6 +1,6 @@
 ﻿# Contributing
 
-Thank you for your interest in contributing to **BlueIris**! BlueIris is an Android application built with Kotlin and Jetpack Compose designed for cache cleaning, storage management, and RAM optimization.
+Thank you for your interest in contributing to **Apex**! Apex is an Android application built with Kotlin and Jetpack Compose designed for cache cleaning, storage management, and RAM optimization.
 
 Before submitting a bug report or feature request, please search existing issues (including closed ones) to ensure it hasn't already been reported or discussed. If there are no duplicates, feel free to submit a new issue using the appropriate template.
 
@@ -11,7 +11,7 @@ For questions or any other ideas to improve, you can join our official e-mail : 
 
 ## Disclaimer
 
-BlueIris is an active Android project focused on providing a clean, efficient, and private storage management tool. While we strive for code quality and reliability, contributions and feedback are always welcome to improve performance and user experience.
+Apex is an active Android project focused on providing a clean, efficient, and private storage management tool. While we strive for code quality and reliability, contributions and feedback are always welcome to improve performance and user experience.
 
 
 
@@ -20,7 +20,7 @@ BlueIris is an active Android project focused on providing a clean, efficient, a
 When submitting a bug report, please make sure your issue contains **sufficient information** to reproduce the problem. Useful details include:
 
 - Device model and Android version
-- BlueIris app version
+- Apex app version
 - Granted permission states (Usage Access, Accessibility Service)
 - Steps to reproduce the bug
 - System logs (logcat) or screenshots if applicable
@@ -29,7 +29,7 @@ When submitting a bug report, please make sure your issue contains **sufficient 
 
 ## Feature Requests
 
-BlueIris aims to remain a fast, privacy-focused, and lightweight system utility for Android. We welcome suggestions that enhance user experience, UI responsiveness, or storage management capabilities.
+Apex aims to remain a fast, privacy-focused, and lightweight system utility for Android. We welcome suggestions that enhance user experience, UI responsiveness, or storage management capabilities.
 
 When suggesting a new feature, please consider:
 - **Relevance:** Does the feature fit the core goal of cache cleaning and memory optimization?
@@ -58,7 +58,7 @@ If you are new to the project:
 
 ## Building From Source
 
-To build BlueIris locally:
+To build Apex locally:
 
 1. **Prerequisites:**
    - [Android Studio](https://developer.android.com/studio) (latest stable or preview release)
@@ -68,6 +68,6 @@ To build BlueIris locally:
 2. **Steps:**
    ```bash
    # Clone the repository
-   git clone https://github.com/hamzabellouch/blueiris.git
+   git clone https://github.com/hamzabellouch/apex.git
 
    # Open the project in Android Studio and sync Gradle files

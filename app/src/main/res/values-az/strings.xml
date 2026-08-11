@@ -1,176 +1,49 @@
-﻿<resources>
-    <string name="app_name">BlueIris</string>
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Apex</string>
     <string name="accessibility_service_description">Bu xidmət keş təmizləmək və arxa fon tətbiqlərini təhlükəsiz və səmərəli şəkildə dayandırmaq üçün Android tətbiq tənzimləmələrində naviqasiyanı avtomatlaşdırır.</string>
-    <string name="clear_cache">Keşi təmizlə</string>
-    <string name="storage">Yaddaş</string>
-    <string name="home">Ana səhifə</string>
     <string name="apps">Tətbiqlər</string>
     <string name="analyze">Təhlil et</string>
-    <string name="permission_required">İcazə tələb olunur</string>
-    <string name="cleaning_cache">Keş təmizlənir…</string>
     <string name="settings">Tənzimləmələr</string>
-    <string name="download_settings_desc">General</string>
     <string name="download">Yüklə</string>
-    <string name="url_empty">Keçid boş ola bilməz</string>
-    <string name="reset_success">Quraşdırılmış versiya uğurla silindi</string>
-    <string name="reset_failed">Quraşdırılmış versiyanı silmək mümkün olmadı</string>
-    <string name="permission_denied">İcazə rədd edildi</string>
-    <string name="download_success_msg">Yükləmə tamamlandı</string>
-    <string name="download_error_msg">Faylı yükləmək mümkün olmadı</string>
-    <string name="download_start_msg">\"%1$s\" yüklənir</string>
     <string name="general_settings">Ümumi</string>
     <string name="language">Ekran dili</string>
-    <string name="language_settings">Ekran dilini təyin et</string>
-    <string name="task_running">Artıq mövcud olan yükləmə tapşırığı icra olunur</string>
-    <string name="paste_msg">URL yerləşdir</string>
-    <string name="paste_fail_msg">Mübadilə qutusundakı URL uyğun gəlmədi</string>
-    <string name="delete_info">Silinsin?</string>
-    <string name="delete_info_msg">\"%1$s\" yükləmə tarixçənizdən həmişəlik silinsin?</string>
     <string name="confirm">Təsdiqlə</string>
     <string name="dismiss">Ləğv et</string>
-    <string name="downloads_history">Yükləmələr</string>
-    <string name="audio">Audio</string>
-    <string name="link_copied">Keçid mübadilə qutusuna kopyalandı</string>
-    <string name="open_url">Keçidi aç</string>
-    <string name="remove">Sil</string>
-    <string name="delete_file">Faylı sil</string>
     <string name="about">Haqqında</string>
-    <string name="about_page">Versiya, rəy, avto-yeniləmə</string>
     <string name="back">Geri</string>
     <string name="version">Versiya</string>
     <string name="release_desc">Dəyişikliklər jurnalı və yeni versiyalara baxın</string>
     <string name="release">Ən son versiya</string>
     <string name="readme_desc">GitHub repozitoriyasını və README faylını yoxlayın</string>
     <string name="readme" translatable="false">README</string>
-    <string name="video">Video</string>
-    <string name="image">Şəkil</string>
-    <string name="image_format">Şəkil formatı</string>
-    <string name="image_format_best">Ən yaxşı (orijinal)</string>
-    <string name="image_format_jpg">JPEG (.jpg)</string>
-    <string name="image_format_png">PNG (.png)</string>
-    <string name="image_format_webp">WebP (.webp)</string>
-    <string name="image_quality">Şəkil keyfiyyəti</string>
-    <string name="image_quality_best">Ən yaxşı keyfiyyət (orijinal-100%)</string>
-    <string name="image_quality_high">Yüksək (85%)</string>
-    <string name="image_quality_medium">Orta (70%)</string>
-    <string name="image_quality_low">Aşağı (50%)</string>
-    <string name="image_format_desc">Yüklənmiş şəkillər üçün üstünlük verilən çıxış formatı</string>
-    <string name="image_preset_desc">Format: %1$s, Keyfiyyət: %2$s</string>
-    <string name="video_image_tab">Video / Şəkil</string>
-    <string name="checked">Yoxlanıldı</string>
     <string name="credits">Təşəkkürlər</string>
     <string name="credits_desc">Müəlliflər və azad proqram təminatı</string>
-    <string name="edit">Düzəliş et</string>
-    <string name="start_execute">Əmri icra etməyə başla</string>
-    <string name="advanced_settings">Ətraflı</string>
-    <string name="print_details">Ətraflı çıxış</string>
-    <string name="print_details_desc">Yüklənərkən ətraflı mesajları göstər</string>
     <string name="display">Ekran</string>
     <string name="display_settings">Tünd tema, dinamik rəng, dillər</string>
     <string name="dark_theme">Tünd tema</string>
     <string name="follow_system">Sistem</string>
-    <string name="follow_system_desc">Sistem teması parametrlərinə riayət et</string>
-    <string name="dark_theme_on_desc">Həmişə tünd temadan istifadə et</string>
-    <string name="dark_theme_off_desc">Həmişə işıqlı temadan istifadə et</string>
     <string name="on">Aktiv</string>
     <string name="off">Deaktiv</string>
     <string name="cancel">Ləğv et</string>
-    <string name="settings_before_download">Yükləmədən əvvəl tənzimlə</string>
-    <string name="settings_before_download_desc">Yükləmədən əvvəl üstünlükləri tənzimləyin</string>
-    <string name="settings_before_download_text">Bu yükləməni tənzimləyin</string>
-    <string name="error_copied">Xəta hesabatı mübadilə qutusuna kopyalandı</string>
-    <string name="thumbnail">Miniatür</string>
     <string name="paste">Yerləşdir</string>
-    <string name="edit_template_desc">Çıxış yolu və URL tətbiq tərəfindən əlavə olunacaq.</string>
-    <string name="not_convert">Çevrilməyib</string>
-    <string name="convert_to">%1$s formatına çevir</string>
-    <string name="format">Format</string>
-    <string name="best_quality">Ən yaxşı keyfiyyət</string>
-    <string name="best_audio_quality">Ən yaxşı audio keyfiyyəti</string>
-    <string name="not_specified">Göstərilməyib (defolt)</string>
-    <string name="preferred_format_desc">Çoxlu seçim təqdim edildikdə üstünlük verilən format</string>
-    <string name="start_download">Yüklə</string>
     <string name="close">Bağla</string>
-    <string name="close_never_show_again">Bir daha göstərmə</string>
-    <string name="user_guide">İstifadəçi təlimatı</string>
-    <string name="open_settings">Tənzimləmələri aç</string>
-    <string name="paste_desc">Mübadilə qutusundan video keçidini almaq üçün \"Yerləşdir\" düyməsini sıxın.</string>
-    <string name="download_desc">Sonra parametrləri tənzimlədikdən sonra \"Yüklə\" düyməsini sıxın.</string>
-    <string name="defaults">Defolt</string>
-    <string name="channel_name">Yükləmə</string>
-    <string name="channel_description">Yüklənmiş fayllar və tərəqqi haqqında bildiriş verin</string>
-    <string name="download_finish_notification">Yükləmə tamamlandı. Açmaq üçün toxunun.</string>
-    <string name="execute_command_notification">Xüsusi əmrlər icra olunur…</string>
-    <string name="battery_settings_desc">Arxa fonda yükləmək üçün sistem parametrində bu tətbiqin batareya istifadəsini \"Məhdudiyyətsiz\" olaraq təyin edin.</string>
-    <string name="options">Seçimlər</string>
-    <string name="additional_settings">Əlavə tənzimləmələr</string>
-    <string name="share_fail_msg">Paylaşılmış məzmunda URL tapılmadı</string>
-    <string name="share_success_msg">Paylaşılmış məzmundan video keçidi oxunur…</string>
-    <string name="show_more_actions">Daha çox əməliyyat göstər</string>
-    <string name="download_notification">Yükləmə bildirişi</string>
-    <string name="download_notification_desc">Yüklənmiş fayllar və tərəqqi haqqında bildiriş verin</string>
-    <string name="fetching_playlist_info">Pleylist məlumatı əldə edilir…</string>
-    <string name="from">Başlanğıc</string>
     <string name="to">Sonu</string>
-    <string name="invalid_index_range">Yanlış indeks diapazonu</string>
-    <string name="playlist_indicator_text">Pleylist yüklənir (%1$d/%2$d)…</string>
-    <string name="audio_directory">Audio qovluğu</string>
-    <string name="download_directory">Yükləmə qovluğu</string>
-    <string name="download_directory_desc">Select where to save files</string>
-    <string name="subdirectory">Alt qovluqda saxla</string>
-    <string name="subdirectory_desc">Faylları müvafiq sahələrə uyğun adlandırılmış qovluqlarda saxlayın</string>
-    <string name="permission_issue">Yaddaş icazəsi problemi</string>
-    <string name="permission_issue_desc">Download/ və Documents/ qovluqlarından kənar qovluqlar dəstəklənmir</string>
-    <string name="battery_configuration">Batareya konfiqurasiyası</string>
-    <string name="battery_configuration_desc">Arxa fonda yükləmək üçün bu tətbiq üçün batareya optimallaşdırılmasını nəzərə almayın</string>
-    <string name="service_title">BlueIris yükləyir…</string>
-    <string name="unknown_error">Naməlum xəta</string>
     <string name="translate">Tərcümə et</string>
     <string name="translate_desc">Hosted Weblate-də bu tətbiqi tərcümə etməyə kömək edin</string>
-    <string name="prefix">Prefiks</string>
-    <string name="new_template">Yeni şablon</string>
-    <string name="template_label">Etiket</string>
-    <string name="remove_template">Silinsin?</string>
-    <string name="remove_template_desc">\"%1$s\" əmr şablonlarından həmişəlik silinsin?</string>
-    <string name="template_selection">Şablon seçimi</string>
-    <string name="downloading_indicator_text">Yükləmə davam edir…</string>
-    <string name="task_canceled">Yükləmə tapşırığı ləğv edildi</string>
     <string name="github_issue">GitHub problemi</string>
     <string name="github_issue_desc">Xəta hesabatı və ya funksiya sorğusu üçün problem göndərin</string>
     <string name="info_copied">Məlumat mübadilə qutusuna kopyalandı</string>
     <string name="enable_auto_update">Avtomatik yeniləməni aktivləşdir</string>
     <string name="update_channel">Yeniləmə kanalı</string>
-    <string name="update_channel_desc">Yeni funksiyalara və dəyişikliklərə öncədən baxmaq üçün buraxılışdan əvvəlki versiyaları quraşdırın.\n\nBu versiyalarda bəzi qeyri-sabitliklər ola bilər, gələcəkdə tətbiqi təkmilləşdirməyə kömək etmək üçün hər hansı bir problemlə qarşılaşsanız, bizə rəy bildirməkdən çəkinməyin.</string>
-    <string name="status_enqueued">Növbədədir</string>
-    <string name="status_completed">Tamamlandı</string>
-    <string name="status_downloading">Yüklənir</string>
-    <string name="status_canceled">Ləğv edildi</string>
-    <string name="open_file">Faylı aç</string>
-    <string name="restart">Yenidən başladın</string>
-    <string name="status_error">Xəta</string>
-    <string name="copy_link">Keçidi kopyala</string>
-    <string name="copy_error_report">Hesabatı kopyala</string>
-    <string name="export_to_clipboard">Mübadilə qutusuna ixrac et</string>
-    <string name="import_from_clipboard">Mübadilə qutusundan idxal et</string>
-    <string name="template_exported">%1$d şablon ixrac edildi</string>
-    <string name="template_imported">%1$d şablon idxal edildi</string>
-    <string name="download_task_count">%1$d yükləmə tapşırığı</string>
-    <string name="recently_added">Son Əlavə Olunanlar</string>
-    <string name="delete_multiple_items_msg">%1$d elementi yükləmə tarixçənizdən həmişəlik silinsin?</string>
     <string name="check_for_updates">Yeniləmələri yoxlayın</string>
     <string name="check_for_updates_desc">GitHub-da ən son versiyanı avtomatik olaraq yoxlayın</string>
     <string name="app_up_to_date">Cari versiya yenilənib</string>
     <string name="app_update_failed">Ən son versiyaya yeniləmək mümkün olmadı</string>
     <string name="update">Yenilə</string>
-    <string name="clear_temp_files">Müvəqqəti faylları təmizləyin</string>
-    <string name="clear_temp_files_desc">Müvəqqəti qovluqdan bütün müvəqqəti faylları silin</string>
-    <string name="clear_temp_files_count">%1$d müvəqqəti fayl silindi</string>
     <string name="telegram_channel">Telegram</string>
-    <string name="matrix_space">Matrix</string>
     <string name="sponsor">Sponsor ol</string>
-    <string name="sponsor_desc">GitHub-da sponsorluq edərək bu tətbiqi dəstəkləyin</string>
-    <string name="sponsor_msg">BlueIris gələcəkdə hər kəs üçün həmişə pulsuz və açıq mənbəli olacaq. Bəyəndinizsə, GitHub-da mənə sponsor olmağı düşünün!</string>
-    <string name="feedback">Rəy</string>
+    <string name="sponsor_msg">Apex gələcəkdə hər kəs üçün həmişə pulsuz və açıq mənbəli olacaq. Bəyəndinizsə, GitHub-da mənə sponsor olmağı düşünün!</string>
     <string name="sponsors">Sponsorlar</string>
     <string name="instagram">Instagram</string>
     <string name="instagram_desc">Daha çox yeniləmə üçün tərtibatçını Instagram-da izləyin</string>
@@ -195,59 +68,25 @@
     <string name="dynamic_color">Dinamik rəng</string>
     <string name="dynamic_color_desc">Duvar kağızlarının rənglərini tətbiq temasına tətbiq edin</string>
     <string name="website">Veb-sayt</string>
-    <string name="look_and_feel"><![CDATA[Xarici görünüş]]></string>
-    <string name="interface_and_interaction"><![CDATA[İnterfeys və qarşılıqlı əlaqə]]></string>
+    <string name="look_and_feel">Xarici görünüş</string>
     <string name="auto_update">Avtomatik yeniləmə</string>
     <string name="suggested">Təklif olunanlar</string>
     <string name="all_languages">Bütün dillər</string>
     <string name="trouble_shooting">Xətaların aradan qaldırılması</string>
     <string name="issue_tracker">Problemlərin izlənməsi</string>
-    <string name="trouble_shooting_desc">Ümumi xətaları düzəldin və məlum problemləri yoxlayın</string>
     <string name="issue_tracker_hint">Xəta ilə qarşılaşdınız? Yeni problem bildirməzdən əvvəl, xahiş edirik problemlərin izlənməsi bölməmizdə axtarış edin. Bir çox ümumi problem artıq orada sənədləşdirilib və həll edilib.</string>
-    <string name="short_url">Qısa URL</string>
-    <string name="security">Təhlükəsizlik</string>
-    <string name="qr_code">QR kod</string>
     <string name="menu">Menyu</string>
-    <string name="scan_qr_code">QR kodu skan edin</string>
-    <string name="qr_code_generator">QR kod generatoru</string>
-    <string name="costume_qr_code">Xüsusi QR kod</string>
     <string name="scan">Skan edin</string>
-    <string name="generate">Yarat</string>
-    <string name="costume">Xüsusi</string>
-    <string name="scan_history">Skan tarixi</string>
-    <string name="no_scan_history_yet">Hələ ki skan tarixi yoxdur</string>
-    <string name="scan_code">Kodu skan edin</string>
-    <string name="scanned_by_links">BlueIris tərəfindən skan edilib</string>
-    <string name="scan_qr_instruction">Kamera istifadə edərək və ya qalereyadan idxal edərək QR kodları skan edin</string>
-    <string name="scan_now">İndi skan edin</string>
-    <string name="scanned_content">Skan edilmiş məzmun</string>
-    <string name="feature_currently_unavailable">Bu funksiya hal-hazırda əlçatan deyil.</string>
     <string name="contact">Əlaqə</string>
-    <string name="contact_desc">BlueIris-ə yeni funksiyalar əlavə etmək üçün tərtibatçı ilə əlaqə saxlayın</string>
-    <string name="links_issue_tracker">BlueIris Problemlərin İzlənməsi</string>
-    <string name="enter_url_error">Zəhmət olmasa bir URL daxil edin</string>
-    <string name="invalid_url_format">Yanlış URL formatı. Zəhmət olmasa etibarlı veb ünvanı daxil edin (məs. example.com).</string>
-    <string name="copied_to_clipboard">Mübadilə qutusuna kopyalandı</string>
+    <string name="contact_desc">Apex-ə yeni funksiyalar əlavə etmək üçün tərtibatçı ilə əlaqə saxlayın</string>
+    <string name="links_issue_tracker">Apex Problemlərin İzlənməsi</string>
     <string name="clear_history">Tarixçəni təmizləyin</string>
-    <string name="no_qr_found_in_image">Seçilmiş şəkildə QR kod tapılmadı</string>
-    <string name="copy">Kopyala</string>
-    <string name="destination">Təyinat yeri</string>
-    <string name="source">Mənbə</string>
-    <string name="generate_qr_for">Bu dəyər üçün QR kod yarat...</string>
-    <string name="enter_text_or_url">Mətn və ya URL daxil edin</string>
-    <string name="enter_text_above_to_generate">Yaratmaq üçün yuxarıda mətn daxil edin</string>
-    <string name="save_qr_code">QR kodu saxla</string>
-    <string name="url_placeholder">http://example.com</string>
     <string name="contact_developer">Tərtibatçı ilə əlaqə</string>
     <string name="contact_developer_confirm">Tərtibatçı ilə əlaqə saxlamaq üçün Gmail-i açmaq istəyirsiniz?</string>
     <string name="github_stars">GitHub Ulduzları</string>
     <string name="github_stars_desc">GitHub-da ulduz verərək bu tətbiqi dəstəkləyin</string>
     <string name="package_name">Paket adı</string>
-    <string name="unshorten">Qısaltmanı aç</string>
-    <string name="disclaimer_text">Biz bu tətbiqi \"olduğu kimi\" təqdim edirik, yəni hər şeyin rəvan işləməsi üçün əlimizdən gələni edirik, lakin onun həmişə mükəmməl və ya xətasız olacağına söz verə bilmərik. Tətbiqdən istifadə edərək, bununla razılaşdığınızı və riskin öz üzərinizdə olduğunu anladığınızı bildirirsiniz.</string>
     <string name="privacy_policy">Məxfilik siyasəti</string>
-    <string name="view_licenses">Lisenziyalara baxın</string>
-    <string name="licenses">Lisenziyalar</string>
     <string name="done">Hazırdır</string>
     <string name="downloading">Yüklənir...</string>
     <string name="downloaded_successfully">Uğurla yükləndi</string>
@@ -258,37 +97,18 @@
     <string name="early_access">Erkən giriş</string>
     <string name="pre_release_desc">Yeni funksiyalara və dəyişikliklərə öncədən baxmaq üçün buraxılışdan əvvəlki versiyaları quraşdırın.\n\nBu versiyalarda bəzi qeyri-sabitliklər ola bilər, gələcəkdə tətbiqi təkmilləşdirməyə kömək etmək üçün hər hansı bir problemlə qarşılaşsanız, bizə rəy bildirməkdən çəkinməyin.</string>
     <string name="update_directory">Yeniləmə qovluğu</string>
-
-    
-    <!-- Navigation Tabs & Toasts -->
     <string name="nav_stop">Dayandır</string>
     <string name="nav_clean">Təmizlə</string>
     <string name="nav_apps">Tətbiqlər</string>
     <string name="nav_menu">Menyu</string>
     <string name="toast_all_cache_cleaned">Bütün keş faylları təmizdir (0 KB)</string>
     <string name="toast_all_bg_apps_stopped">Bütün arxa fon tətbiqləri dayandırılıb</string>
-    <string name="toast_selected_apps_no_cache">Seçilmiş tətbiqlərdə keş yoxdur (0 KB)</string>
-
-    <!-- AppsScreen Filter & Sort -->
-    <string name="app_filter_all">Bütün tətbiqlər</string>
-    <string name="app_filter_user">İstifadəçi tətbiqləri</string>
-    <string name="app_filter_system">Sistem tətbiqləri</string>
-    <string name="app_sort_by_name">Ad üzrə</string>
-    <string name="app_sort_by_date">Tarix üzrə</string>
-    <string name="app_sort_by_size">Ölçü üzrə</string>
     <string name="apps_screen_title">Tətbiqlər</string>
     <string name="apps_listed_count">%1$d tətbiq siyahıdadır</string>
-    <string name="cd_filter_apps">Tətbiqləri filtrlə</string>
-    <string name="cd_sort_apps">Tətbiqləri nizamla</string>
     <string name="apps_no_apps_found">Bu filtr üzrə tətbiq tapılmadı</string>
     <string name="cd_clear_selection">Seçimi təmizlə</string>
-    <string name="apps_selected_count">Seçildi: %1$d</string>
-    <string name="cd_clean_selected_apps">Seçilmiş tətbiqləri təmizlə</string>
-    <string name="cd_selected">Seçilib</string>
     <string name="app_size_prefix">Ölçü: %1$s</string>
     <string name="cd_go_to_details">Ətraflı bax</string>
-
-    <!-- App Detail Screen Strings -->
     <string name="app_detail_version">Versiya: %1$s</string>
     <string name="app_detail_apk_size">APK ölçüsü</string>
     <string name="app_detail_install_date">Quraşdırılma tarixi</string>
@@ -300,15 +120,9 @@
     <string name="app_detail_app_info">TƏTBİQ MƏLUMATI</string>
     <string name="toast_cannot_launch_app">Bu tətbiqi başlatmaq olmur</string>
     <string name="toast_cannot_open_store">Mağaza səhifəsi açılmır</string>
-
-    <!-- Speed & Performance Strings -->
     <string name="performance_and_speed_title">Məhsuldarlıq və Sürət</string>
-
-    <!-- Stop Process Strings -->
     <string name="stop_process_title">Dayandırma prosesi</string>
     <string name="force_stop_mode_title">Məcburi dayandırma rejimi</string>
-
-    <!-- Clean Process Strings -->
     <string name="clean_process_title">Təmizləmə prosesi</string>
     <string name="cleaning_mode_title">Təmizləmə rejimi</string>
     <string name="cleaning_mode_manual">Əl ilə</string>
@@ -316,8 +130,6 @@
     <string name="cleaning_mode_ask_each_time">Hər dəfə soruş</string>
     <string name="ignore_tiny_cache_title">Kiçik keşi nəzərə alma</string>
     <string name="ignore_tiny_cache_desc">3 MB-dan az keşi olan tətbiqləri istisna et</string>
-
-    <!-- StopScreen Strings -->
     <string name="stop_title">Dayandır</string>
     <string name="stop_history_icon_desc">Tarixçə</string>
     <string name="stop_gauge_apps">TƏTBİQLƏR</string>
@@ -340,15 +152,10 @@
     <string name="stop_dialog_close">BAĞLA</string>
     <string name="stop_dialog_running_apps_title">İşləyən tətbiqlər (%1$d)</string>
     <string name="stop_dialog_no_running_apps">Fəal arxa fon tətbiqi yoxdur.</string>
-
-    <!-- CleanScreen Strings -->
     <string name="clean_title">Təmizlə</string>
     <string name="clean_history_icon_desc">Tarixçə</string>
-    <string name="clean_gauge_unit_mb">MB</string>
     <string name="clean_gauge_system_cleaned">Sistem təmizləndi</string>
     <string name="clean_gauge_can_be_cleared">Təmizlənə bilər</string>
-    <string name="clean_gauge_zero_mb">0 MB</string>
-    <string name="clean_gauge_current_mb">%1$s MB</string>
     <string name="clean_stat_total">Ümumi</string>
     <string name="clean_stat_used">İşlənən</string>
     <string name="clean_stat_cache">Keş</string>
@@ -365,8 +172,6 @@
     <string name="clean_dialog_live_cache_title">Canlı keş monitoru</string>
     <string name="clean_dialog_live_cache_desc">Canlı keş ölçüsü: %1$s.</string>
     <string name="clean_dialog_ok">OK</string>
-
-    <!-- Sub-screens Extracted Strings -->
     <string name="cd_back">Geri</string>
     <string name="cd_broom_icon">Süpürgə ikonu</string>
     <string name="cd_whitelist_icon">Ağ siyahı ikonu</string>
@@ -377,15 +182,13 @@
     <string name="cd_accessibility_icon">Əlçatanlıq ikonu</string>
     <string name="cd_success_icon">Uğur ikonu</string>
     <string name="cd_usage_access_icon">İstifadə icazəsi ikonu</string>
-    <string name="cd_blueiris_app_icon">BlueIris ikonu</string>
+    <string name="cd_apex_app_icon">Apex ikonu</string>
     <string name="cd_notifications_icon">Bildiriş ikonu</string>
     <string name="cd_checkmark_icon">İşarə ikonu</string>
-
     <string name="analyze_screen_title">Təhlil et</string>
     <string name="analyze_cache_apps_count">Keş (%1$d Tətbiq)</string>
     <string name="analyze_no_cache_found">Keş faylı tapılmadı</string>
     <string name="analyze_clear_button">TƏMİZLƏ</string>
-
     <string name="whitelist_title">Ağ siyahı</string>
     <string name="whitelist_empty_avoid_stop">Dayandırılmanın qarşısını almaq üçün tətbiq əlavə edin</string>
     <string name="whitelist_empty_avoid_clean">Keş təmizlənməsinin qarşısını almaq üçün tətbiq əlavə edin</string>
@@ -394,10 +197,8 @@
     <string name="whitelist_dialog_all_apps_added">Bütün tətbiqlər artıq ağ siyahıdadır.</string>
     <string name="whitelist_dialog_add_btn">Əlavə et</string>
     <string name="whitelist_dialog_add_count_btn">Əlavə et (%1$d)</string>
-
     <string name="history_title">Tarixçə</string>
     <string name="history_today_stopped">Bu gün dayandırılanlar</string>
-    <string name="history_no_apps_stopped_today">Bu gün tətbiq dayandırılmayıb</string>
     <string name="history_today_cleared">Bu gün təmizlənənlər</string>
     <string name="history_period_today">Bu gün</string>
     <string name="history_period_yesterday">Dünən</string>
@@ -413,29 +214,23 @@
     <string name="history_dialog_clear_stop_msg">Dayandırma tarixçəsini silməyə əminsiniz?</string>
     <string name="history_stop_count_singular">%1$d dəfə</string>
     <string name="history_stop_count_plural">%1$d dəfə</string>
-
     <string name="done_count_apps_singular">1 Tətbiq</string>
     <string name="done_count_apps_plural">%1$d Tətbiq</string>
     <string name="done_stopped_subtitle">Dayandırıldı: %1$s</string>
     <string name="done_cleaned_subtitle">Təmizləndi: %1$s</string>
     <string name="done_button">HAZIRDIR</string>
-
     <string name="permission_title">İcazə</string>
     <string name="accessibility_permission_title">Əlçatanlıq Xidməti API</string>
     <string name="accessibility_permission_desc1">Bu tətbiq keş təmizlənməsini avtomatlaşdırmaq üçün API-dən istifadə edir.</string>
     <string name="accessibility_permission_desc2">Məlumatlar heç vaxt toplanmır və paylaşılmır.</string>
     <string name="btn_cancel_uppercase">LƏĞV ET</string>
     <string name="btn_continue_uppercase">DAVAM ET</string>
-
     <string name="permission_success_title">Uğurlu!</string>
     <string name="permission_success_desc1">Təbriklər, başlamağa hazırsınız.</string>
     <string name="permission_success_desc2">Şəxsi məlumatlarınız toplanmır.</string>
-
     <string name="usage_access_permission_title">İstifadə Girişi İcazəsi</string>
     <string name="usage_access_permission_desc1">Tətbiqlərin ölçüsünü təyin etmək üçün istifadə girişi icazəsi lazımdır.</string>
     <string name="usage_access_permission_desc2">Aktivləşdirmək üçün aşağıdakı düyməyə basın.</string>
-
-    <string name="onboarding_privacy_note">Davam etməklə Siz BlueIris %1$s qəbul edirsiniz</string>
     <string name="btn_next">NÖVBƏTİ</string>
     <string name="btn_get_started">BAŞLA</string>
     <string name="onboarding_page1_desc">Bütün tətbiqlərin keşini təmizləyin və daha çox yaddaş əldə edin.</string>
