@@ -63,7 +63,6 @@ Apex UI & Features:
 
 A comprehensive performance study was conducted to evaluate the impact of Apex on system efficiency, resource allocation, and overall device health. By combining automated cache cleaning and background process management, Apex delivers measurable performance gains across storage, memory, battery longevity, and thermal stability. Below are the key benchmarking results derived from testing under realistic daily usage scenarios.
 
-<br>
 
 ### Apex Overlay Performance Score Radar
 
@@ -73,7 +72,6 @@ The performance score radar provides a holistic evaluation of system health impr
   <img src="https://github.com/user-attachments/assets/d73033df-bfa0-4ea5-a703-ff6eb4b8a51c" width="60%" alt="Apex Overlay Performance Score Radar" />
 </p>
 
-<br>
 
 ### Apex Performance Optimization
 
@@ -87,7 +85,6 @@ Apex focuses on four primary optimization metrics to maximize overall device res
   <img src="https://github.com/user-attachments/assets/0e4fbe3c-62e9-4193-92a4-d2bd98b38026" width="75%" alt="Apex Performance Optimization" />
 </p>
 
-<br>
 
 ### Device Temperature & Speed Latency
 
@@ -98,7 +95,6 @@ Analyzing device thermals and response times demonstrates how Apex prevents hard
 <p align="center">
   <img src="https://github.com/user-attachments/assets/affbabf4-2cd9-4813-a4dd-11fbc44f7947" width="100%" alt="Device Temperature & Speed Latency" />
 </p>
-
 
 
 
