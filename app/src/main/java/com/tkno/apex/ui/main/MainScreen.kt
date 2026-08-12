@@ -37,6 +37,7 @@ import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalHapticFeedback
+import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.platform.LocalViewConfiguration
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -70,6 +71,8 @@ enum class SubScreen {
 fun MainScreen(
     isUsageAccessGranted: Boolean,
     isAccessibilityEnabled: Boolean,
+    isInPipMode: Boolean = false,
+    onEnterPip: () -> Unit = {},
     onRequestUsageAccess: () -> Unit,
     onRequestAccessibility: () -> Unit,
     modifier: Modifier = Modifier
@@ -77,6 +80,7 @@ fun MainScreen(
     val context = LocalContext.current
     val scope = rememberCoroutineScope()
     val lifecycleOwner = LocalLifecycleOwner.current
+
     val prefs = remember(context) { context.getSharedPreferences("apex_prefs", android.content.Context.MODE_PRIVATE) }
 
     val initialTab = remember(prefs) {
@@ -86,6 +90,13 @@ fun MainScreen(
 
     var currentTab by remember { mutableStateOf(initialTab) }
     var currentSubScreen by remember { mutableStateOf(SubScreen.None) }
+    var isMenuSubScreenActive by remember { mutableStateOf(false) }
+
+    LaunchedEffect(currentTab) {
+        if (currentTab != MainTab.Menu) {
+            isMenuSubScreenActive = false
+        }
+    }
 
     // System Back Button handler for SubScreens (Whitelist, Analyze, etc.)
     BackHandler(enabled = currentSubScreen != SubScreen.None) {
@@ -354,35 +365,7 @@ fun MainScreen(
                     completedAppsCount = targetSet.size
                     completedCleanedBytes = targetSet.sumOf { pkg -> initialCacheMap[pkg] ?: 0L }
 
-                    // Record history entries into HistoryManager ONLY for actually successful packages
-                    val pm = context.packageManager
-                    val now = System.currentTimeMillis()
-                    if (finishedMode == ServiceMode.FORCE_STOP) {
-                        val entries = targetSet.map { pkg ->
-                            val label = try {
-                                val info = pm.getApplicationInfo(pkg, 0)
-                                info.loadLabel(pm).toString()
-                            } catch (e: Exception) {
-                                pkg
-                            }
-                            com.tkno.apex.util.StopHistoryEntry(packageName = pkg, appName = label, timestamp = now)
-                        }
-                        com.tkno.apex.util.HistoryManager.addStopRecords(context, entries)
-                    } else {
-                        val entries = targetSet.map { pkg ->
-                            val appInfo = installedApps.find { it.packageName == pkg }
-                            val label = appInfo?.name ?: try {
-                                val info = pm.getApplicationInfo(pkg, 0)
-                                info.loadLabel(pm).toString()
-                            } catch (e: Exception) {
-                                pkg
-                            }
-                            val bytes = initialCacheMap[pkg] ?: appInfo?.cacheBytes ?: 0L
-                            com.tkno.apex.util.CleanHistoryEntry(packageName = pkg, appName = label, bytesCleared = bytes, timestamp = now)
-                        }
-                        com.tkno.apex.util.HistoryManager.addCleanRecords(context, entries)
-                    }
-
+                    // INSTANT (0ms) Main Thread UI State Update
                     installedApps = applySessionOverrides(installedApps)
                     totalCacheBytes = installedApps.sumOf { it.cacheBytes }
 
@@ -393,8 +376,36 @@ fun MainScreen(
                     currentSubScreen = SubScreen.None
                     showOperationDoneScreen = true
 
-                    // Asynchronous background sync with OS StorageStats
+                    // Offload History Recording & OS StorageStats refresh to background thread (0ms UI lag)
                     scope.launch(Dispatchers.IO) {
+                        val pm = context.packageManager
+                        val now = System.currentTimeMillis()
+                        if (finishedMode == ServiceMode.FORCE_STOP) {
+                            val entries = targetSet.map { pkg ->
+                                val label = try {
+                                    val info = pm.getApplicationInfo(pkg, 0)
+                                    info.loadLabel(pm).toString()
+                                } catch (e: Exception) {
+                                    pkg
+                                }
+                                com.tkno.apex.util.StopHistoryEntry(packageName = pkg, appName = label, timestamp = now)
+                            }
+                            com.tkno.apex.util.HistoryManager.addStopRecords(context, entries)
+                        } else {
+                            val entries = targetSet.map { pkg ->
+                                val appInfo = installedApps.find { it.packageName == pkg }
+                                val label = appInfo?.name ?: try {
+                                    val info = pm.getApplicationInfo(pkg, 0)
+                                    info.loadLabel(pm).toString()
+                                } catch (e: Exception) {
+                                    pkg
+                                }
+                                val bytes = initialCacheMap[pkg] ?: appInfo?.cacheBytes ?: 0L
+                                com.tkno.apex.util.CleanHistoryEntry(packageName = pkg, appName = label, bytesCleared = bytes, timestamp = now)
+                            }
+                            com.tkno.apex.util.HistoryManager.addCleanRecords(context, entries)
+                        }
+
                         val freshApps = applySessionOverrides(AppStorageHelper.getInstalledAppsWithCache(context, forceRefresh = true))
                         val freshTotalBytes = freshApps.sumOf { it.cacheBytes }
                         val freshTotalStorage = AppStorageHelper.getTotalStorageBytes(context)
@@ -415,42 +426,91 @@ fun MainScreen(
         }
     }
 
+    if (isInPipMode) {
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .background(Color(0xFF0E141D))
+        ) {
+            // 1. Top Section: Cyan Progress Line
+            LinearProgressIndicator(
+                progress = { cleaningProgress },
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(4.dp),
+                color = Color(0xFF48AFFF),
+                trackColor = Color(0xFF1B2636)
+            )
+
+            // 2. Middle Section: Body Container with Centered Title & Top-Right Close '✕' Button
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .weight(1f)
+                    .padding(horizontal = 12.dp, vertical = 2.dp)
+            ) {
+                Text(
+                    text = if (CacheCleanerAccessibilityService.currentMode == ServiceMode.FORCE_STOP) "Force stopping..." else "Cleaning cache...",
+                    color = Color.White,
+                    fontSize = 13.5.sp,
+                    fontWeight = FontWeight.Bold,
+                    maxLines = 1,
+                    modifier = Modifier.align(Alignment.Center)
+                )            }
+
+            // 3. Bottom Section: Full-Width Bright Cyan Banner
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(40.dp)
+                    .background(Color(0xFF48AFFF)),
+                contentAlignment = Alignment.Center
+            ) {
+                Text(
+                    text = "# $currentCleaningAppIndex/${currentProcessingPackages.size.coerceAtLeast(1)} $currentCleaningAppName",
+                    color = Color(0xFF090D10),
+                    fontSize = 13.5.sp,
+                    fontWeight = FontWeight.Bold,
+                    maxLines = 1,
+                    modifier = Modifier.padding(horizontal = 8.dp)
+                )
+            }
+        }
+        return
+    }
+
     val unselectedNavColor = MaterialTheme.colorScheme.onSurface
+
+    val isBottomBarVisible = currentSubScreen == SubScreen.None && !isShowingPermissionScreen && !(currentTab == MainTab.Menu && isMenuSubScreenActive)
 
     Scaffold(
         bottomBar = {
-            if (currentSubScreen == SubScreen.None && !isShowingPermissionScreen) {
+            AnimatedVisibility(
+                visible = isBottomBarVisible,
+                enter = slideInVertically(initialOffsetY = { it }, animationSpec = tween(220)) + fadeIn(animationSpec = tween(220)),
+                exit = slideOutVertically(targetOffsetY = { it }, animationSpec = tween(200)) + fadeOut(animationSpec = tween(200))
+            ) {
                 Surface(
                     color = MaterialTheme.colorScheme.surfaceContainer,
                     tonalElevation = 0.dp
                 ) {
-                    Column(modifier = Modifier.fillMaxWidth()) {
-                    if (isScanning) {
-                        LinearProgressIndicator(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .height(3.dp),
-                            color = when (currentTab) {
-                                MainTab.Stop -> stopOrange
-                                MainTab.Clean -> accentBlue
-                                MainTab.Apps -> androidGreen
-                                MainTab.Menu -> accentBlue
-                            },
-                            trackColor = Color.Transparent
-                        )
-                    }
-                    NavigationBar(
-                        containerColor = MaterialTheme.colorScheme.surfaceContainer,
-                        tonalElevation = 0.dp,
+                    Box(
                         modifier = Modifier
+                            .fillMaxWidth()
                             .height(72.dp)
-                            .onGloballyPositioned { coordinates ->
-                                val totalWidth = coordinates.size.width.toFloat()
-                                if (totalWidth > 0) {
-                                    itemWidthPx = totalWidth / 4f
-                                }
-                            }
                     ) {
+                        NavigationBar(
+                            containerColor = MaterialTheme.colorScheme.surfaceContainer,
+                            tonalElevation = 0.dp,
+                            modifier = Modifier
+                                .fillMaxSize()
+                                .onGloballyPositioned { coordinates ->
+                                    val totalWidth = coordinates.size.width.toFloat()
+                                    if (totalWidth > 0) {
+                                        itemWidthPx = totalWidth / 4f
+                                    }
+                                }
+                        ) {
                         reorderableTabs.forEachIndexed { index, tab ->
                             val isSelected = currentTab == tab
                             val isDragging = draggingIndex == index
@@ -520,6 +580,7 @@ fun MainScreen(
                                                             if (isLongPressActive) {
                                                                 draggingIndex = null
                                                                 currentDragOffset = 0f
+                                                                haptic.performHapticFeedback(HapticFeedbackType.LongPress)
                                                             }
                                                             break
                                                         }
@@ -563,6 +624,21 @@ fun MainScreen(
                             )
                         }
                     }
+                    if (isScanning) {
+                        LinearProgressIndicator(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .height(3.dp)
+                                .align(Alignment.TopCenter),
+                            color = when (currentTab) {
+                                MainTab.Stop -> stopOrange
+                                MainTab.Clean -> accentBlue
+                                MainTab.Apps -> androidGreen
+                                MainTab.Menu -> accentBlue
+                            },
+                            trackColor = Color.Transparent
+                        )
+                    }
                 }
             }
         }
@@ -570,11 +646,17 @@ fun MainScreen(
         containerColor = appBackground,
         modifier = modifier
     ) { paddingValues ->
+        val layoutDirection = LocalLayoutDirection.current
         Box(
             modifier = Modifier
                 .fillMaxSize()
                 .background(appBackground)
-                .padding(if (currentSubScreen == SubScreen.None && !isShowingPermissionScreen) paddingValues else PaddingValues(0.dp))
+                .padding(
+                    top = paddingValues.calculateTopPadding(),
+                    bottom = if (isBottomBarVisible) paddingValues.calculateBottomPadding() else 0.dp,
+                    start = paddingValues.calculateLeftPadding(layoutDirection),
+                    end = paddingValues.calculateRightPadding(layoutDirection)
+                )
         ) {
             if (!isUsageAccessGranted) {
                 UsageAccessPermissionScreen(
@@ -614,6 +696,7 @@ fun MainScreen(
                                              completedCleanedBytes = filteredTotalCacheBytes
                                              CacheCleanerAccessibilityService.startCleaning(context, packages, mode = ServiceMode.CLEAR_CACHE)
                                              showCleaningOverlay = true
+                                             onEnterPip()
                                          } else {
                                             Toast.makeText(context, context.getString(R.string.toast_all_cache_cleaned), Toast.LENGTH_SHORT).show()
                                         }
@@ -676,11 +759,16 @@ fun MainScreen(
                                                     accessibilityPromptMode = ServiceMode.FORCE_STOP
                                                     showAccessibilityPromptDialog = true
                                                 } else {
-                                                    val packages = activeRunningUserApps.map { it.packageName }
+                                                    val packages = if (activeRunningUserApps.isNotEmpty()) {
+                                                        activeRunningUserApps.map { it.packageName }
+                                                    } else {
+                                                        stoppableUserAppsOnly.filter { it.packageName !in stopWhitelist }.map { it.packageName }
+                                                    }
                                                     if (packages.isNotEmpty()) {
                                                         currentProcessingPackages = packages
-                                                        CacheCleanerAccessibilityService.startCleaning(context, packages, mode = ServiceMode.FORCE_STOP)
+                                                        onEnterPip()
                                                         showCleaningOverlay = true
+                                                        CacheCleanerAccessibilityService.startCleaning(context, packages, mode = ServiceMode.FORCE_STOP)
                                                     } else {
                                                         Toast.makeText(context, context.getString(R.string.toast_all_bg_apps_stopped), Toast.LENGTH_SHORT).show()
                                                     }
@@ -706,8 +794,9 @@ fun MainScreen(
                                                      if (packages.isNotEmpty()) {
                                                          currentProcessingPackages = packages
                                                          completedCleanedBytes = filteredTotalCacheBytes
-                                                         CacheCleanerAccessibilityService.startCleaning(context, packages, mode = ServiceMode.CLEAR_CACHE)
+                                                         onEnterPip()
                                                          showCleaningOverlay = true
+                                                         CacheCleanerAccessibilityService.startCleaning(context, packages, mode = ServiceMode.CLEAR_CACHE)
                                                      } else {
                                                         Toast.makeText(context, context.getString(R.string.toast_all_cache_cleaned), Toast.LENGTH_SHORT).show()
                                                     }
@@ -722,7 +811,11 @@ fun MainScreen(
                                         )
                                     }
                                     MainTab.Menu -> {
-                                        MenuScreen()
+                                        MenuScreen(
+                                            onSubScreenStateChanged = { active ->
+                                                isMenuSubScreenActive = active
+                                            }
+                                        )
                                     }
                                 }
                             }
@@ -747,11 +840,16 @@ fun MainScreen(
                             accessibilityPromptMode = ServiceMode.FORCE_STOP
                             showAccessibilityPromptDialog = true
                         } else {
-                            val packages = activeRunningUserApps.map { it.packageName }
+                            val packages = if (activeRunningUserApps.isNotEmpty()) {
+                                activeRunningUserApps.map { it.packageName }
+                            } else {
+                                stoppableUserAppsOnly.filter { it.packageName !in stopWhitelist }.map { it.packageName }
+                            }
                             if (packages.isNotEmpty()) {
                                 currentProcessingPackages = packages
-                                CacheCleanerAccessibilityService.startCleaning(context, packages, mode = ServiceMode.FORCE_STOP)
+                                onEnterPip()
                                 showCleaningOverlay = true
+                                CacheCleanerAccessibilityService.startCleaning(context, packages, mode = ServiceMode.FORCE_STOP)
                             } else {
                                 Toast.makeText(context, context.getString(R.string.toast_all_bg_apps_stopped), Toast.LENGTH_SHORT).show()
                             }
@@ -767,8 +865,9 @@ fun MainScreen(
                             if (packages.isNotEmpty()) {
                                 currentProcessingPackages = packages
                                 completedCleanedBytes = filteredTotalCacheBytes
-                                CacheCleanerAccessibilityService.startCleaning(context, packages, mode = ServiceMode.CLEAR_CACHE)
+                                onEnterPip()
                                 showCleaningOverlay = true
+                                CacheCleanerAccessibilityService.startCleaning(context, packages, mode = ServiceMode.CLEAR_CACHE)
                             } else {
                                 Toast.makeText(context, context.getString(R.string.toast_all_cache_cleaned), Toast.LENGTH_SHORT).show()
                             }

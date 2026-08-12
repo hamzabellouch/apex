@@ -114,7 +114,7 @@ fun UpdatePage(
                 },
                 navigationIcon = { BackButton { onNavigateBack() } },
                 windowInsets = WindowInsets(0.dp),
-                colors = TopAppBarDefaults.largeTopAppBarColors(
+                colors = TopAppBarDefaults.topAppBarColors(
                     containerColor = MaterialTheme.colorScheme.background,
                     scrolledContainerColor = MaterialTheme.colorScheme.background,
                     titleContentColor = MaterialTheme.colorScheme.onBackground

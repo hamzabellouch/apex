@@ -36,6 +36,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.outlined.ArrowForward
+import androidx.compose.material.icons.automirrored.outlined.ContactSupport
 import androidx.compose.material.icons.automirrored.outlined.OpenInNew
 import androidx.compose.material.icons.filled.Block
 import androidx.compose.material.icons.filled.BugReport
@@ -46,6 +47,7 @@ import androidx.compose.material.icons.outlined.*
 import androidx.compose.material.icons.rounded.Palette
 import androidx.compose.material.icons.rounded.SettingsApplications
 import androidx.compose.material3.*
+import kotlinx.coroutines.launch
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -54,7 +56,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.rememberVectorPainter
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.platform.LocalClipboardManager
+import androidx.compose.ui.platform.ClipEntry
+import androidx.compose.ui.platform.LocalClipboard
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.res.painterResource
@@ -78,8 +81,14 @@ enum class MenuSubScreen {
 }
 
 @Composable
-fun MenuScreen() {
+fun MenuScreen(
+    onSubScreenStateChanged: (Boolean) -> Unit = {}
+) {
     var currentSubScreen by remember { mutableStateOf(MenuSubScreen.Main) }
+
+    LaunchedEffect(currentSubScreen) {
+        onSubScreenStateChanged(currentSubScreen != MenuSubScreen.Main)
+    }
 
     BackHandler(enabled = currentSubScreen != MenuSubScreen.Main) {
         when (currentSubScreen) {
@@ -174,21 +183,26 @@ fun MainMenuList(onNavigateTo: (MenuSubScreen) -> Unit) {
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
+                    .heightIn(min = 48.dp)
                     .padding(bottom = 18.dp),
                 horizontalArrangement = Arrangement.Start,
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                Column {
+                Row(
+                    verticalAlignment = Alignment.Bottom
+                ) {
                     Text(
                         text = stringResource(id = R.string.menu),
                         color = MaterialTheme.colorScheme.onBackground,
                         fontSize = 24.sp,
                         fontWeight = FontWeight.Bold
                     )
+                    Spacer(modifier = Modifier.width(8.dp))
                     Text(
                         text = stringResource(id = R.string.menu_options_listed_count, 4),
                         color = MaterialTheme.colorScheme.onSurfaceVariant,
-                        fontSize = 12.sp
+                        fontSize = 12.sp,
+                        modifier = Modifier.padding(bottom = 3.dp)
                     )
                 }
             }
@@ -1054,7 +1068,7 @@ fun LanguagesPage(onNavigateBack: () -> Unit) {
                     navigationIcon = { BackButton { onNavigateBack() } },
                     scrollBehavior = scrollBehavior,
                     windowInsets = WindowInsets(0.dp),
-                    colors = TopAppBarDefaults.largeTopAppBarColors(
+                    colors = TopAppBarDefaults.topAppBarColors(
                         containerColor = MaterialTheme.colorScheme.background,
                         scrolledContainerColor = MaterialTheme.colorScheme.background,
                         titleContentColor = MaterialTheme.colorScheme.onBackground
@@ -1159,7 +1173,7 @@ fun SponsorsPage(onNavigateBack: () -> Unit) {
                     navigationIcon = { BackButton { onNavigateBack() } },
                     scrollBehavior = scrollBehavior,
                     windowInsets = WindowInsets(0.dp),
-                    colors = TopAppBarDefaults.largeTopAppBarColors(
+                    colors = TopAppBarDefaults.topAppBarColors(
                         containerColor = MaterialTheme.colorScheme.background,
                         scrolledContainerColor = MaterialTheme.colorScheme.background,
                         titleContentColor = MaterialTheme.colorScheme.onBackground
@@ -1503,7 +1517,8 @@ fun AboutPage(
 ) {
     val scrollBehavior = TopAppBarDefaults.exitUntilCollapsedScrollBehavior()
     val context = LocalContext.current
-    val clipboardManager = LocalClipboardManager.current
+    val clipboard = LocalClipboard.current
+    val coroutineScope = rememberCoroutineScope()
 
     val prefs = remember { context.getSharedPreferences("apex_prefs", android.content.Context.MODE_PRIVATE) }
     var isAutoUpdateEnabled by remember {
@@ -1514,9 +1529,9 @@ fun AboutPage(
     AppUpdater(isAutoUpdateEnabled = isAutoUpdateEnabled)
 
     val versionName = try {
-        context.packageManager.getPackageInfo(context.packageName, 0).versionName ?: "0.0.4-beta"
+        context.packageManager.getPackageInfo(context.packageName, 0).versionName ?: "0.0.5-beta"
     } catch (e: Exception) {
-        "0.0.4-beta"
+        "0.0.5-beta"
     }
     val info = "App version: $versionName\nPackage name: ${context.packageName}\nDevice: Android ${android.os.Build.VERSION.RELEASE} (API ${android.os.Build.VERSION.SDK_INT})"
     val uriHandler = LocalUriHandler.current
@@ -1540,7 +1555,7 @@ fun AboutPage(
                     navigationIcon = { BackButton { onNavigateBack() } },
                     scrollBehavior = scrollBehavior,
                     windowInsets = WindowInsets(0.dp),
-                    colors = TopAppBarDefaults.largeTopAppBarColors(
+                    colors = TopAppBarDefaults.topAppBarColors(
                         containerColor = MaterialTheme.colorScheme.background,
                         scrolledContainerColor = MaterialTheme.colorScheme.background,
                         titleContentColor = MaterialTheme.colorScheme.onBackground
@@ -1572,7 +1587,7 @@ fun AboutPage(
                     PreferenceItem(
                         title = stringResource(R.string.github_issue),
                         description = stringResource(R.string.github_issue_desc),
-                        icon = Icons.Outlined.ContactSupport,
+                        icon = Icons.AutoMirrored.Outlined.ContactSupport,
                     ) {
                         openUrl(githubIssueUrl)
                     }
@@ -1626,7 +1641,9 @@ fun AboutPage(
                         description = versionName,
                         icon = Icons.Outlined.Info,
                     ) {
-                        clipboardManager.setText(AnnotatedString(info))
+                        coroutineScope.launch {
+                            clipboard.setClipEntry(ClipEntry(android.content.ClipData.newPlainText("info", info)))
+                        }
                         android.widget.Toast.makeText(context, context.getString(R.string.info_copied), android.widget.Toast.LENGTH_SHORT).show()
                     }
                 }
@@ -1636,7 +1653,9 @@ fun AboutPage(
                         description = context.packageName,
                         icon = Icons.Outlined.Code,
                     ) {
-                        clipboardManager.setText(AnnotatedString(context.packageName))
+                        coroutineScope.launch {
+                            clipboard.setClipEntry(ClipEntry(android.content.ClipData.newPlainText("package_name", context.packageName)))
+                        }
                         android.widget.Toast.makeText(context, context.getString(R.string.info_copied), android.widget.Toast.LENGTH_SHORT).show()
                     }
                 }

@@ -1,4 +1,4 @@
-﻿package com.tkno.apex.ui.main
+package com.tkno.apex.ui.main
 
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -35,6 +35,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.core.graphics.drawable.toBitmap
 import com.tkno.apex.R
+import com.tkno.apex.ui.component.BackButton
 import com.tkno.apex.model.AppCacheInfo
 import java.text.SimpleDateFormat
 import java.util.Date
@@ -48,6 +49,7 @@ fun AppDetailScreen(
 ) {
     val context = LocalContext.current
     val darkBg = MaterialTheme.colorScheme.background
+    val textPrimary = MaterialTheme.colorScheme.onBackground
     val androidGreen = Color(0xFF3DDC84)
 
     BackHandler(onBack = onBackClick)
@@ -77,40 +79,36 @@ fun AppDetailScreen(
         if (timeToFormat > 0) dateFormat.format(Date(timeToFormat)) else formattedInstallDate
     }
 
-    Column(
+    Box(
         modifier = modifier
             .fillMaxSize()
             .background(darkBg)
-            .padding(horizontal = 20.dp, vertical = 12.dp)
     ) {
-        // Top Bar Header with Back Button
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(bottom = 8.dp),
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            IconButton(onClick = onBackClick) {
-                Icon(
-                    imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                    contentDescription = stringResource(R.string.cd_clear_selection),
-                    tint = MaterialTheme.colorScheme.onBackground
-                )
-            }
-        }
-
+        // Scrollable Card Content
         Column(
             modifier = Modifier
                 .fillMaxSize()
+                .padding(horizontal = 20.dp, vertical = 8.dp)
                 .verticalScroll(rememberScrollState()),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Spacer(modifier = Modifier.height(12.dp))
+            // Top Header: Back Button directly on background
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .heightIn(min = 48.dp)
+                    .padding(bottom = 18.dp),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                BackButton(onClick = onBackClick)
+            }
 
-            // Large App Icon
+            Spacer(modifier = Modifier.height(4.dp))
+
+            // App Icon (Compact size: 72.dp)
             Box(
                 modifier = Modifier
-                    .size(96.dp)
+                    .size(72.dp)
                     .background(MaterialTheme.colorScheme.surfaceContainerHigh, CircleShape),
                 contentAlignment = Alignment.Center
             ) {
@@ -126,78 +124,82 @@ fun AppDetailScreen(
                         Image(
                             bitmap = bitmap,
                             contentDescription = app.name,
-                            modifier = Modifier.size(64.dp)
+                            modifier = Modifier.size(48.dp)
                         )
                     } else {
                         Icon(
                             imageVector = Icons.Default.Android,
                             contentDescription = app.name,
-                            tint = MaterialTheme.colorScheme.onSurface,
-                            modifier = Modifier.size(48.dp)
+                            tint = textPrimary,
+                            modifier = Modifier.size(36.dp)
                         )
                     }
                 } else {
                     Icon(
                         imageVector = Icons.Default.Android,
                         contentDescription = app.name,
-                        tint = MaterialTheme.colorScheme.onSurface,
-                        modifier = Modifier.size(48.dp)
+                        tint = textPrimary,
+                        modifier = Modifier.size(36.dp)
                     )
                 }
             }
 
-            Spacer(modifier = Modifier.height(16.dp))
+            Spacer(modifier = Modifier.height(12.dp))
 
-            // App Title
+            // App Title (White in Dark mode, Black in Light mode)
             Text(
                 text = app.name,
-                color = MaterialTheme.colorScheme.onBackground,
-                fontSize = 22.sp,
+                color = textPrimary,
+                fontSize = 20.sp,
                 fontWeight = FontWeight.Bold
             )
 
-            Spacer(modifier = Modifier.height(4.dp))
+            Spacer(modifier = Modifier.height(2.dp))
 
-            // Version String
+            // Version String (White in Dark mode, Black in Light mode)
             Text(
                 text = stringResource(R.string.app_detail_version, versionName),
-                color = MaterialTheme.colorScheme.onSurfaceVariant,
-                fontSize = 14.sp
+                color = textPrimary,
+                fontSize = 13.sp
             )
 
-            Spacer(modifier = Modifier.height(28.dp))
+            Spacer(modifier = Modifier.height(16.dp))
 
-            // Metadata Rows Table
+            // Metadata Rows Table (Compact spacing)
             Column(
                 modifier = Modifier.fillMaxWidth()
             ) {
                 AppDetailMetadataRow(
                     label = stringResource(R.string.app_detail_apk_size),
-                    value = app.appSizeString
+                    value = app.appSizeString,
+                    textColor = textPrimary
                 )
                 HorizontalDivider(color = MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.4f))
 
                 AppDetailMetadataRow(
                     label = stringResource(R.string.app_detail_install_date),
-                    value = formattedInstallDate
+                    value = formattedInstallDate,
+                    textColor = textPrimary
                 )
                 HorizontalDivider(color = MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.4f))
 
                 AppDetailMetadataRow(
                     label = stringResource(R.string.app_detail_last_update),
-                    value = formattedUpdateDate
+                    value = formattedUpdateDate,
+                    textColor = textPrimary
                 )
                 HorizontalDivider(color = MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.4f))
 
                 AppDetailMetadataRow(
                     label = stringResource(R.string.app_detail_requested_permissions),
-                    value = permissionCount.toString()
+                    value = permissionCount.toString(),
+                    textColor = textPrimary
                 )
             }
 
-            Spacer(modifier = Modifier.height(28.dp))
+            Spacer(modifier = Modifier.height(16.dp))
 
-            // Quick Actions Row (Uninstall, Update, Launch) - 20% smaller icons
+            // Quick Actions Row (Uninstall, Update, Launch)
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceEvenly,
@@ -208,6 +210,7 @@ fun AppDetailScreen(
                     icon = Icons.Outlined.Delete,
                     label = stringResource(R.string.app_detail_uninstall),
                     containerColor = Color(0xFFE53935),
+                    textColor = textPrimary,
                     onClick = {
                         try {
                             val intent = Intent(Intent.ACTION_DELETE).apply {
@@ -225,6 +228,7 @@ fun AppDetailScreen(
                     icon = Icons.Outlined.SystemUpdate,
                     label = stringResource(R.string.app_detail_update),
                     containerColor = Color(0xFF2E7D32),
+                    textColor = textPrimary,
                     onClick = {
                         try {
                             val pm = context.packageManager
@@ -265,6 +269,7 @@ fun AppDetailScreen(
                     icon = Icons.AutoMirrored.Outlined.Launch,
                     label = stringResource(R.string.app_detail_launch),
                     containerColor = Color(0xFF8E24AA),
+                    textColor = textPrimary,
                     onClick = {
                         try {
                             val launchIntent = context.packageManager.getLaunchIntentForPackage(app.packageName)
@@ -280,9 +285,9 @@ fun AppDetailScreen(
                 )
             }
 
-            Spacer(modifier = Modifier.height(28.dp))
+            Spacer(modifier = Modifier.height(18.dp))
 
-            // Prominent Green APK Pill Button (APP INFO) - styled like Stop/Clean action buttons
+            // Prominent Green APP INFO Button - Exact same size/dimensions as Done button (height 40.dp, RoundedCornerShape 20.dp)
             Button(
                 onClick = {
                     try {
@@ -296,8 +301,8 @@ fun AppDetailScreen(
                 },
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(52.dp),
-                shape = RoundedCornerShape(26.dp),
+                    .height(40.dp),
+                shape = RoundedCornerShape(20.dp),
                 colors = ButtonDefaults.buttonColors(
                     containerColor = androidGreen,
                     contentColor = Color(0xFF0E141D)
@@ -306,19 +311,19 @@ fun AppDetailScreen(
                 Icon(
                     imageVector = Icons.Default.Android,
                     contentDescription = null,
-                    modifier = Modifier.size(20.dp),
+                    modifier = Modifier.size(18.dp),
                     tint = Color(0xFF0E141D)
                 )
-                Spacer(modifier = Modifier.width(8.dp))
+                Spacer(modifier = Modifier.width(6.dp))
                 Text(
                     text = stringResource(R.string.app_detail_app_info),
-                    fontSize = 16.sp,
+                    fontSize = 15.sp,
                     fontWeight = FontWeight.Bold,
                     color = Color(0xFF0E141D)
                 )
             }
 
-            Spacer(modifier = Modifier.height(24.dp))
+            Spacer(modifier = Modifier.height(16.dp))
         }
     }
 }
@@ -326,24 +331,25 @@ fun AppDetailScreen(
 @Composable
 private fun AppDetailMetadataRow(
     label: String,
-    value: String
+    value: String,
+    textColor: Color
 ) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(vertical = 14.dp),
+            .padding(vertical = 8.dp),
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically
     ) {
         Text(
             text = label,
-            color = MaterialTheme.colorScheme.onBackground,
-            fontSize = 15.sp
+            color = textColor,
+            fontSize = 14.sp
         )
         Text(
             text = value,
-            color = MaterialTheme.colorScheme.onSurfaceVariant,
-            fontSize = 15.sp
+            color = textColor,
+            fontSize = 14.sp
         )
     }
 }
@@ -353,6 +359,7 @@ private fun AppDetailActionButton(
     icon: ImageVector,
     label: String,
     containerColor: Color,
+    textColor: Color,
     onClick: () -> Unit
 ) {
     Column(
@@ -361,7 +368,7 @@ private fun AppDetailActionButton(
     ) {
         Box(
             modifier = Modifier
-                .size(38.dp)
+                .size(36.dp)
                 .background(containerColor, CircleShape),
             contentAlignment = Alignment.Center
         ) {
@@ -369,16 +376,16 @@ private fun AppDetailActionButton(
                 imageVector = icon,
                 contentDescription = label,
                 tint = Color.White,
-                modifier = Modifier.size(19.dp)
+                modifier = Modifier.size(18.dp)
             )
         }
 
-        Spacer(modifier = Modifier.height(6.dp))
+        Spacer(modifier = Modifier.height(4.dp))
 
         Text(
             text = label,
-            color = MaterialTheme.colorScheme.onBackground,
-            fontSize = 13.sp
+            color = textColor,
+            fontSize = 12.sp
         )
     }
 }

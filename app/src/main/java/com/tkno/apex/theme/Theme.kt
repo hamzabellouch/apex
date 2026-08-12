@@ -99,7 +99,7 @@ fun ApexTheme(
     }
 
     val isRtl = remember(targetLocale) {
-        TextUtilsCompat.getLayoutDirectionFromLocale(targetLocale) == ViewCompat.LAYOUT_DIRECTION_RTL
+        TextUtilsCompat.getLayoutDirectionFromLocale(targetLocale) == android.view.View.LAYOUT_DIRECTION_RTL
     }
 
     val layoutDirection = if (isRtl) LayoutDirection.Rtl else LayoutDirection.Ltr

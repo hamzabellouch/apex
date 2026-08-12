@@ -311,6 +311,25 @@ object AppStorageHelper {
         }
     }
 
+    fun getSingleAppCacheBytes(context: Context, packageName: String): Long {
+        return try {
+            val storageStatsManager = context.getSystemService(Context.STORAGE_STATS_SERVICE) as StorageStatsManager
+            val stats = storageStatsManager.queryStatsForPackage(StorageManager.UUID_DEFAULT, packageName, Process.myUserHandle())
+            stats.cacheBytes
+        } catch (e: Exception) {
+            -1L
+        }
+    }
+
+    fun isAppStopped(context: Context, packageName: String): Boolean {
+        return try {
+            val appInfo = context.packageManager.getApplicationInfo(packageName, 0)
+            (appInfo.flags and ApplicationInfo.FLAG_STOPPED) != 0
+        } catch (e: Exception) {
+            false
+        }
+    }
+
     fun getTotalStorageBytes(context: Context): Long {
         return try {
             val storageStatsManager = context.getSystemService(Context.STORAGE_STATS_SERVICE) as StorageStatsManager

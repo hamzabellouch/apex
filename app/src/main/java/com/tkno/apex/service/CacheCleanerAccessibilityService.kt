@@ -36,15 +36,7 @@ class CacheCleanerAccessibilityService : AccessibilityService() {
     private var watchdogRunnable: Runnable? = null
     private var periodicScanRunnable: Runnable? = null
 
-    // System Window Overlay views
     private var windowManager: WindowManager? = null
-    private var overlayView: View? = null
-    private var titleTextView: TextView? = null
-    private var progressTextView: TextView? = null
-    private var progressBar: ProgressBar? = null
-    private var removeTargetView: View? = null
-    private var isHoveringRemove = false
-    private var isUserDraggingOverlay = false
 
     // State tracking for current package execution
     private var hasClickedStorage = false
@@ -135,6 +127,9 @@ class CacheCleanerAccessibilityService : AccessibilityService() {
                lower.contains("meizu") ||
                lower.contains("asus") ||
                lower.contains("lenovo") ||
+               lower.contains("knox") ||
+               lower.contains("secspace") ||
+               lower.contains("workprofile") ||
                lower == "android"
     }
 
@@ -271,7 +266,7 @@ class CacheCleanerAccessibilityService : AccessibilityService() {
 
     @Synchronized
     private fun processActiveNode(rootNode: AccessibilityNodeInfo) {
-        if (!isRunning || isStepInProgress || isUserDraggingOverlay) return
+        if (!isRunning || isStepInProgress) return
 
         if (currentMode == ServiceMode.FORCE_STOP) {
             handleForceStopEvent(rootNode)
@@ -286,9 +281,9 @@ class CacheCleanerAccessibilityService : AccessibilityService() {
         val currentPkg = if (currentAppIndex in packageList.indices) packageList[currentAppIndex] else ""
         val minPageWait = getPageWait()
         val stepPause = getStepPause()
-        val disabledGraceWindow = 1800L
+        val disabledGraceWindow = 2500L
 
-        // If Clear Cache was clicked, check if a confirmation dialog appeared (e.g. MIUI / HyperOS / Samsung)
+        // Case 1: Clear Cache was already clicked -> check for confirmation dialogs
         if (hasClickedClearCache) {
             val confirmNode = findDialogConfirmNode(rootNode)
             if (confirmNode != null) {
@@ -306,99 +301,68 @@ class CacheCleanerAccessibilityService : AccessibilityService() {
             return
         }
 
-        // Step 1: Check for "Clear Cache" button directly on current viewport
-        val clearCacheNode = findClearCacheNode(rootNode)
-        if (clearCacheNode != null) {
-            if (!clearCacheNode.isEnabled) {
-                if (System.currentTimeMillis() - pageOpenedTime < minPageWait + disabledGraceWindow) return
-
-                val activeRoot = rootInActiveWindow
-                if (activeRoot != null) {
-                    val activeClearCache = findClearCacheNode(activeRoot)
-                    if (activeClearCache != null && activeClearCache.isEnabled) {
-                        isStepInProgress = true
-                        val clicked = performClick(activeClearCache)
-                        if (clicked) {
-                            hasClickedClearCache = true
-                            startWatchdog()
-                            pollForClearCacheConfirmationDialog(currentPkg, 3)
-                            return
-                        } else {
-                            isStepInProgress = false
-                        }
-                    }
-                }
-
-                hasClickedClearCache = true
-                hasClickedConfirmClearCache = true
-                itemResultCallback?.invoke(currentPkg, false, ServiceMode.CLEAR_CACHE)
-                scheduleNextApp(100)
-                return
-            }
-
-            isStepInProgress = true
-            val clicked = performClick(clearCacheNode)
-            if (clicked) {
-                hasClickedClearCache = true
-                startWatchdog()
-                pollForClearCacheConfirmationDialog(currentPkg, 3)
-                return
-            } else {
-                isStepInProgress = false
-            }
-        }
-
-        // Step 2: If we have NOT clicked Storage yet
-        if (!hasClickedStorage) {
-            // Check for Xiaomi / MIUI / HyperOS "Clear Data" button
-            if (!hasClickedClearData) {
-                val clearDataNode = findClearDataNode(rootNode)
-                if (clearDataNode != null && clearDataNode.isEnabled) {
-                    isStepInProgress = true
-                    val clicked = performClick(clearDataNode)
-                    if (clicked) {
-                        hasClickedClearData = true
-                        pageOpenedTime = System.currentTimeMillis()
-                        startWatchdog()
-                        mainHandler.postDelayed({ isStepInProgress = false }, stepPause)
-                        return
-                    } else {
-                        isStepInProgress = false
-                    }
-                }
-            }
-
-            // Find "Storage" navigation item on main App Info screen
-            val storageNode = findStorageNode(rootNode)
-            if (storageNode != null) {
+        // Case 2: Xiaomi / MIUI / HyperOS popup menu (Clear Data bottom action was clicked)
+        if (hasClickedClearData) {
+            val miuiClearCacheNode = findClearCacheNode(rootNode)
+            if (miuiClearCacheNode != null) {
                 isStepInProgress = true
-                val clicked = performClick(storageNode)
+                val clicked = performClick(miuiClearCacheNode)
                 if (clicked) {
-                    hasClickedStorage = true
-                    pageOpenedTime = System.currentTimeMillis()
-                    startWatchdog()
-                    mainHandler.postDelayed({ isStepInProgress = false }, stepPause)
+                    hasClickedClearCache = true
+                    hasClickedConfirmClearCache = true
+                    itemResultCallback?.invoke(currentPkg, true, ServiceMode.CLEAR_CACHE)
+                    scheduleNextApp(120)
                     return
                 } else {
                     isStepInProgress = false
                 }
-            } else if (scrollCountForStorage < 4) {
-                // Storage item not visible -> Scroll Down! (EXCLUSIVELY FOR CLEAR_CACHE)
-                scrollCountForStorage++
-                isStepInProgress = true
-                performScrollDown(rootNode)
-                mainHandler.postDelayed({ isStepInProgress = false }, stepPause + 150L)
-                return
             }
-        } else {
-            // Step 3: Inside Storage sub-screen or MIUI popup
+            val confirmNode = findDialogConfirmNode(rootNode)
+            if (confirmNode != null) {
+                isStepInProgress = true
+                val clicked = performClick(confirmNode)
+                if (clicked) {
+                    hasClickedClearCache = true
+                    hasClickedConfirmClearCache = true
+                    itemResultCallback?.invoke(currentPkg, true, ServiceMode.CLEAR_CACHE)
+                    scheduleNextApp(120)
+                    return
+                } else {
+                    isStepInProgress = false
+                }
+            }
+            return
+        }
+
+        // Case 3: Inside Storage sub-screen (hasClickedStorage == true)
+        if (hasClickedStorage) {
             val storageClearCacheNode = findClearCacheNode(rootNode)
             if (storageClearCacheNode != null) {
                 if (!storageClearCacheNode.isEnabled) {
+                    // Give grace period for OS cache calculation ("Computing...")
                     if (System.currentTimeMillis() - pageOpenedTime < minPageWait + disabledGraceWindow) return
+
+                    val activeRoot = rootInActiveWindow
+                    if (activeRoot != null) {
+                        val activeClearCache = findClearCacheNode(activeRoot)
+                        if (activeClearCache != null && activeClearCache.isEnabled) {
+                            isStepInProgress = true
+                            val clicked = performClick(activeClearCache)
+                            if (clicked) {
+                                hasClickedClearCache = true
+                                startWatchdog()
+                                pollForClearCacheConfirmationDialog(currentPkg, 3)
+                                return
+                            } else {
+                                isStepInProgress = false
+                            }
+                        }
+                    }
+
+                    // Button remains disabled after full grace period -> Cache is already 0 B / clean!
                     hasClickedClearCache = true
                     hasClickedConfirmClearCache = true
-                    itemResultCallback?.invoke(currentPkg, false, ServiceMode.CLEAR_CACHE)
+                    itemResultCallback?.invoke(currentPkg, true, ServiceMode.CLEAR_CACHE)
                     scheduleNextApp(100)
                     return
                 }
@@ -414,7 +378,7 @@ class CacheCleanerAccessibilityService : AccessibilityService() {
                     isStepInProgress = false
                 }
             } else if (scrollCountForClearCache < 4) {
-                // Clear cache button not visible inside Storage -> Scroll Down! (EXCLUSIVELY FOR CLEAR_CACHE)
+                // Clear cache button not visible inside Storage -> Scroll Down!
                 scrollCountForClearCache++
                 isStepInProgress = true
                 performScrollDown(rootNode)
@@ -422,7 +386,7 @@ class CacheCleanerAccessibilityService : AccessibilityService() {
                 return
             }
 
-            // Check if MIUI popup or confirm dialog is visible
+            // Check if confirmation dialog appeared inside Storage
             val confirmNode = findDialogConfirmNode(rootNode)
             if (confirmNode != null) {
                 isStepInProgress = true
@@ -437,7 +401,80 @@ class CacheCleanerAccessibilityService : AccessibilityService() {
                     isStepInProgress = false
                 }
             }
+            return
         }
+
+        // Case 4: Main App Info Screen (hasClickedStorage == false and hasClickedClearData == false)
+        // First check for standalone clear cache button matching strict resource ID suffixes
+        val standaloneClearCacheNode = findStandaloneClearCacheNodeOnMainPage(rootNode)
+        if (standaloneClearCacheNode != null) {
+            if (!standaloneClearCacheNode.isEnabled) {
+                if (System.currentTimeMillis() - pageOpenedTime < minPageWait + disabledGraceWindow) return
+                hasClickedClearCache = true
+                hasClickedConfirmClearCache = true
+                itemResultCallback?.invoke(currentPkg, true, ServiceMode.CLEAR_CACHE)
+                scheduleNextApp(100)
+                return
+            }
+
+            isStepInProgress = true
+            val clicked = performClick(standaloneClearCacheNode)
+            if (clicked) {
+                hasClickedClearCache = true
+                startWatchdog()
+                pollForClearCacheConfirmationDialog(currentPkg, 3)
+                return
+            } else {
+                isStepInProgress = false
+            }
+        }
+
+        // Check for Xiaomi / MIUI / HyperOS "Clear Data" bottom button
+        val clearDataNode = findClearDataNode(rootNode)
+        if (clearDataNode != null && clearDataNode.isEnabled) {
+            isStepInProgress = true
+            val clicked = performClick(clearDataNode)
+            if (clicked) {
+                hasClickedClearData = true
+                pageOpenedTime = System.currentTimeMillis()
+                startWatchdog()
+                mainHandler.postDelayed({ isStepInProgress = false }, stepPause)
+                return
+            } else {
+                isStepInProgress = false
+            }
+        }
+
+        // Find "Storage" navigation item on main App Info screen
+        val storageNode = findStorageNode(rootNode)
+        if (storageNode != null) {
+            isStepInProgress = true
+            val clicked = performClick(storageNode)
+            if (clicked) {
+                hasClickedStorage = true
+                pageOpenedTime = System.currentTimeMillis()
+                startWatchdog()
+                mainHandler.postDelayed({ isStepInProgress = false }, stepPause)
+                return
+            } else {
+                isStepInProgress = false
+            }
+        } else if (scrollCountForStorage < 4) {
+            // Storage item not visible -> Scroll Down! (EXCLUSIVELY FOR CLEAR_CACHE)
+            scrollCountForStorage++
+            isStepInProgress = true
+            performScrollDown(rootNode)
+            mainHandler.postDelayed({ isStepInProgress = false }, stepPause + 150L)
+            return
+        }
+    }
+
+    private fun findStandaloneClearCacheNodeOnMainPage(rootNode: AccessibilityNodeInfo): AccessibilityNodeInfo? {
+        val nodeById = findNodeByIdSuffixes(rootNode, CLEAR_CACHE_ID_SUFFIXES)
+        if (nodeById != null && isValidClearCacheNode(nodeById)) {
+            return nodeById
+        }
+        return null
     }
 
     private fun handleForceStopEvent(rootNode: AccessibilityNodeInfo) {
@@ -787,6 +824,19 @@ class CacheCleanerAccessibilityService : AccessibilityService() {
 
         val combined = "$text $contentDesc".lowercase()
 
+        // Exclude Storage Preference menu items & headers from falsely matching Clear Cache button
+        val excludeMenuKeywords = listOf(
+            "storage & cache", "storage and cache", "storage & storage info", "storage usage",
+            "التخزين وذاكرة التخزين المؤقت", "التخزين والذاكرة المؤقتة", "التخزين و الذاكرة",
+            "مساحة التخزين والتخزين المؤقت", "استخدام التخزين", "وحدة التخزين",
+            "espace de stockage et cache", "almacenamiento y caché", "speicher & cache"
+        )
+        for (menuKw in excludeMenuKeywords) {
+            if (combined.contains(menuKw)) {
+                return false
+            }
+        }
+
         // Exclude Clear Data / Clear Storage / Manage Space buttons from matching Clear Cache
         val excludeDataKeywords = listOf(
             "clear data", "clear all data", "clear storage", "manage space", "manage storage",
@@ -1025,361 +1075,51 @@ class CacheCleanerAccessibilityService : AccessibilityService() {
         pageOpenedTime = System.currentTimeMillis()
 
         currentAppIndex++
-        if (currentAppIndex < packageList.size) {
-            val nextPackage = packageList[currentAppIndex]
+        processCurrentOrNextApp()
+    }
+
+    private fun processCurrentOrNextApp() {
+        while (currentAppIndex < packageList.size) {
+            val pkg = packageList[currentAppIndex]
             
+            // Fast-Path for 0-Byte Apps in CLEAR_CACHE Mode:
+            // If StorageStatsManager reports cache is ALREADY 0 B, skip opening Settings entirely!
+            if (currentMode == ServiceMode.CLEAR_CACHE) {
+                val liveCache = AppStorageHelper.getSingleAppCacheBytes(this, pkg)
+                if (liveCache == 0L) {
+                    progressCallback?.invoke(currentAppIndex, packageList.size, pkg)
+                    itemResultCallback?.invoke(pkg, true, ServiceMode.CLEAR_CACHE)
+                    currentAppIndex++
+                    continue
+                }
+            }
+
+            // Fast-Path for Stopped Apps in FORCE_STOP Mode:
+            // If Android OS reports app is ALREADY stopped (FLAG_STOPPED), skip opening Settings entirely!
+            if (currentMode == ServiceMode.FORCE_STOP) {
+                if (AppStorageHelper.isAppStopped(this, pkg)) {
+                    progressCallback?.invoke(currentAppIndex, packageList.size, pkg)
+                    itemResultCallback?.invoke(pkg, true, ServiceMode.FORCE_STOP)
+                    currentAppIndex++
+                    continue
+                }
+            }
+
             val pm = packageManager
             val appLabel = try {
-                val appInfo = pm.getApplicationInfo(nextPackage, 0)
+                val appInfo = pm.getApplicationInfo(pkg, 0)
                 appInfo.loadLabel(pm).toString()
             } catch (e: Exception) {
-                nextPackage
+                pkg
             }
 
-            updateOverlay(currentAppIndex + 1, packageList.size, appLabel)
-            progressCallback?.invoke(currentAppIndex, packageList.size, nextPackage)
-            
-            openAppDetailsSettings(this, nextPackage)
-        } else {
-            stopCleaning(returnToApp = true)
+            progressCallback?.invoke(currentAppIndex, packageList.size, pkg)
+            openAppDetailsSettings(this, pkg)
+            return
         }
-    }
 
-    // Draggable & Auto Edge-Snapping System Window Overlay
-    private fun showOverlay() {
-        if (overlayView != null) return
-        val wm = windowManager ?: (try {
-            (getSystemService(WINDOW_SERVICE) as WindowManager).also { windowManager = it }
-        } catch (e: Exception) { null }) ?: return
-
-        try {
-            val density = resources.displayMetrics.density
-            val defaultOverlayHeight = (100 * density).toInt() // Increased size by 25%
-            val defaultOverlayWidth = defaultOverlayHeight * 2 // Aspect ratio 2:1 (200dp x 100dp)
-
-            val layout = LinearLayout(this).apply {
-                orientation = LinearLayout.VERTICAL
-                
-                val bg = GradientDrawable().apply {
-                    setColor(Color.parseColor("#0E141D"))
-                    cornerRadius = 15 * density
-                }
-                background = bg
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                    clipToOutline = true
-                }
-            }
-
-            // 1. Top Section: Cyan Progress Line
-            val pBar = ProgressBar(this, null, android.R.attr.progressBarStyleHorizontal).apply {
-                max = 100
-                progress = 0
-                layoutParams = LinearLayout.LayoutParams(
-                    LinearLayout.LayoutParams.MATCH_PARENT,
-                    (4 * density).toInt()
-                )
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                    progressTintList = android.content.res.ColorStateList.valueOf(Color.parseColor("#48AFFF"))
-                    progressBackgroundTintList = android.content.res.ColorStateList.valueOf(Color.parseColor("#1B2636"))
-                }
-            }
-            layout.addView(pBar)
-
-            // 2. Middle Section: Body Container with Centered Title & Top-Right Close '✕' Button
-            val bodyContainer = RelativeLayout(this).apply {
-                layoutParams = LinearLayout.LayoutParams(
-                    LinearLayout.LayoutParams.MATCH_PARENT,
-                    (54 * density).toInt()
-                )
-                setPadding((12 * density).toInt(), (6 * density).toInt(), (12 * density).toInt(), (6 * density).toInt())
-            }
-
-            val titleTv = TextView(this).apply {
-                text = if (currentMode == ServiceMode.FORCE_STOP) "Force stopping..." else "Cleaning cache..."
-                setTextColor(Color.WHITE)
-                textSize = 13.5f
-                setTypeface(typeface, android.graphics.Typeface.BOLD)
-                maxLines = 1
-                ellipsize = android.text.TextUtils.TruncateAt.END
-                val lp = RelativeLayout.LayoutParams(
-                    RelativeLayout.LayoutParams.WRAP_CONTENT,
-                    RelativeLayout.LayoutParams.WRAP_CONTENT
-                ).apply {
-                    addRule(RelativeLayout.CENTER_IN_PARENT)
-                }
-                layoutParams = lp
-            }
-
-            val closeBtn = TextView(this).apply {
-                text = " ✕ "
-                setTextColor(Color.parseColor("#9E9E9E"))
-                textSize = 14.5f
-                setTypeface(typeface, android.graphics.Typeface.BOLD)
-                val lp = RelativeLayout.LayoutParams(
-                    RelativeLayout.LayoutParams.WRAP_CONTENT,
-                    RelativeLayout.LayoutParams.WRAP_CONTENT
-                ).apply {
-                    addRule(RelativeLayout.ALIGN_PARENT_END)
-                    addRule(RelativeLayout.CENTER_VERTICAL)
-                }
-                layoutParams = lp
-                setOnClickListener {
-                    stopCleaning(returnToApp = true)
-                }
-            }
-
-            bodyContainer.addView(titleTv)
-            bodyContainer.addView(closeBtn)
-            layout.addView(bodyContainer)
-
-            // 3. Bottom Section: Full-Width Bright Cyan Banner
-            val bottomBanner = LinearLayout(this).apply {
-                orientation = LinearLayout.HORIZONTAL
-                gravity = Gravity.CENTER
-                layoutParams = LinearLayout.LayoutParams(
-                    LinearLayout.LayoutParams.MATCH_PARENT,
-                    (42 * density).toInt()
-                )
-                val bannerBg = GradientDrawable().apply {
-                    setColor(Color.parseColor("#48AFFF"))
-                }
-                background = bannerBg
-            }
-
-            val progressTv = TextView(this).apply {
-                text = "# 1/${packageList.size}"
-                setTextColor(Color.parseColor("#090D10"))
-                textSize = 13.5f
-                setTypeface(typeface, android.graphics.Typeface.BOLD)
-                maxLines = 1
-                ellipsize = android.text.TextUtils.TruncateAt.END
-            }
-
-            bottomBanner.addView(progressTv)
-            layout.addView(bottomBanner)
-
-            overlayView = layout
-            titleTextView = titleTv
-            progressTextView = progressTv
-            progressBar = pBar
-
-            val displayMetrics = resources.displayMetrics
-            val sWidth = displayMetrics.widthPixels
-            val sHeight = displayMetrics.heightPixels
-
-            val params = WindowManager.LayoutParams(
-                defaultOverlayWidth,
-                defaultOverlayHeight,
-                WindowManager.LayoutParams.TYPE_ACCESSIBILITY_OVERLAY,
-                WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE or
-                WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN or
-                WindowManager.LayoutParams.FLAG_HARDWARE_ACCELERATED,
-                PixelFormat.TRANSLUCENT
-            ).apply {
-                gravity = Gravity.TOP or Gravity.START
-                x = sWidth - defaultOverlayWidth - (16 * density).toInt()
-                y = (100 * density).toInt()
-            }
-
-            // Gesture Touch Listener: Butter-Smooth Hardware Accelerated Dragging
-            var initialX = 0
-            var initialY = 0
-            var initialTouchX = 0f
-            var initialTouchY = 0f
-            var isDragging = false
-
-            layout.setOnTouchListener { _, event ->
-                when (event.action) {
-                    MotionEvent.ACTION_DOWN -> {
-                        initialX = params.x
-                        initialY = params.y
-                        initialTouchX = event.rawX
-                        initialTouchY = event.rawY
-                        isDragging = false
-                        true
-                    }
-                    MotionEvent.ACTION_MOVE -> {
-                        val dx = (event.rawX - initialTouchX).toInt()
-                        val dy = (event.rawY - initialTouchY).toInt()
-
-                        if (Math.abs(dx) > 5 || Math.abs(dy) > 5) {
-                            if (!isDragging) {
-                                isDragging = true
-                                isUserDraggingOverlay = true
-                                showRemoveTarget()
-                            }
-                        }
-
-                        if (isDragging) {
-                            params.x = initialX + dx
-                            params.y = initialY + dy
-                            try {
-                                wm.updateViewLayout(layout, params)
-                            } catch (e: Exception) {
-                                e.printStackTrace()
-                            }
-
-                            val isOverTarget = event.rawY > sHeight - (140 * density) && Math.abs(event.rawX - sWidth / 2f) < (130 * density)
-                            updateRemoveTargetHighlight(isOverTarget)
-                        }
-                        true
-                    }
-                    MotionEvent.ACTION_UP, MotionEvent.ACTION_CANCEL -> {
-                        isUserDraggingOverlay = false
-                        if (isDragging) {
-                            val isOverTarget = event.rawY > sHeight - (140 * density) && Math.abs(event.rawX - sWidth / 2f) < (130 * density)
-                            
-                            hideRemoveTarget()
-
-                            if (isOverTarget) {
-                                stopCleaning(returnToApp = true)
-                            } else {
-                                val currentWidth = layout.width.takeIf { it > 0 } ?: defaultOverlayWidth
-                                val centerX = params.x + (currentWidth / 2)
-                                
-                                val targetX = if (centerX < sWidth / 2) {
-                                    (16 * density).toInt()
-                                } else {
-                                    sWidth - currentWidth - (16 * density).toInt()
-                                }
-
-                                params.x = targetX
-                                try {
-                                    wm.updateViewLayout(layout, params)
-                                } catch (e: Exception) {
-                                    e.printStackTrace()
-                                }
-                            }
-                        }
-                        true
-                    }
-                    else -> false
-                }
-            }
-
-            wm.addView(overlayView, params)
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
-    }
-
-    private fun showRemoveTarget() {
-        if (removeTargetView != null) return
-        val wm = windowManager ?: return
-        try {
-            val density = resources.displayMetrics.density
-            
-            val layout = LinearLayout(this).apply {
-                orientation = LinearLayout.HORIZONTAL
-                gravity = Gravity.CENTER
-                setPadding((20 * density).toInt(), (10 * density).toInt(), (20 * density).toInt(), (10 * density).toInt())
-                
-                val bg = GradientDrawable().apply {
-                    setColor(Color.parseColor("#CC000000")) // Standard system translucent surface
-                    cornerRadius = 24 * density
-                    setStroke((1 * density).toInt(), Color.parseColor("#40FFFFFF"))
-                }
-                background = bg
-            }
-
-            val iconTv = TextView(this).apply {
-                text = "✕  "
-                setTextColor(Color.WHITE)
-                textSize = 15f
-                setTypeface(typeface, android.graphics.Typeface.BOLD)
-            }
-
-            val removeTv = TextView(this).apply {
-                text = "Remove"
-                setTextColor(Color.WHITE)
-                textSize = 13f
-                setTypeface(typeface, android.graphics.Typeface.BOLD)
-            }
-
-            layout.addView(iconTv)
-            layout.addView(removeTv)
-
-            val params = WindowManager.LayoutParams(
-                WindowManager.LayoutParams.WRAP_CONTENT,
-                WindowManager.LayoutParams.WRAP_CONTENT,
-                WindowManager.LayoutParams.TYPE_ACCESSIBILITY_OVERLAY,
-                WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE or
-                WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN or
-                WindowManager.LayoutParams.FLAG_HARDWARE_ACCELERATED,
-                PixelFormat.TRANSLUCENT
-            ).apply {
-                gravity = Gravity.BOTTOM or Gravity.CENTER_HORIZONTAL
-                y = (48 * density).toInt()
-            }
-
-            removeTargetView = layout
-            wm.addView(layout, params)
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
-    }
-
-    private fun updateRemoveTargetHighlight(isHovering: Boolean) {
-        if (isHoveringRemove == isHovering) return
-        isHoveringRemove = isHovering
-        val view = removeTargetView as? LinearLayout ?: return
-        val density = resources.displayMetrics.density
-        try {
-            val bg = GradientDrawable().apply {
-                if (isHovering) {
-                    setColor(Color.parseColor("#CCBD1C1C")) // Standard system alert red
-                    setStroke((1.5f * density).toInt(), Color.parseColor("#FF5252"))
-                } else {
-                    setColor(Color.parseColor("#CC000000"))
-                    setStroke((1 * density).toInt(), Color.parseColor("#40FFFFFF"))
-                }
-                cornerRadius = 24 * density
-            }
-            view.background = bg
-            view.scaleX = if (isHovering) 1.12f else 1.0f
-            view.scaleY = if (isHovering) 1.12f else 1.0f
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
-    }
-
-    private fun hideRemoveTarget() {
-        removeTargetView?.let { view ->
-            try {
-                windowManager?.removeView(view)
-            } catch (e: Exception) {
-                e.printStackTrace()
-            }
-            removeTargetView = null
-            isHoveringRemove = false
-        }
-    }
-
-    private fun updateOverlay(current: Int, total: Int, appName: String) {
-        mainHandler.post {
-            try {
-                titleTextView?.text = if (currentMode == ServiceMode.FORCE_STOP) "Force stopping..." else "Cleaning cache..."
-                progressTextView?.text = "# $current/$total $appName"
-                progressBar?.progress = ((current.toFloat() / total.toFloat()) * 100).toInt()
-            } catch (e: Exception) {
-                e.printStackTrace()
-            }
-        }
-    }
-
-    private fun hideOverlay() {
-        hideRemoveTarget()
-        overlayView?.let { view ->
-            try {
-                windowManager?.removeView(view)
-            } catch (e: Exception) {
-                e.printStackTrace()
-            }
-            overlayView = null
-            titleTextView = null
-            progressTextView = null
-            progressBar = null
-        }
+        // All packages processed -> finish & return to app
+        stopCleaning(returnToApp = true)
     }
 
     private fun findNodeByIdSuffixes(root: AccessibilityNodeInfo, suffixes: List<String>): AccessibilityNodeInfo? {
@@ -1539,6 +1279,8 @@ class CacheCleanerAccessibilityService : AccessibilityService() {
             "مسح ذاكرة التخزين المؤقت", 
             "مسح ذاكرة التخزين المؤقتة",
             "مسح ذاكرة التخزين الموقته",
+            "تفريغ ذاكرة التخزين المؤقت",
+            "تفريغ الذاكرة المؤقتة",
             "مسح التخزين المؤقت",
             "مسح التخزين الموقته",
             "مسح الذاكرة المؤقتة",
@@ -1546,9 +1288,10 @@ class CacheCleanerAccessibilityService : AccessibilityService() {
             "تنظيف الذاكرة المؤقتة",
             "تنظيف الكاش",
             "مسح الكاش",
-            "مسح التخزين",
+            "تفريغ الكاش",
             "حذف ذاكرة التخزين المؤقت",
             "حذف الكاش",
+            "إزالة ذاكرة التخزين المؤقت",
             "Vider le cache",
             "Effacer le cache",
             "Borrar caché",
@@ -1569,7 +1312,12 @@ class CacheCleanerAccessibilityService : AccessibilityService() {
             "btn_clear_cache",
             "button_clear_cache",
             "clear_cache_btn",
-            "button2"
+            "button2",
+            "right_button",
+            "right_btn",
+            "button_right",
+            "clear_cache_action",
+            "clear_cache_container"
         )
 
         private val FORCE_STOP_KEYWORDS = listOf(
@@ -1606,7 +1354,11 @@ class CacheCleanerAccessibilityService : AccessibilityService() {
             "force_stop_btn",
             "left_button",
             "right_button",
-            "button1"
+            "button1",
+            "action_force_stop",
+            "menu_force_stop",
+            "stop_button",
+            "btn_stop"
         )
 
         private val DIALOG_CONFIRM_KEYWORDS = listOf(
@@ -1632,7 +1384,9 @@ class CacheCleanerAccessibilityService : AccessibilityService() {
             "clear cache",
             "CLEAR CACHE",
             "مسح التخزين المؤقت",
-            "مسح ذاكرة التخزين المؤقت"
+            "مسح ذاكرة التخزين المؤقت",
+            "مسح الكاش",
+            "تفريغ الكاش"
         )
 
         private val DIALOG_CONFIRM_ID_SUFFIXES = listOf(
@@ -1641,7 +1395,8 @@ class CacheCleanerAccessibilityService : AccessibilityService() {
             "ok_button",
             "confirm",
             "positive_button",
-            "ok"
+            "ok",
+            "android:id/button1"
         )
 
         fun startCleaning(context: Context, packages: List<String>, mode: ServiceMode = ServiceMode.CLEAR_CACHE) {
@@ -1651,26 +1406,15 @@ class CacheCleanerAccessibilityService : AccessibilityService() {
             currentMode = mode
             isRunning = true
             
-            try {
-                instance?.showOverlay()
-            } catch (e: Exception) {
-                e.printStackTrace()
+            val inst = instance
+            if (inst != null) {
+                inst.processCurrentOrNextApp()
+            } else {
+                progressCallback?.invoke(0, packages.size, packages[0])
+                openAppDetailsSettings(context, packages[0])
             }
-
-            val pm = context.packageManager
-            val firstAppLabel = try {
-                val appInfo = pm.getApplicationInfo(packages[0], 0)
-                appInfo.loadLabel(pm).toString()
-            } catch (e: Exception) {
-                packages[0]
-            }
-            instance?.updateOverlay(1, packages.size, firstAppLabel)
-            progressCallback?.invoke(0, packages.size, packages[0])
-
-            // 1. Open the first app's settings page IMMEDIATELY (0ms delay on Main Screen)
-            openAppDetailsSettings(context, packages[0])
             
-            // 2. Wait 1.5s (1500ms) on the first app's settings page before Accessibility starts clicking
+            // Wait 1.5s (1500ms) on the first app's settings page before Accessibility starts clicking
             Handler(Looper.getMainLooper()).postDelayed({
                 if (!isRunning) return@postDelayed
                 instance?.pageOpenedTime = System.currentTimeMillis()
@@ -1679,17 +1423,17 @@ class CacheCleanerAccessibilityService : AccessibilityService() {
         }
 
         fun stopCleaning(returnToApp: Boolean = false) {
-            val cb = completionCallback
             isRunning = false
             packageList = emptyList()
             currentAppIndex = 0
+            val cb = completionCallback
             progressCallback = null
             itemResultCallback = null
             completionCallback = null
             
             instance?.apply {
+                mainHandler.removeCallbacksAndMessages(null)
                 stopPeriodicScan()
-                hideOverlay()
                 stopWatchdog()
                 hasClickedStorage = false
                 hasClickedClearData = false
@@ -1703,11 +1447,11 @@ class CacheCleanerAccessibilityService : AccessibilityService() {
                 pageOpenedTime = 0L
             }
 
-            AppStorageHelper.clearAllMemoryCaches()
-
             if (returnToApp) {
                 instance?.bringAppToForeground()
             }
+
+            AppStorageHelper.clearAllMemoryCaches()
 
             cb?.invoke()
         }

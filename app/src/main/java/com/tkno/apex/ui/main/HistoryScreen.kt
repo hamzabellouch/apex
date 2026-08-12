@@ -32,6 +32,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.core.graphics.drawable.toBitmap
 import com.tkno.apex.R
+import com.tkno.apex.ui.component.BackButton
 import com.tkno.apex.util.CleanHistoryEntry
 import com.tkno.apex.util.HistoryManager
 import com.tkno.apex.util.HistoryTimePeriod
@@ -101,27 +102,22 @@ fun HistoryScreen(
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(bottom = 80.dp)
+                .padding(start = 16.dp, end = 16.dp, top = 8.dp, bottom = 80.dp)
         ) {
             // 1. Top Bar - Always Title "History"
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(horizontal = 16.dp, vertical = 16.dp),
+                    .heightIn(min = 48.dp)
+                    .padding(bottom = 18.dp),
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                IconButton(onClick = onBackClick) {
-                    Icon(
-                        imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                        contentDescription = stringResource(R.string.cd_back),
-                        tint = MaterialTheme.colorScheme.onBackground
-                    )
-                }
-                Spacer(modifier = Modifier.width(8.dp))
+                BackButton(onClick = onBackClick)
+                Spacer(modifier = Modifier.width(4.dp))
                 Text(
                     text = stringResource(R.string.history_title),
                     color = MaterialTheme.colorScheme.onBackground,
-                    fontSize = 20.sp,
+                    fontSize = 24.sp,
                     fontWeight = FontWeight.Bold
                 )
             }
@@ -210,9 +206,7 @@ fun HistoryScreen(
 
             // Filter Options Cards List (Today, Yesterday, Last 7 days, Last 30 days)
             Column(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(horizontal = 16.dp)
+                modifier = Modifier.fillMaxWidth()
             ) {
                 HistoryPeriodItem(
                     title = stringResource(R.string.history_period_today),
@@ -288,27 +282,24 @@ fun HistoryScreen(
                     .background(darkBg)
             ) {
                 Column(
-                    modifier = Modifier.fillMaxSize()
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(top = 8.dp, bottom = 16.dp)
                 ) {
                     // Top Bar for Period Page
                     Row(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .padding(horizontal = 16.dp, vertical = 16.dp),
+                            .heightIn(min = 48.dp)
+                            .padding(start = 16.dp, end = 16.dp, bottom = 18.dp),
                         verticalAlignment = Alignment.CenterVertically
                     ) {
-                        IconButton(onClick = { selectedPeriod = null }) {
-                            Icon(
-                                imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                                contentDescription = stringResource(R.string.cd_back),
-                                tint = MaterialTheme.colorScheme.onBackground
-                            )
-                        }
-                        Spacer(modifier = Modifier.width(8.dp))
+                        BackButton(onClick = { selectedPeriod = null })
+                        Spacer(modifier = Modifier.width(4.dp))
                         Text(
                             text = periodTitle,
                             color = MaterialTheme.colorScheme.onBackground,
-                            fontSize = 20.sp,
+                            fontSize = 24.sp,
                             fontWeight = FontWeight.Bold
                         )
                     }
@@ -331,12 +322,12 @@ fun HistoryScreen(
                         val totalCacheBytes = groupedByApp.sumOf { it.third.first }
                         val totalCacheFormatted = HistoryManager.formatBytes(totalCacheBytes)
 
-                        // Summary Sub-header
+                        // Summary Sub-header (Full-width Edge-to-Edge with 0 side margins)
                         Row(
                             modifier = Modifier
                                 .fillMaxWidth()
                                 .background(MaterialTheme.colorScheme.surfaceContainer)
-                                .padding(horizontal = 20.dp, vertical = 14.dp),
+                                .padding(horizontal = 16.dp, vertical = 14.dp),
                             verticalAlignment = Alignment.CenterVertically
                         ) {
                             Text(
@@ -349,6 +340,8 @@ fun HistoryScreen(
                                 fontWeight = FontWeight.Medium
                             )
                         }
+
+                        Spacer(modifier = Modifier.height(12.dp))
 
                         // Apps List
                         if (groupedByApp.isEmpty()) {
@@ -446,12 +439,12 @@ fun HistoryScreen(
                         val totalAppsCount = groupedByApp.size
                         val totalStopsCount = periodStopEntries.size
 
-                        // Summary Sub-header
+                        // Summary Sub-header (Full-width Edge-to-Edge with 0 side margins)
                         Row(
                             modifier = Modifier
                                 .fillMaxWidth()
                                 .background(MaterialTheme.colorScheme.surfaceContainer)
-                                .padding(horizontal = 20.dp, vertical = 14.dp),
+                                .padding(horizontal = 16.dp, vertical = 14.dp),
                             verticalAlignment = Alignment.CenterVertically
                         ) {
                             Text(
@@ -464,6 +457,8 @@ fun HistoryScreen(
                                 fontWeight = FontWeight.Medium
                             )
                         }
+
+                        Spacer(modifier = Modifier.height(12.dp))
 
                         // Apps List for Stop History
                         if (groupedByApp.isEmpty()) {
@@ -483,8 +478,7 @@ fun HistoryScreen(
                             LazyColumn(
                                 modifier = Modifier
                                     .fillMaxSize()
-                                    .padding(horizontal = 16.dp, vertical = 8.dp),
-                                verticalArrangement = Arrangement.spacedBy(10.dp)
+                                    .padding(horizontal = 16.dp)
                             ) {
                                 items(groupedByApp, key = { it.first }) { (pkg, appName, info) ->
                                     val (count, timestamp) = info
@@ -493,7 +487,8 @@ fun HistoryScreen(
                                         appName = appName,
                                         stopCount = count,
                                         latestTimestamp = timestamp,
-                                        iconDrawable = getAppIcon(pkg)
+                                        iconDrawable = getAppIcon(pkg),
+                                        dividerColor = dividerColor
                                     )
                                 }
                             }
@@ -558,7 +553,7 @@ private fun HistoryPeriodItem(
         modifier = Modifier
             .fillMaxWidth()
             .clickable(onClick = onClick)
-            .padding(vertical = 18.dp, horizontal = 4.dp),
+            .padding(vertical = 18.dp),
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically
     ) {
@@ -599,63 +594,75 @@ private fun StopHistoryRowItem(
     appName: String,
     stopCount: Int,
     latestTimestamp: Long,
-    iconDrawable: Drawable?
+    iconDrawable: Drawable?,
+    dividerColor: Color
 ) {
-    Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .clip(RoundedCornerShape(12.dp))
-            .background(MaterialTheme.colorScheme.surfaceContainerHigh)
-            .padding(12.dp),
-        verticalAlignment = Alignment.CenterVertically
-    ) {
-        if (iconDrawable != null) {
-            Image(
-                bitmap = iconDrawable.toBitmap(48, 48).asImageBitmap(),
-                contentDescription = appName,
-                modifier = Modifier.size(36.dp)
-            )
-        } else {
-            Icon(
-                imageVector = Icons.Default.Android,
-                contentDescription = appName,
-                tint = Color(0xFF3DDC84),
-                modifier = Modifier.size(36.dp)
-            )
-        }
-
-        Spacer(modifier = Modifier.width(12.dp))
-
-        Column(
-            modifier = Modifier.weight(1f)
+    Column {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(vertical = 14.dp),
+            verticalAlignment = Alignment.CenterVertically
         ) {
-            Text(
-                text = appName,
-                color = MaterialTheme.colorScheme.onSurface,
-                fontSize = 14.sp,
-                fontWeight = FontWeight.Medium,
-                maxLines = 1,
-                overflow = TextOverflow.Ellipsis
-            )
-            Text(
-                text = HistoryManager.formatTimestamp(latestTimestamp),
-                color = MaterialTheme.colorScheme.onSurfaceVariant,
-                fontSize = 11.sp
-            )
-        }
+            if (iconDrawable != null) {
+                Image(
+                    bitmap = iconDrawable.toBitmap(54, 54).asImageBitmap(),
+                    contentDescription = appName,
+                    modifier = Modifier
+                        .size(44.dp)
+                        .clip(CircleShape)
+                )
+            } else {
+                Icon(
+                    imageVector = Icons.Default.Android,
+                    contentDescription = appName,
+                    tint = Color(0xFF3DDC84),
+                    modifier = Modifier
+                        .size(44.dp)
+                        .clip(CircleShape)
+                )
+            }
 
-        Surface(
-            color = Color(0xFFFF6D00).copy(alpha = 0.15f),
-            shape = RoundedCornerShape(12.dp)
-        ) {
-            Text(
-                text = if (stopCount == 1) stringResource(R.string.history_stop_count_singular, stopCount) else stringResource(R.string.history_stop_count_plural, stopCount),
-                color = Color(0xFFFF6D00),
-                fontSize = 12.sp,
-                fontWeight = FontWeight.Bold,
-                modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp)
-            )
+            Spacer(modifier = Modifier.width(16.dp))
+
+            Column(
+                modifier = Modifier.weight(1f)
+            ) {
+                Text(
+                    text = appName,
+                    color = MaterialTheme.colorScheme.onSurface,
+                    fontSize = 16.sp,
+                    fontWeight = FontWeight.SemiBold,
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis
+                )
+                Spacer(modifier = Modifier.height(4.dp))
+                Text(
+                    text = HistoryManager.formatTimestamp(latestTimestamp),
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    fontSize = 13.sp
+                )
+            }
+
+            Spacer(modifier = Modifier.width(12.dp))
+
+            Surface(
+                color = Color(0xFFFF6D00).copy(alpha = 0.15f),
+                shape = RoundedCornerShape(12.dp)
+            ) {
+                Text(
+                    text = if (stopCount == 1) stringResource(R.string.history_stop_count_singular, stopCount) else stringResource(R.string.history_stop_count_plural, stopCount),
+                    color = Color(0xFFFF6D00),
+                    fontSize = 12.sp,
+                    fontWeight = FontWeight.Bold,
+                    modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp)
+                )
+            }
         }
+        HorizontalDivider(
+            color = dividerColor,
+            thickness = 1.dp
+        )
     }
 }
 

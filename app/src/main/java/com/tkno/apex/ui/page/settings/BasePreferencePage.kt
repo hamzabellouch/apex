@@ -1,4 +1,4 @@
-﻿package com.tkno.apex.ui.page.settings
+package com.tkno.apex.ui.page.settings
 
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.WindowInsets
@@ -50,7 +50,7 @@ fun BasePreferencePage(
                         scrollBehavior = scrollBehavior,
                         navigationIcon = { BackButton(onClick = onBack) },
                         windowInsets = WindowInsets(0.dp),
-                        colors = TopAppBarDefaults.largeTopAppBarColors(
+                        colors = TopAppBarDefaults.topAppBarColors(
                             containerColor = MaterialTheme.colorScheme.background,
                             scrolledContainerColor = MaterialTheme.colorScheme.background,
                             titleContentColor = MaterialTheme.colorScheme.onBackground

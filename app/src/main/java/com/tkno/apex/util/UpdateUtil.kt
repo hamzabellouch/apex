@@ -98,7 +98,7 @@ object UpdateUtil {
         return try {
             client.newCall(request).execute().use { response ->
                 if (!response.isSuccessful) return emptyList()
-                val bodyString = response.body?.string() ?: return emptyList()
+                val bodyString = response.body.string()
                 jsonFormat.decodeFromString<List<Release>>(bodyString)
             }
         } catch (e: Throwable) {
@@ -205,10 +205,6 @@ object UpdateUtil {
                     return@withContext emptyFlow()
                 }
                 val responseBody = response.body
-                if (responseBody == null) {
-                    response.close()
-                    return@withContext emptyFlow()
-                }
                 return@withContext responseBody.downloadFileWithProgress(saveFile)
             } catch (e: Throwable) {
                 if (e is kotlinx.coroutines.CancellationException) throw e

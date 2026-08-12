@@ -147,17 +147,21 @@ fun AppsScreen(
                     horizontalArrangement = Arrangement.SpaceBetween,
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-                    Column {
+                    Row(
+                        verticalAlignment = Alignment.Bottom
+                    ) {
                         Text(
                             text = stringResource(R.string.apps_screen_title),
                             color = MaterialTheme.colorScheme.onBackground,
                             fontSize = 24.sp,
                             fontWeight = FontWeight.Bold
                         )
+                        Spacer(modifier = Modifier.width(8.dp))
                         Text(
                             text = stringResource(R.string.apps_listed_count, filteredApps.size),
                             color = androidGreen,
-                            fontSize = 12.sp
+                            fontSize = 12.sp,
+                            modifier = Modifier.padding(bottom = 3.dp)
                         )
                     }
 

@@ -34,6 +34,49 @@ import java.util.Locale
 
 class MainActivity : ComponentActivity() {
 
+    private var isInPipMode by mutableStateOf(false)
+    private var wasInPipMode = false
+
+    override fun onPictureInPictureModeChanged(
+        isInPictureInPictureMode: Boolean,
+        newConfig: android.content.res.Configuration
+    ) {
+        super.onPictureInPictureModeChanged(isInPictureInPictureMode, newConfig)
+        isInPipMode = isInPictureInPictureMode
+        if (isInPictureInPictureMode) {
+            wasInPipMode = true
+        } else {
+            if (wasInPipMode) {
+                wasInPipMode = false
+                if (CacheCleanerAccessibilityService.isRunning) {
+                    CacheCleanerAccessibilityService.stopCleaning(returnToApp = true)
+                }
+            }
+        }
+    }
+
+    override fun onUserLeaveHint() {
+        super.onUserLeaveHint()
+        if (CacheCleanerAccessibilityService.isRunning && !isInPipMode) {
+            triggerPipMode()
+        }
+    }
+
+    fun triggerPipMode() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            try {
+                val builder = android.app.PictureInPictureParams.Builder()
+                    .setAspectRatio(android.util.Rational(2, 1))
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                    builder.setAutoEnterEnabled(true)
+                }
+                enterPictureInPictureMode(builder.build())
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+        }
+    }
+
     override fun attachBaseContext(newBase: Context) {
         val prefs = newBase.getSharedPreferences("apex_prefs", Context.MODE_PRIVATE)
         val langTag = prefs.getString("app_language", "system") ?: "system"
@@ -168,6 +211,8 @@ class MainActivity : ComponentActivity() {
                         MainScreen(
                             isUsageAccessGranted = isUsageAccessGranted,
                             isAccessibilityEnabled = isAccessibilityEnabled,
+                            isInPipMode = isInPipMode,
+                            onEnterPip = { triggerPipMode() },
                             onRequestUsageAccess = {
                                 startActivity(Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS))
                             },
@@ -189,12 +234,18 @@ class MainActivity : ComponentActivity() {
     override fun onStop() {
         super.onStop()
         AppStorageHelper.clearAllMemoryCaches()
+        if ((isFinishing || wasInPipMode) && CacheCleanerAccessibilityService.isRunning) {
+            CacheCleanerAccessibilityService.stopCleaning(returnToApp = true)
+        }
     }
 
     override fun onDestroy() {
         super.onDestroy()
         AppStorageHelper.clearAllMemoryCaches()
-        if (isFinishing && !CacheCleanerAccessibilityService.isRunning) {
+        if (CacheCleanerAccessibilityService.isRunning) {
+            CacheCleanerAccessibilityService.stopCleaning(returnToApp = false)
+        }
+        if (isFinishing) {
             android.os.Process.killProcess(android.os.Process.myUid())
             kotlin.system.exitProcess(0)
         }

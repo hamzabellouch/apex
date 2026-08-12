@@ -88,7 +88,7 @@ Apex follows clean code architecture principles for maintainability, high perfor
 ## 🔨 Building from Source - Not available yet
 
 
->To build Omicron locally, make sure you have the latest version of Android Studio installed.
+>To build Apex locally, make sure you have the latest version of Android Studio installed.
 >1. Clone the repository: `git clone https://github.com/hamzabellouch/apex.git`
 >2. Open the project in Android Studio.
 >3. Sync Gradle dependencies.
@@ -102,7 +102,7 @@ Apex follows clean code architecture principles for maintainability, high perfor
 
 ### <a name="Copyright©2026"></a> Copyright © 2026
 
-Thank you for checking out Omicron. If you have any feedback or suggestions, feel free to contact us:
+Thank you for checking out Apex. If you have any feedback or suggestions, feel free to contact us:
 hamzabellouchcontact@gmail.com
 
 Stay connected and follow us on:  

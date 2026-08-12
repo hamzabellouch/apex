@@ -1,4 +1,4 @@
-﻿package com.tkno.apex.ui.main
+package com.tkno.apex.ui.main
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -27,6 +27,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.core.graphics.drawable.toBitmap
 import com.tkno.apex.R
+import com.tkno.apex.ui.component.BackButton
 import com.tkno.apex.model.AppCacheInfo
 import com.tkno.apex.util.AppStorageHelper
 
@@ -61,27 +62,22 @@ fun AnalyzeScreen(
         modifier = modifier
             .fillMaxSize()
             .background(darkBg)
-            .padding(16.dp)
+            .padding(start = 16.dp, end = 16.dp, top = 8.dp, bottom = 16.dp)
     ) {
         // Top Bar
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(bottom = 24.dp),
+                .heightIn(min = 48.dp)
+                .padding(bottom = 18.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            IconButton(onClick = onBackClick) {
-                Icon(
-                    imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                    contentDescription = stringResource(R.string.cd_back),
-                    tint = MaterialTheme.colorScheme.onBackground
-                )
-            }
-            Spacer(modifier = Modifier.width(8.dp))
+            BackButton(onClick = onBackClick)
+            Spacer(modifier = Modifier.width(4.dp))
             Text(
                 text = stringResource(R.string.analyze_screen_title),
                 color = MaterialTheme.colorScheme.onBackground,
-                fontSize = 22.sp,
+                fontSize = 24.sp,
                 fontWeight = FontWeight.Bold
             )
         }

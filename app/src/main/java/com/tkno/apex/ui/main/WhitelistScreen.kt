@@ -33,6 +33,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.core.graphics.drawable.toBitmap
 import com.tkno.apex.R
+import com.tkno.apex.ui.component.BackButton
 import com.tkno.apex.model.AppCacheInfo
 
 enum class WhitelistType {
@@ -49,10 +50,12 @@ fun WhitelistScreen(
     onBackClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
+    val context = LocalContext.current
     val darkBg = MaterialTheme.colorScheme.background
     val cardBg = MaterialTheme.colorScheme.surfaceContainer
-    val accentBlue = Color(0xFF3B82F6)
-    val context = LocalContext.current
+    val accentBlue = Color(0xFF48AFFF)
+
+    BackHandler(onBack = onBackClick)
 
     var showAddAppDialog by remember { mutableStateOf(false) }
     var selectedPackages by remember { mutableStateOf(setOf<String>()) }
@@ -93,25 +96,17 @@ fun WhitelistScreen(
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(start = 16.dp, end = 16.dp, top = 16.dp, bottom = 16.dp)
+                .padding(start = 16.dp, end = 16.dp, top = 8.dp, bottom = 16.dp)
         ) {
-            // Top Bar Header with Back Arrow and Title (Matching Stop & Clean screen top bar)
+            // Top Bar Header with Back Arrow and Title
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
+                    .heightIn(min = 48.dp)
                     .padding(bottom = 18.dp),
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                IconButton(
-                    onClick = onBackClick,
-                    modifier = Modifier.offset(x = (-8).dp)
-                ) {
-                    Icon(
-                        imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                        contentDescription = stringResource(R.string.cd_back),
-                        tint = MaterialTheme.colorScheme.onBackground
-                    )
-                }
+                BackButton(onClick = onBackClick)
                 Spacer(modifier = Modifier.width(4.dp))
                 Text(
                     text = stringResource(R.string.whitelist_title),
