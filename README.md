@@ -61,9 +61,13 @@ Apex UI & Features:
 
 ## Performance
 
-<img width="1600" height="1600" alt="Code_Generated_Image" src="https://github.com/user-attachments/assets/d73033df-bfa0-4ea5-a703-ff6eb4b8a51c" />
-<img width="1600" height="1091" alt="Code_Generated_Image (2)" src="https://github.com/user-attachments/assets/0e4fbe3c-62e9-4193-92a4-d2bd98b38026" />
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/d73033df-bfa0-4ea5-a703-ff6eb4b8a51c" width="48%" />
+  <img src="https://github.com/user-attachments/assets/0e4fbe3c-62e9-4193-92a4-d2bd98b38026" width="48%" />
+</p>
+
 <img width="1600" height="640" alt="Code_Generated_Image (1)" src="https://github.com/user-attachments/assets/affbabf4-2cd9-4813-a4dd-11fbc44f7947" />
+
 
 
 
