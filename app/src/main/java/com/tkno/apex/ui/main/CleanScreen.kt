@@ -1,5 +1,7 @@
 package com.tkno.apex.ui.main
 
+import com.tkno.apex.ui.icon.LeftPanelOpen
+
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.FastOutSlowInEasing
 import androidx.compose.animation.core.animateFloatAsState
@@ -16,6 +18,7 @@ import androidx.compose.material.icons.filled.AutoAwesome
 import androidx.compose.material.icons.filled.CleaningServices
 import androidx.compose.material.icons.filled.DonutLarge
 import androidx.compose.material.icons.filled.History
+import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.icons.filled.Storage
 import androidx.compose.material.icons.filled.Sync
 import androidx.compose.material3.*
@@ -44,6 +47,7 @@ fun CleanScreen(
     onOpenWhitelist: () -> Unit,
     onAnalyzeClick: () -> Unit,
     onOpenHistory: () -> Unit,
+    onOpenDrawer: () -> Unit = {},
     modifier: Modifier = Modifier
 ) {
     val remainingCacheMb = (totalCacheBytes / (1024 * 1024)).toInt()
@@ -76,12 +80,24 @@ fun CleanScreen(
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                Text(
-                    text = stringResource(id = R.string.clean_title),
-                    color = MaterialTheme.colorScheme.onBackground,
-                    fontSize = 24.sp,
-                    fontWeight = FontWeight.Bold
-                )
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    modifier = Modifier.offset(x = (-12).dp)
+                ) {
+                    IconButton(onClick = onOpenDrawer) {
+                        Icon(
+                            imageVector = LeftPanelOpen,
+                            contentDescription = stringResource(id = R.string.nav_menu),
+                            tint = MaterialTheme.colorScheme.onBackground
+                        )
+                    }
+                    Text(
+                        text = stringResource(id = R.string.clean_title),
+                        color = MaterialTheme.colorScheme.onBackground,
+                        fontSize = 24.sp,
+                        fontWeight = FontWeight.Bold
+                    )
+                }
                 IconButton(onClick = onOpenHistory) {
                     Icon(
                         imageVector = Icons.Default.History,

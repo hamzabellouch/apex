@@ -1,5 +1,7 @@
 package com.tkno.apex.ui.main
 
+import com.tkno.apex.ui.icon.LeftPanelOpen
+
 import androidx.activity.compose.BackHandler
 import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.core.tween
@@ -19,6 +21,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.KeyboardArrowRight
 import androidx.compose.material.icons.filled.Android
+import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -57,6 +60,7 @@ enum class AppSortOption(val labelRes: Int) {
 fun AppsScreen(
     installedApps: List<AppCacheInfo>,
     currentCleaningPackage: String?,
+    onOpenDrawer: () -> Unit = {},
     modifier: Modifier = Modifier
 ) {
     val darkBg = MaterialTheme.colorScheme.background
@@ -139,7 +143,7 @@ fun AppsScreen(
                     .background(darkBg)
                     .padding(start = 16.dp, end = 16.dp, top = 8.dp, bottom = 16.dp)
             ) {
-                // Top Bar Header with Title on Left, 3-dots Menu Icon on Far Right
+                // Top Bar Header with Menu Icon & Title on Left, 3-dots Menu Icon on Far Right
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -148,8 +152,16 @@ fun AppsScreen(
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     Row(
-                        verticalAlignment = Alignment.Bottom
+                        verticalAlignment = Alignment.CenterVertically,
+                        modifier = Modifier.offset(x = (-12).dp)
                     ) {
+                        IconButton(onClick = onOpenDrawer) {
+                            Icon(
+                                imageVector = LeftPanelOpen,
+                                contentDescription = stringResource(id = R.string.nav_menu),
+                                tint = MaterialTheme.colorScheme.onBackground
+                            )
+                        }
                         Text(
                             text = stringResource(R.string.apps_screen_title),
                             color = MaterialTheme.colorScheme.onBackground,

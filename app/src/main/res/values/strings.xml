@@ -115,6 +115,7 @@
     <string name="nav_stop">Stop</string>
     <string name="nav_clean">Clean</string>
     <string name="nav_apps">Apps</string>
+    <string name="nav_statistics">Statistics</string>
     <string name="nav_menu">Menu</string>
     <string name="toast_all_cache_cleaned">All cache items are already cleaned (0 KB)</string>
     <string name="toast_all_bg_apps_stopped">All background apps are already stopped</string>
@@ -145,6 +146,8 @@
     <string name="cleaning_mode_ask_each_time">Ask each time</string>
     <string name="ignore_tiny_cache_title">Ignore Tiny Cache</string>
     <string name="ignore_tiny_cache_desc">Eliminate all apps that have below 3 MB Cache</string>
+    <string name="gesture_fallback_title">Physical Gesture Fallback</string>
+    <string name="gesture_fallback_desc">Use physical coordinate tap fallback if standard click fails</string>
     <string name="stop_title">Stop</string>
     <string name="stop_history_icon_desc">History</string>
     <string name="stop_gauge_apps">APPS</string>

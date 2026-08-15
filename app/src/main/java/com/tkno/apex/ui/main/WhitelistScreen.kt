@@ -54,6 +54,9 @@ fun WhitelistScreen(
     val darkBg = MaterialTheme.colorScheme.background
     val cardBg = MaterialTheme.colorScheme.surfaceContainer
     val accentBlue = Color(0xFF48AFFF)
+    val stopOrange = Color(0xFFFF6D00)
+    val activeAccent = if (type == WhitelistType.STOP) stopOrange else accentBlue
+    val fabBgColor = activeAccent.copy(alpha = 0.2f)
 
     BackHandler(onBack = onBackClick)
 
@@ -205,7 +208,7 @@ fun WhitelistScreen(
                                         Icon(
                                             imageVector = Icons.Default.Android,
                                             contentDescription = null,
-                                            tint = accentBlue,
+                                            tint = activeAccent,
                                             modifier = Modifier.size(24.dp)
                                         )
                                     }
@@ -249,9 +252,10 @@ fun WhitelistScreen(
                 dialogSearchQuery = ""
                 showAddAppDialog = true
             },
-            containerColor = MaterialTheme.colorScheme.secondaryContainer,
-            contentColor = MaterialTheme.colorScheme.onSecondaryContainer,
+            containerColor = fabBgColor,
+            contentColor = activeAccent,
             shape = RoundedCornerShape(20.dp),
+            elevation = FloatingActionButtonDefaults.elevation(0.dp, 0.dp, 0.dp, 0.dp),
             modifier = Modifier
                 .align(Alignment.BottomEnd)
                 .padding(end = 16.dp, bottom = 16.dp)
@@ -259,7 +263,7 @@ fun WhitelistScreen(
             Icon(
                 imageVector = Icons.Default.Add,
                 contentDescription = stringResource(R.string.cd_add_app),
-                tint = MaterialTheme.colorScheme.onSecondaryContainer,
+                tint = activeAccent,
                 modifier = Modifier.size(24.dp)
             )
         }
@@ -297,7 +301,7 @@ fun WhitelistScreen(
                             Icon(
                                 imageVector = Icons.Default.Search,
                                 contentDescription = stringResource(R.string.search_apps),
-                                tint = if (isDialogSearchOpen) accentBlue else MaterialTheme.colorScheme.onSurfaceVariant
+                                tint = if (isDialogSearchOpen) activeAccent else MaterialTheme.colorScheme.onSurfaceVariant
                             )
                         }
                     }
@@ -336,7 +340,7 @@ fun WhitelistScreen(
                                 singleLine = true,
                                 shape = RoundedCornerShape(12.dp),
                                 colors = OutlinedTextFieldDefaults.colors(
-                                    focusedBorderColor = accentBlue,
+                                    focusedBorderColor = activeAccent,
                                     unfocusedBorderColor = MaterialTheme.colorScheme.outlineVariant,
                                     focusedContainerColor = MaterialTheme.colorScheme.surfaceContainerHigh,
                                     unfocusedContainerColor = MaterialTheme.colorScheme.surfaceContainerHigh
@@ -404,7 +408,7 @@ fun WhitelistScreen(
                                         Icon(
                                             imageVector = Icons.Default.Android,
                                             contentDescription = null,
-                                            tint = accentBlue,
+                                            tint = activeAccent,
                                             modifier = Modifier.size(28.dp)
                                         )
                                     }
@@ -435,7 +439,7 @@ fun WhitelistScreen(
                                             }
                                         },
                                         colors = CheckboxDefaults.colors(
-                                            checkedColor = accentBlue,
+                                            checkedColor = activeAccent,
                                             uncheckedColor = MaterialTheme.colorScheme.onSurfaceVariant,
                                             checkmarkColor = Color.White
                                         )
@@ -476,7 +480,7 @@ fun WhitelistScreen(
                         },
                         enabled = selectedPackages.isNotEmpty(),
                         colors = ButtonDefaults.buttonColors(
-                            containerColor = accentBlue,
+                            containerColor = activeAccent,
                             contentColor = Color.White,
                             disabledContainerColor = MaterialTheme.colorScheme.surfaceContainerHigh,
                             disabledContentColor = MaterialTheme.colorScheme.onSurfaceVariant

@@ -49,6 +49,7 @@ class CacheCleanerAccessibilityService : AccessibilityService() {
     private var scrollCountForClearCache = 0
     private var isStepInProgress = false
     private var pageOpenedTime = 0L
+    private var lastAppOpenTime = 0L
 
     override fun onServiceConnected() {
         super.onServiceConnected()
@@ -268,6 +269,10 @@ class CacheCleanerAccessibilityService : AccessibilityService() {
     private fun processActiveNode(rootNode: AccessibilityNodeInfo) {
         if (!isRunning || isStepInProgress) return
 
+        // Protection against screen transition race condition:
+        // Ignore scans for the first 350ms after launching a new app settings intent to prevent reading stale previous app screens
+        if (System.currentTimeMillis() - lastAppOpenTime < 350L) return
+
         if (currentMode == ServiceMode.FORCE_STOP) {
             handleForceStopEvent(rootNode)
         } else {
@@ -309,9 +314,8 @@ class CacheCleanerAccessibilityService : AccessibilityService() {
                 val clicked = performClick(miuiClearCacheNode)
                 if (clicked) {
                     hasClickedClearCache = true
-                    hasClickedConfirmClearCache = true
-                    itemResultCallback?.invoke(currentPkg, true, ServiceMode.CLEAR_CACHE)
-                    scheduleNextApp(120)
+                    startWatchdog()
+                    pollForClearCacheConfirmationDialog(currentPkg, 3)
                     return
                 } else {
                     isStepInProgress = false
@@ -470,6 +474,11 @@ class CacheCleanerAccessibilityService : AccessibilityService() {
     }
 
     private fun findStandaloneClearCacheNodeOnMainPage(rootNode: AccessibilityNodeInfo): AccessibilityNodeInfo? {
+        // If "Storage" or "Clear Data" navigation node exists on the page, this is the main App Details page.
+        // We should NEVER treat any element on main page as standalone clear cache if Storage/ClearData exists!
+        if (findStorageNode(rootNode) != null || findClearDataNode(rootNode) != null) {
+            return null
+        }
         val nodeById = findNodeByIdSuffixes(rootNode, CLEAR_CACHE_ID_SUFFIXES)
         if (nodeById != null && isValidClearCacheNode(nodeById)) {
             return nodeById
@@ -793,7 +802,7 @@ class CacheCleanerAccessibilityService : AccessibilityService() {
         val contentDesc = try { node.contentDescription?.toString()?.trim() ?: "" } catch (e: Exception) { "" }
 
         val combined = "$text $contentDesc".lowercase()
-        if (combined.isNotEmpty() && text.length <= 35) {
+        if (combined.isNotEmpty() && (text.length <= 60 || contentDesc.length <= 60)) {
             for (keyword in CLEAR_CACHE_KEYWORDS) {
                 if (combined.contains(keyword.lowercase())) {
                     if (isValidClearCacheNode(node)) {
@@ -820,11 +829,31 @@ class CacheCleanerAccessibilityService : AccessibilityService() {
         if (node == null) return false
         val text = try { node.text?.toString()?.trim() ?: "" } catch (e: Exception) { "" }
         val contentDesc = try { node.contentDescription?.toString()?.trim() ?: "" } catch (e: Exception) { "" }
-        if (text.length > 40) return false
+        if (text.length > 60 || contentDesc.length > 60) return false
 
         val combined = "$text $contentDesc".lowercase()
 
-        // Exclude Storage Preference menu items & headers from falsely matching Clear Cache button
+        // 1. MUST NOT match Force Stop keywords!
+        for (fsKw in FORCE_STOP_KEYWORDS) {
+            val lowerFsKw = fsKw.lowercase()
+            if (combined.contains(lowerFsKw)) {
+                return false
+            }
+        }
+
+        // 2. MUST NOT match Open / Launch / Uninstall / Disable action keywords!
+        val excludeActionKeywords = listOf(
+            "open", "launch", "فتح", "تشغيل", "ouvrir", "abrir", "öffnen", "apri", "открыть",
+            "uninstall", "désinstaller", "desinstalar", "deinstallieren", "إلغاء التثبيت", "حذف التطبيق",
+            "disable", "désactiver", "desactivar", "deaktivieren", "تعطيل", "إيقاف الخدمة"
+        )
+        for (actKw in excludeActionKeywords) {
+            if (combined.contains(actKw)) {
+                return false
+            }
+        }
+
+        // 3. Exclude Storage Preference menu items & headers from falsely matching Clear Cache button
         val excludeMenuKeywords = listOf(
             "storage & cache", "storage and cache", "storage & storage info", "storage usage",
             "التخزين وذاكرة التخزين المؤقت", "التخزين والذاكرة المؤقتة", "التخزين و الذاكرة",
@@ -837,10 +866,11 @@ class CacheCleanerAccessibilityService : AccessibilityService() {
             }
         }
 
-        // Exclude Clear Data / Clear Storage / Manage Space buttons from matching Clear Cache
+        // 4. Exclude Clear Data / Clear Storage / Manage Space buttons from matching Clear Cache
         val excludeDataKeywords = listOf(
             "clear data", "clear all data", "clear storage", "manage space", "manage storage",
-            "مسح البيانات", "مسح جميع البيانات", "مسح سعة التخزين", "إدارة المساحة", "تفريغ مساحة التخزين"
+            "مسح البيانات", "مسح جميع البيانات", "مسح سعة التخزين", "إدارة المساحة", "تفريغ مساحة التخزين",
+            "effacer les données", "limpiar datos", "borrar datos"
         )
         for (exKw in excludeDataKeywords) {
             if (combined.contains(exKw)) {
@@ -1048,10 +1078,16 @@ class CacheCleanerAccessibilityService : AccessibilityService() {
                     itemResultCallback?.invoke(currentPkg, false, currentMode)
                 }
                 isStepInProgress = false
-                moveToNextApp()
+                
+                // Add 300ms buffer when watchdog fires to let OS clear activity queue and prevent domino skips
+                mainHandler.postDelayed({
+                    if (isRunning) {
+                        moveToNextApp()
+                    }
+                }, 300L)
             }
         }
-        val watchdogTimeout = if (isBoostMode) 1200L else 2500L
+        val watchdogTimeout = if (isBoostMode) 3500L else 5000L
         watchdogRunnable?.let { mainHandler.postDelayed(it, watchdogTimeout) }
     }
 
@@ -1073,6 +1109,15 @@ class CacheCleanerAccessibilityService : AccessibilityService() {
         scrollCountForClearCache = 0
         isStepInProgress = false
         pageOpenedTime = System.currentTimeMillis()
+
+        // Periodically run GC every 10 apps to keep JVM heap clean during massive batch operations
+        if (currentAppIndex > 0 && currentAppIndex % 10 == 0) {
+            try {
+                System.gc()
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+        }
 
         currentAppIndex++
         processCurrentOrNextApp()
@@ -1180,8 +1225,15 @@ class CacheCleanerAccessibilityService : AccessibilityService() {
 
         if (actionClicked) return true
 
+        val isGestureFallbackEnabled = try {
+            val prefs = getSharedPreferences("apex_prefs", Context.MODE_PRIVATE)
+            prefs.getBoolean("gesture_fallback_enabled", true)
+        } catch (e: Exception) {
+            true
+        }
+
         // Fallback: Hardware gesture click (API 24+) if performAction(ACTION_CLICK) fails on custom OEM views
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+        if (isGestureFallbackEnabled && Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             try {
                 val bounds = android.graphics.Rect()
                 node.getBoundsInScreen(bounds)
@@ -1226,6 +1278,7 @@ class CacheCleanerAccessibilityService : AccessibilityService() {
             "Storage & cache", 
             "Storage & storage info",
             "Storage usage",
+            "Internal storage",
             "التخزين", 
             "مكان التخزين", 
             "الذاكرة", 
@@ -1237,17 +1290,28 @@ class CacheCleanerAccessibilityService : AccessibilityService() {
             "ذاكرة التخزين",
             "استخدام التخزين",
             "وحدة التخزين",
+            "التخزين الداخلي",
+            "سعة التخزين والذاكرة",
             "Espace de stockage",
             "Stockage",
+            "Stockage et cache",
             "Almacenamiento",
+            "Almacenamiento y caché",
             "Memoria",
             "Speicher",
             "Speicherplatz",
+            "Speicher & Cache",
             "Spazio di archiviazione",
             "Archiviazione",
             "Armazenamento",
+            "Armazenamento e cache",
             "Память",
-            "Хранилище"
+            "Хранилище",
+            "Память и кэш",
+            "Depolama",
+            "Önbellek ve depolama",
+            "Penyimpanan",
+            "Penyimpanan & cache"
         )
 
         private val STORAGE_ID_SUFFIXES = listOf(
@@ -1255,14 +1319,21 @@ class CacheCleanerAccessibilityService : AccessibilityService() {
             "storage_layout",
             "storage_button",
             "storage",
-            "entity_header_content"
+            "storage_pref",
+            "storage_detail",
+            "storage_item"
         )
 
         private val CLEAR_DATA_KEYWORDS = listOf(
             "Clear data",
             "مسح البيانات",
             "Effacer les données",
-            "Limpiar datos"
+            "Limpiar datos",
+            "Borrar datos",
+            "Daten löschen",
+            "Cancella dati",
+            "Limpar dados",
+            "Очистить данные"
         )
 
         private val CLEAR_DATA_ID_SUFFIXES = listOf(
@@ -1276,6 +1347,8 @@ class CacheCleanerAccessibilityService : AccessibilityService() {
             "Clear cache", 
             "Clean cache",
             "CLEAR CACHE",
+            "Wipe cache",
+            "Delete cache",
             "مسح ذاكرة التخزين المؤقت", 
             "مسح ذاكرة التخزين المؤقتة",
             "مسح ذاكرة التخزين الموقته",
@@ -1286,24 +1359,69 @@ class CacheCleanerAccessibilityService : AccessibilityService() {
             "مسح الذاكرة المؤقتة",
             "مسح الذاكرة الموقته",
             "تنظيف الذاكرة المؤقتة",
+            "تنظيف ذاكرة التخزين المؤقت",
+            "تنظيف ذاكرة التخزين المؤقتة",
             "تنظيف الكاش",
             "مسح الكاش",
             "تفريغ الكاش",
             "حذف ذاكرة التخزين المؤقت",
             "حذف الكاش",
             "إزالة ذاكرة التخزين المؤقت",
+            "مسح ذاكرة التخزين",
+            "تفريغ ذاكرة التخزين",
+            "مسح البيانات المؤقتة",
+            "تفريغ البيانات المؤقتة",
+            "مسح الملفات المؤقتة",
+            "إزالة الملفات المؤقتة",
+            "حذف الذاكرة المؤقتة",
+            "إزالة الذاكرة المؤقتة",
             "Vider le cache",
             "Effacer le cache",
+            "Supprimer le cache",
+            "VIDER LE CACHE",
+            "EFFACER LE CACHE",
             "Borrar caché",
             "Limpiar caché",
+            "Eliminar caché",
+            "Borrar memoria caché",
+            "Limpiar memoria caché",
+            "BORRAR CACHÉ",
             "Cache leeren",
             "Temporäre Dateien löschen",
+            "Cache löschen",
+            "CACHE LEEREN",
             "Svuota cache",
             "Cancella cache",
+            "Elimina cache",
+            "SVUOTA CACHE",
             "Limpar cache",
             "Limpar o cache",
+            "Apagar cache",
+            "LIMPAR CACHE",
             "Очистить кэш",
-            "Стереть кэш"
+            "Стереть кэш",
+            "Удалить кэш",
+            "ОЧИСТИТЬ КЭШ",
+            "Önbelleği temizle",
+            "Önbelleği sil",
+            "ÖNBELLEĞİ TEMİZLE",
+            "Hapus cache",
+            "Bersihkan cache",
+            "Hapus memori cache",
+            "HAPUS CACHE",
+            "Xóa bộ nhớ đệm",
+            "Xóa cache",
+            "پاک کردن حافظه پنهان",
+            "پاک کردن کش",
+            "清除缓存",
+            "清除快取",
+            "快取清除",
+            "緩存清除",
+            "キャッシュを消去",
+            "キャッシュを削除",
+            "キャッシュ消去",
+            "캐시 삭제",
+            "캐시 지우기"
         )
 
         private val CLEAR_CACHE_ID_SUFFIXES = listOf(
@@ -1312,12 +1430,14 @@ class CacheCleanerAccessibilityService : AccessibilityService() {
             "btn_clear_cache",
             "button_clear_cache",
             "clear_cache_btn",
-            "button2",
-            "right_button",
-            "right_btn",
-            "button_right",
             "clear_cache_action",
-            "clear_cache_container"
+            "clear_cache_container",
+            "delete_cache_button",
+            "delete_cache",
+            "clean_cache_button",
+            "clean_cache",
+            "clear_cache_tv",
+            "clear_cache_text"
         )
 
         private val FORCE_STOP_KEYWORDS = listOf(
@@ -1355,6 +1475,7 @@ class CacheCleanerAccessibilityService : AccessibilityService() {
             "left_button",
             "right_button",
             "button1",
+            "button2",
             "action_force_stop",
             "menu_force_stop",
             "stop_button",
@@ -1457,6 +1578,7 @@ class CacheCleanerAccessibilityService : AccessibilityService() {
         }
 
         private fun openAppDetailsSettings(context: Context, packageName: String) {
+            instance?.lastAppOpenTime = System.currentTimeMillis()
             try {
                 val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS).apply {
                     data = Uri.fromParts("package", packageName, null)

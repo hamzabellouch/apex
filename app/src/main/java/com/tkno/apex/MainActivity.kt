@@ -66,7 +66,7 @@ class MainActivity : ComponentActivity() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             try {
                 val builder = android.app.PictureInPictureParams.Builder()
-                    .setAspectRatio(android.util.Rational(2, 1))
+                    .setAspectRatio(android.util.Rational(200, 100))
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
                     builder.setAutoEnterEnabled(true)
                 }

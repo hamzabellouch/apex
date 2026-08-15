@@ -1,5 +1,7 @@
 package com.tkno.apex.ui.main
 
+import com.tkno.apex.ui.icon.DataUsage
+
 import android.content.pm.PackageManager
 import android.widget.Toast
 import androidx.activity.compose.BackHandler
@@ -25,6 +27,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Android
 import androidx.compose.material.icons.filled.Block
 import androidx.compose.material.icons.filled.CleaningServices
+import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -55,16 +58,19 @@ import com.tkno.apex.service.ServiceMode
 import com.tkno.apex.util.AppStorageHelper
 import com.tkno.apex.util.RamInfo
 import com.tkno.apex.ui.page.AppUpdater
+import com.tkno.apex.ui.page.settings.about.UpdatePage
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 enum class MainTab {
-    Stop, Clean, Apps, Menu
+    Stop, Clean, Apps, Statistics, Menu
 }
 
 enum class SubScreen {
-    None, Analyze, StopWhitelist, CleanWhitelist, CleanHistory, StopHistory
+    None, Analyze, StopWhitelist, CleanWhitelist, CleanHistory, StopHistory,
+    Settings, GeneralSettings, CustomSpeedSettings, LookAndFeel, Languages, DarkTheme,
+    Sponsor, Troubleshooting, About, Credits, Update
 }
 
 @Composable
@@ -92,15 +98,24 @@ fun MainScreen(
     var currentSubScreen by remember { mutableStateOf(SubScreen.None) }
     var isMenuSubScreenActive by remember { mutableStateOf(false) }
 
-    LaunchedEffect(currentTab) {
-        if (currentTab != MainTab.Menu) {
-            isMenuSubScreenActive = false
-        }
+    val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
+
+    BackHandler(enabled = drawerState.isOpen) {
+        scope.launch { drawerState.close() }
     }
 
-    // System Back Button handler for SubScreens (Whitelist, Analyze, etc.)
+    // System Back Button handler for SubScreens (Whitelist, Analyze, Settings, etc.)
     BackHandler(enabled = currentSubScreen != SubScreen.None) {
-        currentSubScreen = SubScreen.None
+        when (currentSubScreen) {
+            SubScreen.GeneralSettings -> currentSubScreen = SubScreen.Settings
+            SubScreen.CustomSpeedSettings -> currentSubScreen = SubScreen.GeneralSettings
+            SubScreen.Languages -> currentSubScreen = SubScreen.LookAndFeel
+            SubScreen.DarkTheme -> currentSubScreen = SubScreen.LookAndFeel
+            SubScreen.LookAndFeel -> currentSubScreen = SubScreen.Settings
+            SubScreen.Credits -> currentSubScreen = SubScreen.About
+            SubScreen.Update -> currentSubScreen = SubScreen.About
+            else -> currentSubScreen = SubScreen.None
+        }
     }
 
     // Dynamic states for storage & RAM sizes
@@ -137,9 +152,9 @@ fun MainScreen(
         {
             val isSwapped = prefs.getBoolean("tab_order_swapped", false)
             if (isSwapped) {
-                listOf(MainTab.Clean, MainTab.Stop, MainTab.Apps, MainTab.Menu)
+                listOf(MainTab.Clean, MainTab.Stop, MainTab.Apps, MainTab.Statistics)
             } else {
-                listOf(MainTab.Stop, MainTab.Clean, MainTab.Apps, MainTab.Menu)
+                listOf(MainTab.Stop, MainTab.Clean, MainTab.Apps, MainTab.Statistics)
             }
         }
     }
@@ -427,18 +442,21 @@ fun MainScreen(
     }
 
     if (isInPipMode) {
+        val isForceStopMode = CacheCleanerAccessibilityService.currentMode == ServiceMode.FORCE_STOP
+        val pipAccentColor = if (isForceStopMode) stopOrange else accentBlue
+
         Column(
             modifier = Modifier
                 .fillMaxSize()
                 .background(Color(0xFF0E141D))
         ) {
-            // 1. Top Section: Cyan Progress Line
+            // 1. Top Section: Cyan/Orange Progress Line
             LinearProgressIndicator(
                 progress = { cleaningProgress },
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(4.dp),
-                color = Color(0xFF48AFFF),
+                color = pipAccentColor,
                 trackColor = Color(0xFF1B2636)
             )
 
@@ -450,7 +468,7 @@ fun MainScreen(
                     .padding(horizontal = 12.dp, vertical = 2.dp)
             ) {
                 Text(
-                    text = if (CacheCleanerAccessibilityService.currentMode == ServiceMode.FORCE_STOP) "Force stopping..." else "Cleaning cache...",
+                    text = if (isForceStopMode) "Force stopping..." else "Cleaning cache...",
                     color = Color.White,
                     fontSize = 13.5.sp,
                     fontWeight = FontWeight.Bold,
@@ -458,12 +476,12 @@ fun MainScreen(
                     modifier = Modifier.align(Alignment.Center)
                 )            }
 
-            // 3. Bottom Section: Full-Width Bright Cyan Banner
+            // 3. Bottom Section: Full-Width Bright Cyan/Orange Banner
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(40.dp)
-                    .background(Color(0xFF48AFFF)),
+                    .background(pipAccentColor),
                 contentAlignment = Alignment.Center
             ) {
                 Text(
@@ -481,47 +499,77 @@ fun MainScreen(
 
     val unselectedNavColor = MaterialTheme.colorScheme.onSurface
 
-    val isBottomBarVisible = currentSubScreen == SubScreen.None && !isShowingPermissionScreen && !(currentTab == MainTab.Menu && isMenuSubScreenActive)
+    val isBottomBarVisible = currentSubScreen == SubScreen.None && !isShowingPermissionScreen
 
-    Scaffold(
-        bottomBar = {
-            AnimatedVisibility(
-                visible = isBottomBarVisible,
-                enter = slideInVertically(initialOffsetY = { it }, animationSpec = tween(220)) + fadeIn(animationSpec = tween(220)),
-                exit = slideOutVertically(targetOffsetY = { it }, animationSpec = tween(200)) + fadeOut(animationSpec = tween(200))
+    ModalNavigationDrawer(
+        drawerState = drawerState,
+        gesturesEnabled = !isShowingPermissionScreen,
+        drawerContent = {
+            ModalDrawerSheet(
+                modifier = Modifier.width(300.dp),
+                drawerContainerColor = MaterialTheme.colorScheme.surface
             ) {
-                Surface(
-                    color = MaterialTheme.colorScheme.surfaceContainer,
-                    tonalElevation = 0.dp
-                ) {
-                    Box(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .height(72.dp)
-                    ) {
-                        NavigationBar(
-                            containerColor = MaterialTheme.colorScheme.surfaceContainer,
-                            tonalElevation = 0.dp,
-                            modifier = Modifier
-                                .fillMaxSize()
-                                .onGloballyPositioned { coordinates ->
-                                    val totalWidth = coordinates.size.width.toFloat()
-                                    if (totalWidth > 0) {
-                                        itemWidthPx = totalWidth / 4f
-                                    }
-                                }
-                        ) {
-                        reorderableTabs.forEachIndexed { index, tab ->
-                            val isSelected = currentTab == tab
-                            val isDragging = draggingIndex == index
-                            val canDrag = index < 2
-
-                            val (tabLabel, tabIcon, tabColor) = when (tab) {
-                                MainTab.Stop -> Triple(stringResource(R.string.nav_stop), Icons.Default.Block, stopOrange)
-                                MainTab.Clean -> Triple(stringResource(R.string.nav_clean), Icons.Default.CleaningServices, accentBlue)
-                                MainTab.Apps -> Triple(stringResource(R.string.nav_apps), Icons.Default.Android, androidGreen)
-                                MainTab.Menu -> Triple(stringResource(R.string.nav_menu), Icons.Default.Menu, menuGray)
+                MainMenuList(
+                    currentSubScreen = currentSubScreen,
+                    onCloseDrawer = {
+                        scope.launch { drawerState.close() }
+                    },
+                    onNavigateTo = { menuSub ->
+                        scope.launch {
+                            drawerState.close()
+                            currentSubScreen = when (menuSub) {
+                                MenuSubScreen.Settings -> SubScreen.Settings
+                                MenuSubScreen.Sponsor -> SubScreen.Sponsor
+                                MenuSubScreen.Troubleshooting -> SubScreen.Troubleshooting
+                                MenuSubScreen.About -> SubScreen.About
+                                else -> SubScreen.None
                             }
+                        }
+                    }
+                )
+            }
+        }
+    ) {
+        Scaffold(
+            bottomBar = {
+                AnimatedVisibility(
+                    visible = isBottomBarVisible,
+                    enter = slideInVertically(initialOffsetY = { it }, animationSpec = tween(220)) + fadeIn(animationSpec = tween(220)),
+                    exit = slideOutVertically(targetOffsetY = { it }, animationSpec = tween(200)) + fadeOut(animationSpec = tween(200))
+                ) {
+                    Surface(
+                        color = MaterialTheme.colorScheme.surfaceContainer,
+                        tonalElevation = 0.dp
+                    ) {
+                        Box(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .height(72.dp)
+                        ) {
+                            NavigationBar(
+                                containerColor = MaterialTheme.colorScheme.surfaceContainer,
+                                tonalElevation = 0.dp,
+                                modifier = Modifier
+                                    .fillMaxSize()
+                                    .onGloballyPositioned { coordinates ->
+                                        val totalWidth = coordinates.size.width.toFloat()
+                                        if (totalWidth > 0) {
+                                            itemWidthPx = totalWidth / 4f
+                                        }
+                                    }
+                            ) {
+                            reorderableTabs.forEachIndexed { index, tab ->
+                                val isSelected = currentTab == tab
+                                val isDragging = draggingIndex == index
+                                val canDrag = index < 2
+
+                                val (tabLabel, tabIcon, tabColor) = when (tab) {
+                                    MainTab.Stop -> Triple(stringResource(R.string.nav_stop), Icons.Default.Block, stopOrange)
+                                    MainTab.Clean -> Triple(stringResource(R.string.nav_clean), Icons.Default.CleaningServices, accentBlue)
+                                    MainTab.Apps -> Triple(stringResource(R.string.nav_apps), Icons.Default.Android, androidGreen)
+                                    MainTab.Statistics -> Triple(stringResource(R.string.nav_statistics), DataUsage, Color(0xFFFF5252))
+                                    else -> Triple("", Icons.Default.Block, stopOrange)
+                                }
 
                             NavigationBarItem(
                                 selected = isSelected,
@@ -634,6 +682,7 @@ fun MainScreen(
                                 MainTab.Stop -> stopOrange
                                 MainTab.Clean -> accentBlue
                                 MainTab.Apps -> androidGreen
+                                MainTab.Statistics -> Color(0xFFFF5252)
                                 MainTab.Menu -> accentBlue
                             },
                             trackColor = Color.Transparent
@@ -736,6 +785,75 @@ fun MainScreen(
                                 onBackClick = { currentSubScreen = SubScreen.None }
                             )
                         }
+                        SubScreen.Settings -> {
+                            SettingsPage(
+                                onNavigateBack = { currentSubScreen = SubScreen.None },
+                                onNavigateTo = { route ->
+                                    when (route) {
+                                        "general" -> currentSubScreen = SubScreen.GeneralSettings
+                                        "appearance" -> currentSubScreen = SubScreen.LookAndFeel
+                                    }
+                                }
+                            )
+                        }
+                        SubScreen.GeneralSettings -> {
+                            GeneralSettingsPage(
+                                onNavigateBack = { currentSubScreen = SubScreen.Settings },
+                                onNavigateToCustomSpeed = { currentSubScreen = SubScreen.CustomSpeedSettings }
+                            )
+                        }
+                        SubScreen.CustomSpeedSettings -> {
+                            CustomSpeedSettingsPage(
+                                onNavigateBack = { currentSubScreen = SubScreen.GeneralSettings }
+                            )
+                        }
+                        SubScreen.LookAndFeel -> {
+                            AppearancePreferences(
+                                onNavigateBack = { currentSubScreen = SubScreen.Settings },
+                                onNavigateTo = { route ->
+                                    if (route == "languages") currentSubScreen = SubScreen.Languages
+                                    else if (route == "dark_theme") currentSubScreen = SubScreen.DarkTheme
+                                }
+                            )
+                        }
+                        SubScreen.DarkTheme -> {
+                            DarkThemePreferences(
+                                onNavigateBack = { currentSubScreen = SubScreen.LookAndFeel }
+                            )
+                        }
+                        SubScreen.Languages -> {
+                            LanguagesPage(
+                                onNavigateBack = { currentSubScreen = SubScreen.LookAndFeel }
+                            )
+                        }
+                        SubScreen.Sponsor -> {
+                            SponsorsPage(
+                                onNavigateBack = { currentSubScreen = SubScreen.None }
+                            )
+                        }
+                        SubScreen.Troubleshooting -> {
+                            TroubleShootingPage(
+                                onNavigateBack = { currentSubScreen = SubScreen.None }
+                            )
+                        }
+                        SubScreen.About -> {
+                            AboutPage(
+                                onNavigateBack = { currentSubScreen = SubScreen.None },
+                                onNavigateToCreditsPage = { currentSubScreen = SubScreen.Credits },
+                                onNavigateToUpdatePage = { currentSubScreen = SubScreen.Update }
+                            )
+                        }
+                        SubScreen.Credits -> {
+                            CreditsPage(
+                                onNavigateBack = { currentSubScreen = SubScreen.About }
+                            )
+                        }
+                        SubScreen.Update -> {
+                            UpdatePage(
+                                onNavigateBack = { currentSubScreen = SubScreen.About },
+                                triggerUpdate = false
+                            )
+                        }
                         SubScreen.None -> {
                             AnimatedContent(
                                 targetState = currentTab,
@@ -752,6 +870,7 @@ fun MainScreen(
                                             ramInfo = ramInfo,
                                             onOpenWhitelist = { currentSubScreen = SubScreen.StopWhitelist },
                                             onOpenHistory = { currentSubScreen = SubScreen.StopHistory },
+                                            onOpenDrawer = { scope.launch { drawerState.open() } },
                                             onAnalyzeStopClick = {
                                                 if (!isUsageAccessGranted) {
                                                     onRequestUsageAccess()
@@ -783,6 +902,7 @@ fun MainScreen(
                                             totalCacheBytes = filteredTotalCacheBytes,
                                             onOpenWhitelist = { currentSubScreen = SubScreen.CleanWhitelist },
                                             onOpenHistory = { currentSubScreen = SubScreen.CleanHistory },
+                                            onOpenDrawer = { scope.launch { drawerState.open() } },
                                             onAnalyzeClick = {
                                                 if (!isUsageAccessGranted) {
                                                     onRequestUsageAccess()
@@ -807,16 +927,16 @@ fun MainScreen(
                                     MainTab.Apps -> {
                                         AppsScreen(
                                             installedApps = installedApps,
-                                            currentCleaningPackage = currentCleaningPackage
+                                            currentCleaningPackage = currentCleaningPackage,
+                                            onOpenDrawer = { scope.launch { drawerState.open() } }
                                         )
                                     }
-                                    MainTab.Menu -> {
-                                        MenuScreen(
-                                            onSubScreenStateChanged = { active ->
-                                                isMenuSubScreenActive = active
-                                            }
+                                    MainTab.Statistics -> {
+                                        StatisticsScreen(
+                                            onOpenDrawer = { scope.launch { drawerState.open() } }
                                         )
                                     }
+                                    else -> {}
                                 }
                             }
                         }
@@ -880,6 +1000,7 @@ fun MainScreen(
                     containerColor = buttonBgColor,
                     contentColor = buttonIconColor,
                     shape = RoundedCornerShape(20.dp),
+                    elevation = FloatingActionButtonDefaults.elevation(0.dp, 0.dp, 0.dp, 0.dp),
                     modifier = Modifier
                         .align(Alignment.BottomEnd)
                         .padding(end = 16.dp, bottom = 16.dp)
@@ -933,6 +1054,7 @@ fun MainScreen(
                         AppStorageHelper.invalidateCache()
                     }
                 )
+            }
             }
         }
     }

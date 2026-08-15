@@ -27,7 +27,10 @@ fun AccessibilityPermissionScreen(
     modifier: Modifier = Modifier
 ) {
     val darkBg = MaterialTheme.colorScheme.background
+    val isStopMode = descriptionResId == R.string.accessibility_permission_desc1_stop
     val accentBlue = Color(0xFF48AFFF)
+    val stopOrange = Color(0xFFFF6D00)
+    val activeColor = if (isStopMode) stopOrange else accentBlue
     val circleContainerBg = MaterialTheme.colorScheme.surfaceContainerHigh
     val cancelBtnBg = MaterialTheme.colorScheme.surfaceContainer
     val bodyTextColor = MaterialTheme.colorScheme.onSurfaceVariant
@@ -67,7 +70,7 @@ fun AccessibilityPermissionScreen(
 
             Spacer(modifier = Modifier.weight(1f))
 
-            // Center Icon Container (Dark Circle with Blue Human Figure)
+            // Center Icon Container (Dark Circle with Human Figure)
             Box(
                 modifier = Modifier
                     .size(105.dp)
@@ -77,7 +80,7 @@ fun AccessibilityPermissionScreen(
                 Icon(
                     imageVector = Icons.Default.AccessibilityNew,
                     contentDescription = stringResource(R.string.cd_accessibility_icon),
-                    tint = accentBlue,
+                    tint = activeColor,
                     modifier = Modifier.size(51.dp)
                 )
             }
@@ -140,7 +143,7 @@ fun AccessibilityPermissionScreen(
                 ) {
                     Text(
                         text = stringResource(R.string.btn_cancel_uppercase),
-                        color = accentBlue,
+                        color = activeColor,
                         fontSize = 14.sp,
                         fontWeight = FontWeight.Bold,
                         letterSpacing = 0.5.sp
@@ -151,7 +154,7 @@ fun AccessibilityPermissionScreen(
                 Button(
                     onClick = onContinueClick,
                     shape = RoundedCornerShape(20.dp),
-                    colors = ButtonDefaults.buttonColors(containerColor = accentBlue),
+                    colors = ButtonDefaults.buttonColors(containerColor = activeColor),
                     modifier = Modifier
                         .weight(1f)
                         .height(39.dp)

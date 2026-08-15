@@ -244,6 +244,7 @@ fun HistoryScreen(
                 .fillMaxWidth()
                 .padding(16.dp)
         ) {
+            val clearAllColor = if (mode == HistoryMode.STOP) stopOrange else accentBlue
             Button(
                 onClick = { showClearConfirmation = true },
                 modifier = Modifier
@@ -251,7 +252,7 @@ fun HistoryScreen(
                     .height(39.dp),
                 shape = RoundedCornerShape(20.dp),
                 colors = ButtonDefaults.buttonColors(
-                    containerColor = accentBlue
+                    containerColor = clearAllColor
                 )
             ) {
                 Text(

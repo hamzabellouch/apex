@@ -301,25 +301,25 @@ fun AppDetailScreen(
                 },
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(40.dp),
-                shape = RoundedCornerShape(20.dp),
+                    .height(48.dp),
+                shape = RoundedCornerShape(24.dp),
                 colors = ButtonDefaults.buttonColors(
                     containerColor = androidGreen,
-                    contentColor = Color(0xFF0E141D)
+                    contentColor = Color.White
                 )
             ) {
                 Icon(
                     imageVector = Icons.Default.Android,
                     contentDescription = null,
                     modifier = Modifier.size(18.dp),
-                    tint = Color(0xFF0E141D)
+                    tint = Color.White
                 )
                 Spacer(modifier = Modifier.width(6.dp))
                 Text(
                     text = stringResource(R.string.app_detail_app_info),
                     fontSize = 15.sp,
                     fontWeight = FontWeight.Bold,
-                    color = Color(0xFF0E141D)
+                    color = Color.White
                 )
             }
 
@@ -368,15 +368,15 @@ private fun AppDetailActionButton(
     ) {
         Box(
             modifier = Modifier
-                .size(36.dp)
-                .background(containerColor, CircleShape),
+                .size(40.dp)
+                .background(containerColor.copy(alpha = 0.2f), CircleShape),
             contentAlignment = Alignment.Center
         ) {
             Icon(
                 imageVector = icon,
                 contentDescription = label,
-                tint = Color.White,
-                modifier = Modifier.size(18.dp)
+                tint = containerColor,
+                modifier = Modifier.size(20.dp)
             )
         }
 

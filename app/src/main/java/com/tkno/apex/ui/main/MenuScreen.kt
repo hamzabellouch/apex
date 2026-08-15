@@ -1,5 +1,7 @@
 package com.tkno.apex.ui.main
 
+import com.tkno.apex.ui.icon.LeftPanelClose
+
 import android.app.LocaleManager
 import android.content.Intent
 import android.net.Uri
@@ -170,7 +172,11 @@ fun MenuScreen(
 }
 
 @Composable
-fun MainMenuList(onNavigateTo: (MenuSubScreen) -> Unit) {
+fun MainMenuList(
+    currentSubScreen: SubScreen = SubScreen.None,
+    onCloseDrawer: () -> Unit = {},
+    onNavigateTo: (MenuSubScreen) -> Unit
+) {
     Box(
         modifier = Modifier.fillMaxSize()
     ) {
@@ -183,14 +189,21 @@ fun MainMenuList(onNavigateTo: (MenuSubScreen) -> Unit) {
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .heightIn(min = 48.dp)
                     .padding(bottom = 18.dp),
                 horizontalArrangement = Arrangement.Start,
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Row(
-                    verticalAlignment = Alignment.Bottom
+                    verticalAlignment = Alignment.CenterVertically,
+                    modifier = Modifier.offset(x = (-12).dp)
                 ) {
+                    IconButton(onClick = onCloseDrawer) {
+                        Icon(
+                            imageVector = LeftPanelClose,
+                            contentDescription = stringResource(id = R.string.nav_menu),
+                            tint = MaterialTheme.colorScheme.onBackground
+                        )
+                    }
                     Text(
                         text = stringResource(id = R.string.menu),
                         color = MaterialTheme.colorScheme.onBackground,
@@ -209,41 +222,59 @@ fun MainMenuList(onNavigateTo: (MenuSubScreen) -> Unit) {
 
             Spacer(Modifier.height(4.dp))
 
+            val isSettingsSelected = currentSubScreen == SubScreen.Settings ||
+                currentSubScreen == SubScreen.GeneralSettings ||
+                currentSubScreen == SubScreen.CustomSpeedSettings ||
+                currentSubScreen == SubScreen.LookAndFeel ||
+                currentSubScreen == SubScreen.Languages ||
+                currentSubScreen == SubScreen.DarkTheme
+
+            val isSponsorSelected = currentSubScreen == SubScreen.Sponsor
+
+            val isTroubleshootingSelected = currentSubScreen == SubScreen.Troubleshooting
+
+            val isAboutSelected = currentSubScreen == SubScreen.About ||
+                currentSubScreen == SubScreen.Credits ||
+                currentSubScreen == SubScreen.Update
+
             val drawerItemColors = NavigationDrawerItemDefaults.colors(
                 unselectedContainerColor = Color.Transparent,
                 unselectedIconColor = MaterialTheme.colorScheme.onSurfaceVariant,
-                unselectedTextColor = MaterialTheme.colorScheme.onSurface
+                unselectedTextColor = MaterialTheme.colorScheme.onSurface,
+                selectedContainerColor = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.12f),
+                selectedIconColor = MaterialTheme.colorScheme.onSurface,
+                selectedTextColor = MaterialTheme.colorScheme.onSurface
             )
             ProvideTextStyle(MaterialTheme.typography.labelLarge) {
                 NavigationDrawerItem(
                     label = { Text(stringResource(id = R.string.settings)) },
-                    icon = { Icon(Icons.Outlined.Settings, null) },
+                    icon = { Icon(if (isSettingsSelected) Icons.Default.Settings else Icons.Outlined.Settings, null) },
                     onClick = { onNavigateTo(MenuSubScreen.Settings) },
-                    selected = false,
+                    selected = isSettingsSelected,
                     colors = drawerItemColors,
                     modifier = Modifier.fillMaxWidth().padding(horizontal = 3.dp)
                 )
                 NavigationDrawerItem(
                     label = { Text(stringResource(id = R.string.sponsor)) },
-                    icon = { Icon(Icons.Outlined.VolunteerActivism, null) },
+                    icon = { Icon(if (isSponsorSelected) Icons.Default.VolunteerActivism else Icons.Outlined.VolunteerActivism, null) },
                     onClick = { onNavigateTo(MenuSubScreen.Sponsor) },
-                    selected = false,
+                    selected = isSponsorSelected,
                     colors = drawerItemColors,
                     modifier = Modifier.fillMaxWidth().padding(horizontal = 3.dp)
                 )
                 NavigationDrawerItem(
                     label = { Text(stringResource(id = R.string.trouble_shooting)) },
-                    icon = { Icon(Icons.Outlined.BugReport, null) },
+                    icon = { Icon(if (isTroubleshootingSelected) Icons.Default.BugReport else Icons.Outlined.BugReport, null) },
                     onClick = { onNavigateTo(MenuSubScreen.Troubleshooting) },
-                    selected = false,
+                    selected = isTroubleshootingSelected,
                     colors = drawerItemColors,
                     modifier = Modifier.fillMaxWidth().padding(horizontal = 3.dp)
                 )
                 NavigationDrawerItem(
                     label = { Text(stringResource(id = R.string.about)) },
-                    icon = { Icon(Icons.Outlined.Info, null) },
+                    icon = { Icon(if (isAboutSelected) Icons.Default.Info else Icons.Outlined.Info, null) },
                     onClick = { onNavigateTo(MenuSubScreen.About) },
-                    selected = false,
+                    selected = isAboutSelected,
                     colors = drawerItemColors,
                     modifier = Modifier.fillMaxWidth().padding(horizontal = 3.dp)
                 )
@@ -302,6 +333,7 @@ fun GeneralSettingsPage(
 
     var cleaningMode by remember { mutableIntStateOf(prefs.getInt("cleaning_mode", 1)) }
     var isIgnoreTinyCache by remember { mutableStateOf(prefs.getBoolean("ignore_tiny_cache", false)) }
+    var isGestureFallbackEnabled by remember { mutableStateOf(prefs.getBoolean("gesture_fallback_enabled", true)) }
     var showCleaningModeDialog by remember { mutableStateOf(false) }
 
     BasePreferencePage(
@@ -383,6 +415,18 @@ fun GeneralSettingsPage(
                     val newValue = !isIgnoreTinyCache
                     isIgnoreTinyCache = newValue
                     prefs.edit().putBoolean("ignore_tiny_cache", newValue).apply()
+                }
+            )
+
+            PreferenceSwitch(
+                title = stringResource(id = R.string.gesture_fallback_title),
+                description = stringResource(id = R.string.gesture_fallback_desc),
+                icon = Icons.Outlined.TouchApp,
+                isChecked = isGestureFallbackEnabled,
+                onClick = {
+                    val newValue = !isGestureFallbackEnabled
+                    isGestureFallbackEnabled = newValue
+                    prefs.edit().putBoolean("gesture_fallback_enabled", newValue).apply()
                 }
             )
         }
@@ -1529,9 +1573,9 @@ fun AboutPage(
     AppUpdater(isAutoUpdateEnabled = isAutoUpdateEnabled)
 
     val versionName = try {
-        context.packageManager.getPackageInfo(context.packageName, 0).versionName ?: "0.0.5-beta"
+        context.packageManager.getPackageInfo(context.packageName, 0).versionName ?: "0.0.6-beta"
     } catch (e: Exception) {
-        "0.0.5-beta"
+        "0.0.6-beta"
     }
     val info = "App version: $versionName\nPackage name: ${context.packageName}\nDevice: Android ${android.os.Build.VERSION.RELEASE} (API ${android.os.Build.VERSION.SDK_INT})"
     val uriHandler = LocalUriHandler.current

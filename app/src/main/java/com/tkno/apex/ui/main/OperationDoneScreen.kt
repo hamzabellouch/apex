@@ -1,4 +1,4 @@
-﻿package com.tkno.apex.ui.main
+package com.tkno.apex.ui.main
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -28,8 +28,13 @@ fun OperationDoneScreen(
     modifier: Modifier = Modifier
 ) {
     val darkBg = MaterialTheme.colorScheme.background
+    val isStop = actionType == "STOP"
     val accentBlue = Color(0xFF48AFFF)
     val circleBlue = Color(0xFF64B5F6)
+    val stopOrange = Color(0xFFFF6D00)
+
+    val primaryColor = if (isStop) stopOrange else accentBlue
+    val circleColor = if (isStop) stopOrange else circleBlue
 
     val countText = if (completedAppsCount == 1) stringResource(R.string.done_count_apps_singular) else stringResource(R.string.done_count_apps_plural, completedAppsCount)
     val cleanedText = AppStorageHelper.formatSize(cleanedCacheBytes)
@@ -52,7 +57,7 @@ fun OperationDoneScreen(
             Box(
                 modifier = Modifier
                     .size(105.dp)
-                    .background(circleBlue, CircleShape),
+                    .background(circleColor, CircleShape),
                 contentAlignment = Alignment.Center
             ) {
                 Icon(
@@ -92,7 +97,7 @@ fun OperationDoneScreen(
             Button(
                 onClick = onDoneClick,
                 shape = RoundedCornerShape(20.dp),
-                colors = ButtonDefaults.buttonColors(containerColor = accentBlue),
+                colors = ButtonDefaults.buttonColors(containerColor = primaryColor),
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(40.dp)

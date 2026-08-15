@@ -115,6 +115,7 @@
     <string name="nav_stop">إيقاف</string>
     <string name="nav_clean">تنظيف</string>
     <string name="nav_apps">التطبيقات</string>
+    <string name="nav_statistics">الإحصائيات</string>
     <string name="nav_menu">القائمة</string>
     <string name="toast_all_cache_cleaned">جميع ملفات التخزين المؤقت منظفة بالفعل (0 ك.بايت)</string>
     <string name="toast_all_bg_apps_stopped">جميع تطبيقات الخلفية متوقفة بالفعل</string>
@@ -145,6 +146,8 @@
     <string name="cleaning_mode_ask_each_time">السؤال في كل مرة</string>
     <string name="ignore_tiny_cache_title">تجاهل التخزين المؤقت الصغير</string>
     <string name="ignore_tiny_cache_desc">استبعاد جميع التطبيقات التي يقل التخزين المؤقت فيها عن 3 ميغابايت</string>
+    <string name="gesture_fallback_title">الخطة الاحتياطية للمس الفيزيائي</string>
+    <string name="gesture_fallback_desc">استخدام اللمس الفيزيائي بالإحداثيات كخطة احتياطية عند فشل النقر البرمجي المباشر</string>
     <string name="stop_title">إيقاف</string>
     <string name="stop_history_icon_desc">السجل</string>
     <string name="stop_gauge_apps">تطبيقات</string>

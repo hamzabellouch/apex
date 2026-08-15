@@ -97,6 +97,7 @@
     <string name="nav_stop">Stop</string>
     <string name="nav_clean">Clean</string>
     <string name="nav_apps">Apps</string>
+    <string name="nav_statistics">Statistics</string>
     <string name="nav_menu">Menu</string>
     <string name="toast_all_cache_cleaned">All cache items are already cleaned (0 KB)</string>
     <string name="toast_all_bg_apps_stopped">All background apps are already stopped</string>
