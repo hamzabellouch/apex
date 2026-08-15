@@ -1227,9 +1227,9 @@ class CacheCleanerAccessibilityService : AccessibilityService() {
 
         val isGestureFallbackEnabled = try {
             val prefs = getSharedPreferences("apex_prefs", Context.MODE_PRIVATE)
-            prefs.getBoolean("gesture_fallback_enabled", true)
+            prefs.getBoolean("gesture_fallback_enabled", false)
         } catch (e: Exception) {
-            true
+            false
         }
 
         // Fallback: Hardware gesture click (API 24+) if performAction(ACTION_CLICK) fails on custom OEM views

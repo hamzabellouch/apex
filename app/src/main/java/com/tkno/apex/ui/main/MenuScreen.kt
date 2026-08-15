@@ -333,7 +333,7 @@ fun GeneralSettingsPage(
 
     var cleaningMode by remember { mutableIntStateOf(prefs.getInt("cleaning_mode", 1)) }
     var isIgnoreTinyCache by remember { mutableStateOf(prefs.getBoolean("ignore_tiny_cache", false)) }
-    var isGestureFallbackEnabled by remember { mutableStateOf(prefs.getBoolean("gesture_fallback_enabled", true)) }
+    var isGestureFallbackEnabled by remember { mutableStateOf(prefs.getBoolean("gesture_fallback_enabled", false)) }
     var showCleaningModeDialog by remember { mutableStateOf(false) }
 
     BasePreferencePage(
