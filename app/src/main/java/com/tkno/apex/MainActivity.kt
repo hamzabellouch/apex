@@ -55,28 +55,6 @@ class MainActivity : ComponentActivity() {
         }
     }
 
-    override fun onUserLeaveHint() {
-        super.onUserLeaveHint()
-        if (CacheCleanerAccessibilityService.isRunning && !isInPipMode) {
-            triggerPipMode()
-        }
-    }
-
-    fun triggerPipMode() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            try {
-                val builder = android.app.PictureInPictureParams.Builder()
-                    .setAspectRatio(android.util.Rational(200, 100))
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-                    builder.setAutoEnterEnabled(true)
-                }
-                enterPictureInPictureMode(builder.build())
-            } catch (e: Exception) {
-                e.printStackTrace()
-            }
-        }
-    }
-
     override fun attachBaseContext(newBase: Context) {
         val prefs = newBase.getSharedPreferences("apex_prefs", Context.MODE_PRIVATE)
         val langTag = prefs.getString("app_language", "system") ?: "system"
@@ -93,71 +71,18 @@ class MainActivity : ComponentActivity() {
         super.attachBaseContext(newBase)
     }
 
+    private var isUsageAccessGranted by mutableStateOf(false)
+    private var isAccessibilityEnabled by mutableStateOf(false)
+
     override fun onCreate(savedInstanceState: Bundle?) {
         applySavedLocale()
         applyInitialWindowBackground()
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-    }
+        disableAutoPip()
 
-    private fun applyInitialWindowBackground() {
-        val prefs = getSharedPreferences("apex_prefs", Context.MODE_PRIVATE)
-        val darkThemePref = prefs.getInt("dark_theme", 0)
-        val systemDark = (resources.configuration.uiMode and android.content.res.Configuration.UI_MODE_NIGHT_MASK) == android.content.res.Configuration.UI_MODE_NIGHT_YES
-        val useDarkTheme = when (darkThemePref) {
-            1 -> true
-            2 -> false
-            else -> systemDark
-        }
-        val bgDrawable = android.graphics.drawable.ColorDrawable(
-            if (useDarkTheme) android.graphics.Color.parseColor("#0E141D") else android.graphics.Color.WHITE
-        )
-        window.setBackgroundDrawable(bgDrawable)
-    }
-
-    private fun applySavedLocale() {
-        val prefs = getSharedPreferences("apex_prefs", Context.MODE_PRIVATE)
-        val langTag = prefs.getString("app_language", "system") ?: "system"
-
-        val localeListCompat = if (langTag == "system") {
-            LocaleListCompat.getEmptyLocaleList()
-        } else {
-            LocaleListCompat.forLanguageTags(langTag)
-        }
-        AppCompatDelegate.setApplicationLocales(localeListCompat)
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            val localeManager = getSystemService(Context.LOCALE_SERVICE) as? LocaleManager
-            if (localeManager != null) {
-                val localeList = if (langTag == "system") {
-                    LocaleList.getEmptyLocaleList()
-                } else {
-                    LocaleList(Locale.forLanguageTag(langTag))
-                }
-                localeManager.applicationLocales = localeList
-            }
-        }
-
-        val targetLocale = if (langTag == "system") Locale.getDefault() else Locale.forLanguageTag(langTag)
-        Locale.setDefault(targetLocale)
-        val config = resources.configuration
-        config.setLocale(targetLocale)
-        config.setLayoutDirection(targetLocale)
-        @Suppress("DEPRECATION")
-        resources.updateConfiguration(config, resources.displayMetrics)
-    }
-
-    override fun onNewIntent(intent: Intent) {
-        super.onNewIntent(intent)
-        setIntent(intent)
-    }
-
-    override fun onResume() {
-        super.onResume()
-        
-        // Refresh UI with permission states on resume
-        val isUsageAccessGranted = AppStorageHelper.isUsageStatsPermissionGranted(this)
-        val isAccessibilityEnabled = isAccessibilityServiceEnabled(this)
+        isUsageAccessGranted = AppStorageHelper.isUsageStatsPermissionGranted(this)
+        isAccessibilityEnabled = isAccessibilityServiceEnabled(this)
         val prefs = getSharedPreferences("apex_prefs", Context.MODE_PRIVATE)
 
         setContent {
@@ -224,6 +149,95 @@ class MainActivity : ComponentActivity() {
                 }
             }
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        disableAutoPip()
+        
+        // Refresh permission states on resume without destroying Compose tree
+        isUsageAccessGranted = AppStorageHelper.isUsageStatsPermissionGranted(this)
+        isAccessibilityEnabled = isAccessibilityServiceEnabled(this)
+    }
+
+    private fun disableAutoPip() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            try {
+                val builder = android.app.PictureInPictureParams.Builder()
+                    .setAutoEnterEnabled(false)
+                    .setAspectRatio(android.util.Rational(200, 100))
+                setPictureInPictureParams(builder.build())
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+        }
+    }
+
+    fun triggerPipMode() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            try {
+                val builder = android.app.PictureInPictureParams.Builder()
+                    .setAspectRatio(android.util.Rational(200, 100))
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                    builder.setAutoEnterEnabled(false)
+                }
+                enterPictureInPictureMode(builder.build())
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+        }
+    }
+
+    private fun applyInitialWindowBackground() {
+        val prefs = getSharedPreferences("apex_prefs", Context.MODE_PRIVATE)
+        val darkThemePref = prefs.getInt("dark_theme", 0)
+        val systemDark = (resources.configuration.uiMode and android.content.res.Configuration.UI_MODE_NIGHT_MASK) == android.content.res.Configuration.UI_MODE_NIGHT_YES
+        val useDarkTheme = when (darkThemePref) {
+            1 -> true
+            2 -> false
+            else -> systemDark
+        }
+        val bgDrawable = android.graphics.drawable.ColorDrawable(
+            if (useDarkTheme) android.graphics.Color.parseColor("#0E141D") else android.graphics.Color.WHITE
+        )
+        window.setBackgroundDrawable(bgDrawable)
+    }
+
+    private fun applySavedLocale() {
+        val prefs = getSharedPreferences("apex_prefs", Context.MODE_PRIVATE)
+        val langTag = prefs.getString("app_language", "system") ?: "system"
+
+        val localeListCompat = if (langTag == "system") {
+            LocaleListCompat.getEmptyLocaleList()
+        } else {
+            LocaleListCompat.forLanguageTags(langTag)
+        }
+        AppCompatDelegate.setApplicationLocales(localeListCompat)
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            val localeManager = getSystemService(Context.LOCALE_SERVICE) as? LocaleManager
+            if (localeManager != null) {
+                val localeList = if (langTag == "system") {
+                    LocaleList.getEmptyLocaleList()
+                } else {
+                    LocaleList(Locale.forLanguageTag(langTag))
+                }
+                localeManager.applicationLocales = localeList
+            }
+        }
+
+        val targetLocale = if (langTag == "system") Locale.getDefault() else Locale.forLanguageTag(langTag)
+        Locale.setDefault(targetLocale)
+        val config = resources.configuration
+        config.setLocale(targetLocale)
+        config.setLayoutDirection(targetLocale)
+        @Suppress("DEPRECATION")
+        resources.updateConfiguration(config, resources.displayMetrics)
+    }
+
+    override fun onNewIntent(intent: Intent) {
+        super.onNewIntent(intent)
+        setIntent(intent)
     }
 
     override fun onPause() {

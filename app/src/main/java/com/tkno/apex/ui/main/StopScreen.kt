@@ -55,6 +55,7 @@ fun StopScreen(
     onAnalyzeStopClick: () -> Unit,
     onOpenHistory: () -> Unit,
     onOpenDrawer: () -> Unit = {},
+    showMenuButton: Boolean = true,
     modifier: Modifier = Modifier
 ) {
     val context = LocalContext.current
@@ -87,14 +88,16 @@ fun StopScreen(
             ) {
                 Row(
                     verticalAlignment = Alignment.CenterVertically,
-                    modifier = Modifier.offset(x = (-12).dp)
+                    modifier = if (showMenuButton) Modifier.offset(x = (-12).dp) else Modifier
                 ) {
-                    IconButton(onClick = onOpenDrawer) {
-                        Icon(
-                            imageVector = LeftPanelOpen,
-                            contentDescription = stringResource(id = R.string.nav_menu),
-                            tint = MaterialTheme.colorScheme.onBackground
-                        )
+                    if (showMenuButton) {
+                        IconButton(onClick = onOpenDrawer) {
+                            Icon(
+                                imageVector = LeftPanelOpen,
+                                contentDescription = stringResource(id = R.string.nav_menu),
+                                tint = MaterialTheme.colorScheme.onBackground
+                            )
+                        }
                     }
                     Text(
                         text = stringResource(id = R.string.stop_title),

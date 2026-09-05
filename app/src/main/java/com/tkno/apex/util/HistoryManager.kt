@@ -66,8 +66,7 @@ object HistoryManager {
         if (entries.isEmpty()) return
         val currentList = getCleanHistory(context).toMutableList()
         currentList.addAll(0, entries)
-        val trimmed = if (currentList.size > 500) currentList.take(500) else currentList
-        saveCleanHistory(context, trimmed)
+        saveCleanHistory(context, currentList)
     }
 
     private fun saveCleanHistory(context: Context, list: List<CleanHistoryEntry>) {
@@ -116,8 +115,7 @@ object HistoryManager {
         if (entries.isEmpty()) return
         val currentList = getStopHistory(context).toMutableList()
         currentList.addAll(0, entries)
-        val trimmed = if (currentList.size > 500) currentList.take(500) else currentList
-        saveStopHistory(context, trimmed)
+        saveStopHistory(context, currentList)
     }
 
     private fun saveStopHistory(context: Context, list: List<StopHistoryEntry>) {
@@ -172,15 +170,19 @@ object HistoryManager {
 
     fun formatBytes(bytes: Long): String {
         if (bytes <= 0) return "0 MB"
-        val mb = bytes / (1024.0 * 1024.0)
-        return if (mb >= 1024) {
-            val gb = mb / 1024.0
-            String.format("%.1f GB", gb)
-        } else if (mb >= 1) {
-            String.format("%.1f MB", mb)
-        } else {
-            val kb = bytes / 1024.0
-            String.format("%.0f KB", kb)
+        val kb = bytes / 1024.0
+        val mb = kb / 1024.0
+        val gb = mb / 1024.0
+        val tb = gb / 1024.0
+        val pb = tb / 1024.0
+
+        return when {
+            pb >= 1.0 -> String.format(java.util.Locale.US, "%.1f PB", pb)
+            tb >= 1.0 -> String.format(java.util.Locale.US, "%.1f TB", tb)
+            gb >= 1.0 -> String.format(java.util.Locale.US, "%.1f GB", gb)
+            mb >= 1.0 -> String.format(java.util.Locale.US, "%.1f MB", mb)
+            kb >= 1.0 -> String.format(java.util.Locale.US, "%.0f KB", kb)
+            else -> "$bytes B"
         }
     }
 

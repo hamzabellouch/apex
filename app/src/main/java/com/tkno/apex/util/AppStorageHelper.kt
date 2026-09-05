@@ -277,34 +277,36 @@ object AppStorageHelper {
 
     fun formatSizeParts(bytes: Long, maxDecimals: Int = 2): Pair<String, String> {
         if (bytes <= 0) return Pair("0", "KB")
-        val kb = bytes / 1024f
-        val mb = kb / 1024f
-        val gb = mb / 1024f
-        val tb = gb / 1024f
+        val kb = bytes / 1024.0
+        val mb = kb / 1024.0
+        val gb = mb / 1024.0
+        val tb = gb / 1024.0
+        val pb = tb / 1024.0
 
         return when {
-            tb >= 1.0f -> Pair(formatNumber(tb, maxDecimals), "TB")
-            gb >= 1.0f -> Pair(formatNumber(gb, maxDecimals), "GB")
-            mb >= 1.0f -> Pair(formatNumber(mb, maxDecimals), "MB")
-            kb >= 1.0f -> Pair(formatNumber(kb, maxDecimals), "KB")
+            pb >= 1.0 -> Pair(formatNumber(pb, maxDecimals), "PB")
+            tb >= 1.0 -> Pair(formatNumber(tb, maxDecimals), "TB")
+            gb >= 1.0 -> Pair(formatNumber(gb, maxDecimals), "GB")
+            mb >= 1.0 -> Pair(formatNumber(mb, maxDecimals), "MB")
+            kb >= 1.0 -> Pair(formatNumber(kb, maxDecimals), "KB")
             else -> Pair(bytes.toString(), "B")
         }
     }
 
-    private fun formatNumber(value: Float, maxDecimals: Int): String {
+    private fun formatNumber(value: Double, maxDecimals: Int): String {
         if (maxDecimals == 1) {
             val roundedInt = kotlin.math.round(value)
-            if (kotlin.math.abs(value - roundedInt) < 0.05f) {
+            if (kotlin.math.abs(value - roundedInt) < 0.05) {
                 return String.format(java.util.Locale.US, "%.0f", value)
             }
             return String.format(java.util.Locale.US, "%.1f", value)
         } else {
             val roundedInt = kotlin.math.round(value)
-            if (kotlin.math.abs(value - roundedInt) < 0.005f) {
-                return String.format(java.util.Locale.US, "%.2f", value)
+            if (kotlin.math.abs(value - roundedInt) < 0.005) {
+                return String.format(java.util.Locale.US, "%.0f", value)
             }
-            val roundedOneDecimal = kotlin.math.round(value * 10f) / 10f
-            if (kotlin.math.abs(value - roundedOneDecimal) < 0.005f) {
+            val roundedOneDecimal = kotlin.math.round(value * 10.0) / 10.0
+            if (kotlin.math.abs(value - roundedOneDecimal) < 0.005) {
                 return String.format(java.util.Locale.US, "%.1f", value)
             }
             return String.format(java.util.Locale.US, "%.2f", value)
@@ -332,8 +334,13 @@ object AppStorageHelper {
 
     fun getTotalStorageBytes(context: Context): Long {
         return try {
-            val storageStatsManager = context.getSystemService(Context.STORAGE_STATS_SERVICE) as StorageStatsManager
-            storageStatsManager.getTotalBytes(StorageManager.UUID_DEFAULT)
+            val storageStatsManager = context.getSystemService(Context.STORAGE_STATS_SERVICE) as? StorageStatsManager
+            storageStatsManager?.getTotalBytes(StorageManager.UUID_DEFAULT)
+                ?: run {
+                    val path = android.os.Environment.getDataDirectory()
+                    val stat = android.os.StatFs(path.path)
+                    stat.blockCountLong * stat.blockSizeLong
+                }
         } catch (e: Exception) {
             try {
                 val path = android.os.Environment.getDataDirectory()
@@ -347,18 +354,28 @@ object AppStorageHelper {
 
     fun getUsedStorageBytes(context: Context): Long {
         return try {
-            val storageStatsManager = context.getSystemService(Context.STORAGE_STATS_SERVICE) as StorageStatsManager
-            val total = storageStatsManager.getTotalBytes(StorageManager.UUID_DEFAULT)
-            val free = try {
+            val storageStatsManager = context.getSystemService(Context.STORAGE_STATS_SERVICE) as? StorageStatsManager
+            if (storageStatsManager != null) {
+                val total = storageStatsManager.getTotalBytes(StorageManager.UUID_DEFAULT)
+                val free = storageStatsManager.getFreeBytes(StorageManager.UUID_DEFAULT)
+                (total - free).coerceAtLeast(0L)
+            } else {
                 val path = android.os.Environment.getDataDirectory()
                 val stat = android.os.StatFs(path.path)
-                stat.availableBlocksLong * stat.blockSizeLong
+                val total = stat.blockCountLong * stat.blockSizeLong
+                val free = stat.availableBlocksLong * stat.blockSizeLong
+                (total - free).coerceAtLeast(0L)
+            }
+        } catch (e: Exception) {
+            try {
+                val path = android.os.Environment.getDataDirectory()
+                val stat = android.os.StatFs(path.path)
+                val total = stat.blockCountLong * stat.blockSizeLong
+                val free = stat.availableBlocksLong * stat.blockSizeLong
+                (total - free).coerceAtLeast(0L)
             } catch (ex: Exception) {
                 0L
             }
-            total - free
-        } catch (e: Exception) {
-            0L
         }
     }
 

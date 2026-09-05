@@ -70,7 +70,7 @@ enum class MainTab {
 enum class SubScreen {
     None, Analyze, StopWhitelist, CleanWhitelist, CleanHistory, StopHistory,
     Settings, GeneralSettings, CustomSpeedSettings, LookAndFeel, Languages, DarkTheme,
-    Sponsor, Troubleshooting, About, Credits, Update
+    InterfaceAndInteraction, Sponsor, Troubleshooting, About, Credits, Update
 }
 
 @Composable
@@ -112,6 +112,7 @@ fun MainScreen(
             SubScreen.Languages -> currentSubScreen = SubScreen.LookAndFeel
             SubScreen.DarkTheme -> currentSubScreen = SubScreen.LookAndFeel
             SubScreen.LookAndFeel -> currentSubScreen = SubScreen.Settings
+            SubScreen.InterfaceAndInteraction -> currentSubScreen = SubScreen.Settings
             SubScreen.Credits -> currentSubScreen = SubScreen.About
             SubScreen.Update -> currentSubScreen = SubScreen.About
             else -> currentSubScreen = SubScreen.None
@@ -129,11 +130,21 @@ fun MainScreen(
     var isAutoUpdateEnabled by remember {
         mutableStateOf(prefs.getBoolean("auto_update_enabled", false))
     }
+    var hideNavLabels by remember {
+        mutableStateOf(prefs.getBoolean("hide_navigation_labels", false))
+    }
+    var hideMenuButton by remember {
+        mutableStateOf(prefs.getBoolean("hide_menu_button", false))
+    }
 
     DisposableEffect(prefs) {
         val listener = android.content.SharedPreferences.OnSharedPreferenceChangeListener { p, key ->
             if (key == "auto_update_enabled") {
                 isAutoUpdateEnabled = p.getBoolean("auto_update_enabled", false)
+            } else if (key == "hide_navigation_labels") {
+                hideNavLabels = p.getBoolean("hide_navigation_labels", false)
+            } else if (key == "hide_menu_button") {
+                hideMenuButton = p.getBoolean("hide_menu_button", false)
             }
         }
         prefs.registerOnSharedPreferenceChangeListener(listener)
@@ -381,6 +392,7 @@ fun MainScreen(
                     completedCleanedBytes = targetSet.sumOf { pkg -> initialCacheMap[pkg] ?: 0L }
 
                     // INSTANT (0ms) Main Thread UI State Update
+                    currentTab = if (finishedMode == ServiceMode.FORCE_STOP) MainTab.Stop else MainTab.Clean
                     installedApps = applySessionOverrides(installedApps)
                     totalCacheBytes = installedApps.sumOf { it.cacheBytes }
 
@@ -506,8 +518,11 @@ fun MainScreen(
         gesturesEnabled = !isShowingPermissionScreen,
         drawerContent = {
             ModalDrawerSheet(
-                modifier = Modifier.width(300.dp),
-                drawerContainerColor = MaterialTheme.colorScheme.surface
+                modifier = Modifier
+                    .width(300.dp)
+                    .fillMaxHeight(),
+                drawerContainerColor = MaterialTheme.colorScheme.surface,
+                windowInsets = DrawerDefaults.windowInsets
             ) {
                 MainMenuList(
                     currentSubScreen = currentSubScreen,
@@ -544,13 +559,15 @@ fun MainScreen(
                         Box(
                             modifier = Modifier
                                 .fillMaxWidth()
-                                .height(72.dp)
+                                .navigationBarsPadding()
                         ) {
                             NavigationBar(
                                 containerColor = MaterialTheme.colorScheme.surfaceContainer,
                                 tonalElevation = 0.dp,
+                                windowInsets = WindowInsets(0.dp),
                                 modifier = Modifier
-                                    .fillMaxSize()
+                                    .fillMaxWidth()
+                                    .height(68.dp)
                                     .onGloballyPositioned { coordinates ->
                                         val totalWidth = coordinates.size.width.toFloat()
                                         if (totalWidth > 0) {
@@ -574,6 +591,7 @@ fun MainScreen(
                             NavigationBarItem(
                                 selected = isSelected,
                                 onClick = { currentTab = tab },
+                                alwaysShowLabel = !hideNavLabels,
                                 icon = {
                                     Icon(
                                         imageVector = tabIcon,
@@ -581,13 +599,15 @@ fun MainScreen(
                                         tint = if (isSelected) tabColor else unselectedNavColor
                                     )
                                 },
-                                label = {
-                                    Text(
-                                        text = tabLabel,
-                                        color = if (isSelected) tabColor else unselectedNavColor,
-                                        fontSize = 12.sp
-                                    )
-                                },
+                                label = if (!hideNavLabels) {
+                                    {
+                                        Text(
+                                            text = tabLabel,
+                                            color = if (isSelected) tabColor else unselectedNavColor,
+                                            fontSize = 12.sp
+                                        )
+                                    }
+                                } else null,
                                 colors = NavigationBarItemDefaults.colors(
                                     indicatorColor = tabColor.copy(alpha = 0.2f),
                                     selectedIconColor = tabColor,
@@ -693,6 +713,7 @@ fun MainScreen(
         }
     },
         containerColor = appBackground,
+        contentWindowInsets = WindowInsets.systemBars,
         modifier = modifier
     ) { paddingValues ->
         val layoutDirection = LocalLayoutDirection.current
@@ -702,7 +723,7 @@ fun MainScreen(
                 .background(appBackground)
                 .padding(
                     top = paddingValues.calculateTopPadding(),
-                    bottom = if (isBottomBarVisible) paddingValues.calculateBottomPadding() else 0.dp,
+                    bottom = paddingValues.calculateBottomPadding(),
                     start = paddingValues.calculateLeftPadding(layoutDirection),
                     end = paddingValues.calculateRightPadding(layoutDirection)
                 )
@@ -792,6 +813,7 @@ fun MainScreen(
                                     when (route) {
                                         "general" -> currentSubScreen = SubScreen.GeneralSettings
                                         "appearance" -> currentSubScreen = SubScreen.LookAndFeel
+                                        "interface_and_interaction" -> currentSubScreen = SubScreen.InterfaceAndInteraction
                                     }
                                 }
                             )
@@ -824,6 +846,11 @@ fun MainScreen(
                         SubScreen.Languages -> {
                             LanguagesPage(
                                 onNavigateBack = { currentSubScreen = SubScreen.LookAndFeel }
+                            )
+                        }
+                        SubScreen.InterfaceAndInteraction -> {
+                            InterfaceAndInteractionPreferences(
+                                onNavigateBack = { currentSubScreen = SubScreen.Settings }
                             )
                         }
                         SubScreen.Sponsor -> {
@@ -871,6 +898,7 @@ fun MainScreen(
                                             onOpenWhitelist = { currentSubScreen = SubScreen.StopWhitelist },
                                             onOpenHistory = { currentSubScreen = SubScreen.StopHistory },
                                             onOpenDrawer = { scope.launch { drawerState.open() } },
+                                            showMenuButton = !hideMenuButton,
                                             onAnalyzeStopClick = {
                                                 if (!isUsageAccessGranted) {
                                                     onRequestUsageAccess()
@@ -903,6 +931,7 @@ fun MainScreen(
                                             onOpenWhitelist = { currentSubScreen = SubScreen.CleanWhitelist },
                                             onOpenHistory = { currentSubScreen = SubScreen.CleanHistory },
                                             onOpenDrawer = { scope.launch { drawerState.open() } },
+                                            showMenuButton = !hideMenuButton,
                                             onAnalyzeClick = {
                                                 if (!isUsageAccessGranted) {
                                                     onRequestUsageAccess()
@@ -928,12 +957,14 @@ fun MainScreen(
                                         AppsScreen(
                                             installedApps = installedApps,
                                             currentCleaningPackage = currentCleaningPackage,
-                                            onOpenDrawer = { scope.launch { drawerState.open() } }
+                                            onOpenDrawer = { scope.launch { drawerState.open() } },
+                                            showMenuButton = !hideMenuButton
                                         )
                                     }
                                     MainTab.Statistics -> {
                                         StatisticsScreen(
-                                            onOpenDrawer = { scope.launch { drawerState.open() } }
+                                            onOpenDrawer = { scope.launch { drawerState.open() } },
+                                            showMenuButton = !hideMenuButton
                                         )
                                     }
                                     else -> {}

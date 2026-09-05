@@ -61,6 +61,7 @@ fun AppsScreen(
     installedApps: List<AppCacheInfo>,
     currentCleaningPackage: String?,
     onOpenDrawer: () -> Unit = {},
+    showMenuButton: Boolean = true,
     modifier: Modifier = Modifier
 ) {
     val darkBg = MaterialTheme.colorScheme.background
@@ -153,14 +154,16 @@ fun AppsScreen(
                 ) {
                     Row(
                         verticalAlignment = Alignment.CenterVertically,
-                        modifier = Modifier.offset(x = (-12).dp)
+                        modifier = if (showMenuButton) Modifier.offset(x = (-12).dp) else Modifier
                     ) {
-                        IconButton(onClick = onOpenDrawer) {
-                            Icon(
-                                imageVector = LeftPanelOpen,
-                                contentDescription = stringResource(id = R.string.nav_menu),
-                                tint = MaterialTheme.colorScheme.onBackground
-                            )
+                        if (showMenuButton) {
+                            IconButton(onClick = onOpenDrawer) {
+                                Icon(
+                                    imageVector = LeftPanelOpen,
+                                    contentDescription = stringResource(id = R.string.nav_menu),
+                                    tint = MaterialTheme.colorScheme.onBackground
+                                )
+                            }
                         }
                         Text(
                             text = stringResource(R.string.apps_screen_title),

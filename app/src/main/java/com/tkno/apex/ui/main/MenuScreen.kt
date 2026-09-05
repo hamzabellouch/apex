@@ -1,6 +1,7 @@
 package com.tkno.apex.ui.main
 
 import com.tkno.apex.ui.icon.LeftPanelClose
+import com.tkno.apex.ui.icon.LeftPanelOpen
 
 import android.app.LocaleManager
 import android.content.Intent
@@ -40,6 +41,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.outlined.ArrowForward
 import androidx.compose.material.icons.automirrored.outlined.ContactSupport
 import androidx.compose.material.icons.automirrored.outlined.OpenInNew
+import androidx.compose.material.icons.automirrored.rounded.FormatListBulleted
 import androidx.compose.material.icons.filled.Block
 import androidx.compose.material.icons.filled.BugReport
 import androidx.compose.material.icons.filled.Info
@@ -48,6 +50,7 @@ import androidx.compose.material.icons.filled.VolunteerActivism
 import androidx.compose.material.icons.outlined.*
 import androidx.compose.material.icons.rounded.Palette
 import androidx.compose.material.icons.rounded.SettingsApplications
+import androidx.compose.material.icons.rounded.ViewComfy
 import androidx.compose.material3.*
 import kotlinx.coroutines.launch
 import androidx.compose.runtime.*
@@ -79,7 +82,7 @@ import com.tkno.apex.ui.svg.drawablevectors.coder
 import java.util.Locale
 
 enum class MenuSubScreen {
-    Main, Settings, GeneralSettings, CustomSpeedSettings, LookAndFeel, Languages, DarkTheme, Sponsor, Troubleshooting, About, Credits, Update
+    Main, Settings, GeneralSettings, CustomSpeedSettings, LookAndFeel, Languages, DarkTheme, InterfaceAndInteraction, Sponsor, Troubleshooting, About, Credits, Update
 }
 
 @Composable
@@ -99,6 +102,7 @@ fun MenuScreen(
             MenuSubScreen.Languages -> currentSubScreen = MenuSubScreen.LookAndFeel
             MenuSubScreen.DarkTheme -> currentSubScreen = MenuSubScreen.LookAndFeel
             MenuSubScreen.LookAndFeel -> currentSubScreen = MenuSubScreen.Settings
+            MenuSubScreen.InterfaceAndInteraction -> currentSubScreen = MenuSubScreen.Settings
             MenuSubScreen.Credits -> currentSubScreen = MenuSubScreen.About
             MenuSubScreen.Update -> currentSubScreen = MenuSubScreen.About
             else -> currentSubScreen = MenuSubScreen.Main
@@ -119,13 +123,17 @@ fun MenuScreen(
         label = "MenuSubScreenTransition"
     ) { subScreen ->
         when (subScreen) {
-            MenuSubScreen.Main -> MainMenuList(onNavigateTo = { currentSubScreen = it })
+            MenuSubScreen.Main -> MainMenuList(
+                modifier = Modifier.statusBarsPadding().navigationBarsPadding(),
+                onNavigateTo = { currentSubScreen = it }
+            )
             MenuSubScreen.Settings -> SettingsPage(
                 onNavigateBack = { currentSubScreen = MenuSubScreen.Main },
                 onNavigateTo = { route ->
                     when (route) {
                         "general" -> currentSubScreen = MenuSubScreen.GeneralSettings
                         "appearance" -> currentSubScreen = MenuSubScreen.LookAndFeel
+                        "interface_and_interaction" -> currentSubScreen = MenuSubScreen.InterfaceAndInteraction
                     }
                 }
             )
@@ -148,6 +156,9 @@ fun MenuScreen(
             )
             MenuSubScreen.Languages -> LanguagesPage(
                 onNavigateBack = { currentSubScreen = MenuSubScreen.LookAndFeel }
+            )
+            MenuSubScreen.InterfaceAndInteraction -> InterfaceAndInteractionPreferences(
+                onNavigateBack = { currentSubScreen = MenuSubScreen.Settings }
             )
             MenuSubScreen.Sponsor -> SponsorsPage(
                 onNavigateBack = { currentSubScreen = MenuSubScreen.Main }
@@ -175,10 +186,11 @@ fun MenuScreen(
 fun MainMenuList(
     currentSubScreen: SubScreen = SubScreen.None,
     onCloseDrawer: () -> Unit = {},
+    modifier: Modifier = Modifier,
     onNavigateTo: (MenuSubScreen) -> Unit
 ) {
     Box(
-        modifier = Modifier.fillMaxSize()
+        modifier = modifier.fillMaxSize()
     ) {
         Column(
             modifier = Modifier
@@ -309,6 +321,15 @@ fun SettingsPage(onNavigateBack: () -> Unit, onNavigateTo: (String) -> Unit) {
                     icon = Icons.Rounded.Palette,
                 ) {
                     onNavigateTo("appearance")
+                }
+            }
+            item {
+                SettingItem(
+                    title = stringResource(id = R.string.interface_and_interaction),
+                    description = stringResource(id = R.string.interface_and_interaction_desc),
+                    icon = Icons.Rounded.ViewComfy,
+                ) {
+                    onNavigateTo("interface_and_interaction")
                 }
             }
         }
@@ -1300,6 +1321,71 @@ fun SponsorsPage(onNavigateBack: () -> Unit) {
     )
 }
 
+/* ---------------- InterfaceAndInteractionPreferences ---------------- */
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun InterfaceAndInteractionPreferences(onNavigateBack: () -> Unit) {
+    val context = LocalContext.current
+    val prefs = remember { context.getSharedPreferences("apex_prefs", android.content.Context.MODE_PRIVATE) }
+    var hideNavLabels by remember { mutableStateOf(prefs.getBoolean("hide_navigation_labels", false)) }
+    var hideMenuButton by remember { mutableStateOf(prefs.getBoolean("hide_menu_button", false)) }
+
+    DisposableEffect(prefs) {
+        val listener = android.content.SharedPreferences.OnSharedPreferenceChangeListener { p, key ->
+            if (key == "hide_navigation_labels") {
+                hideNavLabels = p.getBoolean("hide_navigation_labels", false)
+            } else if (key == "hide_menu_button") {
+                hideMenuButton = p.getBoolean("hide_menu_button", false)
+            }
+        }
+        prefs.registerOnSharedPreferenceChangeListener(listener)
+        onDispose {
+            prefs.unregisterOnSharedPreferenceChangeListener(listener)
+        }
+    }
+
+    BasePreferencePage(
+        title = stringResource(id = R.string.interface_and_interaction),
+        onBack = onNavigateBack,
+    ) { padding ->
+        LazyColumn(
+            modifier = Modifier.fillMaxSize(),
+            contentPadding = padding
+        ) {
+            item {
+                PreferenceSubtitle(text = stringResource(id = R.string.navigation_and_interface))
+            }
+            item {
+                PreferenceSwitch(
+                    title = stringResource(id = R.string.hide_navigation_labels),
+                    description = stringResource(id = R.string.hide_navigation_labels_desc),
+                    icon = Icons.AutoMirrored.Rounded.FormatListBulleted,
+                    isChecked = hideNavLabels,
+                    onClick = {
+                        val newValue = !hideNavLabels
+                        hideNavLabels = newValue
+                        prefs.edit().putBoolean("hide_navigation_labels", newValue).apply()
+                    }
+                )
+            }
+            item {
+                PreferenceSwitch(
+                    title = stringResource(id = R.string.hide_menu_button),
+                    description = stringResource(id = R.string.hide_menu_button_desc),
+                    icon = LeftPanelOpen,
+                    isChecked = hideMenuButton,
+                    onClick = {
+                        val newValue = !hideMenuButton
+                        hideMenuButton = newValue
+                        prefs.edit().putBoolean("hide_menu_button", newValue).apply()
+                    }
+                )
+            }
+        }
+    }
+}
+
 /* ---------------- TroubleShootingPage ---------------- */
 
 @Composable
@@ -1573,9 +1659,9 @@ fun AboutPage(
     AppUpdater(isAutoUpdateEnabled = isAutoUpdateEnabled)
 
     val versionName = try {
-        context.packageManager.getPackageInfo(context.packageName, 0).versionName ?: "0.0.6-beta"
+        context.packageManager.getPackageInfo(context.packageName, 0).versionName ?: "0.0.7-beta"
     } catch (e: Exception) {
-        "0.0.6-beta"
+        "0.0.7-beta"
     }
     val info = "App version: $versionName\nPackage name: ${context.packageName}\nDevice: Android ${android.os.Build.VERSION.RELEASE} (API ${android.os.Build.VERSION.SDK_INT})"
     val uriHandler = LocalUriHandler.current

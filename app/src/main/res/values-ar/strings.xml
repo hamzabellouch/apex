@@ -83,6 +83,13 @@
     <string name="dynamic_color_desc">تطبيق ألوان خلفية الشاشة على مظهر التطبيق</string>
     <string name="website">الموقع الإلكتروني</string>
     <string name="look_and_feel">المظهر والحس الفني</string>
+    <string name="interface_and_interaction">الواجهة والتفاعل</string>
+    <string name="interface_and_interaction_desc">تخصيص شريط التنقل والقائمة الجانبية والإيماءات</string>
+    <string name="navigation_and_interface">شريط التنقل والواجهة</string>
+    <string name="hide_navigation_labels">إخفاء تسميات شريط التنقل</string>
+    <string name="hide_navigation_labels_desc">إخفاء النصوص في شريط التنقل السفلي وإظهار الأيقونات فقط</string>
+    <string name="hide_menu_button">إخفاء زر القائمة</string>
+    <string name="hide_menu_button_desc">إخفاء زر القائمة من ترويسة الشاشات مع الإبقاء على إيماءة سحب القائمة مفعلة</string>
     <string name="auto_update">التحديث التلقائي</string>
     <string name="suggested">المقترحة</string>
     <string name="all_languages">كل اللغات</string>
@@ -275,4 +282,21 @@
     <string name="onboarding_page3_desc">تم تكوين كل شيء بنجاح والتطبيق الآن جاهز للعمل. نتمنى لك استخدامًا ممتعًا.</string>
     <string name="new_update_available">تحديث جديد متاح</string>
     <string name="new_update_desc">إصدار جديد (%1$s) متوفر الآن. انقر للتحميل والتثبيت.</string>
+    <string name="daily_avg_screen_time">المتوسط اليومي لوقت الشاشة</string>
+    <string name="screen_time">وقت الشاشة</string>
+    <string name="used_avg_prev_weeks">%1$s في المتوسط خلال الأسابيع الـ 3 السابقة</string>
+    <string name="category_social">التواصل الاجتماعي</string>
+    <string name="category_entertainment">الترفيه</string>
+    <string name="category_productivity">الإنتاجية</string>
+    <string name="category_games">الألعاب</string>
+    <string name="category_tools">الأدوات والخدمات</string>
+    <string name="category_other">أخرى</string>
+    <string name="no_usage_data_week">لا توجد بيانات استخدام مسجلة لهذا الأسبوع</string>
+    <string name="screen_time_for_day">وقت الشاشة ليوم %1$s</string>
+    <string name="previous_week">الأسبوع السابق</string>
+    <string name="next_week">الأسبوع التالي</string>
+    <string name="most_used_apps">التطبيقات الأكثر استخداماً</string>
+    <string name="category_productivity_finance">الإنتاجية والمالية</string>
+    <string name="detailed_statistics">الإحصائيات المفصلة</string>
+    <string name="no_usage_data_today">لا توجد بيانات استخدام مسجلة لليوم</string>
 </resources>

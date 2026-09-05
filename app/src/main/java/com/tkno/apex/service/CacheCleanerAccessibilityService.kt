@@ -559,20 +559,47 @@ class CacheCleanerAccessibilityService : AccessibilityService() {
     }
 
     private fun performScrollDown(rootNode: AccessibilityNodeInfo): Boolean {
-        // SCROLLING IS STRLICTLY RESERVED ONLY FOR CLEAR_CACHE MODE
+        // SCROLLING IS STRICTLY RESERVED ONLY FOR CLEAR_CACHE MODE
         if (currentMode != ServiceMode.CLEAR_CACHE) return false
 
+        // 1. First, search for any scrollable container and perform native Accessibility scroll
         val scrollableNode = findScrollableNode(rootNode)
         if (scrollableNode != null) {
             try {
-                val scrolled = scrollableNode.performAction(AccessibilityNodeInfo.ACTION_SCROLL_FORWARD)
+                var scrolled = scrollableNode.performAction(AccessibilityNodeInfo.ACTION_SCROLL_FORWARD)
+                if (!scrolled && Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    scrolled = scrollableNode.performAction(AccessibilityNodeInfo.AccessibilityAction.ACTION_SCROLL_DOWN.id)
+                }
                 if (scrolled) return true
             } catch (e: Exception) {
                 e.printStackTrace()
             }
         }
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+        // 2. Also search across all active windows if rootNode container was not found
+        try {
+            val allWindows = windows
+            if (!allWindows.isNullOrEmpty()) {
+                for (window in allWindows) {
+                    val winRoot = window.root
+                    if (winRoot != null && winRoot != rootNode) {
+                        val winScrollable = findScrollableNode(winRoot)
+                        if (winScrollable != null) {
+                            var scrolled = winScrollable.performAction(AccessibilityNodeInfo.ACTION_SCROLL_FORWARD)
+                            if (!scrolled && Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                                scrolled = winScrollable.performAction(AccessibilityNodeInfo.AccessibilityAction.ACTION_SCROLL_DOWN.id)
+                            }
+                            if (scrolled) return true
+                        }
+                    }
+                }
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+
+        // 3. Fallback: Hardware gesture swipe ONLY if gesture fallback is explicitly enabled in settings
+        if (isGestureFallbackEnabled() && Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             try {
                 val displayMetrics = resources.displayMetrics
                 val startX = displayMetrics.widthPixels / 2f
@@ -596,7 +623,34 @@ class CacheCleanerAccessibilityService : AccessibilityService() {
 
     private fun findScrollableNode(node: AccessibilityNodeInfo?): AccessibilityNodeInfo? {
         if (node == null) return null
-        if (node.isScrollable) return node
+
+        try {
+            if (node.isScrollable) return node
+
+            val actions = node.actionList
+            if (actions != null) {
+                for (action in actions) {
+                    if (action.id == AccessibilityNodeInfo.ACTION_SCROLL_FORWARD ||
+                        action.id == AccessibilityNodeInfo.AccessibilityAction.ACTION_SCROLL_FORWARD.id ||
+                        action.id == AccessibilityNodeInfo.AccessibilityAction.ACTION_SCROLL_DOWN.id
+                    ) {
+                        return node
+                    }
+                }
+            }
+
+            val className = node.className?.toString() ?: ""
+            if (className.contains("RecyclerView", ignoreCase = true) ||
+                className.contains("ScrollView", ignoreCase = true) ||
+                className.contains("ListView", ignoreCase = true) ||
+                className.contains("ViewPager", ignoreCase = true) ||
+                className.contains("List", ignoreCase = true)
+            ) {
+                return node
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
 
         try {
             for (i in 0 until node.childCount) {
@@ -1225,15 +1279,10 @@ class CacheCleanerAccessibilityService : AccessibilityService() {
 
         if (actionClicked) return true
 
-        val isGestureFallbackEnabled = try {
-            val prefs = getSharedPreferences("apex_prefs", Context.MODE_PRIVATE)
-            prefs.getBoolean("gesture_fallback_enabled", false)
-        } catch (e: Exception) {
-            false
-        }
+        val isGestureFallback = isGestureFallbackEnabled()
 
         // Fallback: Hardware gesture click (API 24+) if performAction(ACTION_CLICK) fails on custom OEM views
-        if (isGestureFallbackEnabled && Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+        if (isGestureFallback && Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             try {
                 val bounds = android.graphics.Rect()
                 node.getBoundsInScreen(bounds)
@@ -1254,6 +1303,15 @@ class CacheCleanerAccessibilityService : AccessibilityService() {
         }
 
         return false
+    }
+
+    private fun isGestureFallbackEnabled(): Boolean {
+        return try {
+            val prefs = getSharedPreferences("apex_prefs", Context.MODE_PRIVATE)
+            prefs.getBoolean("gesture_fallback_enabled", false)
+        } catch (e: Exception) {
+            false
+        }
     }
 
     companion object {

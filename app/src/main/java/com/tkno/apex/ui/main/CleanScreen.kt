@@ -48,6 +48,7 @@ fun CleanScreen(
     onAnalyzeClick: () -> Unit,
     onOpenHistory: () -> Unit,
     onOpenDrawer: () -> Unit = {},
+    showMenuButton: Boolean = true,
     modifier: Modifier = Modifier
 ) {
     val remainingCacheMb = (totalCacheBytes / (1024 * 1024)).toInt()
@@ -82,14 +83,16 @@ fun CleanScreen(
             ) {
                 Row(
                     verticalAlignment = Alignment.CenterVertically,
-                    modifier = Modifier.offset(x = (-12).dp)
+                    modifier = if (showMenuButton) Modifier.offset(x = (-12).dp) else Modifier
                 ) {
-                    IconButton(onClick = onOpenDrawer) {
-                        Icon(
-                            imageVector = LeftPanelOpen,
-                            contentDescription = stringResource(id = R.string.nav_menu),
-                            tint = MaterialTheme.colorScheme.onBackground
-                        )
+                    if (showMenuButton) {
+                        IconButton(onClick = onOpenDrawer) {
+                            Icon(
+                                imageVector = LeftPanelOpen,
+                                contentDescription = stringResource(id = R.string.nav_menu),
+                                tint = MaterialTheme.colorScheme.onBackground
+                            )
+                        }
                     }
                     Text(
                         text = stringResource(id = R.string.clean_title),
@@ -108,10 +111,10 @@ fun CleanScreen(
             }
 
             // Dynamic gauge target calculation based on max 1 GB cache capacity or totalCacheBytes
-            val maxCacheBytes = maxOf(1024f * 1024f * 1024f, totalCacheBytes.toFloat())
+            val maxCacheBytes = maxOf(1024.0 * 1024.0 * 1024.0, totalCacheBytes.toDouble())
             val targetFraction = remember(totalCacheBytes, isCleaned) {
                 if (isCleaned || totalCacheBytes == 0L) 0.0f
-                else (totalCacheBytes.toFloat() / maxCacheBytes).coerceIn(0.02f, 1.0f)
+                else ((totalCacheBytes.toDouble() / maxCacheBytes).toFloat()).coerceIn(0.02f, 1.0f)
             }
             val progressAnimatable = remember { Animatable(0f) }
 

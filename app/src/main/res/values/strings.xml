@@ -83,6 +83,13 @@
     <string name="dynamic_color_desc">Apply colors from wallpapers to the app theme</string>
     <string name="website">Website</string>
     <string name="look_and_feel">Look &amp; feel</string>
+    <string name="interface_and_interaction">Interface &amp; interaction</string>
+    <string name="interface_and_interaction_desc">Customize navigation bar, drawer and gestures</string>
+    <string name="navigation_and_interface">Navigation &amp; interface</string>
+    <string name="hide_navigation_labels">Hide navigation labels</string>
+    <string name="hide_navigation_labels_desc">Hide text labels in the bottom navigation bar and show only icons</string>
+    <string name="hide_menu_button">Hide menu button</string>
+    <string name="hide_menu_button_desc">Hide the menu button from screen headers while keeping drawer swipe gestures active</string>
     <string name="auto_update">Auto update</string>
     <string name="suggested">Suggested</string>
     <string name="all_languages">All languages</string>
@@ -275,4 +282,21 @@
     <string name="onboarding_page3_desc">Everything was successfully configured and now the app is ready to work. Have a nice use.</string>
     <string name="new_update_available">New Update Available</string>
     <string name="new_update_desc">Version %1$s is available. Tap to download and install.</string>
+    <string name="daily_avg_screen_time">Daily average screen time</string>
+    <string name="screen_time">Screen time</string>
+    <string name="used_avg_prev_weeks">%1$s used on average for previous 3 weeks</string>
+    <string name="category_social">Social</string>
+    <string name="category_entertainment">Entertainment</string>
+    <string name="category_productivity">Productivity</string>
+    <string name="category_games">Games</string>
+    <string name="category_tools">Tools &amp; Utilities</string>
+    <string name="category_other">Other</string>
+    <string name="no_usage_data_week">No usage data recorded for this week</string>
+    <string name="screen_time_for_day">Screen time for %1$s</string>
+    <string name="previous_week">Previous week</string>
+    <string name="next_week">Next week</string>
+    <string name="most_used_apps">Most used apps</string>
+    <string name="category_productivity_finance">Productivity and finance</string>
+    <string name="detailed_statistics">Detailed statistics</string>
+    <string name="no_usage_data_today">No usage data recorded for today</string>
 </resources>
