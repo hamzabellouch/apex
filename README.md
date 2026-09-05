@@ -6,7 +6,8 @@
 Reclaim storage space and optimize system memory with automated, privacy-first Android cache cleaning.
 </p>
 
-<img width="5504" height="3072" alt="Apex" src="https://github.com/user-attachments/assets/5f45f01b-f2f7-415c-8202-13a58ff63364" />
+<img width="2730" height="1536" alt="Apex" src="https://github.com/user-attachments/assets/5cd44c84-ad3e-4906-bec8-6289dc300350" />
+
 
 
 
