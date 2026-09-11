@@ -88,6 +88,8 @@
     <string name="navigation_and_interface">Navigation &amp; interface</string>
     <string name="hide_navigation_labels">Hide navigation labels</string>
     <string name="hide_navigation_labels_desc">Hide text labels in the bottom navigation bar and show only icons</string>
+    <string name="use_classic_navigation_bar">Use classic taskbar</string>
+    <string name="use_classic_navigation_bar_desc">Switch back to the standard full-width navigation bar style</string>
     <string name="hide_menu_button">Hide menu button</string>
     <string name="hide_menu_button_desc">Hide the menu button from screen headers while keeping drawer swipe gestures active</string>
     <string name="auto_update">Auto update</string>
@@ -109,6 +111,9 @@
     <string name="github_stars_desc">Support this app by starring it on GitHub</string>
     <string name="package_name">Package name</string>
     <string name="privacy_policy">Privacy policy</string>
+    <string name="privacy_policy_desc">Read our privacy policy and terms</string>
+    <string name="whats_new">What\'s New</string>
+    <string name="whats_new_highlights_title">Recent updates &amp; improvements</string>
     <string name="done">Done</string>
     <string name="downloading">Downloading...</string>
     <string name="downloaded_successfully">Downloaded successfully</string>
@@ -275,9 +280,9 @@
     <string name="usage_access_permission_desc2">To enable it, click the button below and allow permission for Apex.</string>
     <string name="btn_next">NEXT</string>
     <string name="btn_get_started">GET STARTED</string>
-    <string name="onboarding_page1_desc">Clear cache of all apps and get more available storage space with the help of Apex.</string>
-    <string name="onboarding_page2_title">Cache Notifications</string>
-    <string name="onboarding_page2_desc">Get notification whenever you have too much cache. This will help you to track cache in notification.</string>
+    <string name="onboarding_page1_desc">Clear cache to free up storage space and force stop apps to boost device performance with the help of Apex.</string>
+    <string name="onboarding_page2_title">Notifications</string>
+    <string name="onboarding_page2_desc">Get notifications when you have too much cache or running apps, helping you track, clean, and stop them effortlessly.</string>
     <string name="onboarding_page3_title">That’s all!</string>
     <string name="onboarding_page3_desc">Everything was successfully configured and now the app is ready to work. Have a nice use.</string>
     <string name="new_update_available">New Update Available</string>

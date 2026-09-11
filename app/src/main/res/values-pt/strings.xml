@@ -232,9 +232,9 @@
     <string name="usage_access_permission_desc2">To enable it, click the button below and allow permission for Apex.</string>
     <string name="btn_next">NEXT</string>
     <string name="btn_get_started">GET STARTED</string>
-    <string name="onboarding_page1_desc">Clear cache of all apps and get more available storage space with the help of Apex.</string>
-    <string name="onboarding_page2_title">Cache Notifications</string>
-    <string name="onboarding_page2_desc">Get notification whenever you have too much cache. This will help you to track cache in notification.</string>
+    <string name="onboarding_page1_desc">Limpe o cache para liberar espaço e force a parada de apps para melhorar o desempenho com o Apex.</string>
+    <string name="onboarding_page2_title">Notificações</string>
+    <string name="onboarding_page2_desc">Receba notificações quando houver muito cache ou apps em execução para limpá-los e encerrá-los facilmente.</string>
     <string name="onboarding_page3_title">That’s all!</string>
     <string name="onboarding_page3_desc">Everything was successfully configured and now the app is ready to work. Have a nice use.</string>
 </resources>

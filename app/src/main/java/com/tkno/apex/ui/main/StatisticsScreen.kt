@@ -24,7 +24,6 @@ import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.automirrored.filled.KeyboardArrowLeft
 import androidx.compose.material.icons.automirrored.filled.KeyboardArrowRight
 import androidx.compose.material.icons.filled.Android
-import androidx.compose.material.icons.filled.BarChart
 import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.material.icons.filled.QueryStats
 import androidx.compose.material3.*
@@ -45,6 +44,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.core.graphics.drawable.toBitmap
 import com.tkno.apex.R
+import com.tkno.apex.ui.icon.DigitalWellbeing
 import com.tkno.apex.ui.icon.LeftPanelOpen
 import com.tkno.apex.util.AppUsageItem
 import com.tkno.apex.util.CategorySegment
@@ -197,10 +197,10 @@ private fun StatisticsOverviewView(
             ) {
                 IconButton(onClick = onOpenDetailedView) {
                     Icon(
-                        imageVector = Icons.Default.BarChart,
+                        imageVector = DigitalWellbeing,
                         contentDescription = stringResource(R.string.detailed_statistics),
                         tint = MaterialTheme.colorScheme.onBackground,
-                        modifier = Modifier.size(26.dp)
+                        modifier = Modifier.size(24.dp)
                     )
                 }
 

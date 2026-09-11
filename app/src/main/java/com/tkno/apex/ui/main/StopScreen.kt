@@ -357,42 +357,35 @@ fun StopScreen(
                                     .padding(vertical = 6.dp),
                                 verticalAlignment = Alignment.CenterVertically
                             ) {
-                                Box(
-                                    modifier = Modifier
-                                        .size(36.dp)
-                                        .background(MaterialTheme.colorScheme.surfaceContainerHigh, CircleShape),
-                                    contentAlignment = Alignment.Center
-                                ) {
-                                    if (app.icon != null) {
-                                        val bitmap = remember(app.packageName) {
-                                            try {
-                                                app.icon.toBitmap().asImageBitmap()
-                                            } catch (e: Exception) {
-                                                null
-                                            }
+                                if (app.icon != null) {
+                                    val bitmap = remember(app.packageName) {
+                                        try {
+                                            app.icon.toBitmap().asImageBitmap()
+                                        } catch (e: Exception) {
+                                            null
                                         }
-                                        if (bitmap != null) {
-                                            Image(
-                                                bitmap = bitmap,
-                                                contentDescription = app.name,
-                                                modifier = Modifier.size(24.dp)
-                                            )
-                                        } else {
-                                            Icon(
-                                                imageVector = Icons.Default.Android,
-                                                contentDescription = app.name,
-                                                tint = stopOrange,
-                                                modifier = Modifier.size(20.dp)
-                                            )
-                                        }
+                                    }
+                                    if (bitmap != null) {
+                                        Image(
+                                            bitmap = bitmap,
+                                            contentDescription = app.name,
+                                            modifier = Modifier.size(34.dp)
+                                        )
                                     } else {
                                         Icon(
                                             imageVector = Icons.Default.Android,
                                             contentDescription = app.name,
                                             tint = stopOrange,
-                                            modifier = Modifier.size(20.dp)
+                                            modifier = Modifier.size(30.dp)
                                         )
                                     }
+                                } else {
+                                    Icon(
+                                        imageVector = Icons.Default.Android,
+                                        contentDescription = app.name,
+                                        tint = stopOrange,
+                                        modifier = Modifier.size(30.dp)
+                                    )
                                 }
                                 Spacer(modifier = Modifier.width(12.dp))
                                 Column {

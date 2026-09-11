@@ -2,6 +2,10 @@ package com.tkno.apex.ui.main
 
 import com.tkno.apex.ui.icon.LeftPanelClose
 import com.tkno.apex.ui.icon.LeftPanelOpen
+import com.tkno.apex.ui.icon.Policy
+import com.tkno.apex.ui.icon.LocalFireDepartment
+import androidx.compose.ui.semantics.Role
+import androidx.compose.material.icons.filled.Close
 
 import android.app.LocaleManager
 import android.content.Intent
@@ -77,6 +81,7 @@ import com.tkno.apex.ui.component.*
 import com.tkno.apex.ui.page.AppUpdater
 import com.tkno.apex.ui.page.settings.BasePreferencePage
 import com.tkno.apex.ui.page.settings.about.UpdatePage
+import com.tkno.apex.ui.page.settings.about.WhatsNewDialog
 import com.tkno.apex.ui.svg.drawablevectors.DynamicColorImageVectors
 import com.tkno.apex.ui.svg.drawablevectors.coder
 import java.util.Locale
@@ -346,8 +351,16 @@ fun GeneralSettingsPage(
 ) {
     val context = LocalContext.current
     val prefs = remember(context) { context.getSharedPreferences("apex_prefs", android.content.Context.MODE_PRIVATE) }
-    var isBoostMode by remember { mutableStateOf(prefs.getBoolean("turbo_mode", prefs.getBoolean("boost_mode", false))) }
-    var isCustomSpeedEnabled by remember { mutableStateOf(prefs.getBoolean("custom_speed_enabled", false)) }
+    val initialBoost = remember(prefs) { prefs.getBoolean("turbo_mode", prefs.getBoolean("boost_mode", false)) }
+    val initialCustomSpeed = remember(prefs) { prefs.getBoolean("custom_speed_enabled", false) }
+    var isBoostMode by remember { mutableStateOf(initialBoost) }
+    var isCustomSpeedEnabled by remember { mutableStateOf(if (initialBoost) false else initialCustomSpeed) }
+
+    LaunchedEffect(Unit) {
+        if (initialBoost && initialCustomSpeed) {
+            prefs.edit().putBoolean("custom_speed_enabled", false).apply()
+        }
+    }
 
     var forceStopMode by remember { mutableIntStateOf(prefs.getInt("force_stop_mode", 1)) }
     var showForceStopModeDialog by remember { mutableStateOf(false) }
@@ -373,11 +386,24 @@ fun GeneralSettingsPage(
                 title = stringResource(id = R.string.boost_mode),
                 description = stringResource(id = R.string.boost_mode_desc),
                 icon = Icons.Outlined.Speed,
+                enabled = !isCustomSpeedEnabled,
                 isChecked = isBoostMode,
                 onClick = {
                     val newValue = !isBoostMode
                     isBoostMode = newValue
-                    prefs.edit().putBoolean("turbo_mode", newValue).putBoolean("boost_mode", newValue).apply()
+                    if (newValue) {
+                        isCustomSpeedEnabled = false
+                        prefs.edit()
+                            .putBoolean("turbo_mode", true)
+                            .putBoolean("boost_mode", true)
+                            .putBoolean("custom_speed_enabled", false)
+                            .apply()
+                    } else {
+                        prefs.edit()
+                            .putBoolean("turbo_mode", false)
+                            .putBoolean("boost_mode", false)
+                            .apply()
+                    }
                 }
             )
 
@@ -385,13 +411,30 @@ fun GeneralSettingsPage(
                 title = stringResource(id = R.string.custom_speed_mode),
                 description = stringResource(id = R.string.custom_speed_mode_desc),
                 icon = Icons.Outlined.Tune,
+                enabled = !isBoostMode,
+                isSwitchEnabled = !isBoostMode,
                 isChecked = isCustomSpeedEnabled,
                 onChecked = {
                     val newValue = !isCustomSpeedEnabled
                     isCustomSpeedEnabled = newValue
-                    prefs.edit().putBoolean("custom_speed_enabled", newValue).apply()
+                    if (newValue) {
+                        isBoostMode = false
+                        prefs.edit()
+                            .putBoolean("custom_speed_enabled", true)
+                            .putBoolean("turbo_mode", false)
+                            .putBoolean("boost_mode", false)
+                            .apply()
+                    } else {
+                        prefs.edit()
+                            .putBoolean("custom_speed_enabled", false)
+                            .apply()
+                    }
                 },
-                onClick = onNavigateToCustomSpeed
+                onClick = {
+                    if (!isBoostMode) {
+                        onNavigateToCustomSpeed()
+                    }
+                }
             )
 
             PreferenceGroupTitle(
@@ -505,8 +548,9 @@ fun ForceStopModeDialog(
                     Row(
                         modifier = Modifier
                             .fillMaxWidth()
+                            .clip(RoundedCornerShape(12.dp))
                             .clickable { onSelectMode(modeValue) }
-                            .padding(vertical = 12.dp),
+                            .padding(vertical = 2.dp),
                         verticalAlignment = Alignment.CenterVertically
                     ) {
                         RadioButton(
@@ -516,7 +560,7 @@ fun ForceStopModeDialog(
                                 selectedColor = Color(0xFF48AFFF)
                             )
                         )
-                        Spacer(modifier = Modifier.width(12.dp))
+                        Spacer(modifier = Modifier.width(8.dp))
                         Text(
                             text = label,
                             fontSize = 16.sp,
@@ -526,8 +570,7 @@ fun ForceStopModeDialog(
                 }
             }
         },
-        confirmButton = {},
-        dismissButton = {
+        confirmButton = {
             TextButton(onClick = onDismiss) {
                 Text(
                     text = stringResource(id = R.string.cancel),
@@ -569,8 +612,9 @@ fun CleaningModeDialog(
                     Row(
                         modifier = Modifier
                             .fillMaxWidth()
+                            .clip(RoundedCornerShape(12.dp))
                             .clickable { onSelectMode(modeValue) }
-                            .padding(vertical = 12.dp),
+                            .padding(vertical = 2.dp),
                         verticalAlignment = Alignment.CenterVertically
                     ) {
                         RadioButton(
@@ -580,7 +624,7 @@ fun CleaningModeDialog(
                                 selectedColor = Color(0xFF48AFFF)
                             )
                         )
-                        Spacer(modifier = Modifier.width(12.dp))
+                        Spacer(modifier = Modifier.width(8.dp))
                         Text(
                             text = label,
                             fontSize = 16.sp,
@@ -590,8 +634,7 @@ fun CleaningModeDialog(
                 }
             }
         },
-        confirmButton = {},
-        dismissButton = {
+        confirmButton = {
             TextButton(onClick = onDismiss) {
                 Text(
                     text = stringResource(id = R.string.cancel),
@@ -1330,6 +1373,7 @@ fun InterfaceAndInteractionPreferences(onNavigateBack: () -> Unit) {
     val prefs = remember { context.getSharedPreferences("apex_prefs", android.content.Context.MODE_PRIVATE) }
     var hideNavLabels by remember { mutableStateOf(prefs.getBoolean("hide_navigation_labels", false)) }
     var hideMenuButton by remember { mutableStateOf(prefs.getBoolean("hide_menu_button", false)) }
+    var useClassicNav by remember { mutableStateOf(prefs.getBoolean("use_classic_navigation_bar", false)) }
 
     DisposableEffect(prefs) {
         val listener = android.content.SharedPreferences.OnSharedPreferenceChangeListener { p, key ->
@@ -1337,6 +1381,8 @@ fun InterfaceAndInteractionPreferences(onNavigateBack: () -> Unit) {
                 hideNavLabels = p.getBoolean("hide_navigation_labels", false)
             } else if (key == "hide_menu_button") {
                 hideMenuButton = p.getBoolean("hide_menu_button", false)
+            } else if (key == "use_classic_navigation_bar") {
+                useClassicNav = p.getBoolean("use_classic_navigation_bar", false)
             }
         }
         prefs.registerOnSharedPreferenceChangeListener(listener)
@@ -1366,6 +1412,19 @@ fun InterfaceAndInteractionPreferences(onNavigateBack: () -> Unit) {
                         val newValue = !hideNavLabels
                         hideNavLabels = newValue
                         prefs.edit().putBoolean("hide_navigation_labels", newValue).apply()
+                    }
+                )
+            }
+            item {
+                PreferenceSwitch(
+                    title = stringResource(id = R.string.use_classic_navigation_bar),
+                    description = stringResource(id = R.string.use_classic_navigation_bar_desc),
+                    icon = Icons.Rounded.ViewComfy,
+                    isChecked = useClassicNav,
+                    onClick = {
+                        val newValue = !useClassicNav
+                        useClassicNav = newValue
+                        prefs.edit().putBoolean("use_classic_navigation_bar", newValue).apply()
                     }
                 )
             }
@@ -1474,7 +1533,7 @@ fun TroubleShootingPage(onNavigateBack: () -> Unit) {
                                 containerColor = facebookContainer,
                                 contentColor = facebookContent,
                                 textColor = Color.White,
-                            ) { uriHandler.openUri("https://www.facebook.com/hamzabellouch1") }
+                            ) { uriHandler.openUri("https://www.facebook.com/hamzabellouch0") }
 
                             2 -> PreferencesHintCard(
                                 title = stringResource(id = R.string.instagram),
@@ -1654,14 +1713,22 @@ fun AboutPage(
     var isAutoUpdateEnabled by remember {
         mutableStateOf(prefs.getBoolean("auto_update_enabled", false))
     }
+    var showWhatsNewDialog by remember { mutableStateOf(false) }
+
+    val whatsNewDismissedUntil = remember {
+        prefs.getLong("whats_new_dismissed_until", 0L)
+    }
+    var isWhatsNewDismissed by remember {
+        mutableStateOf(System.currentTimeMillis() < whatsNewDismissedUntil)
+    }
 
     // Launch background update check
     AppUpdater(isAutoUpdateEnabled = isAutoUpdateEnabled)
 
     val versionName = try {
-        context.packageManager.getPackageInfo(context.packageName, 0).versionName ?: "0.0.7-beta"
+        context.packageManager.getPackageInfo(context.packageName, 0).versionName ?: "0.0.8-beta"
     } catch (e: Exception) {
-        "0.0.7-beta"
+        "0.0.8-beta"
     }
     val info = "App version: $versionName\nPackage name: ${context.packageName}\nDevice: Android ${android.os.Build.VERSION.RELEASE} (API ${android.os.Build.VERSION.SDK_INT})"
     val uriHandler = LocalUriHandler.current
@@ -1683,6 +1750,68 @@ fun AboutPage(
                         Text(modifier = Modifier, text = stringResource(id = R.string.about), color = MaterialTheme.colorScheme.onBackground)
                     },
                     navigationIcon = { BackButton { onNavigateBack() } },
+                    actions = {
+                        if (!isWhatsNewDismissed) {
+                            Surface(
+                                shape = CircleShape,
+                                color = MaterialTheme.colorScheme.secondaryContainer,
+                                modifier = Modifier
+                                    .padding(end = 12.dp)
+                                    .clip(CircleShape)
+                            ) {
+                                Row(
+                                    modifier = Modifier.height(36.dp),
+                                    verticalAlignment = Alignment.CenterVertically
+                                ) {
+                                    Row(
+                                        modifier = Modifier
+                                            .clickable(
+                                                role = Role.Button,
+                                                onClick = { showWhatsNewDialog = true }
+                                            )
+                                            .padding(start = 10.dp, end = 6.dp, top = 6.dp, bottom = 6.dp),
+                                        verticalAlignment = Alignment.CenterVertically,
+                                        horizontalArrangement = Arrangement.spacedBy(6.dp)
+                                    ) {
+                                        Icon(
+                                            imageVector = LocalFireDepartment,
+                                            contentDescription = null,
+                                            modifier = Modifier.size(18.dp),
+                                            tint = MaterialTheme.colorScheme.primary
+                                        )
+                                        Text(
+                                            text = stringResource(R.string.whats_new),
+                                            style = MaterialTheme.typography.labelLarge.copy(fontWeight = FontWeight.SemiBold),
+                                            color = MaterialTheme.colorScheme.onSecondaryContainer
+                                        )
+                                    }
+
+                                    Box(
+                                        modifier = Modifier
+                                            .padding(end = 6.dp)
+                                            .size(24.dp)
+                                            .clip(CircleShape)
+                                            .clickable(
+                                                role = Role.Button,
+                                                onClick = {
+                                                    val dismissUntil = System.currentTimeMillis() + 24 * 60 * 60 * 1000L
+                                                    prefs.edit().putLong("whats_new_dismissed_until", dismissUntil).apply()
+                                                    isWhatsNewDismissed = true
+                                                }
+                                            ),
+                                        contentAlignment = Alignment.Center
+                                    ) {
+                                        Icon(
+                                            imageVector = Icons.Default.Close,
+                                            contentDescription = stringResource(R.string.close),
+                                            modifier = Modifier.size(14.dp),
+                                            tint = MaterialTheme.colorScheme.onSecondaryContainer.copy(alpha = 0.7f)
+                                        )
+                                    }
+                                }
+                            }
+                        }
+                    },
                     scrollBehavior = scrollBehavior,
                     windowInsets = WindowInsets(0.dp),
                     colors = TopAppBarDefaults.topAppBarColors(
@@ -1767,6 +1896,15 @@ fun AboutPage(
                 }
                 item {
                     PreferenceItem(
+                        title = stringResource(R.string.privacy_policy),
+                        description = stringResource(R.string.privacy_policy_desc),
+                        icon = Policy,
+                    ) {
+                        openUrl("https://github.com/hamzabellouch/apex/blob/main/PRIVACY_POLICY.md")
+                    }
+                }
+                item {
+                    PreferenceItem(
                         title = stringResource(R.string.version),
                         description = versionName,
                         icon = Icons.Outlined.Info,
@@ -1792,6 +1930,13 @@ fun AboutPage(
             }
         },
     )
+
+    if (showWhatsNewDialog) {
+        WhatsNewDialog(
+            onDismissRequest = { showWhatsNewDialog = false },
+            versionName = versionName
+        )
+    }
 }
 
 /* ---------------- CreditsPage ---------------- */

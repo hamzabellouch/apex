@@ -233,9 +233,9 @@
     <string name="usage_access_permission_desc2">아래 버튼을 눌러 활성화하세요.</string>
     <string name="btn_next">다음</string>
     <string name="btn_get_started">시작하기</string>
-    <string name="onboarding_page1_desc">모든 앱의 캐시를 정리하고 공간을 확보하세요.</string>
-    <string name="onboarding_page2_title">캐시 알림</string>
-    <string name="onboarding_page2_desc">캐시가 너무 많을 때 알림을 받으세요.</string>
+    <string name="onboarding_page1_desc">캐시를 삭제하여 저장 공간을 확보하고, 앱을 강제 종료하여 기기 성능을 향상시키세요.</string>
+    <string name="onboarding_page2_title">알림</string>
+    <string name="onboarding_page2_desc">캐시가 너무 많거나 실행 중인 앱이 많을 때 알림을 받아 간편하게 정리하고 종료하세요.</string>
     <string name="onboarding_page3_title">완료되었습니다!</string>
     <string name="onboarding_page3_desc">모든 설정이 성공적으로 완료되었습니다.</string>
 </resources>

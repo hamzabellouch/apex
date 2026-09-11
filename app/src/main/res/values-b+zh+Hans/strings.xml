@@ -235,9 +235,9 @@
     <string name="usage_access_permission_desc2">要启用它，请点击下方按钮。</string>
     <string name="btn_next">下一步</string>
     <string name="btn_get_started">立即开始</string>
-    <string name="onboarding_page1_desc">清理所有应用的缓存，获取更多可用存储空间。</string>
-    <string name="onboarding_page2_title">缓存通知</string>
-    <string name="onboarding_page2_desc">当缓存过多时接收通知提醒。</string>
+    <string name="onboarding_page1_desc">清理缓存以释放存储空间，并强行停止应用以提升设备性能，尽在 Apex。</string>
+    <string name="onboarding_page2_title">通知</string>
+    <string name="onboarding_page2_desc">当缓存过多或后台运行过多应用时接收通知，助您轻松清理和停止。</string>
     <string name="onboarding_page3_title">大功告成！</string>
     <string name="onboarding_page3_desc">一切已成功配置，应用现已就绪。</string>
 </resources>

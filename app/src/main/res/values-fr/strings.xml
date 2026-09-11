@@ -235,9 +235,9 @@ le nettoyage du cache</string>
     <string name="usage_access_permission_desc2">Pour l\'activer, appuyez sur le bouton ci-dessous.</string>
     <string name="btn_next">SUIVANT</string>
     <string name="btn_get_started">COMMENCER</string>
-    <string name="onboarding_page1_desc">Videz le cache de toutes vos applications et libérez de l\'espace de stockage.</string>
-    <string name="onboarding_page2_title">Notifications de cache</string>
-    <string name="onboarding_page2_desc">Recevez une notification lorsque le cache devient trop volumineux.</string>
+    <string name="onboarding_page1_desc">Videz le cache pour libérer de l\'espace et forcez l\'arrêt des applications pour améliorer les performances avec Apex.</string>
+    <string name="onboarding_page2_title">Notifications</string>
+    <string name="onboarding_page2_desc">Recevez des notifications en cas de cache excessif ou d\'applications actives pour les nettoyer et les arrêter facilement.</string>
     <string name="onboarding_page3_title">C\'est tout !</string>
     <string name="onboarding_page3_desc">Tout est configuré avec succès et l\'application est prête.</string>
 </resources>

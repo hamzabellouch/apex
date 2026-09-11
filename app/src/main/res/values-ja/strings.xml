@@ -233,9 +233,9 @@
     <string name="usage_access_permission_desc2">下のボタンをタップして有効にしてください。</string>
     <string name="btn_next">次へ</string>
     <string name="btn_get_started">はじめる</string>
-    <string name="onboarding_page1_desc">全アプリのキャッシュを削除して空き容量を増やします。</string>
-    <string name="onboarding_page2_title">キャッシュ通知</string>
-    <string name="onboarding_page2_desc">キャッシュが増えた際に通知を受け取ります。</string>
+    <string name="onboarding_page1_desc">キャッシュを削除して空き容量を増やし、アプリを強制停止してパフォーマンスを向上させます。</string>
+    <string name="onboarding_page2_title">通知</string>
+    <string name="onboarding_page2_desc">キャッシュや実行中のアプリが多くなった際に通知を受け取り、簡単に削除や停止ができます。</string>
     <string name="onboarding_page3_title">これで完了です！</string>
     <string name="onboarding_page3_desc">すべての設定が正常に完了しました。</string>
 </resources>

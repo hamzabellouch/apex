@@ -235,9 +235,9 @@ la limpieza de caché</string>
     <string name="usage_access_permission_desc2">Para activarlo, pulsa el botón de abajo.</string>
     <string name="btn_next">SIGUIENTE</string>
     <string name="btn_get_started">EMPEZAR</string>
-    <string name="onboarding_page1_desc">Limpia la caché de todas las apps y obtén más almacenamiento.</string>
-    <string name="onboarding_page2_title">Notificaciones de caché</string>
-    <string name="onboarding_page2_desc">Recibe notificaciones cuando haya demasiada caché acumulada.</string>
+    <string name="onboarding_page1_desc">Limpia la caché para liberar espacio y fuerza la detención de apps para mejorar el rendimiento con Apex.</string>
+    <string name="onboarding_page2_title">Notificaciones</string>
+    <string name="onboarding_page2_desc">Recibe notificaciones cuando haya demasiada caché o apps en ejecución para limpiarlas y detenerlas fácilmente.</string>
     <string name="onboarding_page3_title">¡Eso es todo!</string>
     <string name="onboarding_page3_desc">Todo se configuró con éxito y la aplicación está lista.</string>
 </resources>

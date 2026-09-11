@@ -1,11 +1,14 @@
-﻿package com.tkno.apex.ui.onboarding
+package com.tkno.apex.ui.onboarding
 
+import android.content.Intent
+import android.net.Uri
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
@@ -21,6 +24,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.SpanStyle
@@ -79,7 +83,9 @@ fun OnboardingScreen(
 
             // Privacy Policy note (Shown only on Page 3 as in reference image)
             if (pagerState.currentPage == 2) {
+                val context = LocalContext.current
                 val privacyPolicyText = stringResource(R.string.privacy_policy)
+                val privacyPolicyUrl = "https://github.com/hamzabellouch/apex/blob/main/PRIVACY_POLICY.md"
                 Text(
                     text = buildAnnotatedString {
                         append("By proceeding, you confirm you accept\nApex's ")
@@ -91,7 +97,18 @@ fun OnboardingScreen(
                     fontSize = 13.sp,
                     textAlign = TextAlign.Center,
                     lineHeight = 18.sp,
-                    modifier = Modifier.padding(bottom = 16.dp)
+                    modifier = Modifier
+                        .clip(RoundedCornerShape(8.dp))
+                        .clickable {
+                            try {
+                                val intent = Intent(Intent.ACTION_VIEW, Uri.parse(privacyPolicyUrl))
+                                context.startActivity(intent)
+                            } catch (e: Exception) {
+                                // fallback if no browser application is installed
+                            }
+                        }
+                        .padding(horizontal = 8.dp, vertical = 4.dp)
+                        .padding(bottom = 8.dp)
                 )
             } else {
                 Spacer(modifier = Modifier.height(34.dp))
@@ -153,8 +170,8 @@ private fun OnboardingPageOne() {
         painter = painterResource(id = R.drawable.ic_app_logo),
         contentDescription = stringResource(R.string.cd_apex_app_icon),
         modifier = Modifier
-            .size(100.dp)
-            .clip(RoundedCornerShape(24.dp))
+            .size(105.dp)
+            .clip(CircleShape)
     )
 
     Spacer(modifier = Modifier.height(36.dp))

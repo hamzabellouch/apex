@@ -235,9 +235,9 @@ zu vermeiden</string>
     <string name="usage_access_permission_desc2">Klicken Sie unten, um sie zu aktivieren.</string>
     <string name="btn_next">WEITER</string>
     <string name="btn_get_started">LOSLEGEN</string>
-    <string name="onboarding_page1_desc">Leeren Sie den Cache aller Apps für mehr Speicherplatz.</string>
-    <string name="onboarding_page2_title">Cache-Benachrichtigungen</string>
-    <string name="onboarding_page2_desc">Erhalten Sie Benachrichtigungen bei zu viel Cache.</string>
+    <string name="onboarding_page1_desc">Leeren Sie den Cache für mehr Speicherplatz und stoppen Sie Apps zur Leistungssteigerung mit Apex.</string>
+    <string name="onboarding_page2_title">Benachrichtigungen</string>
+    <string name="onboarding_page2_desc">Erhalten Sie Benachrichtigungen bei zu viel Cache oder laufenden Apps, um diese einfach zu bereinigen und zu stoppen.</string>
     <string name="onboarding_page3_title">Das ist alles!</string>
     <string name="onboarding_page3_desc">Alles wurde erfolgreich konfiguriert.</string>
 </resources>

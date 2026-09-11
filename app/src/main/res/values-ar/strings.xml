@@ -88,6 +88,8 @@
     <string name="navigation_and_interface">شريط التنقل والواجهة</string>
     <string name="hide_navigation_labels">إخفاء تسميات شريط التنقل</string>
     <string name="hide_navigation_labels_desc">إخفاء النصوص في شريط التنقل السفلي وإظهار الأيقونات فقط</string>
+    <string name="use_classic_navigation_bar">استخدام شريط التنقل الكلاسيكي</string>
+    <string name="use_classic_navigation_bar_desc">العودة إلى مظهر شريط التنقل التقليدي الممتد بعرض الشاشة</string>
     <string name="hide_menu_button">إخفاء زر القائمة</string>
     <string name="hide_menu_button_desc">إخفاء زر القائمة من ترويسة الشاشات مع الإبقاء على إيماءة سحب القائمة مفعلة</string>
     <string name="auto_update">التحديث التلقائي</string>
@@ -109,6 +111,9 @@
     <string name="github_stars_desc">دعم هذا التطبيق بإضافة نجمة على GitHub</string>
     <string name="package_name">اسم الحزمة</string>
     <string name="privacy_policy">سياسة الخصوصية</string>
+    <string name="privacy_policy_desc">قراءة سياسة الخصوصية والشروط الخاصة بنا</string>
+    <string name="whats_new">ما الجديد</string>
+    <string name="whats_new_highlights_title">أحدث التحديثات والتحسينات</string>
     <string name="done">تم</string>
     <string name="downloading">جاري التنزيل...</string>
     <string name="downloaded_successfully">تم التنزيل بنجاح</string>
@@ -275,9 +280,9 @@
     <string name="usage_access_permission_desc2">لتفعيله، انقر فوق الزر أدناه وامنح الإذن لتطبيق إيبكس.</string>
     <string name="btn_next">التالي</string>
     <string name="btn_get_started">ابدأ الآن</string>
-    <string name="onboarding_page1_desc">قم بمسح ذاكرة التخزين المؤقت لجميع التطبيقات واحصل على مساحة تخزين إضافية بمساعدة إيبكس.</string>
-    <string name="onboarding_page2_title">إشعارات التخزين المؤقت</string>
-    <string name="onboarding_page2_desc">احصل على إشعار عندما تتراكم ذاكرة التخزين المؤقت بشكل كبير. سيساعدك هذا على تتبع التخزين المؤقت عبر الإشعارات.</string>
+    <string name="onboarding_page1_desc">قم بمسح ذاكرة التخزين المؤقت لتوفير مساحة إضافية، وإيقاف التطبيقات إجباريًا لتحسين أداء وسرعة جهازك بمساعدة إيبكس.</string>
+    <string name="onboarding_page2_title">الإشعارات</string>
+    <string name="onboarding_page2_desc">احصل على إشعارات عند زيادة التخزين المؤقت أو كثرة التطبيقات المشغّلة، لمساعدتك على تنظيف الكاش وإيقاف التطبيقات في الوقت المناسب.</string>
     <string name="onboarding_page3_title">هذا كل شيء!</string>
     <string name="onboarding_page3_desc">تم تكوين كل شيء بنجاح والتطبيق الآن جاهز للعمل. نتمنى لك استخدامًا ممتعًا.</string>
     <string name="new_update_available">تحديث جديد متاح</string>

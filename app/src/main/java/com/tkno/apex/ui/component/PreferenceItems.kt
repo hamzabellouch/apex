@@ -321,7 +321,7 @@ fun PreferenceSwitchWithDivider(
                         .padding(horizontal = 8.dp)
                         .width(1.dp)
                         .align(Alignment.CenterVertically),
-                color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.3f),
+                color = MaterialTheme.colorScheme.onSurface.copy(alpha = if (enabled) 0.3f else 0.12f),
             )
             Switch(
                 checked = isChecked,

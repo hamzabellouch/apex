@@ -235,9 +235,9 @@
     <string name="usage_access_permission_desc2">要啟用它，請點擊下方按鈕。</string>
     <string name="btn_next">下一步</string>
     <string name="btn_get_started">立即開始</string>
-    <string name="onboarding_page1_desc">清理所有應用程式的快取，獲取更多可用儲存空間。</string>
-    <string name="onboarding_page2_title">快取通知</string>
-    <string name="onboarding_page2_desc">當快取過多時接收通知提醒。</string>
+    <string name="onboarding_page1_desc">清理快取以釋放儲存空間，並強制停止應用程式以提升裝置效能，盡在 Apex。</string>
+    <string name="onboarding_page2_title">通知</string>
+    <string name="onboarding_page2_desc">當快取過多或背景執行過多應用程式時接收通知，助您輕鬆清理與停止。</string>
     <string name="onboarding_page3_title">大功告成！</string>
     <string name="onboarding_page3_desc">一切已成功配置，應用現已就緒。</string>
 </resources>

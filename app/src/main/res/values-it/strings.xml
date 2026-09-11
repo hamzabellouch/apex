@@ -233,9 +233,9 @@
     <string name="usage_access_permission_desc2">Fai clic sul pulsante in basso per abilitarla.</string>
     <string name="btn_next">AVANTI</string>
     <string name="btn_get_started">INIZIA</string>
-    <string name="onboarding_page1_desc">Pulisci la cache di tutte le app per avere più spazio.</string>
-    <string name="onboarding_page2_title">Notifiche cache</string>
-    <string name="onboarding_page2_desc">Ricevi una notifica quando la cache è troppa.</string>
+    <string name="onboarding_page1_desc">Pulisci la cache per liberare spazio e arresta forzatamente le app per migliorare le prestazioni con Apex.</string>
+    <string name="onboarding_page2_title">Notifiche</string>
+    <string name="onboarding_page2_desc">Ricevi notifiche quando hai troppa cache o troppe app attive, per pulirle e arrestarle facilmente.</string>
     <string name="onboarding_page3_title">È tutto!</string>
     <string name="onboarding_page3_desc">Tutto è stato configurato con successo.</string>
 </resources>

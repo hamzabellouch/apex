@@ -233,9 +233,9 @@
     <string name="usage_access_permission_desc2">To enable it, click the button below and allow permission for Apex.</string>
     <string name="btn_next">NEXT</string>
     <string name="btn_get_started">GET STARTED</string>
-    <string name="onboarding_page1_desc">Clear cache of all apps and get more available storage space with the help of Apex.</string>
-    <string name="onboarding_page2_title">Cache Notifications</string>
-    <string name="onboarding_page2_desc">Get notification whenever you have too much cache. This will help you to track cache in notification.</string>
+    <string name="onboarding_page1_desc">Depolama alanı açmak için önbelleği temizleyin ve cihaz performansını artırmak için uygulamaları Apex ile durdurun.</string>
+    <string name="onboarding_page2_title">Bildirimler</string>
+    <string name="onboarding_page2_desc">Fazla önbellek veya çalışan uygulama olduğunda bildirim alarak bunları kolayca temizleyin ve durdurun.</string>
     <string name="onboarding_page3_title">That’s all!</string>
     <string name="onboarding_page3_desc">Everything was successfully configured and now the app is ready to work. Have a nice use.</string>
 </resources>

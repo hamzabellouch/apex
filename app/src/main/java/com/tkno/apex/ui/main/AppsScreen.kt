@@ -405,43 +405,36 @@ fun AppCacheItem(
             .padding(vertical = 10.dp, horizontal = 4.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
-        // App Icon Box
-        Box(
-            modifier = Modifier
-                .size(48.dp)
-                .background(MaterialTheme.colorScheme.surfaceContainerHigh, CircleShape),
-            contentAlignment = Alignment.Center
-        ) {
-            if (app.icon != null) {
-                val bitmap = remember(app.packageName) {
-                    try {
-                        app.icon.toBitmap().asImageBitmap()
-                    } catch (e: Exception) {
-                        null
-                    }
+        // App Icon
+        if (app.icon != null) {
+            val bitmap = remember(app.packageName) {
+                try {
+                    app.icon.toBitmap().asImageBitmap()
+                } catch (e: Exception) {
+                    null
                 }
-                if (bitmap != null) {
-                    Image(
-                        bitmap = bitmap,
-                        contentDescription = app.name,
-                        modifier = Modifier.size(28.dp)
-                    )
-                } else {
-                    Icon(
-                        imageVector = Icons.Default.Android,
-                        contentDescription = app.name,
-                        tint = MaterialTheme.colorScheme.onSurface,
-                        modifier = Modifier.size(24.dp)
-                    )
-                }
+            }
+            if (bitmap != null) {
+                Image(
+                    bitmap = bitmap,
+                    contentDescription = app.name,
+                    modifier = Modifier.size(42.dp)
+                )
             } else {
                 Icon(
                     imageVector = Icons.Default.Android,
                     contentDescription = app.name,
                     tint = MaterialTheme.colorScheme.onSurface,
-                    modifier = Modifier.size(24.dp)
+                    modifier = Modifier.size(36.dp)
                 )
             }
+        } else {
+            Icon(
+                imageVector = Icons.Default.Android,
+                contentDescription = app.name,
+                tint = MaterialTheme.colorScheme.onSurface,
+                modifier = Modifier.size(36.dp)
+            )
         }
 
         Spacer(modifier = Modifier.width(14.dp))
