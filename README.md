@@ -127,14 +127,13 @@ Apex follows clean code architecture principles for maintainability, high perfor
 
 4. Make sure that: `Install from unknown sources` is enabled in your Android settings.
 
-## 🔨 Building from Source - Not available yet
+## 🔨 Building from Source
 
-
->To build Apex locally, make sure you have the latest version of Android Studio installed.
->1. Clone the repository: `git clone https://github.com/hamzabellouch/apex.git`
->2. Open the project in Android Studio.
->3. Sync Gradle dependencies.
->4. Build and run the application on your device or emulator.
+To build Apex locally, make sure you have the latest version of Android Studio installed.
+1. Clone the repository: `git clone https://github.com/hamzabellouch/apex.git`
+2. Open the project in Android Studio.
+3. Sync Gradle dependencies.
+4. Build and run the application on your device or emulator.
 
 
 
