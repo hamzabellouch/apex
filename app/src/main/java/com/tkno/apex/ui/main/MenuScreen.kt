@@ -52,6 +52,7 @@ import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material.icons.filled.VolunteerActivism
 import androidx.compose.material.icons.outlined.*
+import androidx.compose.material.icons.rounded.Animation
 import androidx.compose.material.icons.rounded.Palette
 import androidx.compose.material.icons.rounded.SettingsApplications
 import androidx.compose.material.icons.rounded.ViewComfy
@@ -78,8 +79,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.tkno.apex.R
 import com.tkno.apex.ui.component.*
-import com.tkno.apex.ui.page.AppUpdater
 import com.tkno.apex.ui.page.settings.BasePreferencePage
+import com.tkno.apex.ui.page.AppUpdater
 import com.tkno.apex.ui.page.settings.about.UpdatePage
 import com.tkno.apex.ui.page.settings.about.WhatsNewDialog
 import com.tkno.apex.ui.svg.drawablevectors.DynamicColorImageVectors
@@ -152,8 +153,10 @@ fun MenuScreen(
             MenuSubScreen.LookAndFeel -> AppearancePreferences(
                 onNavigateBack = { currentSubScreen = MenuSubScreen.Settings },
                 onNavigateTo = { route ->
-                    if (route == "languages") currentSubScreen = MenuSubScreen.Languages
-                    else if (route == "dark_theme") currentSubScreen = MenuSubScreen.DarkTheme
+                    when (route) {
+                        "languages" -> currentSubScreen = MenuSubScreen.Languages
+                        "dark_theme" -> currentSubScreen = MenuSubScreen.DarkTheme
+                    }
                 }
             )
             MenuSubScreen.DarkTheme -> DarkThemePreferences(
@@ -226,13 +229,6 @@ fun MainMenuList(
                         color = MaterialTheme.colorScheme.onBackground,
                         fontSize = 24.sp,
                         fontWeight = FontWeight.Bold
-                    )
-                    Spacer(modifier = Modifier.width(8.dp))
-                    Text(
-                        text = stringResource(id = R.string.menu_options_listed_count, 4),
-                        color = MaterialTheme.colorScheme.onSurfaceVariant,
-                        fontSize = 12.sp,
-                        modifier = Modifier.padding(bottom = 3.dp)
                     )
                 }
             }
@@ -1373,7 +1369,7 @@ fun InterfaceAndInteractionPreferences(onNavigateBack: () -> Unit) {
     val prefs = remember { context.getSharedPreferences("apex_prefs", android.content.Context.MODE_PRIVATE) }
     var hideNavLabels by remember { mutableStateOf(prefs.getBoolean("hide_navigation_labels", false)) }
     var hideMenuButton by remember { mutableStateOf(prefs.getBoolean("hide_menu_button", false)) }
-    var useClassicNav by remember { mutableStateOf(prefs.getBoolean("use_classic_navigation_bar", false)) }
+    var animateNavIndicator by remember { mutableStateOf(prefs.getBoolean("animate_taskbar_indicator", true)) }
 
     DisposableEffect(prefs) {
         val listener = android.content.SharedPreferences.OnSharedPreferenceChangeListener { p, key ->
@@ -1381,8 +1377,8 @@ fun InterfaceAndInteractionPreferences(onNavigateBack: () -> Unit) {
                 hideNavLabels = p.getBoolean("hide_navigation_labels", false)
             } else if (key == "hide_menu_button") {
                 hideMenuButton = p.getBoolean("hide_menu_button", false)
-            } else if (key == "use_classic_navigation_bar") {
-                useClassicNav = p.getBoolean("use_classic_navigation_bar", false)
+            } else if (key == "animate_taskbar_indicator") {
+                animateNavIndicator = p.getBoolean("animate_taskbar_indicator", true)
             }
         }
         prefs.registerOnSharedPreferenceChangeListener(listener)
@@ -1417,14 +1413,14 @@ fun InterfaceAndInteractionPreferences(onNavigateBack: () -> Unit) {
             }
             item {
                 PreferenceSwitch(
-                    title = stringResource(id = R.string.use_classic_navigation_bar),
-                    description = stringResource(id = R.string.use_classic_navigation_bar_desc),
-                    icon = Icons.Rounded.ViewComfy,
-                    isChecked = useClassicNav,
+                    title = stringResource(id = R.string.animate_taskbar_indicator),
+                    description = stringResource(id = R.string.animate_taskbar_indicator_desc),
+                    icon = Icons.Rounded.Animation,
+                    isChecked = animateNavIndicator,
                     onClick = {
-                        val newValue = !useClassicNav
-                        useClassicNav = newValue
-                        prefs.edit().putBoolean("use_classic_navigation_bar", newValue).apply()
+                        val newValue = !animateNavIndicator
+                        animateNavIndicator = newValue
+                        prefs.edit().putBoolean("animate_taskbar_indicator", newValue).apply()
                     }
                 )
             }
@@ -1726,9 +1722,9 @@ fun AboutPage(
     AppUpdater(isAutoUpdateEnabled = isAutoUpdateEnabled)
 
     val versionName = try {
-        context.packageManager.getPackageInfo(context.packageName, 0).versionName ?: "0.0.8-beta"
+        context.packageManager.getPackageInfo(context.packageName, 0).versionName ?: "0.0.9-beta"
     } catch (e: Exception) {
-        "0.0.8-beta"
+        "0.0.9-beta"
     }
     val info = "App version: $versionName\nPackage name: ${context.packageName}\nDevice: Android ${android.os.Build.VERSION.RELEASE} (API ${android.os.Build.VERSION.SDK_INT})"
     val uriHandler = LocalUriHandler.current

@@ -1,4 +1,4 @@
-﻿package com.tkno.apex.util
+package com.tkno.apex.util
 
 import okhttp3.OkHttpClient
 import java.util.concurrent.TimeUnit

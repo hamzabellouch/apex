@@ -90,6 +90,8 @@
     <string name="hide_navigation_labels_desc">Hide text labels in the bottom navigation bar and show only icons</string>
     <string name="use_classic_navigation_bar">Use classic taskbar</string>
     <string name="use_classic_navigation_bar_desc">Switch back to the standard full-width navigation bar style</string>
+    <string name="animate_taskbar_indicator">Animate taskbar indicator</string>
+    <string name="animate_taskbar_indicator_desc">Enable smooth sliding halo animation when switching between tabs</string>
     <string name="hide_menu_button">Hide menu button</string>
     <string name="hide_menu_button_desc">Hide the menu button from screen headers while keeping drawer swipe gestures active</string>
     <string name="auto_update">Auto update</string>
@@ -99,7 +101,6 @@
     <string name="issue_tracker">Issue tracker</string>
     <string name="issue_tracker_hint">Encountered an error? Before reporting a new issue, please search our issue tracker. Many common problems have already been addressed and documented there.</string>
     <string name="menu">Menu</string>
-    <string name="menu_options_listed_count">%1$d options listed</string>
     <string name="scan">Scan</string>
     <string name="contact">Contact</string>
     <string name="contact_desc">Contact the developer to add new features in Apex</string>
@@ -128,6 +129,7 @@
     <string name="nav_clean">Clean</string>
     <string name="nav_apps">Apps</string>
     <string name="nav_statistics">Statistics</string>
+    <string name="weekly_report">Weekly report</string>
     <string name="nav_menu">Menu</string>
     <string name="toast_all_cache_cleaned">All cache items are already cleaned (0 KB)</string>
     <string name="toast_all_bg_apps_stopped">All background apps are already stopped</string>
@@ -247,6 +249,7 @@
     <string name="history_period_yesterday">Yesterday</string>
     <string name="history_period_last_7_days">Last 7 days</string>
     <string name="history_period_last_30_days">Last 30 days</string>
+    <string name="history_period_all_time">All</string>
     <string name="history_period_tap_details">Tap here to see details</string>
     <string name="history_clear_all">Clear All</string>
     <string name="history_period_summary_singular">Total: %1$d app  |  %2$s Cache</string>
@@ -304,4 +307,6 @@
     <string name="category_productivity_finance">Productivity and finance</string>
     <string name="detailed_statistics">Detailed statistics</string>
     <string name="no_usage_data_today">No usage data recorded for today</string>
+    <string name="auto_install_packages">Auto-install packages</string>
+    <string name="manual_install_open_files">The update APK was downloaded. Opening file manager to install manually.</string>
 </resources>

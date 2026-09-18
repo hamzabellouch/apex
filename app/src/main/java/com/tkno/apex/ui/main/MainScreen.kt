@@ -8,6 +8,9 @@ import androidx.activity.compose.BackHandler
 import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.animateColorAsState
+import androidx.compose.animation.core.Spring
+import androidx.compose.animation.core.animateDpAsState
+import androidx.compose.animation.core.spring
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
@@ -57,10 +60,10 @@ import com.tkno.apex.R
 import com.tkno.apex.model.AppCacheInfo
 import com.tkno.apex.service.CacheCleanerAccessibilityService
 import com.tkno.apex.service.ServiceMode
-import com.tkno.apex.util.AppStorageHelper
-import com.tkno.apex.util.RamInfo
 import com.tkno.apex.ui.page.AppUpdater
 import com.tkno.apex.ui.page.settings.about.UpdatePage
+import com.tkno.apex.util.AppStorageHelper
+import com.tkno.apex.util.RamInfo
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -90,6 +93,12 @@ fun MainScreen(
     val lifecycleOwner = LocalLifecycleOwner.current
 
     val prefs = remember(context) { context.getSharedPreferences("apex_prefs", android.content.Context.MODE_PRIVATE) }
+
+    val isAutoUpdateEnabled = remember(prefs) {
+        prefs.getBoolean("auto_update_enabled", false)
+    }
+
+    AppUpdater(isAutoUpdateEnabled = isAutoUpdateEnabled)
 
     val initialTab = remember(prefs) {
         val isSwapped = prefs.getBoolean("tab_order_swapped", false)
@@ -129,29 +138,24 @@ fun MainScreen(
     var ramInfo by remember { mutableStateOf(AppStorageHelper.getRamInfo(context)) }
     var isScanning by remember { mutableStateOf(false) }
 
-    var isAutoUpdateEnabled by remember {
-        mutableStateOf(prefs.getBoolean("auto_update_enabled", false))
-    }
     var hideNavLabels by remember {
         mutableStateOf(prefs.getBoolean("hide_navigation_labels", false))
     }
     var hideMenuButton by remember {
         mutableStateOf(prefs.getBoolean("hide_menu_button", false))
     }
-    var useClassicNav by remember {
-        mutableStateOf(prefs.getBoolean("use_classic_navigation_bar", false))
+    var animateNavIndicator by remember {
+        mutableStateOf(prefs.getBoolean("animate_taskbar_indicator", true))
     }
 
     DisposableEffect(prefs) {
         val listener = android.content.SharedPreferences.OnSharedPreferenceChangeListener { p, key ->
-            if (key == "auto_update_enabled") {
-                isAutoUpdateEnabled = p.getBoolean("auto_update_enabled", false)
-            } else if (key == "hide_navigation_labels") {
+            if (key == "hide_navigation_labels") {
                 hideNavLabels = p.getBoolean("hide_navigation_labels", false)
             } else if (key == "hide_menu_button") {
                 hideMenuButton = p.getBoolean("hide_menu_button", false)
-            } else if (key == "use_classic_navigation_bar") {
-                useClassicNav = p.getBoolean("use_classic_navigation_bar", false)
+            } else if (key == "animate_taskbar_indicator") {
+                animateNavIndicator = p.getBoolean("animate_taskbar_indicator", true)
             }
         }
         prefs.registerOnSharedPreferenceChangeListener(listener)
@@ -159,8 +163,6 @@ fun MainScreen(
             prefs.unregisterOnSharedPreferenceChangeListener(listener)
         }
     }
-
-    AppUpdater(isAutoUpdateEnabled = isAutoUpdateEnabled)
 
     var isPermissionSuccessCompleted by remember {
         mutableStateOf(prefs.getBoolean("permission_success_completed", false))
@@ -526,8 +528,9 @@ fun MainScreen(
         drawerContent = {
             ModalDrawerSheet(
                 modifier = Modifier
-                    .width(300.dp)
+                    .width(320.dp)
                     .fillMaxHeight(),
+                drawerShape = RoundedCornerShape(topEnd = 20.dp, bottomEnd = 20.dp),
                 drawerContainerColor = MaterialTheme.colorScheme.surface,
                 windowInsets = DrawerDefaults.windowInsets
             ) {
@@ -559,174 +562,14 @@ fun MainScreen(
                     enter = slideInVertically(initialOffsetY = { it }, animationSpec = tween(220)) + fadeIn(animationSpec = tween(220)),
                     exit = slideOutVertically(targetOffsetY = { it }, animationSpec = tween(200)) + fadeOut(animationSpec = tween(200))
                 ) {
-                    if (useClassicNav) {
+                    Box(
+                        modifier = Modifier
+                            .navigationBarsPadding()
+                            .fillMaxWidth()
+                            .padding(bottom = 16.dp, start = 22.dp, end = 22.dp),
+                        contentAlignment = Alignment.Center
+                    ) {
                         Surface(
-                            color = MaterialTheme.colorScheme.surfaceContainer,
-                            tonalElevation = 0.dp
-                        ) {
-                            Box(
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .navigationBarsPadding()
-                            ) {
-                                NavigationBar(
-                                    containerColor = MaterialTheme.colorScheme.surfaceContainer,
-                                    tonalElevation = 0.dp,
-                                    windowInsets = WindowInsets(0.dp),
-                                    modifier = Modifier
-                                        .fillMaxWidth()
-                                        .height(68.dp)
-                                        .onGloballyPositioned { coordinates ->
-                                            val totalWidth = coordinates.size.width.toFloat()
-                                            if (totalWidth > 0 && reorderableTabs.isNotEmpty()) {
-                                                itemWidthPx = totalWidth / reorderableTabs.size.toFloat()
-                                            }
-                                        }
-                                ) {
-                                    reorderableTabs.forEachIndexed { index, tab ->
-                                        val isSelected = currentTab == tab
-                                        val isDragging = draggingIndex == index
-                                        val canDrag = index < 2
-
-                                        val (tabLabel, tabIcon, tabColor) = when (tab) {
-                                            MainTab.Stop -> Triple(stringResource(R.string.nav_stop), Icons.Default.Block, stopOrange)
-                                            MainTab.Clean -> Triple(stringResource(R.string.nav_clean), Icons.Default.CleaningServices, accentBlue)
-                                            MainTab.Apps -> Triple(stringResource(R.string.nav_apps), Icons.Default.Android, androidGreen)
-                                            MainTab.Statistics -> Triple(stringResource(R.string.nav_statistics), DataUsage, Color(0xFFFF5252))
-                                            else -> Triple("", Icons.Default.Block, stopOrange)
-                                        }
-
-                                        NavigationBarItem(
-                                            selected = isSelected,
-                                            onClick = { currentTab = tab },
-                                            alwaysShowLabel = !hideNavLabels,
-                                            icon = {
-                                                Icon(
-                                                    imageVector = tabIcon,
-                                                    contentDescription = tabLabel,
-                                                    tint = if (isSelected) tabColor else unselectedNavColor
-                                                )
-                                            },
-                                            label = if (!hideNavLabels) {
-                                                {
-                                                    Text(
-                                                        text = tabLabel,
-                                                        color = if (isSelected) tabColor else unselectedNavColor,
-                                                        fontSize = 12.sp
-                                                    )
-                                                }
-                                            } else null,
-                                            colors = NavigationBarItemDefaults.colors(
-                                                indicatorColor = tabColor.copy(alpha = 0.2f),
-                                                selectedIconColor = tabColor,
-                                                selectedTextColor = tabColor,
-                                                unselectedIconColor = unselectedNavColor,
-                                                unselectedTextColor = unselectedNavColor
-                                            ),
-                                            modifier = Modifier
-                                                .graphicsLayer {
-                                                    if (isDragging) {
-                                                        translationX = currentDragOffset
-                                                        scaleX = 1.12f
-                                                        scaleY = 1.12f
-                                                    }
-                                                }
-                                                .then(
-                                                    if (canDrag) {
-                                                        Modifier.pointerInput(index) {
-                                                            awaitEachGesture {
-                                                                val down = awaitFirstDown(requireUnconsumed = false)
-                                                                var isLongPressActive = false
-
-                                                                val longPressTimer = scope.launch {
-                                                                    delay(viewConfiguration.longPressTimeoutMillis)
-                                                                    isLongPressActive = true
-                                                                    draggingIndex = index
-                                                                    currentDragOffset = 0f
-                                                                    haptic.performHapticFeedback(HapticFeedbackType.LongPress)
-                                                                }
-
-                                                                val pointer = down.id
-                                                                while (true) {
-                                                                    val event = awaitPointerEvent()
-                                                                    val change = event.changes.firstOrNull { it.id == pointer }
-
-                                                                    if (change == null || !change.pressed) {
-                                                                        longPressTimer.cancel()
-                                                                        if (isLongPressActive) {
-                                                                            draggingIndex = null
-                                                                            currentDragOffset = 0f
-                                                                            haptic.performHapticFeedback(HapticFeedbackType.LongPress)
-                                                                        }
-                                                                        break
-                                                                    }
-
-                                                                    if (!isLongPressActive) {
-                                                                        val diff = change.position - down.position
-                                                                        if (diff.getDistance() > viewConfiguration.touchSlop) {
-                                                                            longPressTimer.cancel()
-                                                                        }
-                                                                    } else {
-                                                                        change.consume()
-                                                                        val deltaX = change.position.x - change.previousPosition.x
-                                                                        val activeIndex = draggingIndex ?: break
-                                                                        currentDragOffset += deltaX
-
-                                                                        val threshold = if (itemWidthPx > 0f) itemWidthPx * 0.5f else 100f
-
-                                                                        if (currentDragOffset > threshold && activeIndex == 0) {
-                                                                            val temp = reorderableTabs[0]
-                                                                            reorderableTabs[0] = reorderableTabs[1]
-                                                                            reorderableTabs[1] = temp
-                                                                            draggingIndex = 1
-                                                                            currentDragOffset -= itemWidthPx
-                                                                            haptic.performHapticFeedback(HapticFeedbackType.LongPress)
-                                                                            prefs.edit().putBoolean("tab_order_swapped", reorderableTabs[0] == MainTab.Clean).apply()
-                                                                        } else if (currentDragOffset < -threshold && activeIndex == 1) {
-                                                                            val temp = reorderableTabs[1]
-                                                                            reorderableTabs[1] = reorderableTabs[0]
-                                                                            reorderableTabs[0] = temp
-                                                                            draggingIndex = 0
-                                                                            currentDragOffset += itemWidthPx
-                                                                            haptic.performHapticFeedback(HapticFeedbackType.LongPress)
-                                                                            prefs.edit().putBoolean("tab_order_swapped", reorderableTabs[0] == MainTab.Clean).apply()
-                                                                        }
-                                                                    }
-                                                                }
-                                                            }
-                                                        }
-                                                    } else Modifier
-                                                )
-                                        )
-                                    }
-                                }
-                                if (isScanning) {
-                                    LinearProgressIndicator(
-                                        modifier = Modifier
-                                            .fillMaxWidth()
-                                            .height(3.dp)
-                                            .align(Alignment.TopCenter),
-                                        color = when (currentTab) {
-                                            MainTab.Stop -> stopOrange
-                                            MainTab.Clean -> accentBlue
-                                            MainTab.Apps -> androidGreen
-                                            MainTab.Statistics -> Color(0xFFFF5252)
-                                            MainTab.Menu -> accentBlue
-                                        },
-                                        trackColor = Color.Transparent
-                                    )
-                                }
-                            }
-                        }
-                    } else {
-                        Box(
-                            modifier = Modifier
-                                .navigationBarsPadding()
-                                .fillMaxWidth()
-                                .padding(bottom = 16.dp, start = 22.dp, end = 22.dp),
-                            contentAlignment = Alignment.Center
-                        ) {
-                            Surface(
                                 color = MaterialTheme.colorScheme.surfaceContainer.copy(alpha = 0.95f),
                                 shape = RoundedCornerShape(percent = 50),
                                 tonalElevation = 0.dp,
@@ -741,145 +584,172 @@ fun MainScreen(
                                         }
                                     }
                             ) {
-                                Box(modifier = Modifier.fillMaxSize()) {
-                                    Row(
-                                        verticalAlignment = Alignment.CenterVertically,
-                                        horizontalArrangement = Arrangement.spacedBy(4.dp),
-                                        modifier = Modifier
-                                            .fillMaxSize()
-                                            .padding(horizontal = 6.dp)
-                                    ) {
-                                        reorderableTabs.forEachIndexed { index, tab ->
-                                            val isSelected = currentTab == tab
-                                            val isDragging = draggingIndex == index
-                                            val canDrag = index < 2
+                                if (animateNavIndicator) {
+                                    BoxWithConstraints(modifier = Modifier.fillMaxSize()) {
+                                        val itemCount = reorderableTabs.size.coerceAtLeast(1)
+                                        val horizontalMargin = 6.dp
+                                        val verticalMargin = if (hideNavLabels) 10.dp else 6.dp
+                                        val itemSpacing = 4.dp
 
-                                            val (tabLabel, tabIcon, tabColor) = when (tab) {
-                                                MainTab.Stop -> Triple(stringResource(R.string.nav_stop), Icons.Default.Block, stopOrange)
-                                                MainTab.Clean -> Triple(stringResource(R.string.nav_clean), Icons.Default.CleaningServices, accentBlue)
-                                                MainTab.Apps -> Triple(stringResource(R.string.nav_apps), Icons.Default.Android, androidGreen)
-                                                MainTab.Statistics -> Triple(stringResource(R.string.nav_statistics), DataUsage, Color(0xFFFF5252))
-                                                else -> Triple("", Icons.Default.Block, stopOrange)
-                                            }
+                                        val totalReservedSpacing = horizontalMargin * 2 + itemSpacing * (itemCount - 1)
+                                        val slotWidth = (maxWidth - totalReservedSpacing) / itemCount
 
-                                            val indicatorColor by animateColorAsState(
-                                                targetValue = if (isSelected) tabColor.copy(alpha = 0.22f) else Color.Transparent,
-                                                animationSpec = tween(250),
-                                                label = "indicatorColor_$index"
-                                            )
+                                        val indicatorWidth = if (hideNavLabels) 56.dp.coerceAtMost(slotWidth) else slotWidth
+                                        val indicatorHeight = 64.dp - verticalMargin * 2
 
-                                            val iconTint by animateColorAsState(
-                                                targetValue = if (isSelected) tabColor else MaterialTheme.colorScheme.onSurfaceVariant,
-                                                animationSpec = tween(250),
-                                                label = "iconTint_$index"
-                                            )
+                                        val activeIndex = reorderableTabs.indexOf(currentTab).coerceIn(0, itemCount - 1)
+                                        val slotLeft = horizontalMargin + (slotWidth + itemSpacing) * activeIndex
+                                        val targetOffsetX = slotLeft + (slotWidth - indicatorWidth) / 2
 
-                                            val textColor by animateColorAsState(
-                                                targetValue = if (isSelected) tabColor else MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.8f),
-                                                animationSpec = tween(250),
-                                                label = "textColor_$index"
-                                            )
+                                        val animatedOffsetX by animateDpAsState(
+                                            targetValue = targetOffsetX,
+                                            animationSpec = spring(
+                                                dampingRatio = 0.8f,
+                                                stiffness = Spring.StiffnessMediumLow
+                                            ),
+                                            label = "indicatorOffsetX"
+                                        )
 
-                                            Box(
-                                                modifier = Modifier
-                                                    .weight(1f)
-                                                    .fillMaxHeight()
-                                                    .graphicsLayer {
-                                                        if (isDragging) {
-                                                            translationX = currentDragOffset
-                                                            scaleX = 1.12f
-                                                            scaleY = 1.12f
+                                        val activeTabColor = when (currentTab) {
+                                            MainTab.Stop -> stopOrange
+                                            MainTab.Clean -> accentBlue
+                                            MainTab.Apps -> androidGreen
+                                            MainTab.Statistics -> Color(0xFFFF5252)
+                                            else -> stopOrange
+                                        }
+
+                                        val animatedIndicatorColor by animateColorAsState(
+                                            targetValue = activeTabColor.copy(alpha = 0.22f),
+                                            animationSpec = tween(250),
+                                            label = "slidingIndicatorColor"
+                                        )
+
+                                        // Sliding Pill Indicator / Halo
+                                        Box(
+                                            modifier = Modifier
+                                                .offset(x = animatedOffsetX, y = verticalMargin)
+                                                .width(indicatorWidth)
+                                                .height(indicatorHeight)
+                                                .clip(RoundedCornerShape(percent = 50))
+                                                .background(animatedIndicatorColor)
+                                        )
+
+                                        // Row of tabs
+                                        Row(
+                                            verticalAlignment = Alignment.CenterVertically,
+                                            horizontalArrangement = Arrangement.spacedBy(itemSpacing),
+                                            modifier = Modifier
+                                                .fillMaxSize()
+                                                .padding(horizontal = horizontalMargin, vertical = verticalMargin)
+                                        ) {
+                                            reorderableTabs.forEachIndexed { index, tab ->
+                                                val isSelected = currentTab == tab
+                                                val isDragging = draggingIndex == index
+                                                val canDrag = index < 2
+
+                                                val (tabLabel, tabIcon, tabColor) = when (tab) {
+                                                    MainTab.Stop -> Triple(stringResource(R.string.nav_stop), Icons.Default.Block, stopOrange)
+                                                    MainTab.Clean -> Triple(stringResource(R.string.nav_clean), Icons.Default.CleaningServices, accentBlue)
+                                                    MainTab.Apps -> Triple(stringResource(R.string.nav_apps), Icons.Default.Android, androidGreen)
+                                                    MainTab.Statistics -> Triple(stringResource(R.string.nav_statistics), DataUsage, Color(0xFFFF5252))
+                                                    else -> Triple("", Icons.Default.Block, stopOrange)
+                                                }
+
+                                                val iconTint by animateColorAsState(
+                                                    targetValue = if (isSelected) tabColor else MaterialTheme.colorScheme.onSurfaceVariant,
+                                                    animationSpec = tween(250),
+                                                    label = "iconTint_$index"
+                                                )
+
+                                                val textColor by animateColorAsState(
+                                                    targetValue = if (isSelected) tabColor else MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.8f),
+                                                    animationSpec = tween(250),
+                                                    label = "textColor_$index"
+                                                )
+
+                                                Box(
+                                                    modifier = Modifier
+                                                        .weight(1f)
+                                                        .fillMaxHeight()
+                                                        .graphicsLayer {
+                                                            if (isDragging) {
+                                                                translationX = currentDragOffset
+                                                                scaleX = 1.12f
+                                                                scaleY = 1.12f
+                                                            }
                                                         }
-                                                    }
-                                                    .clickable(
-                                                        interactionSource = remember { MutableInteractionSource() },
-                                                        indication = null
-                                                    ) {
-                                                        currentTab = tab
-                                                    }
-                                                    .then(
-                                                        if (canDrag) {
-                                                            Modifier.pointerInput(index) {
-                                                                awaitEachGesture {
-                                                                    val down = awaitFirstDown(requireUnconsumed = false)
-                                                                    var isLongPressActive = false
+                                                        .clickable(
+                                                            interactionSource = remember { MutableInteractionSource() },
+                                                            indication = null
+                                                        ) {
+                                                            currentTab = tab
+                                                        }
+                                                        .then(
+                                                            if (canDrag) {
+                                                                Modifier.pointerInput(index) {
+                                                                    awaitEachGesture {
+                                                                        val down = awaitFirstDown(requireUnconsumed = false)
+                                                                        var isLongPressActive = false
 
-                                                                    val longPressTimer = scope.launch {
-                                                                        delay(viewConfiguration.longPressTimeoutMillis)
-                                                                        isLongPressActive = true
-                                                                        draggingIndex = index
-                                                                        currentDragOffset = 0f
-                                                                        haptic.performHapticFeedback(HapticFeedbackType.LongPress)
-                                                                    }
-
-                                                                    val pointer = down.id
-                                                                    while (true) {
-                                                                        val event = awaitPointerEvent()
-                                                                        val change = event.changes.firstOrNull { it.id == pointer }
-
-                                                                        if (change == null || !change.pressed) {
-                                                                            longPressTimer.cancel()
-                                                                            if (isLongPressActive) {
-                                                                                draggingIndex = null
-                                                                                currentDragOffset = 0f
-                                                                                haptic.performHapticFeedback(HapticFeedbackType.LongPress)
-                                                                            }
-                                                                            break
+                                                                        val longPressTimer = scope.launch {
+                                                                            delay(viewConfiguration.longPressTimeoutMillis)
+                                                                            isLongPressActive = true
+                                                                            draggingIndex = index
+                                                                            currentDragOffset = 0f
+                                                                            haptic.performHapticFeedback(HapticFeedbackType.LongPress)
                                                                         }
 
-                                                                        if (!isLongPressActive) {
-                                                                            val diff = change.position - down.position
-                                                                            if (diff.getDistance() > viewConfiguration.touchSlop) {
+                                                                        val pointer = down.id
+                                                                        while (true) {
+                                                                            val event = awaitPointerEvent()
+                                                                            val change = event.changes.firstOrNull { it.id == pointer }
+
+                                                                            if (change == null || !change.pressed) {
                                                                                 longPressTimer.cancel()
+                                                                                if (isLongPressActive) {
+                                                                                    draggingIndex = null
+                                                                                    currentDragOffset = 0f
+                                                                                    haptic.performHapticFeedback(HapticFeedbackType.LongPress)
+                                                                                }
+                                                                                break
                                                                             }
-                                                                        } else {
-                                                                            change.consume()
-                                                                            val deltaX = change.position.x - change.previousPosition.x
-                                                                            val activeIndex = draggingIndex ?: break
-                                                                            currentDragOffset += deltaX
 
-                                                                            val threshold = if (itemWidthPx > 0f) itemWidthPx * 0.5f else 100f
+                                                                            if (!isLongPressActive) {
+                                                                                val diff = change.position - down.position
+                                                                                if (diff.getDistance() > viewConfiguration.touchSlop) {
+                                                                                    longPressTimer.cancel()
+                                                                                }
+                                                                            } else {
+                                                                                change.consume()
+                                                                                val deltaX = change.position.x - change.previousPosition.x
+                                                                                val activeIndex = draggingIndex ?: break
+                                                                                currentDragOffset += deltaX
 
-                                                                            if (currentDragOffset > threshold && activeIndex == 0) {
-                                                                                val temp = reorderableTabs[0]
-                                                                                reorderableTabs[0] = reorderableTabs[1]
-                                                                                reorderableTabs[1] = temp
-                                                                                draggingIndex = 1
-                                                                                currentDragOffset -= itemWidthPx
-                                                                                haptic.performHapticFeedback(HapticFeedbackType.LongPress)
-                                                                                prefs.edit().putBoolean("tab_order_swapped", reorderableTabs[0] == MainTab.Clean).apply()
-                                                                            } else if (currentDragOffset < -threshold && activeIndex == 1) {
-                                                                                val temp = reorderableTabs[1]
-                                                                                reorderableTabs[1] = reorderableTabs[0]
-                                                                                reorderableTabs[0] = temp
-                                                                                draggingIndex = 0
-                                                                                currentDragOffset += itemWidthPx
-                                                                                haptic.performHapticFeedback(HapticFeedbackType.LongPress)
-                                                                                prefs.edit().putBoolean("tab_order_swapped", reorderableTabs[0] == MainTab.Clean).apply()
+                                                                                val threshold = if (itemWidthPx > 0f) itemWidthPx * 0.5f else 100f
+
+                                                                                if (currentDragOffset > threshold && activeIndex == 0) {
+                                                                                    val temp = reorderableTabs[0]
+                                                                                    reorderableTabs[0] = reorderableTabs[1]
+                                                                                    reorderableTabs[1] = temp
+                                                                                    draggingIndex = 1
+                                                                                    currentDragOffset -= itemWidthPx
+                                                                                    haptic.performHapticFeedback(HapticFeedbackType.LongPress)
+                                                                                    prefs.edit().putBoolean("tab_order_swapped", reorderableTabs[0] == MainTab.Clean).apply()
+                                                                                } else if (currentDragOffset < -threshold && activeIndex == 1) {
+                                                                                    val temp = reorderableTabs[1]
+                                                                                    reorderableTabs[1] = reorderableTabs[0]
+                                                                                    reorderableTabs[0] = temp
+                                                                                    draggingIndex = 0
+                                                                                    currentDragOffset += itemWidthPx
+                                                                                    haptic.performHapticFeedback(HapticFeedbackType.LongPress)
+                                                                                    prefs.edit().putBoolean("tab_order_swapped", reorderableTabs[0] == MainTab.Clean).apply()
+                                                                                }
                                                                             }
                                                                         }
                                                                     }
                                                                 }
-                                                            }
-                                                        } else Modifier
-                                                    ),
-                                                contentAlignment = Alignment.Center
-                                            ) {
-                                                Box(
-                                                    modifier = if (hideNavLabels) {
-                                                        Modifier
-                                                            .height(44.dp)
-                                                            .width(56.dp)
-                                                            .clip(RoundedCornerShape(percent = 50))
-                                                            .background(indicatorColor)
-                                                    } else {
-                                                        Modifier
-                                                            .fillMaxHeight()
-                                                            .padding(vertical = 6.dp)
-                                                            .fillMaxWidth()
-                                                            .clip(RoundedCornerShape(percent = 50))
-                                                            .background(indicatorColor)
-                                                    },
+                                                            } else Modifier
+                                                        ),
                                                     contentAlignment = Alignment.Center
                                                 ) {
                                                     Column(
@@ -909,30 +779,218 @@ fun MainScreen(
                                                 }
                                             }
                                         }
-                                    }
 
-                                    if (isScanning) {
-                                        LinearProgressIndicator(
+                                        if (isScanning) {
+                                            LinearProgressIndicator(
+                                                modifier = Modifier
+                                                    .fillMaxWidth()
+                                                    .height(3.dp)
+                                                    .clip(RoundedCornerShape(topStart = 16.dp, topEnd = 16.dp))
+                                                    .align(Alignment.TopCenter),
+                                                color = when (currentTab) {
+                                                    MainTab.Stop -> stopOrange
+                                                    MainTab.Clean -> accentBlue
+                                                    MainTab.Apps -> androidGreen
+                                                    MainTab.Statistics -> Color(0xFFFF5252)
+                                                    MainTab.Menu -> accentBlue
+                                                },
+                                                trackColor = Color.Transparent
+                                            )
+                                        }
+                                    }
+                                } else {
+                                    Box(modifier = Modifier.fillMaxSize()) {
+                                        Row(
+                                            verticalAlignment = Alignment.CenterVertically,
+                                            horizontalArrangement = Arrangement.spacedBy(4.dp),
                                             modifier = Modifier
-                                                .fillMaxWidth()
-                                                .height(3.dp)
-                                                .clip(RoundedCornerShape(topStart = 16.dp, topEnd = 16.dp))
-                                                .align(Alignment.TopCenter),
-                                            color = when (currentTab) {
-                                                MainTab.Stop -> stopOrange
-                                                MainTab.Clean -> accentBlue
-                                                MainTab.Apps -> androidGreen
-                                                MainTab.Statistics -> Color(0xFFFF5252)
-                                                MainTab.Menu -> accentBlue
-                                            },
-                                            trackColor = Color.Transparent
-                                        )
+                                                .fillMaxSize()
+                                                .padding(horizontal = 6.dp)
+                                        ) {
+                                            reorderableTabs.forEachIndexed { index, tab ->
+                                                val isSelected = currentTab == tab
+                                                val isDragging = draggingIndex == index
+                                                val canDrag = index < 2
+
+                                                val (tabLabel, tabIcon, tabColor) = when (tab) {
+                                                    MainTab.Stop -> Triple(stringResource(R.string.nav_stop), Icons.Default.Block, stopOrange)
+                                                    MainTab.Clean -> Triple(stringResource(R.string.nav_clean), Icons.Default.CleaningServices, accentBlue)
+                                                    MainTab.Apps -> Triple(stringResource(R.string.nav_apps), Icons.Default.Android, androidGreen)
+                                                    MainTab.Statistics -> Triple(stringResource(R.string.nav_statistics), DataUsage, Color(0xFFFF5252))
+                                                    else -> Triple("", Icons.Default.Block, stopOrange)
+                                                }
+
+                                                val indicatorColor by animateColorAsState(
+                                                    targetValue = if (isSelected) tabColor.copy(alpha = 0.22f) else Color.Transparent,
+                                                    animationSpec = tween(250),
+                                                    label = "indicatorColor_$index"
+                                                )
+
+                                                val iconTint by animateColorAsState(
+                                                    targetValue = if (isSelected) tabColor else MaterialTheme.colorScheme.onSurfaceVariant,
+                                                    animationSpec = tween(250),
+                                                    label = "iconTint_$index"
+                                                )
+
+                                                val textColor by animateColorAsState(
+                                                    targetValue = if (isSelected) tabColor else MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.8f),
+                                                    animationSpec = tween(250),
+                                                    label = "textColor_$index"
+                                                )
+
+                                                Box(
+                                                    modifier = Modifier
+                                                        .weight(1f)
+                                                        .fillMaxHeight()
+                                                        .graphicsLayer {
+                                                            if (isDragging) {
+                                                                translationX = currentDragOffset
+                                                                scaleX = 1.12f
+                                                                scaleY = 1.12f
+                                                            }
+                                                        }
+                                                        .clickable(
+                                                            interactionSource = remember { MutableInteractionSource() },
+                                                            indication = null
+                                                        ) {
+                                                            currentTab = tab
+                                                        }
+                                                        .then(
+                                                            if (canDrag) {
+                                                                Modifier.pointerInput(index) {
+                                                                    awaitEachGesture {
+                                                                        val down = awaitFirstDown(requireUnconsumed = false)
+                                                                        var isLongPressActive = false
+
+                                                                        val longPressTimer = scope.launch {
+                                                                            delay(viewConfiguration.longPressTimeoutMillis)
+                                                                            isLongPressActive = true
+                                                                            draggingIndex = index
+                                                                            currentDragOffset = 0f
+                                                                            haptic.performHapticFeedback(HapticFeedbackType.LongPress)
+                                                                        }
+
+                                                                        val pointer = down.id
+                                                                        while (true) {
+                                                                            val event = awaitPointerEvent()
+                                                                            val change = event.changes.firstOrNull { it.id == pointer }
+
+                                                                            if (change == null || !change.pressed) {
+                                                                                longPressTimer.cancel()
+                                                                                if (isLongPressActive) {
+                                                                                    draggingIndex = null
+                                                                                    currentDragOffset = 0f
+                                                                                    haptic.performHapticFeedback(HapticFeedbackType.LongPress)
+                                                                                }
+                                                                                break
+                                                                            }
+
+                                                                            if (!isLongPressActive) {
+                                                                                val diff = change.position - down.position
+                                                                                if (diff.getDistance() > viewConfiguration.touchSlop) {
+                                                                                    longPressTimer.cancel()
+                                                                                }
+                                                                            } else {
+                                                                                change.consume()
+                                                                                val deltaX = change.position.x - change.previousPosition.x
+                                                                                val activeIndex = draggingIndex ?: break
+                                                                                currentDragOffset += deltaX
+
+                                                                                val threshold = if (itemWidthPx > 0f) itemWidthPx * 0.5f else 100f
+
+                                                                                if (currentDragOffset > threshold && activeIndex == 0) {
+                                                                                    val temp = reorderableTabs[0]
+                                                                                    reorderableTabs[0] = reorderableTabs[1]
+                                                                                    reorderableTabs[1] = temp
+                                                                                    draggingIndex = 1
+                                                                                    currentDragOffset -= itemWidthPx
+                                                                                    haptic.performHapticFeedback(HapticFeedbackType.LongPress)
+                                                                                    prefs.edit().putBoolean("tab_order_swapped", reorderableTabs[0] == MainTab.Clean).apply()
+                                                                                } else if (currentDragOffset < -threshold && activeIndex == 1) {
+                                                                                    val temp = reorderableTabs[1]
+                                                                                    reorderableTabs[1] = reorderableTabs[0]
+                                                                                    reorderableTabs[0] = temp
+                                                                                    draggingIndex = 0
+                                                                                    currentDragOffset += itemWidthPx
+                                                                                    haptic.performHapticFeedback(HapticFeedbackType.LongPress)
+                                                                                    prefs.edit().putBoolean("tab_order_swapped", reorderableTabs[0] == MainTab.Clean).apply()
+                                                                                }
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                }
+                                                            } else Modifier
+                                                        ),
+                                                    contentAlignment = Alignment.Center
+                                                ) {
+                                                    Box(
+                                                        modifier = if (hideNavLabels) {
+                                                            Modifier
+                                                                .height(44.dp)
+                                                                .width(56.dp)
+                                                                .clip(RoundedCornerShape(percent = 50))
+                                                                .background(indicatorColor)
+                                                        } else {
+                                                            Modifier
+                                                                .fillMaxHeight()
+                                                                .padding(vertical = 6.dp)
+                                                                .fillMaxWidth()
+                                                                .clip(RoundedCornerShape(percent = 50))
+                                                                .background(indicatorColor)
+                                                        },
+                                                        contentAlignment = Alignment.Center
+                                                    ) {
+                                                        Column(
+                                                            horizontalAlignment = Alignment.CenterHorizontally,
+                                                            verticalArrangement = Arrangement.Center,
+                                                            modifier = Modifier.padding(horizontal = 4.dp)
+                                                        ) {
+                                                            Icon(
+                                                                imageVector = tabIcon,
+                                                                contentDescription = tabLabel,
+                                                                tint = iconTint,
+                                                                modifier = Modifier.size(22.dp)
+                                                            )
+                                                            if (!hideNavLabels) {
+                                                                Text(
+                                                                    text = tabLabel,
+                                                                    style = MaterialTheme.typography.labelSmall.copy(
+                                                                        fontWeight = FontWeight.SemiBold,
+                                                                        fontSize = 11.sp
+                                                                    ),
+                                                                    color = textColor,
+                                                                    maxLines = 1,
+                                                                    modifier = Modifier.padding(top = 2.dp)
+                                                                )
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+
+                                        if (isScanning) {
+                                            LinearProgressIndicator(
+                                                modifier = Modifier
+                                                    .fillMaxWidth()
+                                                    .height(3.dp)
+                                                    .clip(RoundedCornerShape(topStart = 16.dp, topEnd = 16.dp))
+                                                    .align(Alignment.TopCenter),
+                                                color = when (currentTab) {
+                                                    MainTab.Stop -> stopOrange
+                                                    MainTab.Clean -> accentBlue
+                                                    MainTab.Apps -> androidGreen
+                                                    MainTab.Statistics -> Color(0xFFFF5252)
+                                                    MainTab.Menu -> accentBlue
+                                                },
+                                                trackColor = Color.Transparent
+                                            )
+                                        }
                                     }
                                 }
                             }
                         }
                     }
-                }
             },
         containerColor = appBackground,
         contentWindowInsets = WindowInsets.systemBars,
@@ -945,7 +1003,7 @@ fun MainScreen(
                 .background(appBackground)
                 .padding(
                     top = paddingValues.calculateTopPadding(),
-                    bottom = paddingValues.calculateBottomPadding(),
+                    bottom = 0.dp,
                     start = paddingValues.calculateLeftPadding(layoutDirection),
                     end = paddingValues.calculateRightPadding(layoutDirection)
                 )
@@ -1120,7 +1178,7 @@ fun MainScreen(
                                             onOpenWhitelist = { currentSubScreen = SubScreen.StopWhitelist },
                                             onOpenHistory = { currentSubScreen = SubScreen.StopHistory },
                                             onOpenDrawer = { scope.launch { drawerState.open() } },
-                                            showMenuButton = !hideMenuButton,
+                                            showMenuButton = !hideMenuButton && reorderableTabs.firstOrNull() == MainTab.Stop,
                                             onAnalyzeStopClick = {
                                                 if (!isUsageAccessGranted) {
                                                     onRequestUsageAccess()
@@ -1153,7 +1211,7 @@ fun MainScreen(
                                             onOpenWhitelist = { currentSubScreen = SubScreen.CleanWhitelist },
                                             onOpenHistory = { currentSubScreen = SubScreen.CleanHistory },
                                             onOpenDrawer = { scope.launch { drawerState.open() } },
-                                            showMenuButton = !hideMenuButton,
+                                            showMenuButton = !hideMenuButton && reorderableTabs.firstOrNull() == MainTab.Clean,
                                             onAnalyzeClick = {
                                                 if (!isUsageAccessGranted) {
                                                     onRequestUsageAccess()
@@ -1169,8 +1227,8 @@ fun MainScreen(
                                                          showCleaningOverlay = true
                                                          CacheCleanerAccessibilityService.startCleaning(context, packages, mode = ServiceMode.CLEAR_CACHE)
                                                      } else {
-                                                        Toast.makeText(context, context.getString(R.string.toast_all_cache_cleaned), Toast.LENGTH_SHORT).show()
-                                                    }
+                                                         Toast.makeText(context, context.getString(R.string.toast_all_cache_cleaned), Toast.LENGTH_SHORT).show()
+                                                     }
                                                 }
                                             }
                                         )
@@ -1180,13 +1238,13 @@ fun MainScreen(
                                             installedApps = installedApps,
                                             currentCleaningPackage = currentCleaningPackage,
                                             onOpenDrawer = { scope.launch { drawerState.open() } },
-                                            showMenuButton = !hideMenuButton
+                                            showMenuButton = false
                                         )
                                     }
                                     MainTab.Statistics -> {
                                         StatisticsScreen(
                                             onOpenDrawer = { scope.launch { drawerState.open() } },
-                                            showMenuButton = !hideMenuButton
+                                            showMenuButton = false
                                         )
                                     }
                                     else -> {}
@@ -1256,7 +1314,8 @@ fun MainScreen(
                     elevation = FloatingActionButtonDefaults.elevation(0.dp, 0.dp, 0.dp, 0.dp),
                     modifier = Modifier
                         .align(Alignment.BottomEnd)
-                        .padding(end = 16.dp, bottom = 16.dp)
+                        .navigationBarsPadding()
+                        .padding(end = 16.dp, bottom = 88.dp)
                 ) {
                     Icon(
                         imageVector = buttonIcon,

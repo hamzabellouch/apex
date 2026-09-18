@@ -43,7 +43,7 @@ private data class WhatsNewItem(
 @Composable
 fun WhatsNewDialog(
     onDismissRequest: () -> Unit,
-    versionName: String = "0.0.8-beta",
+    versionName: String = "0.0.9-beta",
     releaseDate: String = "September 11, 2026",
 ) {
     var isArabic by remember { mutableStateOf(false) }
@@ -87,11 +87,6 @@ fun WhatsNewDialog(
             textAr = "إضافة توافق ذكي بين الوضع التوربو والسرعة المخصصة في الإعدادات ليعملا معاً بسلاسة",
             beforeImage = R.drawable.whats_new_turbo_before,
             afterImage = R.drawable.whats_new_turbo_after
-        ),
-        WhatsNewItem(
-            textEn = "Added an option in settings to restore the classic full-width taskbar",
-            textAr = "إضافة خيار في الإعدادات لاستعادة شريط المهام الكلاسيكي كامل العرض",
-            singleImage = R.drawable.whats_new_classic_taskbar
         ),
         WhatsNewItem(
             textEn = "Improved popup dialogs for Cleaning mode and Force stop mode by removing unnecessary extra spacing",

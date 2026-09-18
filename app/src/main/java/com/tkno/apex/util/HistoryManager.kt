@@ -25,7 +25,8 @@ enum class HistoryTimePeriod {
     TODAY,
     YESTERDAY,
     LAST_7_DAYS,
-    LAST_30_DAYS
+    LAST_30_DAYS,
+    ALL_TIME
 }
 
 object HistoryManager {
@@ -39,22 +40,32 @@ object HistoryManager {
 
     // --- Clean History ---
 
+    @Synchronized
     fun getCleanHistory(context: Context): List<CleanHistoryEntry> {
         val jsonStr = getPrefs(context).getString(KEY_CLEAN_HISTORY, null) ?: return emptyList()
+        if (jsonStr.isEmpty() || jsonStr == "[]") return emptyList()
         val list = mutableListOf<CleanHistoryEntry>()
         try {
             val jsonArray = JSONArray(jsonStr)
             for (i in 0 until jsonArray.length()) {
-                val obj = jsonArray.getJSONObject(i)
-                list.add(
-                    CleanHistoryEntry(
-                        id = obj.optString("id", java.util.UUID.randomUUID().toString()),
-                        packageName = obj.optString("packageName", ""),
-                        appName = obj.optString("appName", ""),
-                        bytesCleared = obj.optLong("bytesCleared", 0L),
-                        timestamp = obj.optLong("timestamp", 0L)
-                    )
-                )
+                try {
+                    val obj = jsonArray.optJSONObject(i) ?: continue
+                    val packageName = obj.optString("packageName", "")
+                    val appName = obj.optString("appName", "")
+                    if (packageName.isNotEmpty() || appName.isNotEmpty()) {
+                        list.add(
+                            CleanHistoryEntry(
+                                id = obj.optString("id", java.util.UUID.randomUUID().toString()),
+                                packageName = packageName,
+                                appName = appName,
+                                bytesCleared = obj.optLong("bytesCleared", 0L),
+                                timestamp = obj.optLong("timestamp", 0L)
+                            )
+                        )
+                    }
+                } catch (e: Exception) {
+                    // Skip single corrupted entry to protect the rest of the list
+                }
             }
         } catch (e: Exception) {
             e.printStackTrace()
@@ -62,48 +73,68 @@ object HistoryManager {
         return list.sortedByDescending { it.timestamp }
     }
 
+    @Synchronized
     fun addCleanRecords(context: Context, entries: List<CleanHistoryEntry>) {
         if (entries.isEmpty()) return
         val currentList = getCleanHistory(context).toMutableList()
-        currentList.addAll(0, entries)
+        val existingIds = currentList.map { it.id }.toSet()
+        val newEntries = entries.filter { it.id !in existingIds }
+        if (newEntries.isEmpty()) return
+        currentList.addAll(0, newEntries)
         saveCleanHistory(context, currentList)
     }
 
+    @Synchronized
     private fun saveCleanHistory(context: Context, list: List<CleanHistoryEntry>) {
-        val jsonArray = JSONArray()
-        for (entry in list) {
-            val obj = JSONObject()
-            obj.put("id", entry.id)
-            obj.put("packageName", entry.packageName)
-            obj.put("appName", entry.appName)
-            obj.put("bytesCleared", entry.bytesCleared)
-            obj.put("timestamp", entry.timestamp)
-            jsonArray.put(obj)
+        try {
+            val jsonArray = JSONArray()
+            for (entry in list) {
+                val obj = JSONObject()
+                obj.put("id", entry.id)
+                obj.put("packageName", entry.packageName)
+                obj.put("appName", entry.appName)
+                obj.put("bytesCleared", entry.bytesCleared)
+                obj.put("timestamp", entry.timestamp)
+                jsonArray.put(obj)
+            }
+            getPrefs(context).edit().putString(KEY_CLEAN_HISTORY, jsonArray.toString()).apply()
+        } catch (e: Exception) {
+            e.printStackTrace()
         }
-        getPrefs(context).edit().putString(KEY_CLEAN_HISTORY, jsonArray.toString()).apply()
     }
 
+    @Synchronized
     fun clearCleanHistory(context: Context) {
         getPrefs(context).edit().remove(KEY_CLEAN_HISTORY).apply()
     }
 
     // --- Stop History ---
 
+    @Synchronized
     fun getStopHistory(context: Context): List<StopHistoryEntry> {
         val jsonStr = getPrefs(context).getString(KEY_STOP_HISTORY, null) ?: return emptyList()
+        if (jsonStr.isEmpty() || jsonStr == "[]") return emptyList()
         val list = mutableListOf<StopHistoryEntry>()
         try {
             val jsonArray = JSONArray(jsonStr)
             for (i in 0 until jsonArray.length()) {
-                val obj = jsonArray.getJSONObject(i)
-                list.add(
-                    StopHistoryEntry(
-                        id = obj.optString("id", java.util.UUID.randomUUID().toString()),
-                        packageName = obj.optString("packageName", ""),
-                        appName = obj.optString("appName", ""),
-                        timestamp = obj.optLong("timestamp", 0L)
-                    )
-                )
+                try {
+                    val obj = jsonArray.optJSONObject(i) ?: continue
+                    val packageName = obj.optString("packageName", "")
+                    val appName = obj.optString("appName", "")
+                    if (packageName.isNotEmpty() || appName.isNotEmpty()) {
+                        list.add(
+                            StopHistoryEntry(
+                                id = obj.optString("id", java.util.UUID.randomUUID().toString()),
+                                packageName = packageName,
+                                appName = appName,
+                                timestamp = obj.optLong("timestamp", 0L)
+                            )
+                        )
+                    }
+                } catch (e: Exception) {
+                    // Skip single corrupted entry
+                }
             }
         } catch (e: Exception) {
             e.printStackTrace()
@@ -111,26 +142,36 @@ object HistoryManager {
         return list.sortedByDescending { it.timestamp }
     }
 
+    @Synchronized
     fun addStopRecords(context: Context, entries: List<StopHistoryEntry>) {
         if (entries.isEmpty()) return
         val currentList = getStopHistory(context).toMutableList()
-        currentList.addAll(0, entries)
+        val existingIds = currentList.map { it.id }.toSet()
+        val newEntries = entries.filter { it.id !in existingIds }
+        if (newEntries.isEmpty()) return
+        currentList.addAll(0, newEntries)
         saveStopHistory(context, currentList)
     }
 
+    @Synchronized
     private fun saveStopHistory(context: Context, list: List<StopHistoryEntry>) {
-        val jsonArray = JSONArray()
-        for (entry in list) {
-            val obj = JSONObject()
-            obj.put("id", entry.id)
-            obj.put("packageName", entry.packageName)
-            obj.put("appName", entry.appName)
-            obj.put("timestamp", entry.timestamp)
-            jsonArray.put(obj)
+        try {
+            val jsonArray = JSONArray()
+            for (entry in list) {
+                val obj = JSONObject()
+                obj.put("id", entry.id)
+                obj.put("packageName", entry.packageName)
+                obj.put("appName", entry.appName)
+                obj.put("timestamp", entry.timestamp)
+                jsonArray.put(obj)
+            }
+            getPrefs(context).edit().putString(KEY_STOP_HISTORY, jsonArray.toString()).apply()
+        } catch (e: Exception) {
+            e.printStackTrace()
         }
-        getPrefs(context).edit().putString(KEY_STOP_HISTORY, jsonArray.toString()).apply()
     }
 
+    @Synchronized
     fun clearStopHistory(context: Context) {
         getPrefs(context).edit().remove(KEY_STOP_HISTORY).apply()
     }
@@ -138,8 +179,7 @@ object HistoryManager {
     // --- Helper Filter Utilities ---
 
     fun isTimestampInPeriod(timestamp: Long, period: HistoryTimePeriod): Boolean {
-        val calendar = Calendar.getInstance()
-        val now = calendar.timeInMillis
+        if (period == HistoryTimePeriod.ALL_TIME) return true
 
         val todayStart = Calendar.getInstance().apply {
             set(Calendar.HOUR_OF_DAY, 0)
@@ -157,6 +197,7 @@ object HistoryManager {
             HistoryTimePeriod.YESTERDAY -> timestamp in yesterdayStart until todayStart
             HistoryTimePeriod.LAST_7_DAYS -> timestamp >= last7DaysStart
             HistoryTimePeriod.LAST_30_DAYS -> timestamp >= last30DaysStart
+            HistoryTimePeriod.ALL_TIME -> true
         }
     }
 
@@ -183,6 +224,37 @@ object HistoryManager {
             mb >= 1.0 -> String.format(java.util.Locale.US, "%.1f MB", mb)
             kb >= 1.0 -> String.format(java.util.Locale.US, "%.0f KB", kb)
             else -> "$bytes B"
+        }
+    }
+
+    fun formatCount(count: Long): String {
+        if (count <= 0) return "0"
+        return when {
+            count >= 1_000_000_000L -> {
+                val b = count / 1_000_000_000.0
+                if (count % 1_000_000_000L == 0L) {
+                    "${count / 1_000_000_000L}B"
+                } else {
+                    String.format(java.util.Locale.US, "%.1fB", b).replace(".0B", "B")
+                }
+            }
+            count >= 1_000_000L -> {
+                val m = count / 1_000_000.0
+                if (count % 1_000_000L == 0L) {
+                    "${count / 1_000_000L}M"
+                } else {
+                    String.format(java.util.Locale.US, "%.1fM", m).replace(".0M", "M")
+                }
+            }
+            count >= 1_000L -> {
+                val k = count / 1_000.0
+                if (count % 1_000L == 0L) {
+                    "${count / 1_000L}K"
+                } else {
+                    String.format(java.util.Locale.US, "%.1fK", k).replace(".0K", "K")
+                }
+            }
+            else -> count.toString()
         }
     }
 

@@ -2,6 +2,8 @@ package com.tkno.apex.ui.main
 
 import androidx.activity.compose.BackHandler
 import androidx.compose.animation.AnimatedContent
+import androidx.compose.animation.core.Animatable
+import androidx.compose.animation.core.FastOutSlowInEasing
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
@@ -234,7 +236,7 @@ private fun StatisticsOverviewView(
             LazyColumn(
                 modifier = Modifier.fillMaxSize(),
                 verticalArrangement = Arrangement.spacedBy(16.dp),
-                contentPadding = PaddingValues(bottom = 32.dp)
+                contentPadding = PaddingValues(bottom = 110.dp)
             ) {
                 // Card 1: Today Screen Time & Segmented Color Progress Bar
                 item {
@@ -317,16 +319,34 @@ private fun SegmentedProgressBar(
     modifier: Modifier = Modifier
 ) {
     val fallbackColor = MaterialTheme.colorScheme.surfaceContainerHighest
+    val animProgress = remember { Animatable(0f) }
+
+    LaunchedEffect(segments) {
+        if (segments.isNotEmpty()) {
+            animProgress.snapTo(0f)
+            animProgress.animateTo(
+                targetValue = 1f,
+                animationSpec = tween(
+                    durationMillis = 850,
+                    easing = FastOutSlowInEasing
+                )
+            )
+        }
+    }
 
     Box(
         modifier = modifier
             .clip(RoundedCornerShape(12.dp))
             .background(fallbackColor)
     ) {
-        if (segments.isNotEmpty()) {
-            Row(modifier = Modifier.fillMaxSize()) {
+        if (segments.isNotEmpty() && animProgress.value > 0f) {
+            Row(
+                modifier = Modifier
+                    .fillMaxHeight()
+                    .fillMaxWidth(animProgress.value)
+            ) {
                 segments.forEach { segment ->
-                    val weight = segment.fraction.coerceAtLeast(0.01f)
+                    val weight = segment.fraction.coerceAtLeast(0.001f)
                     Box(
                         modifier = Modifier
                             .weight(weight)
@@ -542,7 +562,7 @@ private fun StatisticsDetailedWeeklyView(
                 )
             }
             Text(
-                text = stringResource(id = R.string.nav_statistics),
+                text = stringResource(id = R.string.weekly_report),
                 color = MaterialTheme.colorScheme.onBackground,
                 fontSize = 24.sp,
                 fontWeight = FontWeight.Bold,
@@ -614,7 +634,7 @@ private fun StatisticsDetailedWeeklyView(
                 LazyColumn(
                     modifier = Modifier.fillMaxSize(),
                     verticalArrangement = Arrangement.spacedBy(16.dp),
-                    contentPadding = PaddingValues(bottom = 32.dp)
+                    contentPadding = PaddingValues(bottom = 110.dp)
                 ) {
                     // Top Hero Card: Screen Time Metric & Weekly Bar Chart
                     item {
@@ -782,6 +802,11 @@ private fun WeeklyBarChartView(
                 }
             }
 
+            var animationPlayed by remember { mutableStateOf(false) }
+            LaunchedEffect(dailyUsages) {
+                animationPlayed = true
+            }
+
             // 2. Interactive Bars Column Row
             Row(
                 modifier = Modifier.fillMaxSize(),
@@ -797,8 +822,12 @@ private fun WeeklyBarChartView(
                     }
 
                     val animatedFraction by animateFloatAsState(
-                        targetValue = targetFraction,
-                        animationSpec = tween(durationMillis = 400),
+                        targetValue = if (animationPlayed) targetFraction else 0f,
+                        animationSpec = tween(
+                            durationMillis = 600,
+                            delayMillis = index * 35,
+                            easing = FastOutSlowInEasing
+                        ),
                         label = "BarHeightAnim_$index"
                     )
 

@@ -212,7 +212,7 @@ fun AppsScreen(
                             state = listState,
                             modifier = Modifier.fillMaxSize(),
                             verticalArrangement = Arrangement.spacedBy(8.dp),
-                            contentPadding = PaddingValues(bottom = 16.dp)
+                            contentPadding = PaddingValues(bottom = 110.dp)
                         ) {
                             items(filteredApps, key = { it.packageName }) { app ->
                                 AppCacheItem(

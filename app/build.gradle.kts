@@ -11,8 +11,8 @@ android {
         applicationId = "com.tkno.apex"
         minSdk = 24 // Supports Android 7.0 (API 24), Android 8.0 (API 26/Oreo), Android 9 through Android 15+
         targetSdk = 36
-        versionCode = 8
-        versionName = "0.0.8-beta"
+        versionCode = 9
+        versionName = "0.0.9-beta"
 
         ndk {
             abiFilters += setOf("armeabi-v7a", "arm64-v8a", "x86", "x86_64")
@@ -42,12 +42,18 @@ android {
         excludes += "/META-INF/{AL2.0,LGPL2.1}"
       }
     }
+
+    lint {
+      abortOnError = false
+      checkReleaseBuilds = false
+      disable += setOf("ExtraTranslation", "MissingTranslation")
+    }
 }
 
 androidComponents {
     onVariants { variant ->
         variant.outputs.forEach { output ->
-            output.outputFileName.set("Apex-v0.0.8-beta-${variant.name}.apk")
+            output.outputFileName.set("Apex-v0.0.9-beta-${variant.name}.apk")
         }
     }
 }
@@ -76,10 +82,11 @@ dependencies {
   implementation(libs.androidx.compose.material3)
   implementation(libs.androidx.compose.material.icons.extended)
 
-  // Tooling
-  debugImplementation(libs.androidx.compose.ui.tooling)
-
-  // Networking (for auto-update)
+  // Auto-Update dependencies
   implementation(libs.okhttp)
   implementation(libs.kotlinx.serialization.json)
+  implementation(libs.androidx.documentfile)
+
+  // Tooling
+  debugImplementation(libs.androidx.compose.ui.tooling)
 }

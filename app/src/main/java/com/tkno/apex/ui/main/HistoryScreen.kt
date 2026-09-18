@@ -82,6 +82,10 @@ fun HistoryScreen(
         }
     }
 
+    LaunchedEffect(Unit) {
+        refreshHistory()
+    }
+
     // Dynamic metrics calculations for Today
     val todayCleanEntries = remember(cleanHistory) {
         HistoryManager.filterCleanHistoryByPeriod(cleanHistory, HistoryTimePeriod.TODAY)
@@ -131,6 +135,7 @@ fun HistoryScreen(
             ) {
                 if (mode == HistoryMode.STOP) {
                     val stopUnit = stringResource(R.string.history_stop_unit)
+                    val formattedStopCount = HistoryManager.formatCount(todayStopEntries.size.toLong())
                     Row(
                         verticalAlignment = Alignment.Top
                     ) {
@@ -143,7 +148,7 @@ fun HistoryScreen(
                         )
                         Spacer(modifier = Modifier.width(4.dp))
                         Text(
-                            text = "${todayStopEntries.size}",
+                            text = formattedStopCount,
                             color = MaterialTheme.colorScheme.onBackground,
                             fontSize = 48.sp,
                             fontWeight = FontWeight.Bold
@@ -234,6 +239,13 @@ fun HistoryScreen(
                     subtitle = stringResource(R.string.history_period_tap_details),
                     onClick = { selectedPeriod = HistoryTimePeriod.LAST_30_DAYS }
                 )
+                HorizontalDivider(color = dividerColor, thickness = 1.dp)
+
+                HistoryPeriodItem(
+                    title = stringResource(R.string.history_period_all_time),
+                    subtitle = stringResource(R.string.history_period_tap_details),
+                    onClick = { selectedPeriod = HistoryTimePeriod.ALL_TIME }
+                )
             }
         }
 
@@ -275,6 +287,7 @@ fun HistoryScreen(
                 HistoryTimePeriod.YESTERDAY -> stringResource(R.string.history_period_yesterday)
                 HistoryTimePeriod.LAST_7_DAYS -> stringResource(R.string.history_period_last_7_days)
                 HistoryTimePeriod.LAST_30_DAYS -> stringResource(R.string.history_period_last_30_days)
+                HistoryTimePeriod.ALL_TIME -> stringResource(R.string.history_period_all_time)
             }
 
             Box(
@@ -375,25 +388,37 @@ fun HistoryScreen(
                                         ) {
                                             val icon = getAppIcon(pkg)
                                             if (icon != null) {
-                                                Image(
-                                                    bitmap = icon.toBitmap(54, 54).asImageBitmap(),
-                                                    contentDescription = appName,
-                                                    modifier = Modifier
-                                                        .size(44.dp)
-                                                        .clip(CircleShape)
-                                                )
+                                                val bitmap = remember(pkg) {
+                                                    try {
+                                                        icon.toBitmap().asImageBitmap()
+                                                    } catch (e: Exception) {
+                                                        null
+                                                    }
+                                                }
+                                                if (bitmap != null) {
+                                                    Image(
+                                                        bitmap = bitmap,
+                                                        contentDescription = appName,
+                                                        modifier = Modifier.size(42.dp)
+                                                    )
+                                                } else {
+                                                    Icon(
+                                                        imageVector = Icons.Default.Android,
+                                                        contentDescription = appName,
+                                                        tint = MaterialTheme.colorScheme.onSurface,
+                                                        modifier = Modifier.size(36.dp)
+                                                    )
+                                                }
                                             } else {
                                                 Icon(
                                                     imageVector = Icons.Default.Android,
                                                     contentDescription = appName,
-                                                    tint = Color(0xFF3DDC84),
-                                                    modifier = Modifier
-                                                        .size(44.dp)
-                                                        .clip(CircleShape)
+                                                    tint = MaterialTheme.colorScheme.onSurface,
+                                                    modifier = Modifier.size(36.dp)
                                                 )
                                             }
 
-                                            Spacer(modifier = Modifier.width(16.dp))
+                                            Spacer(modifier = Modifier.width(14.dp))
 
                                             Column(
                                                 modifier = Modifier.weight(1f)
@@ -606,25 +631,37 @@ private fun StopHistoryRowItem(
             verticalAlignment = Alignment.CenterVertically
         ) {
             if (iconDrawable != null) {
-                Image(
-                    bitmap = iconDrawable.toBitmap(54, 54).asImageBitmap(),
-                    contentDescription = appName,
-                    modifier = Modifier
-                        .size(44.dp)
-                        .clip(CircleShape)
-                )
+                val bitmap = remember(packageName) {
+                    try {
+                        iconDrawable.toBitmap().asImageBitmap()
+                    } catch (e: Exception) {
+                        null
+                    }
+                }
+                if (bitmap != null) {
+                    Image(
+                        bitmap = bitmap,
+                        contentDescription = appName,
+                        modifier = Modifier.size(42.dp)
+                    )
+                } else {
+                    Icon(
+                        imageVector = Icons.Default.Android,
+                        contentDescription = appName,
+                        tint = MaterialTheme.colorScheme.onSurface,
+                        modifier = Modifier.size(36.dp)
+                    )
+                }
             } else {
                 Icon(
                     imageVector = Icons.Default.Android,
                     contentDescription = appName,
-                    tint = Color(0xFF3DDC84),
-                    modifier = Modifier
-                        .size(44.dp)
-                        .clip(CircleShape)
+                    tint = MaterialTheme.colorScheme.onSurface,
+                    modifier = Modifier.size(36.dp)
                 )
             }
 
-            Spacer(modifier = Modifier.width(16.dp))
+            Spacer(modifier = Modifier.width(14.dp))
 
             Column(
                 modifier = Modifier.weight(1f)

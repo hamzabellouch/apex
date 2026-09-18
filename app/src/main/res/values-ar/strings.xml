@@ -90,6 +90,8 @@
     <string name="hide_navigation_labels_desc">إخفاء النصوص في شريط التنقل السفلي وإظهار الأيقونات فقط</string>
     <string name="use_classic_navigation_bar">استخدام شريط التنقل الكلاسيكي</string>
     <string name="use_classic_navigation_bar_desc">العودة إلى مظهر شريط التنقل التقليدي الممتد بعرض الشاشة</string>
+    <string name="animate_taskbar_indicator">تحريك مؤشر شريط التنقل</string>
+    <string name="animate_taskbar_indicator_desc">تفعيل حركة انزلاقية سلسة للهالة عند الانتقال بين التبويبات</string>
     <string name="hide_menu_button">إخفاء زر القائمة</string>
     <string name="hide_menu_button_desc">إخفاء زر القائمة من ترويسة الشاشات مع الإبقاء على إيماءة سحب القائمة مفعلة</string>
     <string name="auto_update">التحديث التلقائي</string>
@@ -99,7 +101,6 @@
     <string name="issue_tracker">متتبع المشاكل</string>
     <string name="issue_tracker_hint">هل واجهت خطأً؟ قبل الإبلاغ عن مشكلة جديدة، يرجى البحث في متتبع المشاكل الخاص بنا. تم توثيق وإصلاح العديد من المشاكل الشائعة هناك.</string>
     <string name="menu">القائمة</string>
-    <string name="menu_options_listed_count">%1$d خيارات في القائمة</string>
     <string name="scan">مسح</string>
     <string name="contact">الاتصال</string>
     <string name="contact_desc">تواصل مع المطور لإضافة ميزات جديدة في إيبكس</string>
@@ -128,6 +129,7 @@
     <string name="nav_clean">تنظيف</string>
     <string name="nav_apps">التطبيقات</string>
     <string name="nav_statistics">الإحصائيات</string>
+    <string name="weekly_report">التقرير الأسبوعي</string>
     <string name="nav_menu">القائمة</string>
     <string name="toast_all_cache_cleaned">جميع ملفات التخزين المؤقت منظفة بالفعل (0 ك.بايت)</string>
     <string name="toast_all_bg_apps_stopped">جميع تطبيقات الخلفية متوقفة بالفعل</string>
@@ -247,6 +249,7 @@
     <string name="history_period_yesterday">الأمس</string>
     <string name="history_period_last_7_days">آخر 7 أيام</string>
     <string name="history_period_last_30_days">آخر 30 يومًا</string>
+    <string name="history_period_all_time">الكل</string>
     <string name="history_period_tap_details">انقر هنا لعرض التفاصيل</string>
     <string name="history_clear_all">مسح الكل</string>
     <string name="history_period_summary_singular">الإجمالي: %1$d تطبيق  |  %2$s ذاكرة تخزين مؤقت</string>
@@ -304,4 +307,6 @@
     <string name="category_productivity_finance">الإنتاجية والمالية</string>
     <string name="detailed_statistics">الإحصائيات المفصلة</string>
     <string name="no_usage_data_today">لا توجد بيانات استخدام مسجلة لليوم</string>
+    <string name="auto_install_packages">تثبيت الحزم تلقائياً</string>
+    <string name="manual_install_open_files">تم تنزيل تحديث APK. اذهب إلى تطبيق الملفات لتثبيت التحديث.</string>
 </resources>
