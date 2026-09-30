@@ -6,8 +6,8 @@ The following versions of Apex are currently supported with security, privacy, a
 
 | Version       | Supported          |
 | ------------- | ------------------ |
-| + 1.0.0         | :white_check_mark: |
-| < 1.0.0       | :x:                |
+| + 0.1.0-beta  | :white_check_mark: |
+| < 0.1.0-beta  | :x:                |
 
 
 
@@ -24,7 +24,7 @@ Please make sure that:
 ### How to Report
 You can report vulnerabilities through:
 - GitHub Issues (for non-sensitive reports and general bug reports)
-- Direct private contact channels / email for sensitive vulnerabilities or security concerns
+- E-mail: hamzabellouchcontact@gmail.com / [Froms](https://docs.google.com/forms/d/e/1FAIpQLScQgidK6ixuhSmQt2Ra3H7FWNNVbsZ4YgX0P3r7Xe5Aumpzrg/viewform?usp=dialog) for sensitive vulnerabilities or security concerns
 
 When reporting, please include:
 - Device model and Android OS version
