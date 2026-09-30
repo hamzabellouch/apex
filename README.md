@@ -38,23 +38,23 @@ Apex UI & Features:
     <img src="https://github.com/hamzabellouch/apex/blob/main/Images/9.jpg" width="30%" />
     <img src="https://github.com/hamzabellouch/apex/blob/main/Images/10.jpg" width="30%" />
     <img src="https://github.com/hamzabellouch/apex/blob/main/Images/11.jpg" width="30%" />
-    <img src="https://github.com/hamzabellouch/apex/blob/main/Images/12.jpg" عرض="30%" />
-    <img src="https://github.com/hamzabellouch/apex/blob/main/Images/13.jpg" عرض="30%" />
-    <img src="https://github.com/hamzabellouch/apex/blob/main/Images/14.jpg" عرض="30%" />
-    <img src="https://github.com/hamzabellouch/apex/blob/main/Images/15.jpg" عرض="30%" />
-    <img src="https://github.com/hamzabellouch/apex/blob/main/Images/16.jpg" عرض="30%" />
-  </شعبة>
-</شعبة>
+    <img src="https://github.com/hamzabellouch/apex/blob/main/Images/12.jpg" width="30%" />
+    <img src="https://github.com/hamzabellouch/apex/blob/main/Images/13.jpg" width="30%" />
+    <img src="https://github.com/hamzabellouch/apex/blob/main/Images/14.jpg" width="30%" />
+    <img src="https://github.com/hamzabellouch/apex/blob/main/Images/15.jpg" width="30%" />
+    <img src="https://github.com/hamzabellouch/apex/blob/main/Images/16.jpg" width="30%" />
+  </div>
+</div>
 
-<ر>
+<br>
 
 
 
-## ⭐ الميزات والقدرات الرئيسية
+## ⭐ Key Features & Capabilities
 
-| ميزة | الطريقة / واجهة برمجة التطبيقات المستخدمة | الأداء والسرعة | مستوى الخصوصية والأمان | وصف |
+| Feature | Method / API Used | Performance & Speed | Privacy & Safety Level | Description |
 | :--- | :--- | :--- | :--- | :--- |
-| **المسح الدقيق لذاكرة التخزين المؤقت** | `StorageStatsManager` & `PACKAGE_USAGE_STATS` | **Ultra-Fast** (< 1 sec) | **100% On-Device** | Reads exact cache sizes for user and pre-installed system applications. |
+| **Accurate Cache Scanning** | `StorageStatsManager` & `PACKAGE_USAGE_STATS` | **Ultra-Fast** (< 1 sec) | **100% On-Device** | Reads exact cache sizes for user and pre-installed system applications. |
 | **Automated Batch Cleaning** | Custom `AccessibilityService` | **Automated & Fast** | **Strictly Isolated** | Automates navigating to app settings and clicking "Clear Cache" without manual user repetition. |
 | **RAM Optimization** | `ActivityManager` & System Memory Trimming | **Instant** | **Safe** | Monitors real-time total, used, and free RAM and releases background app memory. |
 | **System App Protection** | Built-in Safety Guard Rules | **Real-Time** | **System Protective** | Automatically prevents force-stopping critical system apps (Settings, SystemUI, Play Services). |
@@ -125,13 +125,13 @@ Apex follows clean code architecture principles for maintainability, high perfor
 
 3. Install the application on your Android device.
 
-4. Apex Install from unknown sources` is enabled in your Android settings.
+4. Make sure that: `Install from unknown sources` is enabled in your Android settings.
 
 ## 🔨 Building from Source
 
 To build Apex locally, make sure you have the latest version of Android Studio installed.
 1. Clone the repository: `git clone https://github.com/hamzabellouch/apex.git`
-2. Open the project in [Android Studio](https://developer.android.com/studio).
+2. Open the project in Android Studio.
 3. Sync Gradle dependencies.
 4. Build and run the application on your device or emulator.
 
@@ -147,4 +147,4 @@ Thank you for checking out Apex. If you have any feedback or suggestions, feel f
 hamzabellouchcontact@gmail.com
 
 Stay connected and follow us on:  
-[WhatsApp](https://whatsapp.com/channel/0029Vb7MArw0LKZMpjjqOk2P) | [Facebook(https://facebook.com/hamzabellouch0) | [Instagram](https://instagram.com/hamzabellouch0) | [Twitter](https://twitter.com/hamzabellouch0) | [Telegram](https://t.me/hammzabellouch) | [LinkedIn](https://www.linkedin.com/in/hamzabellouch)(https://facebook.com/hamzabellouch0) | [Instagram](https://instagram.com/hamzabellouch0) | [Twitter](https://twitter.com/hamzabellouch0) | [Telegram](https://t.me/hammzabellouch) | [LinkedIn](https://www.linkedin.com/in/hamzabellouch)
+[Facebook](https://facebook.com/hamzabellouch0) | [Instagram](https://instagram.com/hamzabellouch0) | [Twitter](https://twitter.com/hamzabellouch0) | [Telegram](https://t.me/hammzabellouch) | [LinkedIn](https://www.linkedin.com/in/hamzabellouch)
