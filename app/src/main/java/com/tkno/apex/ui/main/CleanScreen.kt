@@ -1,6 +1,7 @@
 package com.tkno.apex.ui.main
 
 import com.tkno.apex.ui.icon.LeftPanelOpen
+import com.tkno.apex.ui.icon.InfoOutline
 
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.FastOutSlowInEasing
@@ -49,6 +50,7 @@ fun CleanScreen(
     onOpenHistory: () -> Unit,
     onOpenDrawer: () -> Unit = {},
     showMenuButton: Boolean = true,
+    showInfoIcon: Boolean = false,
     modifier: Modifier = Modifier
 ) {
     val remainingCacheMb = (totalCacheBytes / (1024 * 1024)).toInt()
@@ -61,6 +63,7 @@ fun CleanScreen(
 
     var showStorageDetailsDialog by remember { mutableStateOf(false) }
     var showLiveCacheDialog by remember { mutableStateOf(false) }
+    var showCleanInfoDialog by remember { mutableStateOf(false) }
 
     Box(
         modifier = modifier
@@ -184,13 +187,32 @@ fun CleanScreen(
                         lineHeight = 32.sp,
                         textAlign = TextAlign.Center
                     )
-                    Text(
-                        text = if (isCleaned) "MB" else displayUnitStr,
-                        color = MaterialTheme.colorScheme.onBackground,
-                        fontSize = 16.sp,
-                        fontWeight = FontWeight.Bold,
-                        textAlign = TextAlign.Center
-                    )
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.Center
+                    ) {
+                        Text(
+                            text = if (isCleaned) "MB" else displayUnitStr,
+                            color = MaterialTheme.colorScheme.onBackground,
+                            fontSize = 16.sp,
+                            fontWeight = FontWeight.Bold,
+                            textAlign = TextAlign.Center
+                        )
+                        if (showInfoIcon && !isCleaned && totalCacheBytes > 0L) {
+                            Spacer(modifier = Modifier.width(4.dp))
+                            IconButton(
+                                onClick = { showCleanInfoDialog = true },
+                                modifier = Modifier.size(22.dp)
+                            ) {
+                                Icon(
+                                    imageVector = InfoOutline,
+                                    contentDescription = stringResource(id = R.string.clean_info_icon_desc),
+                                    tint = accentBlue,
+                                    modifier = Modifier.size(17.dp)
+                                )
+                            }
+                        }
+                    }
                     Spacer(modifier = Modifier.height(4.dp))
                     Text(
                         text = if (isCleaned) stringResource(id = R.string.clean_gauge_system_cleaned) else stringResource(id = R.string.clean_gauge_can_be_cleared),
@@ -346,6 +368,44 @@ fun CleanScreen(
             confirmButton = {
                 TextButton(onClick = { showLiveCacheDialog = false }) {
                     Text(text = stringResource(id = R.string.clean_dialog_ok), color = accentBlue, fontWeight = FontWeight.Bold)
+                }
+            }
+        )
+    }
+
+    // Clean Info Dialog (Explains system cache restrictions)
+    if (showCleanInfoDialog) {
+        AlertDialog(
+            onDismissRequest = { showCleanInfoDialog = false },
+            title = {
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    Icon(
+                        imageVector = InfoOutline,
+                        contentDescription = null,
+                        tint = accentBlue,
+                        modifier = Modifier.size(24.dp)
+                    )
+                    Spacer(modifier = Modifier.width(8.dp))
+                    Text(
+                        text = stringResource(id = R.string.clean_info_dialog_title),
+                        color = MaterialTheme.colorScheme.onSurface,
+                        fontSize = 18.sp,
+                        fontWeight = FontWeight.Bold
+                    )
+                }
+            },
+            text = {
+                Text(
+                    text = stringResource(id = R.string.clean_info_dialog_desc),
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    fontSize = 14.sp,
+                    lineHeight = 20.sp
+                )
+            },
+            containerColor = cardBg,
+            confirmButton = {
+                TextButton(onClick = { showCleanInfoDialog = false }) {
+                    Text(text = stringResource(id = R.string.clean_dialog_close), color = accentBlue, fontWeight = FontWeight.Bold)
                 }
             }
         )

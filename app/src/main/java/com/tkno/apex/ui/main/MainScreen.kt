@@ -18,6 +18,7 @@ import androidx.compose.animation.scaleIn
 import androidx.compose.animation.slideInVertically
 import androidx.compose.animation.slideOutVertically
 import androidx.compose.animation.togetherWith
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
@@ -30,16 +31,19 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Android
+import androidx.compose.material.icons.filled.AutoAwesome
 import androidx.compose.material.icons.filled.Block
 import androidx.compose.material.icons.filled.CleaningServices
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.Menu
+import androidx.compose.material.icons.outlined.TouchApp
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.layout.onGloballyPositioned
@@ -47,6 +51,9 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.platform.LocalViewConfiguration
+import androidx.compose.ui.text.style.TextAlign
+import androidx.core.graphics.drawable.toBitmap
+import com.tkno.apex.service.ManualOperationManager
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import androidx.compose.ui.text.font.FontWeight
@@ -269,7 +276,7 @@ fun MainScreen(
         stoppableUserAppsOnly.filter { !it.isStopped && it.packageName !in stoppedPackages && it.packageName !in stopWhitelist }
     }
 
-    // Accessibility cleaning progress states
+    // Operation cleaning progress states
     var showCleaningOverlay by remember { mutableStateOf(false) }
     var currentCleaningAppIndex by remember { mutableStateOf(0) }
     var currentCleaningAppName by remember { mutableStateOf("") }
@@ -280,11 +287,14 @@ fun MainScreen(
     // Dialog trigger
     var showAccessibilityPromptDialog by remember { mutableStateOf(false) }
     var accessibilityPromptMode by remember { mutableStateOf(ServiceMode.CLEAR_CACHE) }
+    var showModeSelectionDialog by remember { mutableStateOf<ServiceMode?>(null) }
 
     var showOperationDoneScreen by remember { mutableStateOf(false) }
     var completedActionType by remember { mutableStateOf("STOP") }
     var completedAppsCount by remember { mutableStateOf(0) }
     var completedCleanedBytes by remember { mutableStateOf(0L) }
+    var hasCompletedStopSession by remember { mutableStateOf(false) }
+    var hasCompletedCleanSession by remember { mutableStateOf(false) }
 
     val isShowingPermissionScreen = !isUsageAccessGranted ||
             (showAccessibilityPromptDialog && !isAccessibilityEnabled) ||
@@ -296,6 +306,100 @@ fun MainScreen(
     val androidGreen = Color(0xFF3DDC84)
     val menuGray = MaterialTheme.colorScheme.onSurface
     val appBackground = MaterialTheme.colorScheme.background
+
+    fun startAutoOperation(packages: List<String>, mode: ServiceMode) {
+        if (packages.isEmpty()) {
+            val toastRes = if (mode == ServiceMode.FORCE_STOP) R.string.toast_all_bg_apps_stopped else R.string.toast_all_cache_cleaned
+            Toast.makeText(context, context.getString(toastRes), Toast.LENGTH_SHORT).show()
+            return
+        }
+        currentProcessingPackages = packages
+        if (mode == ServiceMode.CLEAR_CACHE) {
+            completedCleanedBytes = filteredTotalCacheBytes
+        }
+        showCleaningOverlay = true
+        onEnterPip()
+        CacheCleanerAccessibilityService.startCleaning(context, packages, mode = mode)
+    }
+
+    fun startManualOperation(packages: List<String>, mode: ServiceMode) {
+        if (packages.isEmpty()) {
+            val toastRes = if (mode == ServiceMode.FORCE_STOP) R.string.toast_all_bg_apps_stopped else R.string.toast_all_cache_cleaned
+            Toast.makeText(context, context.getString(toastRes), Toast.LENGTH_SHORT).show()
+            return
+        }
+        currentProcessingPackages = packages
+        if (mode == ServiceMode.CLEAR_CACHE) {
+            completedCleanedBytes = filteredTotalCacheBytes
+        }
+        showCleaningOverlay = true
+        onEnterPip()
+        ManualOperationManager.start(context, packages, mode = mode)
+    }
+
+    fun handleStartStop(forcedMode: Int? = null) {
+        if (!isUsageAccessGranted) {
+            onRequestUsageAccess()
+            return
+        }
+        val mode = forcedMode ?: prefs.getInt("force_stop_mode", 1)
+        if (mode == 2) {
+            showModeSelectionDialog = ServiceMode.FORCE_STOP
+            return
+        }
+
+        val packages = if (activeRunningUserApps.isNotEmpty()) {
+            activeRunningUserApps.map { it.packageName }
+        } else {
+            stoppableUserAppsOnly.filter { it.packageName !in stopWhitelist }.map { it.packageName }
+        }
+
+        if (packages.isEmpty()) {
+            Toast.makeText(context, context.getString(R.string.toast_all_bg_apps_stopped), Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        if (mode == 0) {
+            startManualOperation(packages, ServiceMode.FORCE_STOP)
+        } else {
+            if (!isAccessibilityEnabled) {
+                accessibilityPromptMode = ServiceMode.FORCE_STOP
+                showAccessibilityPromptDialog = true
+            } else {
+                startAutoOperation(packages, ServiceMode.FORCE_STOP)
+            }
+        }
+    }
+
+    fun handleStartClean(forcedMode: Int? = null) {
+        if (!isUsageAccessGranted) {
+            onRequestUsageAccess()
+            return
+        }
+        val mode = forcedMode ?: prefs.getInt("cleaning_mode", 1)
+        if (mode == 2) {
+            showModeSelectionDialog = ServiceMode.CLEAR_CACHE
+            return
+        }
+
+        val packages = appsWithCacheOnly.map { it.packageName }
+
+        if (packages.isEmpty()) {
+            Toast.makeText(context, context.getString(R.string.toast_all_cache_cleaned), Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        if (mode == 0) {
+            startManualOperation(packages, ServiceMode.CLEAR_CACHE)
+        } else {
+            if (!isAccessibilityEnabled) {
+                accessibilityPromptMode = ServiceMode.CLEAR_CACHE
+                showAccessibilityPromptDialog = true
+            } else {
+                startAutoOperation(packages, ServiceMode.CLEAR_CACHE)
+            }
+        }
+    }
 
     // Load actual apps & system metrics ONLY when app is actively open and in focus (resumes on foreground, halts completely when paused/closed)
     LaunchedEffect(lifecycleOwner, isUsageAccessGranted, showCleaningOverlay) {
@@ -357,13 +461,13 @@ fun MainScreen(
         }
     }
 
-    // Set up progress callbacks from the accessibility service
+    // Set up progress callbacks from the accessibility & manual services
     LaunchedEffect(showCleaningOverlay) {
         if (showCleaningOverlay) {
             successfulPackages = emptySet()
             val initialCacheMap = installedApps.associate { it.packageName to it.cacheBytes }
 
-            CacheCleanerAccessibilityService.progressCallback = { index, total, packageName ->
+            val onProgress: (Int, Int, String) -> Unit = { index, total, packageName ->
                 currentCleaningAppIndex = index + 1
                 currentCleaningPackage = packageName
                 
@@ -375,10 +479,10 @@ fun MainScreen(
                     packageName
                 }
                 currentCleaningAppName = appLabel
-                cleaningProgress = index.toFloat() / total.toFloat()
+                cleaningProgress = if (total > 0) index.toFloat() / total.toFloat() else 0f
             }
 
-            CacheCleanerAccessibilityService.itemResultCallback = { packageName, success, mode ->
+            val onItemResult: (String, Boolean, ServiceMode) -> Unit = { packageName, success, mode ->
                 if (success) {
                     successfulPackages = successfulPackages + packageName
                     if (mode == ServiceMode.FORCE_STOP) {
@@ -391,11 +495,16 @@ fun MainScreen(
                 }
             }
 
-            CacheCleanerAccessibilityService.completionCallback = {
+            val onComplete: () -> Unit = {
                 scope.launch(Dispatchers.Main) {
                     val targetSet = successfulPackages
 
-                    val finishedMode = CacheCleanerAccessibilityService.currentMode
+                    val finishedMode = if (ManualOperationManager.isRunning) ManualOperationManager.currentMode else CacheCleanerAccessibilityService.currentMode
+                    if (finishedMode == ServiceMode.FORCE_STOP) {
+                        hasCompletedStopSession = true
+                    } else {
+                        hasCompletedCleanSession = true
+                    }
                     completedActionType = if (finishedMode == ServiceMode.FORCE_STOP) "STOP" else "CLEAN"
                     completedAppsCount = targetSet.size
                     completedCleanedBytes = targetSet.sumOf { pkg -> initialCacheMap[pkg] ?: 0L }
@@ -456,14 +565,27 @@ fun MainScreen(
                     }
                 }
             }
+
+            CacheCleanerAccessibilityService.progressCallback = onProgress
+            CacheCleanerAccessibilityService.itemResultCallback = onItemResult
+            CacheCleanerAccessibilityService.completionCallback = onComplete
+
+            ManualOperationManager.progressCallback = onProgress
+            ManualOperationManager.itemResultCallback = onItemResult
+            ManualOperationManager.completionCallback = onComplete
         } else {
             CacheCleanerAccessibilityService.stopCleaning()
+            ManualOperationManager.stop(context)
             currentCleaningPackage = null
         }
     }
 
     if (isInPipMode) {
-        val isForceStopMode = CacheCleanerAccessibilityService.currentMode == ServiceMode.FORCE_STOP
+        val isForceStopMode = if (ManualOperationManager.isRunning) {
+            ManualOperationManager.currentMode == ServiceMode.FORCE_STOP
+        } else {
+            CacheCleanerAccessibilityService.currentMode == ServiceMode.FORCE_STOP
+        }
         val pipAccentColor = if (isForceStopMode) stopOrange else accentBlue
 
         Column(
@@ -489,13 +611,14 @@ fun MainScreen(
                     .padding(horizontal = 12.dp, vertical = 2.dp)
             ) {
                 Text(
-                    text = if (isForceStopMode) "Force stopping..." else "Cleaning cache...",
+                    text = if (isForceStopMode) stringResource(R.string.pip_force_stopping) else stringResource(R.string.pip_cleaning_cache),
                     color = Color.White,
                     fontSize = 13.5.sp,
                     fontWeight = FontWeight.Bold,
                     maxLines = 1,
                     modifier = Modifier.align(Alignment.Center)
-                )            }
+                )
+            }
 
             // 3. Bottom Section: Full-Width Bright Cyan/Orange Banner
             Box(
@@ -1033,25 +1156,7 @@ fun MainScreen(
                                 totalCacheBytes = filteredTotalCacheBytes,
                                 currentCleaningPackage = currentCleaningPackage,
                                 onBackClick = { currentSubScreen = SubScreen.None },
-                                onClearClick = {
-                                    if (!isUsageAccessGranted) {
-                                        onRequestUsageAccess()
-                                    } else if (!isAccessibilityEnabled) {
-                                        accessibilityPromptMode = ServiceMode.CLEAR_CACHE
-                                        showAccessibilityPromptDialog = true
-                                    } else {
-                                         val packages = appsWithCacheOnly.map { it.packageName }
-                                         if (packages.isNotEmpty()) {
-                                             currentProcessingPackages = packages
-                                             completedCleanedBytes = filteredTotalCacheBytes
-                                             CacheCleanerAccessibilityService.startCleaning(context, packages, mode = ServiceMode.CLEAR_CACHE)
-                                             showCleaningOverlay = true
-                                             onEnterPip()
-                                         } else {
-                                            Toast.makeText(context, context.getString(R.string.toast_all_cache_cleaned), Toast.LENGTH_SHORT).show()
-                                        }
-                                    }
-                                }
+                                onClearClick = { handleStartClean() }
                             )
                         }
                         SubScreen.StopWhitelist -> {
@@ -1179,28 +1284,8 @@ fun MainScreen(
                                             onOpenHistory = { currentSubScreen = SubScreen.StopHistory },
                                             onOpenDrawer = { scope.launch { drawerState.open() } },
                                             showMenuButton = !hideMenuButton && reorderableTabs.firstOrNull() == MainTab.Stop,
-                                            onAnalyzeStopClick = {
-                                                if (!isUsageAccessGranted) {
-                                                    onRequestUsageAccess()
-                                                } else if (!isAccessibilityEnabled) {
-                                                    accessibilityPromptMode = ServiceMode.FORCE_STOP
-                                                    showAccessibilityPromptDialog = true
-                                                } else {
-                                                    val packages = if (activeRunningUserApps.isNotEmpty()) {
-                                                        activeRunningUserApps.map { it.packageName }
-                                                    } else {
-                                                        stoppableUserAppsOnly.filter { it.packageName !in stopWhitelist }.map { it.packageName }
-                                                    }
-                                                    if (packages.isNotEmpty()) {
-                                                        currentProcessingPackages = packages
-                                                        onEnterPip()
-                                                        showCleaningOverlay = true
-                                                        CacheCleanerAccessibilityService.startCleaning(context, packages, mode = ServiceMode.FORCE_STOP)
-                                                    } else {
-                                                        Toast.makeText(context, context.getString(R.string.toast_all_bg_apps_stopped), Toast.LENGTH_SHORT).show()
-                                                    }
-                                                }
-                                            }
+                                            showInfoIcon = hasCompletedStopSession && activeRunningUserApps.isNotEmpty(),
+                                            onAnalyzeStopClick = { handleStartStop() }
                                         )
                                     }
                                     MainTab.Clean -> {
@@ -1212,25 +1297,8 @@ fun MainScreen(
                                             onOpenHistory = { currentSubScreen = SubScreen.CleanHistory },
                                             onOpenDrawer = { scope.launch { drawerState.open() } },
                                             showMenuButton = !hideMenuButton && reorderableTabs.firstOrNull() == MainTab.Clean,
-                                            onAnalyzeClick = {
-                                                if (!isUsageAccessGranted) {
-                                                    onRequestUsageAccess()
-                                                } else if (!isAccessibilityEnabled) {
-                                                    accessibilityPromptMode = ServiceMode.CLEAR_CACHE
-                                                    showAccessibilityPromptDialog = true
-                                                } else {
-                                                     val packages = appsWithCacheOnly.map { it.packageName }
-                                                     if (packages.isNotEmpty()) {
-                                                         currentProcessingPackages = packages
-                                                         completedCleanedBytes = filteredTotalCacheBytes
-                                                         onEnterPip()
-                                                         showCleaningOverlay = true
-                                                         CacheCleanerAccessibilityService.startCleaning(context, packages, mode = ServiceMode.CLEAR_CACHE)
-                                                     } else {
-                                                         Toast.makeText(context, context.getString(R.string.toast_all_cache_cleaned), Toast.LENGTH_SHORT).show()
-                                                     }
-                                                }
-                                            }
+                                            showInfoIcon = hasCompletedCleanSession && filteredTotalCacheBytes > 0L,
+                                            onAnalyzeClick = { handleStartClean() }
                                         )
                                     }
                                     MainTab.Apps -> {
@@ -1265,44 +1333,9 @@ fun MainScreen(
                 val buttonText = stringResource(id = if (isStopTab) R.string.stop_start_button else R.string.clean_start_button)
                 val onButtonClick = {
                     if (isStopTab) {
-                        if (!isUsageAccessGranted) {
-                            onRequestUsageAccess()
-                        } else if (!isAccessibilityEnabled) {
-                            accessibilityPromptMode = ServiceMode.FORCE_STOP
-                            showAccessibilityPromptDialog = true
-                        } else {
-                            val packages = if (activeRunningUserApps.isNotEmpty()) {
-                                activeRunningUserApps.map { it.packageName }
-                            } else {
-                                stoppableUserAppsOnly.filter { it.packageName !in stopWhitelist }.map { it.packageName }
-                            }
-                            if (packages.isNotEmpty()) {
-                                currentProcessingPackages = packages
-                                onEnterPip()
-                                showCleaningOverlay = true
-                                CacheCleanerAccessibilityService.startCleaning(context, packages, mode = ServiceMode.FORCE_STOP)
-                            } else {
-                                Toast.makeText(context, context.getString(R.string.toast_all_bg_apps_stopped), Toast.LENGTH_SHORT).show()
-                            }
-                        }
+                        handleStartStop()
                     } else {
-                        if (!isUsageAccessGranted) {
-                            onRequestUsageAccess()
-                        } else if (!isAccessibilityEnabled) {
-                            accessibilityPromptMode = ServiceMode.CLEAR_CACHE
-                            showAccessibilityPromptDialog = true
-                        } else {
-                            val packages = appsWithCacheOnly.map { it.packageName }
-                            if (packages.isNotEmpty()) {
-                                currentProcessingPackages = packages
-                                completedCleanedBytes = filteredTotalCacheBytes
-                                onEnterPip()
-                                showCleaningOverlay = true
-                                CacheCleanerAccessibilityService.startCleaning(context, packages, mode = ServiceMode.CLEAR_CACHE)
-                            } else {
-                                Toast.makeText(context, context.getString(R.string.toast_all_cache_cleaned), Toast.LENGTH_SHORT).show()
-                            }
-                        }
+                        handleStartClean()
                     }
                 }
 
@@ -1339,6 +1372,235 @@ fun MainScreen(
                     },
                     onCancelClick = {
                         showAccessibilityPromptDialog = false
+                    }
+                )
+            }
+
+            // Mode Selection Dialog (Appears when mode is set to "Ask each time")
+            if (showModeSelectionDialog != null) {
+                val targetMode = showModeSelectionDialog!!
+                val isStop = targetMode == ServiceMode.FORCE_STOP
+                AlertDialog(
+                    onDismissRequest = { showModeSelectionDialog = null },
+                    title = {
+                        Text(
+                            text = stringResource(id = if (isStop) R.string.force_stop_mode_title else R.string.cleaning_mode_title),
+                            fontSize = 20.sp,
+                            fontWeight = FontWeight.Bold,
+                            color = MaterialTheme.colorScheme.onSurface
+                        )
+                    },
+                    text = {
+                        Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                            // Auto Option Row
+                            Row(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .clip(RoundedCornerShape(12.dp))
+                                    .clickable {
+                                        val modeToRun = targetMode
+                                        showModeSelectionDialog = null
+                                        if (modeToRun == ServiceMode.FORCE_STOP) {
+                                            handleStartStop(forcedMode = 1)
+                                        } else {
+                                            handleStartClean(forcedMode = 1)
+                                        }
+                                    }
+                                    .padding(12.dp),
+                                verticalAlignment = Alignment.CenterVertically
+                            ) {
+                                Icon(
+                                    imageVector = Icons.Default.AutoAwesome,
+                                    contentDescription = null,
+                                    tint = if (isStop) stopOrange else accentBlue,
+                                    modifier = Modifier.size(24.dp)
+                                )
+                                Spacer(modifier = Modifier.width(12.dp))
+                                Column {
+                                    Text(
+                                        text = stringResource(id = R.string.cleaning_mode_automatic),
+                                        fontSize = 16.sp,
+                                        fontWeight = FontWeight.Bold,
+                                        color = MaterialTheme.colorScheme.onSurface
+                                    )
+                                    Text(
+                                        text = stringResource(id = R.string.mode_dialog_auto_desc),
+                                        fontSize = 12.sp,
+                                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                                    )
+                                }
+                            }
+
+                            // Manual Option Row
+                            Row(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .clip(RoundedCornerShape(12.dp))
+                                    .clickable {
+                                        val modeToRun = targetMode
+                                        showModeSelectionDialog = null
+                                        if (modeToRun == ServiceMode.FORCE_STOP) {
+                                            handleStartStop(forcedMode = 0)
+                                        } else {
+                                            handleStartClean(forcedMode = 0)
+                                        }
+                                    }
+                                    .padding(12.dp),
+                                verticalAlignment = Alignment.CenterVertically
+                            ) {
+                                Icon(
+                                    imageVector = Icons.Outlined.TouchApp,
+                                    contentDescription = null,
+                                    tint = if (isStop) stopOrange else accentBlue,
+                                    modifier = Modifier.size(24.dp)
+                                )
+                                Spacer(modifier = Modifier.width(12.dp))
+                                Column {
+                                    Text(
+                                        text = stringResource(id = R.string.cleaning_mode_manual),
+                                        fontSize = 16.sp,
+                                        fontWeight = FontWeight.Bold,
+                                        color = MaterialTheme.colorScheme.onSurface
+                                    )
+                                    Text(
+                                        text = stringResource(id = R.string.mode_dialog_manual_desc),
+                                        fontSize = 12.sp,
+                                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                                    )
+                                }
+                            }
+                        }
+                    },
+                    confirmButton = {},
+                    dismissButton = {
+                        TextButton(onClick = { showModeSelectionDialog = null }) {
+                            Text(
+                                text = stringResource(id = R.string.cancel),
+                                color = if (isStop) stopOrange else accentBlue,
+                                fontSize = 14.sp,
+                                fontWeight = FontWeight.Bold
+                            )
+                        }
+                    }
+                )
+            }
+
+            // In-App Manual Operation Dialog (when user returns to Apex without PIP)
+            if (ManualOperationManager.isRunning && !isInPipMode) {
+                val isStop = ManualOperationManager.currentMode == ServiceMode.FORCE_STOP
+                val accentColor = if (isStop) stopOrange else accentBlue
+                val pm = context.packageManager
+                val currentPkg = currentCleaningPackage ?: ""
+                val appLabel = currentCleaningAppName.ifEmpty { currentPkg }
+                val appIcon = remember(currentPkg) {
+                    try {
+                        if (currentPkg.isNotEmpty()) pm.getApplicationIcon(currentPkg) else null
+                    } catch (e: Exception) {
+                        null
+                    }
+                }
+
+                AlertDialog(
+                    onDismissRequest = { /* Modal during manual processing */ },
+                    title = {
+                        Text(
+                            text = if (isStop) stringResource(R.string.stop_process_title) else stringResource(R.string.clean_process_title),
+                            fontSize = 18.sp,
+                            fontWeight = FontWeight.Bold,
+                            color = MaterialTheme.colorScheme.onSurface
+                        )
+                    },
+                    text = {
+                        Column(
+                            modifier = Modifier.fillMaxWidth(),
+                            horizontalAlignment = Alignment.CenterHorizontally,
+                            verticalArrangement = Arrangement.spacedBy(12.dp)
+                        ) {
+                            if (appIcon != null) {
+                                val bitmap = remember(currentPkg) {
+                                    try {
+                                        appIcon.toBitmap().asImageBitmap()
+                                    } catch (e: Exception) {
+                                        null
+                                    }
+                                }
+                                if (bitmap != null) {
+                                    Image(
+                                        bitmap = bitmap,
+                                        contentDescription = appLabel,
+                                        modifier = Modifier.size(54.dp)
+                                    )
+                                }
+                            }
+                            Text(
+                                text = appLabel,
+                                fontSize = 16.sp,
+                                fontWeight = FontWeight.Bold,
+                                color = MaterialTheme.colorScheme.onSurface
+                            )
+                            Text(
+                                text = stringResource(
+                                    id = if (isStop) R.string.manual_stop_instruction else R.string.manual_clean_instruction
+                                ),
+                                fontSize = 13.sp,
+                                color = MaterialTheme.colorScheme.onSurfaceVariant,
+                                textAlign = TextAlign.Center
+                            )
+                            LinearProgressIndicator(
+                                progress = { cleaningProgress },
+                                modifier = Modifier.fillMaxWidth().height(6.dp),
+                                color = accentColor,
+                                trackColor = MaterialTheme.colorScheme.surfaceContainerHigh
+                            )
+                            Text(
+                                text = "# $currentCleaningAppIndex/${currentProcessingPackages.size.coerceAtLeast(1)}",
+                                fontSize = 12.sp,
+                                color = MaterialTheme.colorScheme.onSurfaceVariant
+                            )
+                        }
+                    },
+                    confirmButton = {
+                        Row(
+                            modifier = Modifier.fillMaxWidth(),
+                            horizontalArrangement = Arrangement.SpaceBetween
+                        ) {
+                            TextButton(
+                                onClick = {
+                                    ManualOperationManager.stop(context, returnToApp = true)
+                                }
+                            ) {
+                                Text(
+                                    text = stringResource(id = R.string.stop_action_dialog_cancel),
+                                    color = MaterialTheme.colorScheme.error,
+                                    fontWeight = FontWeight.Bold
+                                )
+                            }
+                            Row {
+                                TextButton(
+                                    onClick = {
+                                        ManualOperationManager.skipCurrentApp(context)
+                                    }
+                                ) {
+                                    Text(
+                                        text = stringResource(id = R.string.skip_app),
+                                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                                        fontWeight = FontWeight.Bold
+                                    )
+                                }
+                                TextButton(
+                                    onClick = {
+                                        onEnterPip()
+                                        ManualOperationManager.retryCurrentApp(context)
+                                    }
+                                ) {
+                                    Text(
+                                        text = stringResource(id = R.string.open_settings),
+                                        color = accentColor,
+                                        fontWeight = FontWeight.Bold
+                                    )
+                                }
+                            }
+                        }
                     }
                 )
             }

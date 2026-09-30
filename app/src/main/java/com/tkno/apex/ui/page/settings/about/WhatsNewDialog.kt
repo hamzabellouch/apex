@@ -43,70 +43,60 @@ private data class WhatsNewItem(
 @Composable
 fun WhatsNewDialog(
     onDismissRequest: () -> Unit,
-    versionName: String = "0.0.9-beta",
-    releaseDate: String = "September 11, 2026",
+    versionName: String = "0.1.0-beta",
+    releaseDate: String = "September 30, 2026",
 ) {
     var isArabic by remember { mutableStateOf(false) }
 
     val formattedVersion = if (versionName.startsWith("v", ignoreCase = true)) versionName else "v$versionName"
-    val dateText = if (isArabic) "11 سبتمبر 2026" else releaseDate
+    val dateText = if (isArabic) "30 سبتمبر 2026" else releaseDate
     val titleText = if (isArabic) "ما الجديد" else stringResource(R.string.whats_new)
     val highlightsTitleText = if (isArabic) "أحدث التحديثات والتحسينات" else stringResource(R.string.whats_new_highlights_title)
 
     val updateItems = listOf(
         WhatsNewItem(
-            textEn = "Redesigned the bottom taskbar with a modern floating capsule layout",
-            textAr = "إعادة تصميم شريط المهام السفلي بتصميم كبسولة عائمة وعصرية",
-            beforeImage = R.drawable.whats_new_taskbar_before,
-            afterImage = R.drawable.whats_new_taskbar_after
+            textEn = "Added an Info icon to explain system limitations after Stop and Clean operations",
+            textAr = "إضافة أيقونة معلومات لشرح قيود النظام بعد عمليات الإيقاف والتنظيف"
         ),
         WhatsNewItem(
-            textEn = "Removed the circle background behind app icons and increased their size for a cleaner look",
-            textAr = "إزالة الخلفية الدائرية خلف أيقونات التطبيقات وزيادة حجمها لمظهر أكثر وضوحاً وأناقة",
-            beforeImage = R.drawable.whats_new_icons_before,
-            afterImage = R.drawable.whats_new_icons_after
+            textEn = "Show the Info icon only when remaining items exist and reset its visibility after app relaunch",
+            textAr = "إظهار أيقونة المعلومات فقط عند وجود عناصر متبقية وإعادة تعيين ظهورها بعد إعادة تشغيل التطبيق"
         ),
         WhatsNewItem(
-            textEn = "Replaced the top bar icon in the Statistics screen with the new Digital Wellbeing icon",
-            textAr = "استبدال أيقونة الشريط العلوي في شاشة الإحصائيات بأيقونة الرفاهية الرقمية الجديدة",
-            beforeImage = R.drawable.whats_new_stats_before,
-            afterImage = R.drawable.whats_new_stats_after
+            textEn = "Added explanatory dialogs showing only the system limitation text without listing remaining apps",
+            textAr = "إضافة نوافذ حوارية توضيحية تعرض نص قيود النظام فقط دون سرد التطبيقات المتبقية"
         ),
         WhatsNewItem(
-            textEn = "Added a Privacy Policy option in the About screen that opens the official privacy policy",
-            textAr = "إضافة خيار سياسة الخصوصية في شاشة حول التطبيق لفتح السياسة الرسمية",
-            singleImage = R.drawable.whats_new_privacy_policy
+            textEn = "Added a custom Report icon for problem reporting",
+            textAr = "إضافة أيقونة إبلاغ مخصصة للإبلاغ عن المشكلات"
         ),
         WhatsNewItem(
-            textEn = "Added a What's New button at the top of the About screen",
-            textAr = "إضافة كبسولة \"ما الجديد\" في الجزء العلوي من شاشة حول التطبيق",
-            singleImage = R.drawable.whats_new_about_button
+            textEn = "Added localized strings for the problem reporting feature",
+            textAr = "إضافة نصوص مترجمة لميزة الإبلاغ عن المشكلات"
         ),
         WhatsNewItem(
-            textEn = "Added smart coordination between Turbo mode and Custom speed in Settings so they work together seamlessly",
-            textAr = "إضافة توافق ذكي بين الوضع التوربو والسرعة المخصصة في الإعدادات ليعملا معاً بسلاسة",
-            beforeImage = R.drawable.whats_new_turbo_before,
-            afterImage = R.drawable.whats_new_turbo_after
+            textEn = "Added a Report Problem button inside the issue tracker card",
+            textAr = "إضافة زر الإبلاغ عن مشكلة داخل بطاقة متتبع المشكلات"
         ),
         WhatsNewItem(
-            textEn = "Improved popup dialogs for Cleaning mode and Force stop mode by removing unnecessary extra spacing",
-            textAr = "تحسين النوافذ المنبثقة لوضع التنظيف ووضع الإيقاف الإجباري بإزالة المسافات الزائدة"
+            textEn = "Integrated the Report Problem dialog with the updated Google Form",
+            textAr = "دمج نافذة الإبلاغ عن مشكلة مع نموذج Google المحدّث"
         ),
         WhatsNewItem(
-            textEn = "Refreshed the first welcome screen with a modern circular logo and a clearer explanation of how cleaning cache and stopping apps help your device",
-            textAr = "تحديث شاشة الترحيب الأولى بشعار دائري عصري وشرح أوضح لكيفية مساعدة تنظيف الذاكرة وإيقاف التطبيقات للجهاز"
+            textEn = "Created ManualOperationManager for manual app switching when Accessibility Service is unavailable",
+            textAr = "إنشاء ManualOperationManager للتبديل اليدوي بين التطبيقات عند عدم توفر خدمة إمكانية الوصول"
         ),
         WhatsNewItem(
-            textEn = "Updated the notification screen title to Notifications with an expanded description covering both cache and background apps",
-            textAr = "تحديث عنوان شاشة الإشعارات إلى الإشعارات مع وصف موسع يشمل كلاً من الذاكرة المؤقتة وتطبيقات الخلفية"
+            textEn = "Added support for Manual, Automatic, and Ask Each Time modes for Stop and Clean actions",
+            textAr = "إضافة دعم للأوضاع اليدوي والتلقائي والسؤال في كل مرة لإجراءات الإيقاف والتنظيف"
         ),
         WhatsNewItem(
-            textEn = "Created a popup window for What's New that shows the latest features and improvements with a banner image",
-            textAr = "إنشاء نافذة منبثقة لما الجديد تعرض أحدث الميزات والتحسينات مع صورة بانر"
+            textEn = "Improved Picture-in-Picture handling and lifecycle cleanup for manual operations",
+            textAr = "تحسين معالجة وضع صورة داخل صورة (PiP) وتنظيف دورة الحياة للعمليات اليدوية"
         ),
         WhatsNewItem(
-            textEn = "Added smooth color transitions when switching between tabs",
-            textAr = "إضافة انتقالات لونية سلسة ومتحركة عند التبديل بين علامات التبويب"
+            textEn = "Added multilingual dialogs for operation mode selection and manual process guidance",
+            textAr = "إضافة نوافذ حوارية متعددة اللغات لاختيار وضع التشغيل والإرشاد للعملية اليدوية"
         )
     )
 

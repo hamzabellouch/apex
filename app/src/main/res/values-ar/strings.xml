@@ -61,6 +61,8 @@
     <string name="sponsors">الداعمون</string>
     <string name="instagram">إنستغرام</string>
     <string name="instagram_desc">تابع المطور على إنستغرام لمزيد من التحديثات</string>
+    <string name="whatsapp">واتساب</string>
+    <string name="whatsapp_desc">تابع المطور على واتساب لمزيد من التحديثات</string>
     <string name="facebook">فيسبوك</string>
     <string name="facebook_desc">تابع المطور على فيسبوك لمزيد من التحديثات</string>
     <string name="linkedin">لينكد إن</string>
@@ -184,6 +186,10 @@
     <string name="stop_dialog_close">إغلاق</string>
     <string name="stop_dialog_running_apps_title">التطبيقات قيد التشغيل (%1$d)</string>
     <string name="stop_dialog_no_running_apps">لا توجد تطبيقات نشطة تعمل في الخلفية.</string>
+    <string name="stop_info_icon_desc">معلومات الإيقاف</string>
+    <string name="stop_info_dialog_title">معلومات إيقاف التطبيقات</string>
+    <string name="stop_info_dialog_desc">لا يمكن إيقاف بعض التطبيقات إجبارياً لأن نظام أندرويد يمنع ذلك لضمان استقرار الجهاز وحماية العمليات الأساسية للنظام.</string>
+    <string name="stop_info_dialog_remaining_apps">التطبيقات النشطة المتبقية (%1$d):</string>
     <string name="clean_title">تنظيف</string>
     <string name="clean_history_icon_desc">السجل</string>
     <string name="clean_gauge_system_cleaned">النظام نظيف</string>
@@ -204,6 +210,9 @@
     <string name="clean_dialog_live_cache_title">مراقب التخزين المؤقت المباشر</string>
     <string name="clean_dialog_live_cache_desc">حجم التخزين المؤقت المباشر: %1$s. تم الفحص في الوقت الفعلي.</string>
     <string name="clean_dialog_ok">موافق</string>
+    <string name="clean_info_icon_desc">معلومات التنظيف</string>
+    <string name="clean_info_dialog_title">معلومات تنظيف التخزين المؤقت</string>
+    <string name="clean_info_dialog_desc">قد لا يتم مسح بعض ملفات التخزين المؤقت بالكامل بسبب قيود أذونات نظام أندرويد لحماية ملفات وبيانات النظام الأساسية.</string>
     <string name="cd_back">رجوع</string>
     <string name="cd_broom_icon">رمز المكنسة</string>
     <string name="cd_whitelist_icon">رمز القائمة البيضاء</string>
@@ -309,4 +318,16 @@
     <string name="no_usage_data_today">لا توجد بيانات استخدام مسجلة لليوم</string>
     <string name="auto_install_packages">تثبيت الحزم تلقائياً</string>
     <string name="manual_install_open_files">تم تنزيل تحديث APK. اذهب إلى تطبيق الملفات لتثبيت التحديث.</string>
+    <string name="problem_report">إبلاغ عن مشكلة</string>
+    <string name="problem_report_dialog_desc">إذا واجهتكم مشكلة، المرجو ملء هذه الاستمارة، لن تتجاوز المدة تقريباً 20 ثانية.</string>
+    <string name="open_report_form">إبلاغ</string>
+    <string name="mode_dialog_auto_desc">أتمتة النقرات باستخدام خدمة إمكانية الوصول</string>
+    <string name="mode_dialog_manual_desc">تنفيذ العمليات يدوياً دون الحاجة لخدمة إمكانية الوصول</string>
+    <string name="manual_stop_instruction">قم بإيقاف التطبيق إجبارياً في الإعدادات. سينقلك Apex تلقائياً إلى التطبيق التالي بمجرد إيقافه.</string>
+    <string name="manual_clean_instruction">قم بمسح التخزين المؤقت في الإعدادات (التخزين -> مسح التخزين المؤقت). سينقلك Apex تلقائياً إلى التطبيق التالي بمجرد مسحه.</string>
+    <string name="stop_action_dialog_cancel">إيقاف</string>
+    <string name="skip_app">تخطي</string>
+    <string name="open_settings">فتح الإعدادات</string>
+    <string name="pip_force_stopping">جارٍ الإيقاف الإجباري...</string>
+    <string name="pip_cleaning_cache">جارٍ تنظيف التخزين المؤقت...</string>
 </resources>

@@ -61,6 +61,8 @@
     <string name="sponsors">Sponsors</string>
     <string name="instagram">Instagram</string>
     <string name="instagram_desc">follow the developer on Instagram for more updates</string>
+    <string name="whatsapp">WhatsApp</string>
+    <string name="whatsapp_desc">follow the developer on WhatsApp for more updates</string>
     <string name="facebook">Facebook</string>
     <string name="facebook_desc">follow the developer on Facebook for more updates</string>
     <string name="linkedin">LinkedIn</string>
@@ -184,6 +186,10 @@
     <string name="stop_dialog_close">CLOSE</string>
     <string name="stop_dialog_running_apps_title">Running Apps (%1$d)</string>
     <string name="stop_dialog_no_running_apps">No active running background apps.</string>
+    <string name="stop_info_icon_desc">Stop Information</string>
+    <string name="stop_info_dialog_title">App Stop Information</string>
+    <string name="stop_info_dialog_desc">Some applications cannot be force stopped because the Android system prevents it to preserve system stability and core functionality.</string>
+    <string name="stop_info_dialog_remaining_apps">Remaining Active Apps (%1$d):</string>
     <string name="clean_title">Clean</string>
     <string name="clean_history_icon_desc">History</string>
     <string name="clean_gauge_system_cleaned">System cleaned</string>
@@ -204,6 +210,9 @@
     <string name="clean_dialog_live_cache_title">Live Cache Monitor</string>
     <string name="clean_dialog_live_cache_desc">Live cache size: %1$s. Scanned in real-time.</string>
     <string name="clean_dialog_ok">OK</string>
+    <string name="clean_info_icon_desc">Clean Information</string>
+    <string name="clean_info_dialog_title">Cache Clean Information</string>
+    <string name="clean_info_dialog_desc">Some cache data or system files cannot be completely cleared due to Android system permission restrictions that protect essential device data.</string>
     <string name="cd_back">Back</string>
     <string name="cd_broom_icon">Broom Icon</string>
     <string name="cd_whitelist_icon">Whitelist Icon</string>
@@ -309,4 +318,16 @@
     <string name="no_usage_data_today">No usage data recorded for today</string>
     <string name="auto_install_packages">Auto-install packages</string>
     <string name="manual_install_open_files">The update APK was downloaded. Opening file manager to install manually.</string>
+    <string name="problem_report">Report problem</string>
+    <string name="problem_report_dialog_desc">If you encounter any problem, please fill out this form (it will take approximately 20 seconds).</string>
+    <string name="open_report_form">Report</string>
+    <string name="mode_dialog_auto_desc">Automate clicks using Accessibility Service</string>
+    <string name="mode_dialog_manual_desc">Perform actions manually without Accessibility Service</string>
+    <string name="manual_stop_instruction">Force stop the app in Settings. Apex will automatically proceed to the next app once stopped.</string>
+    <string name="manual_clean_instruction">Clear cache in Settings (Storage -> Clear Cache). Apex will automatically proceed to the next app once cleared.</string>
+    <string name="stop_action_dialog_cancel">Stop</string>
+    <string name="skip_app">Skip</string>
+    <string name="open_settings">Open Settings</string>
+    <string name="pip_force_stopping">Force stopping...</string>
+    <string name="pip_cleaning_cache">Cleaning cache...</string>
 </resources>

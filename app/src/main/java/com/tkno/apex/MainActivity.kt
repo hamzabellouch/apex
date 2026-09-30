@@ -26,6 +26,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.core.os.LocaleListCompat
 import com.tkno.apex.service.CacheCleanerAccessibilityService
+import com.tkno.apex.service.ManualOperationManager
 import com.tkno.apex.theme.ApexTheme
 import com.tkno.apex.ui.main.MainScreen
 import com.tkno.apex.ui.onboarding.OnboardingScreen
@@ -50,6 +51,9 @@ class MainActivity : ComponentActivity() {
                 wasInPipMode = false
                 if (CacheCleanerAccessibilityService.isRunning) {
                     CacheCleanerAccessibilityService.stopCleaning(returnToApp = true)
+                }
+                if (ManualOperationManager.isRunning) {
+                    ManualOperationManager.stop(this, returnToApp = true)
                 }
             }
         }
@@ -251,6 +255,9 @@ class MainActivity : ComponentActivity() {
         if ((isFinishing || wasInPipMode) && CacheCleanerAccessibilityService.isRunning) {
             CacheCleanerAccessibilityService.stopCleaning(returnToApp = true)
         }
+        if ((isFinishing || wasInPipMode) && ManualOperationManager.isRunning) {
+            ManualOperationManager.stop(this, returnToApp = true)
+        }
     }
 
     override fun onDestroy() {
@@ -258,6 +265,9 @@ class MainActivity : ComponentActivity() {
         AppStorageHelper.clearAllMemoryCaches()
         if (CacheCleanerAccessibilityService.isRunning) {
             CacheCleanerAccessibilityService.stopCleaning(returnToApp = false)
+        }
+        if (ManualOperationManager.isRunning) {
+            ManualOperationManager.stop(this, returnToApp = false)
         }
         if (isFinishing) {
             android.os.Process.killProcess(android.os.Process.myUid())

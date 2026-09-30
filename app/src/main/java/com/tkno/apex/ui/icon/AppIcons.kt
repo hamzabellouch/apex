@@ -520,3 +520,148 @@ public val Translate: ImageVector
     }
 
 private var _translate: ImageVector? = null
+
+public val Report: ImageVector
+    get() {
+        if (_report != null) {
+            return _report!!
+        }
+        _report = ImageVector.Builder(
+            name = "report",
+            defaultWidth = 24.dp,
+            defaultHeight = 24.dp,
+            viewportWidth = 24f,
+            viewportHeight = 24f
+        ).apply {
+            path(
+                fill = SolidColor(Color.Black),
+                fillAlpha = 1f,
+                stroke = null,
+                strokeAlpha = 1f,
+                strokeLineWidth = 1f,
+                strokeLineCap = StrokeCap.Butt,
+                strokeLineJoin = StrokeJoin.Bevel,
+                strokeLineMiter = 1f,
+                pathFillType = PathFillType.NonZero
+            ) {
+                moveTo(12f, 17f)
+                quadToRelative(0.43f, 0f, 0.71f, -0.29f)
+                quadTo(13f, 16.43f, 13f, 16f)
+                reflectiveQuadTo(12.71f, 15.29f)
+                reflectiveQuadTo(12f, 15f)
+                reflectiveQuadToRelative(-0.71f, 0.29f)
+                reflectiveQuadTo(11f, 16f)
+                reflectiveQuadToRelative(0.29f, 0.71f)
+                reflectiveQuadTo(12f, 17f)
+                close()
+                moveTo(11f, 13f)
+                horizontalLineToRelative(2f)
+                verticalLineTo(7f)
+                horizontalLineTo(11f)
+                verticalLineToRelative(6f)
+                close()
+                moveTo(8.25f, 21f)
+                lineTo(3f, 15.75f)
+                verticalLineTo(8.25f)
+                lineTo(8.25f, 3f)
+                horizontalLineToRelative(7.5f)
+                lineTo(21f, 8.25f)
+                verticalLineToRelative(7.5f)
+                lineTo(15.75f, 21f)
+                horizontalLineTo(8.25f)
+                close()
+                moveTo(9.1f, 19f)
+                horizontalLineToRelative(5.8f)
+                lineTo(19f, 14.9f)
+                verticalLineTo(9.1f)
+                lineTo(14.9f, 5f)
+                horizontalLineTo(9.1f)
+                lineTo(5f, 9.1f)
+                verticalLineToRelative(5.8f)
+                lineTo(9.1f, 19f)
+                close()
+                moveTo(12f, 12f)
+                close()
+            }
+        }.build()
+        return _report!!
+    }
+
+private var _report: ImageVector? = null
+
+public val InfoOutline: ImageVector
+    get() {
+        if (_infoOutline != null) {
+            return _infoOutline!!
+        }
+        _infoOutline = ImageVector.Builder(
+            name = "info_outline",
+            defaultWidth = 24.dp,
+            defaultHeight = 24.dp,
+            viewportWidth = 24f,
+            viewportHeight = 24f,
+        ).apply {
+            path(
+                fill = SolidColor(Color.Black),
+                fillAlpha = 1f,
+                stroke = null,
+                strokeAlpha = 1f,
+                strokeLineWidth = 1f,
+                strokeLineCap = StrokeCap.Butt,
+                strokeLineJoin = StrokeJoin.Bevel,
+                strokeLineMiter = 1f,
+                pathFillType = PathFillType.NonZero,
+            ) {
+                moveTo(11f, 17f)
+                horizontalLineToRelative(2f)
+                verticalLineTo(11f)
+                horizontalLineTo(11f)
+                verticalLineToRelative(6f)
+                close()
+                moveTo(12.71f, 8.71f)
+                quadTo(13f, 8.42f, 13f, 8f)
+                quadTo(13f, 7.57f, 12.71f, 7.29f)
+                reflectiveQuadTo(12f, 7f)
+                reflectiveQuadTo(11.29f, 7.29f)
+                reflectiveQuadTo(11f, 8f)
+                quadToRelative(0f, 0.42f, 0.29f, 0.71f)
+                reflectiveQuadTo(12f, 9f)
+                reflectiveQuadTo(12.71f, 8.71f)
+                close()
+                moveTo(12f, 22f)
+                quadTo(9.93f, 22f, 8.1f, 21.21f)
+                quadTo(6.28f, 20.43f, 4.93f, 19.08f)
+                quadTo(3.58f, 17.73f, 2.79f, 15.9f)
+                reflectiveQuadTo(2f, 12f)
+                quadTo(2f, 9.92f, 2.79f, 8.1f)
+                quadTo(3.58f, 6.27f, 4.93f, 4.93f)
+                quadTo(6.28f, 3.57f, 8.1f, 2.79f)
+                quadTo(9.93f, 2f, 12f, 2f)
+                reflectiveQuadToRelative(3.9f, 0.79f)
+                reflectiveQuadToRelative(3.17f, 2.14f)
+                quadToRelative(1.35f, 1.35f, 2.14f, 3.17f)
+                quadTo(22f, 9.92f, 22f, 12f)
+                reflectiveQuadToRelative(-0.79f, 3.9f)
+                reflectiveQuadToRelative(-2.14f, 3.17f)
+                quadToRelative(-1.35f, 1.35f, -3.17f, 2.14f)
+                reflectiveQuadTo(12f, 22f)
+                close()
+                moveToRelative(0f, -2f)
+                quadToRelative(3.35f, 0f, 5.68f, -2.32f)
+                reflectiveQuadTo(20f, 12f)
+                reflectiveQuadTo(17.68f, 6.32f)
+                reflectiveQuadTo(12f, 4f)
+                reflectiveQuadTo(6.33f, 6.32f)
+                reflectiveQuadTo(4f, 12f)
+                reflectiveQuadToRelative(2.33f, 5.68f)
+                reflectiveQuadTo(12f, 20f)
+                close()
+                moveToRelative(0f, -8f)
+                close()
+            }
+        }.build()
+        return _infoOutline!!
+    }
+
+private var _infoOutline: ImageVector? = null
+

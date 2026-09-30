@@ -1,6 +1,7 @@
 package com.tkno.apex.ui.main
 
 import com.tkno.apex.ui.icon.LeftPanelOpen
+import com.tkno.apex.ui.icon.InfoOutline
 
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.FastOutSlowInEasing
@@ -56,6 +57,7 @@ fun StopScreen(
     onOpenHistory: () -> Unit,
     onOpenDrawer: () -> Unit = {},
     showMenuButton: Boolean = true,
+    showInfoIcon: Boolean = false,
     modifier: Modifier = Modifier
 ) {
     val context = LocalContext.current
@@ -66,6 +68,7 @@ fun StopScreen(
 
     var showRunningAppsDialog by remember { mutableStateOf(false) }
     var showMemoryInfoDialog by remember { mutableStateOf(false) }
+    var showStopInfoDialog by remember { mutableStateOf(false) }
 
     Box(
         modifier = modifier
@@ -183,13 +186,32 @@ fun StopScreen(
                         lineHeight = 32.sp,
                         textAlign = TextAlign.Center
                     )
-                    Text(
-                        text = stringResource(id = R.string.stop_gauge_apps),
-                        color = MaterialTheme.colorScheme.onBackground,
-                        fontSize = 16.sp,
-                        fontWeight = FontWeight.Bold,
-                        textAlign = TextAlign.Center
-                    )
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.Center
+                    ) {
+                        Text(
+                            text = stringResource(id = R.string.stop_gauge_apps),
+                            color = MaterialTheme.colorScheme.onBackground,
+                            fontSize = 16.sp,
+                            fontWeight = FontWeight.Bold,
+                            textAlign = TextAlign.Center
+                        )
+                        if (showInfoIcon && installedApps.isNotEmpty()) {
+                            Spacer(modifier = Modifier.width(4.dp))
+                            IconButton(
+                                onClick = { showStopInfoDialog = true },
+                                modifier = Modifier.size(22.dp)
+                            ) {
+                                Icon(
+                                    imageVector = InfoOutline,
+                                    contentDescription = stringResource(id = R.string.stop_info_icon_desc),
+                                    tint = stopOrange,
+                                    modifier = Modifier.size(17.dp)
+                                )
+                            }
+                        }
+                    }
                     Spacer(modifier = Modifier.height(4.dp))
                     Text(
                         text = stringResource(id = R.string.stop_gauge_background),
@@ -409,6 +431,44 @@ fun StopScreen(
             containerColor = cardBg,
             confirmButton = {
                 TextButton(onClick = { showRunningAppsDialog = false }) {
+                    Text(text = stringResource(id = R.string.stop_dialog_close), color = stopOrange, fontWeight = FontWeight.Bold)
+                }
+            }
+        )
+    }
+
+    // Stop Info Dialog (Explains system restrictions on stopping apps)
+    if (showStopInfoDialog) {
+        AlertDialog(
+            onDismissRequest = { showStopInfoDialog = false },
+            title = {
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    Icon(
+                        imageVector = InfoOutline,
+                        contentDescription = null,
+                        tint = stopOrange,
+                        modifier = Modifier.size(24.dp)
+                    )
+                    Spacer(modifier = Modifier.width(8.dp))
+                    Text(
+                        text = stringResource(id = R.string.stop_info_dialog_title),
+                        color = MaterialTheme.colorScheme.onSurface,
+                        fontSize = 18.sp,
+                        fontWeight = FontWeight.Bold
+                    )
+                }
+            },
+            text = {
+                Text(
+                    text = stringResource(id = R.string.stop_info_dialog_desc),
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    fontSize = 14.sp,
+                    lineHeight = 20.sp
+                )
+            },
+            containerColor = cardBg,
+            confirmButton = {
+                TextButton(onClick = { showStopInfoDialog = false }) {
                     Text(text = stringResource(id = R.string.stop_dialog_close), color = stopOrange, fontWeight = FontWeight.Bold)
                 }
             }

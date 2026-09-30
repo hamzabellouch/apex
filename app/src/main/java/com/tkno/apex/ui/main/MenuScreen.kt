@@ -4,8 +4,10 @@ import com.tkno.apex.ui.icon.LeftPanelClose
 import com.tkno.apex.ui.icon.LeftPanelOpen
 import com.tkno.apex.ui.icon.Policy
 import com.tkno.apex.ui.icon.LocalFireDepartment
+import com.tkno.apex.ui.icon.Report
 import androidx.compose.ui.semantics.Role
 import androidx.compose.material.icons.filled.Close
+import androidx.compose.ui.text.style.TextAlign
 
 import android.app.LocaleManager
 import android.content.Intent
@@ -254,8 +256,8 @@ fun MainMenuList(
                 unselectedContainerColor = Color.Transparent,
                 unselectedIconColor = MaterialTheme.colorScheme.onSurfaceVariant,
                 unselectedTextColor = MaterialTheme.colorScheme.onSurface,
-                selectedContainerColor = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.12f),
-                selectedIconColor = MaterialTheme.colorScheme.onSurface,
+                selectedContainerColor = MaterialTheme.colorScheme.primary.copy(alpha = 0.12f),
+                selectedIconColor = MaterialTheme.colorScheme.primary,
                 selectedTextColor = MaterialTheme.colorScheme.onSurface
             )
             ProvideTextStyle(MaterialTheme.typography.labelLarge) {
@@ -1443,11 +1445,14 @@ fun InterfaceAndInteractionPreferences(onNavigateBack: () -> Unit) {
 
 /* ---------------- TroubleShootingPage ---------------- */
 
+private const val reportProblemFormUrl = "https://docs.google.com/forms/d/e/1FAIpQLScQgidK6ixuhSmQt2Ra3H7FWNNVbsZ4YgX0P3r7Xe5Aumpzrg/viewform?usp=dialog"
+
 @Composable
 fun TroubleShootingPage(onNavigateBack: () -> Unit) {
     val uriHandler = LocalUriHandler.current
     val context = LocalContext.current
     var showContactDialog by remember { mutableStateOf(false) }
+    var showReportDialog by remember { mutableStateOf(false) }
 
     val prefs = remember { context.getSharedPreferences("apex_prefs", android.content.Context.MODE_PRIVATE) }
     var darkThemePref by remember { mutableIntStateOf(prefs.getInt("dark_theme", 0)) }
@@ -1472,6 +1477,9 @@ fun TroubleShootingPage(onNavigateBack: () -> Unit) {
 
     val emailContainer = if (isDark) Color(0xFF1E293B) else Color(0xFFF1F5F9)
     val emailContent = if (isDark) Color(0xFF94A3B8) else Color(0xFF475569)
+
+    val whatsappContainer = if (isDark) Color(0xFF0A2B1D) else Color(0xFFE8F8F0)
+    val whatsappContent = if (isDark) Color(0xFF25D366) else Color(0xFF128C7E)
 
     val facebookContainer = if (isDark) Color(0xFF0D2646) else Color(0xFFE7F3FF)
     val facebookContent = if (isDark) Color(0xFF4599FF) else Color(0xFF1877F2)
@@ -1506,7 +1514,7 @@ fun TroubleShootingPage(onNavigateBack: () -> Unit) {
     ) { padding ->
         LazyColumn(contentPadding = padding) {
             item {
-                val pagerState = rememberPagerState(initialPage = 0) { 10 }
+                val pagerState = rememberPagerState(initialPage = 0) { 11 }
                 Column(modifier = Modifier.fillMaxWidth()) {
                     HorizontalPager(
                         state = pagerState,
@@ -1523,6 +1531,15 @@ fun TroubleShootingPage(onNavigateBack: () -> Unit) {
                             ) { showContactDialog = true }
 
                             1 -> PreferencesHintCard(
+                                title = stringResource(id = R.string.whatsapp),
+                                icon = painterResource(id = R.drawable.ic_whatsapp),
+                                description = stringResource(id = R.string.whatsapp_desc),
+                                containerColor = whatsappContainer,
+                                contentColor = whatsappContent,
+                                textColor = Color.White,
+                            ) { uriHandler.openUri("https://whatsapp.com/channel/0029Vb7MArw0LKZMpjjqOk2P") }
+
+                            2 -> PreferencesHintCard(
                                 title = stringResource(id = R.string.facebook),
                                 icon = painterResource(id = R.drawable.ic_facebook),
                                 description = stringResource(id = R.string.facebook_desc),
@@ -1531,7 +1548,7 @@ fun TroubleShootingPage(onNavigateBack: () -> Unit) {
                                 textColor = Color.White,
                             ) { uriHandler.openUri("https://www.facebook.com/hamzabellouch0") }
 
-                            2 -> PreferencesHintCard(
+                            3 -> PreferencesHintCard(
                                 title = stringResource(id = R.string.instagram),
                                 icon = painterResource(id = R.drawable.ic_instagram),
                                 description = stringResource(id = R.string.instagram_desc),
@@ -1540,7 +1557,7 @@ fun TroubleShootingPage(onNavigateBack: () -> Unit) {
                                 textColor = Color.White,
                             ) { uriHandler.openUri("https://www.instagram.com/hamzabellouch0") }
 
-                            3 -> PreferencesHintCard(
+                            4 -> PreferencesHintCard(
                                 title = stringResource(id = R.string.linkedin),
                                 icon = painterResource(id = R.drawable.ic_linkedin),
                                 description = stringResource(id = R.string.linkedin_desc),
@@ -1549,7 +1566,7 @@ fun TroubleShootingPage(onNavigateBack: () -> Unit) {
                                 textColor = Color.White,
                             ) { uriHandler.openUri("https://www.linkedin.com/in/hamzabellouch") }
 
-                            4 -> PreferencesHintCard(
+                            5 -> PreferencesHintCard(
                                 title = stringResource(id = R.string.x_platform),
                                 icon = painterResource(id = R.drawable.ic_x),
                                 description = stringResource(id = R.string.x_desc),
@@ -1558,7 +1575,7 @@ fun TroubleShootingPage(onNavigateBack: () -> Unit) {
                                 textColor = Color.White,
                             ) { uriHandler.openUri("https://x.com/hamzabellouch0") }
 
-                            5 -> PreferencesHintCard(
+                            6 -> PreferencesHintCard(
                                 title = stringResource(id = R.string.youtube),
                                 icon = painterResource(id = R.drawable.ic_youtube),
                                 description = stringResource(id = R.string.youtube_desc),
@@ -1567,7 +1584,7 @@ fun TroubleShootingPage(onNavigateBack: () -> Unit) {
                                 textColor = Color.White,
                             ) { uriHandler.openUri("https://www.youtube.com/@hamzabellouch") }
 
-                            6 -> PreferencesHintCard(
+                            7 -> PreferencesHintCard(
                                 title = stringResource(id = R.string.tiktok),
                                 icon = painterResource(id = R.drawable.ic_tiktok),
                                 description = stringResource(id = R.string.tiktok_desc),
@@ -1576,7 +1593,7 @@ fun TroubleShootingPage(onNavigateBack: () -> Unit) {
                                 textColor = Color.White,
                             ) { uriHandler.openUri("https://www.tiktok.com/@hamzabellouch0") }
 
-                            7 -> PreferencesHintCard(
+                            8 -> PreferencesHintCard(
                                 title = stringResource(id = R.string.reddit),
                                 icon = painterResource(id = R.drawable.ic_reddit),
                                 description = stringResource(id = R.string.reddit_desc),
@@ -1585,7 +1602,7 @@ fun TroubleShootingPage(onNavigateBack: () -> Unit) {
                                 textColor = Color.White,
                             ) { uriHandler.openUri("https://www.reddit.com") }
 
-                            8 -> PreferencesHintCard(
+                            9 -> PreferencesHintCard(
                                 title = stringResource(id = R.string.bluesky),
                                 icon = painterResource(id = R.drawable.ic_bluesky),
                                 description = stringResource(id = R.string.bluesky_desc),
@@ -1594,7 +1611,7 @@ fun TroubleShootingPage(onNavigateBack: () -> Unit) {
                                 textColor = Color.White,
                             ) { uriHandler.openUri("https://bsky.app/profile/hamzabellouch.bsky.social") }
 
-                            9 -> PreferencesHintCard(
+                            10 -> PreferencesHintCard(
                                 title = stringResource(id = R.string.telegram_channel),
                                 icon = painterResource(id = R.drawable.icons8_telegram_app),
                                 description = stringResource(id = R.string.telegram_channel_desc),
@@ -1611,7 +1628,7 @@ fun TroubleShootingPage(onNavigateBack: () -> Unit) {
                         horizontalArrangement = Arrangement.spacedBy(6.dp),
                         verticalAlignment = Alignment.CenterVertically
                     ) {
-                        repeat(10) { pageIndex ->
+                        repeat(11) { pageIndex ->
                             val isSelected = pagerState.currentPage == pageIndex
                             Box(
                                 modifier = Modifier
@@ -1638,10 +1655,130 @@ fun TroubleShootingPage(onNavigateBack: () -> Unit) {
                         icon = Icons.AutoMirrored.Outlined.OpenInNew,
                         onClick = { uriHandler.openUri("https://github.com/hamzabellouch/apex/issues") },
                     )
-                    Spacer(Modifier.height(8.dp))
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(end = 16.dp, bottom = 14.dp, top = 4.dp),
+                        horizontalArrangement = Arrangement.End,
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Surface(
+                            shape = CircleShape,
+                            color = MaterialTheme.colorScheme.secondaryContainer,
+                            contentColor = MaterialTheme.colorScheme.onSecondaryContainer,
+                            modifier = Modifier
+                                .clip(CircleShape)
+                                .clickable(
+                                    role = Role.Button,
+                                    onClick = { showReportDialog = true }
+                                )
+                        ) {
+                            Row(
+                                modifier = Modifier
+                                    .height(36.dp)
+                                    .padding(horizontal = 14.dp),
+                                verticalAlignment = Alignment.CenterVertically,
+                                horizontalArrangement = Arrangement.spacedBy(6.dp)
+                            ) {
+                                Icon(
+                                    imageVector = Report,
+                                    contentDescription = null,
+                                    modifier = Modifier.size(18.dp),
+                                    tint = MaterialTheme.colorScheme.primary
+                                )
+                                Text(
+                                    text = stringResource(R.string.problem_report),
+                                    style = MaterialTheme.typography.labelLarge.copy(fontWeight = FontWeight.SemiBold),
+                                    color = MaterialTheme.colorScheme.onSecondaryContainer
+                                )
+                            }
+                        }
+                    }
                 }
             }
         }
+    }
+
+    if (showReportDialog) {
+        AlertDialog(
+            onDismissRequest = { showReportDialog = false },
+            icon = {
+                Icon(
+                    imageVector = Report,
+                    contentDescription = null,
+                    tint = MaterialTheme.colorScheme.primary,
+                    modifier = Modifier.size(28.dp)
+                )
+            },
+            title = {
+                Text(
+                    text = stringResource(R.string.problem_report),
+                    style = MaterialTheme.typography.headlineSmall,
+                    textAlign = TextAlign.Center
+                )
+            },
+            text = {
+                Column(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                    Text(
+                        text = stringResource(R.string.problem_report_dialog_desc),
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                        textAlign = TextAlign.Center
+                    )
+                    Spacer(modifier = Modifier.height(20.dp))
+                    
+                    Surface(
+                        shape = CircleShape,
+                        color = MaterialTheme.colorScheme.secondaryContainer,
+                        contentColor = MaterialTheme.colorScheme.onSecondaryContainer,
+                        modifier = Modifier
+                            .clip(CircleShape)
+                            .clickable(
+                                role = Role.Button,
+                                onClick = {
+                                    showReportDialog = false
+                                    uriHandler.openUri(reportProblemFormUrl)
+                                }
+                            )
+                    ) {
+                        Row(
+                            modifier = Modifier.padding(horizontal = 20.dp, vertical = 10.dp),
+                            verticalAlignment = Alignment.CenterVertically,
+                            horizontalArrangement = Arrangement.spacedBy(8.dp)
+                        ) {
+                            Icon(
+                                imageVector = Report,
+                                contentDescription = null,
+                                modifier = Modifier.size(18.dp),
+                                tint = MaterialTheme.colorScheme.primary
+                            )
+                            Text(
+                                text = stringResource(R.string.open_report_form),
+                                style = MaterialTheme.typography.labelLarge.copy(fontWeight = FontWeight.SemiBold),
+                                color = MaterialTheme.colorScheme.onSecondaryContainer
+                            )
+                            Icon(
+                                imageVector = Icons.AutoMirrored.Outlined.OpenInNew,
+                                contentDescription = null,
+                                modifier = Modifier.size(16.dp),
+                                tint = MaterialTheme.colorScheme.onSecondaryContainer.copy(alpha = 0.7f)
+                            )
+                        }
+                    }
+                }
+            },
+            confirmButton = {},
+            dismissButton = {
+                OutlinedButtonWithIcon(
+                    icon = Icons.Outlined.Cancel,
+                    text = stringResource(id = R.string.cancel),
+                    onClick = { showReportDialog = false },
+                )
+            }
+        )
     }
 
     if (showContactDialog) {
@@ -1722,9 +1859,9 @@ fun AboutPage(
     AppUpdater(isAutoUpdateEnabled = isAutoUpdateEnabled)
 
     val versionName = try {
-        context.packageManager.getPackageInfo(context.packageName, 0).versionName ?: "0.0.9-beta"
+        context.packageManager.getPackageInfo(context.packageName, 0).versionName ?: "0.1.0-beta"
     } catch (e: Exception) {
-        "0.0.9-beta"
+        "0.1.0-beta"
     }
     val info = "App version: $versionName\nPackage name: ${context.packageName}\nDevice: Android ${android.os.Build.VERSION.RELEASE} (API ${android.os.Build.VERSION.SDK_INT})"
     val uriHandler = LocalUriHandler.current
