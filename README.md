@@ -131,7 +131,7 @@ Apex follows clean code architecture principles for maintainability, high perfor
 
 To build Apex locally, make sure you have the latest version of Android Studio installed.
 1. Clone the repository: `git clone https://github.com/hamzabellouch/apex.git`
-2. Open the project in Android Studio.
+2. Open the project in [Android Studio](https://developer.android.com/studio).
 3. Sync Gradle dependencies.
 4. Build and run the application on your device or emulator.
 
@@ -147,4 +147,4 @@ Thank you for checking out Apex. If you have any feedback or suggestions, feel f
 hamzabellouchcontact@gmail.com
 
 Stay connected and follow us on:  
-[Facebook](https://facebook.com/hamzabellouch0) | [Instagram](https://instagram.com/hamzabellouch0) | [Twitter](https://twitter.com/hamzabellouch0) | [Telegram](https://t.me/hammzabellouch) | [LinkedIn](https://www.linkedin.com/in/hamzabellouch)
+[WhatsApp](https://whatsapp.com/channel/0029Vb7MArw0LKZMpjjqOk2P) | [Facebook](https://facebook.com/hamzabellouch0) | [Instagram](https://instagram.com/hamzabellouch0) | [Twitter](https://twitter.com/hamzabellouch0) | [Telegram](https://t.me/hammzabellouch) | [LinkedIn](https://www.linkedin.com/in/hamzabellouch)
