@@ -43,6 +43,7 @@ Apex UI & Features:
     <img src="https://github.com/hamzabellouch/apex/blob/main/Images/14.jpg" width="30%" />
     <img src="https://github.com/hamzabellouch/apex/blob/main/Images/15.jpg" width="30%" />
     <img src="https://github.com/hamzabellouch/apex/blob/main/Images/16.jpg" width="30%" />
+    <img src="https://github.com/hamzabellouch/apex/blob/main/Images/17.jpg" width="30%" />
   </div>
 </div>
 
