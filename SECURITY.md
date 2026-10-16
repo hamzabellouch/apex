@@ -1,4 +1,4 @@
-﻿# Security Policy
+# Security Policy
 
 ## Supported Versions
 
@@ -6,8 +6,8 @@ The following versions of Apex are currently supported with security, privacy, a
 
 | Version       | Supported          |
 | ------------- | ------------------ |
-| + 0.1.0-beta  | :white_check_mark: |
-| < 0.1.0-beta  | :x:                |
+| + 0.1.1-beta  | :white_check_mark: |
+| < 0.1.1-beta  | :x:                |
 
 
 

@@ -131,6 +131,8 @@ fun PreferenceItem(
 fun PreferenceSingleChoiceItem(
     modifier: Modifier = Modifier,
     text: String,
+    description: String? = null,
+    icon: ImageVector? = null,
     selected: Boolean,
     contentPadding: PaddingValues = PaddingValues(horizontal = 8.dp, vertical = 16.dp),
     selectedColor: Color? = null,
@@ -145,7 +147,15 @@ fun PreferenceSingleChoiceItem(
             modifier = modifier.fillMaxWidth().padding(contentPadding),
             verticalAlignment = Alignment.CenterVertically,
         ) {
-            Column(modifier = Modifier.weight(1f).padding(start = 8.dp)) {
+            icon?.let {
+                Icon(
+                    imageVector = icon,
+                    contentDescription = null,
+                    modifier = Modifier.padding(start = 8.dp, end = 16.dp).size(24.dp),
+                    tint = MaterialTheme.colorScheme.onSurfaceVariant,
+                )
+            }
+            Column(modifier = Modifier.weight(1f).padding(start = if (icon == null) 8.dp else 0.dp)) {
                 Text(
                     text = text,
                     maxLines = 1,
@@ -153,6 +163,9 @@ fun PreferenceSingleChoiceItem(
                     color = if (selected && selectedColor != null) selectedColor else MaterialTheme.colorScheme.onSurface,
                     overflow = TextOverflow.Ellipsis,
                 )
+                if (!description.isNullOrEmpty()) {
+                    PreferenceItemDescription(text = description, enabled = true, maxLines = 1)
+                }
             }
             RadioButton(
                 selected = selected,
@@ -262,6 +275,60 @@ fun PreferenceSwitch(
             }
             Column(modifier = Modifier.weight(1f)) {
                 PreferenceItemTitle(text = title, enabled = enabled)
+                if (!description.isNullOrEmpty())
+                    PreferenceItemDescription(text = description, enabled = enabled)
+            }
+            Switch(
+                checked = isChecked,
+                onCheckedChange = null,
+                interactionSource = interactionSource,
+                modifier = Modifier.padding(start = 20.dp, end = 6.dp),
+                enabled = enabled,
+                thumbContent = thumbContent,
+            )
+        }
+    }
+}
+
+@Composable
+fun PreferenceSwitchVariant(
+    title: String,
+    description: String? = null,
+    icon: ImageVector? = null,
+    enabled: Boolean = true,
+    isChecked: Boolean = true,
+    thumbContent: (@Composable () -> Unit)? = rememberThumbContent(isChecked = isChecked),
+    onClick: (() -> Unit) = {},
+) {
+    val interactionSource = remember { MutableInteractionSource() }
+    Surface(
+        color = Color.Transparent,
+        modifier =
+            Modifier.fillMaxWidth().toggleable(
+                value = isChecked,
+                enabled = enabled,
+                onValueChange = { onClick() },
+                indication = androidx.compose.foundation.LocalIndication.current,
+                interactionSource = interactionSource,
+            )
+    ) {
+        Row(
+            modifier =
+                Modifier.fillMaxWidth()
+                    .padding(horizontal.dp, vertical.dp)
+                    .padding(start = if (icon == null) 12.dp else 0.dp),
+            verticalAlignment = Alignment.CenterVertically,
+        ) {
+            icon?.let {
+                Icon(
+                    imageVector = icon,
+                    contentDescription = null,
+                    modifier = Modifier.padding(start = 8.dp, end = 16.dp).size(24.dp),
+                    tint = MaterialTheme.colorScheme.onSurfaceVariant.applyOpacity(enabled),
+                )
+            }
+            Column(modifier = Modifier.weight(1f)) {
+                PreferenceItemTitle(text = title, enabled = enabled, style = PreferenceTitleVariant)
                 if (!description.isNullOrEmpty())
                     PreferenceItemDescription(text = description, enabled = enabled)
             }

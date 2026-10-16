@@ -36,14 +36,19 @@ object ManualOperationManager {
     private var initialAppCacheBytes = 0L
 
     fun start(context: Context, packages: List<String>, mode: ServiceMode) {
-        if (packages.isEmpty()) return
+        val filteredPackages = if (mode == ServiceMode.FORCE_STOP) {
+            packages.filter { !AppStorageHelper.isProtectedFromStop(it) }
+        } else {
+            packages
+        }
+        if (filteredPackages.isEmpty()) return
         stop(context, returnToApp = false)
 
         isRunning = true
         currentMode = mode
-        packageList = packages
+        packageList = filteredPackages
         currentAppIndex = 0
-        totalAppsCount = packages.size
+        totalAppsCount = filteredPackages.size
         isTransitioning = false
 
         processCurrentOrNextApp(context.applicationContext)

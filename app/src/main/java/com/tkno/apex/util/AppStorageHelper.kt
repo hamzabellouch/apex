@@ -10,6 +10,7 @@ import android.graphics.drawable.Drawable
 import android.os.Process
 import android.os.storage.StorageManager
 import android.util.LruCache
+import android.view.inputmethod.InputMethodManager
 import com.tkno.apex.model.AppCacheInfo
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
@@ -45,18 +46,64 @@ object AppStorageHelper {
         return mode == AppOpsManager.MODE_ALLOWED
     }
 
-    private fun isAllowedStoppableSystemApp(packageName: String): Boolean {
+    fun isProtectedFromStop(
+        packageName: String,
+        enabledImePackages: Set<String> = emptySet()
+    ): Boolean {
+        if (packageName.isEmpty()) return true
         val lower = packageName.lowercase()
-        
-        // Critical system components that must NEVER be force stopped
+
+        // 1. Critical system components
         if (lower.contains("systemui") || 
             lower.contains("settings") || 
             lower == "android" || 
             lower.contains("play.services") || 
             lower.contains("gms") || 
             lower.contains("incallui")) {
+            return true
+        }
+
+        // 2. Keyboards & Input Methods (active IMEs and keyboard packages)
+        if (packageName in enabledImePackages ||
+            lower.contains("keyboard") ||
+            lower.contains("inputmethod") ||
+            lower.contains("gboard") ||
+            lower.contains("swiftkey") ||
+            lower.contains("honeyboard") ||
+            lower.contains(".ime")) {
+            return true
+        }
+
+        // 3. Clock & Alarm applications
+        if (lower.contains("clock") ||
+            lower.contains("deskclock") ||
+            lower.contains("alarm")) {
+            return true
+        }
+
+        // 4. Phone, Dialer & Telephony applications
+        if (lower.contains("phone") ||
+            lower.contains("dialer") ||
+            lower.contains("telephony") ||
+            lower.contains("telecom")) {
+            return true
+        }
+
+        // 5. Contacts applications
+        if (lower.contains("contacts") ||
+            lower.contains("people")) {
+            return true
+        }
+
+        return false
+    }
+
+    private fun isAllowedStoppableSystemApp(packageName: String): Boolean {
+        if (isProtectedFromStop(packageName)) {
             return false
         }
+
+        val lower = packageName.lowercase()
 
         // Allowed pre-installed user apps explicitly requested
         val allowedKeywords = listOf(
@@ -79,16 +126,9 @@ object AppStorageHelper {
             "calendar",
             "accessibility",
             "talkback",
-            "contacts",
             "messaging",
             "mms",
             "messages",
-            "phone",
-            "dialer",
-            "telephony",
-            "telecom",
-            "clock",
-            "deskclock",
             "googlequicksearchbox",
             "vending",      // Google Play Store (com.android.vending)
             "playstore"
@@ -180,6 +220,17 @@ object AppStorageHelper {
         val myUserHandle = Process.myUserHandle()
         val selfPackageName = context.packageName
 
+        val imm = try {
+            context.getSystemService(Context.INPUT_METHOD_SERVICE) as? InputMethodManager
+        } catch (e: Exception) {
+            null
+        }
+        val enabledImePackages = try {
+            imm?.enabledInputMethodList?.map { it.packageName }?.toSet() ?: emptySet()
+        } catch (e: Exception) {
+            emptySet()
+        }
+
         val appList = coroutineScope {
             packages.map { pkg ->
                 async(Dispatchers.IO) {
@@ -195,7 +246,8 @@ object AppStorageHelper {
 
                     val isSystemApp = (appInfo.flags and ApplicationInfo.FLAG_SYSTEM) != 0
                     val isStopped = (appInfo.flags and ApplicationInfo.FLAG_STOPPED) != 0
-                    val isStoppable = !isSystemApp || isAllowedStoppableSystemApp(pkg.packageName)
+                    val isStoppable = !isProtectedFromStop(pkg.packageName, enabledImePackages) &&
+                            (!isSystemApp || isAllowedStoppableSystemApp(pkg.packageName))
                     val isCleanable = !isSystemApp || isAllowedCleanableSystemApp(pkg.packageName)
                     val installTime = pkg.firstInstallTime.takeIf { it > 0 } ?: pkg.lastUpdateTime
 

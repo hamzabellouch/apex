@@ -19,6 +19,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalLayoutDirection
+import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role
@@ -30,6 +31,7 @@ import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
 import com.tkno.apex.R
 import com.tkno.apex.theme.getAppTypography
+import com.tkno.apex.ui.icon.MenuBook
 import com.tkno.apex.ui.icon.Translate
 
 private data class WhatsNewItem(
@@ -43,60 +45,22 @@ private data class WhatsNewItem(
 @Composable
 fun WhatsNewDialog(
     onDismissRequest: () -> Unit,
-    versionName: String = "0.1.0-beta",
-    releaseDate: String = "September 30, 2026",
+    versionName: String = "0.1.1-beta",
+    releaseDate: String = "October 16, 2026",
+    releasesUrl: String = "https://github.com/hamzabellouch/apex/releases",
 ) {
     var isArabic by remember { mutableStateOf(false) }
+    val uriHandler = LocalUriHandler.current
 
     val formattedVersion = if (versionName.startsWith("v", ignoreCase = true)) versionName else "v$versionName"
-    val dateText = if (isArabic) "30 سبتمبر 2026" else releaseDate
+    val dateText = if (isArabic) "16 أكتوبر 2026" else releaseDate
     val titleText = if (isArabic) "ما الجديد" else stringResource(R.string.whats_new)
     val highlightsTitleText = if (isArabic) "أحدث التحديثات والتحسينات" else stringResource(R.string.whats_new_highlights_title)
 
     val updateItems = listOf(
         WhatsNewItem(
-            textEn = "Added an Info icon to explain system limitations after Stop and Clean operations",
-            textAr = "إضافة أيقونة معلومات لشرح قيود النظام بعد عمليات الإيقاف والتنظيف"
-        ),
-        WhatsNewItem(
-            textEn = "Show the Info icon only when remaining items exist and reset its visibility after app relaunch",
-            textAr = "إظهار أيقونة المعلومات فقط عند وجود عناصر متبقية وإعادة تعيين ظهورها بعد إعادة تشغيل التطبيق"
-        ),
-        WhatsNewItem(
-            textEn = "Added explanatory dialogs showing only the system limitation text without listing remaining apps",
-            textAr = "إضافة نوافذ حوارية توضيحية تعرض نص قيود النظام فقط دون سرد التطبيقات المتبقية"
-        ),
-        WhatsNewItem(
-            textEn = "Added a custom Report icon for problem reporting",
-            textAr = "إضافة أيقونة إبلاغ مخصصة للإبلاغ عن المشكلات"
-        ),
-        WhatsNewItem(
-            textEn = "Added localized strings for the problem reporting feature",
-            textAr = "إضافة نصوص مترجمة لميزة الإبلاغ عن المشكلات"
-        ),
-        WhatsNewItem(
-            textEn = "Added a Report Problem button inside the issue tracker card",
-            textAr = "إضافة زر الإبلاغ عن مشكلة داخل بطاقة متتبع المشكلات"
-        ),
-        WhatsNewItem(
-            textEn = "Integrated the Report Problem dialog with the updated Google Form",
-            textAr = "دمج نافذة الإبلاغ عن مشكلة مع نموذج Google المحدّث"
-        ),
-        WhatsNewItem(
-            textEn = "Created ManualOperationManager for manual app switching when Accessibility Service is unavailable",
-            textAr = "إنشاء ManualOperationManager للتبديل اليدوي بين التطبيقات عند عدم توفر خدمة إمكانية الوصول"
-        ),
-        WhatsNewItem(
-            textEn = "Added support for Manual, Automatic, and Ask Each Time modes for Stop and Clean actions",
-            textAr = "إضافة دعم للأوضاع اليدوي والتلقائي والسؤال في كل مرة لإجراءات الإيقاف والتنظيف"
-        ),
-        WhatsNewItem(
-            textEn = "Improved Picture-in-Picture handling and lifecycle cleanup for manual operations",
-            textAr = "تحسين معالجة وضع صورة داخل صورة (PiP) وتنظيف دورة الحياة للعمليات اليدوية"
-        ),
-        WhatsNewItem(
-            textEn = "Added multilingual dialogs for operation mode selection and manual process guidance",
-            textAr = "إضافة نوافذ حوارية متعددة اللغات لاختيار وضع التشغيل والإرشاد للعملية اليدوية"
+            textEn = "As always, we've included improvements to performance for a better app experience. Thanks for choosing Apex!",
+            textAr = "كما هو الحال دائمًا، قمنا بتضمين تحسينات في الأداء لتجربة تطبيق أفضل. شكرًا لاختيارك Apex!"
         )
     )
 
@@ -270,40 +234,81 @@ fun WhatsNewDialog(
 
                         Spacer(modifier = Modifier.height(14.dp))
 
-                        // Language Toggle Capsule Button (Arabic / English)
-                        Box(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .padding(vertical = 8.dp),
-                            contentAlignment = Alignment.Center
+                        // Bottom Action Capsules (Language Toggle & Release Notes)
+                        CompositionLocalProvider(
+                            LocalLayoutDirection provides LayoutDirection.Ltr
                         ) {
-                            Surface(
-                                shape = CircleShape,
-                                color = MaterialTheme.colorScheme.secondaryContainer,
-                                modifier = Modifier.clip(CircleShape)
+                            Row(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .padding(vertical = 8.dp),
+                                horizontalArrangement = Arrangement.spacedBy(10.dp, Alignment.CenterHorizontally),
+                                verticalAlignment = Alignment.CenterVertically
                             ) {
-                                Row(
-                                    modifier = Modifier
-                                        .height(36.dp)
-                                        .clickable(
-                                            role = Role.Button,
-                                            onClick = { isArabic = !isArabic }
-                                        )
-                                        .padding(horizontal = 14.dp),
-                                    verticalAlignment = Alignment.CenterVertically,
-                                    horizontalArrangement = Arrangement.spacedBy(6.dp)
+                                // Language Toggle Capsule Button (Arabic / English)
+                                Surface(
+                                    shape = CircleShape,
+                                    color = MaterialTheme.colorScheme.secondaryContainer,
+                                    modifier = Modifier.clip(CircleShape)
                                 ) {
-                                    Icon(
-                                        imageVector = Translate,
-                                        contentDescription = null,
-                                        modifier = Modifier.size(18.dp),
-                                        tint = MaterialTheme.colorScheme.primary
-                                    )
-                                    Text(
-                                        text = if (isArabic) "English" else "Arabic",
-                                        style = MaterialTheme.typography.labelLarge.copy(fontWeight = FontWeight.SemiBold),
-                                        color = MaterialTheme.colorScheme.onSecondaryContainer
-                                    )
+                                    Row(
+                                        modifier = Modifier
+                                            .height(36.dp)
+                                            .clickable(
+                                                role = Role.Button,
+                                                onClick = { isArabic = !isArabic }
+                                            )
+                                            .padding(horizontal = 14.dp),
+                                        verticalAlignment = Alignment.CenterVertically,
+                                        horizontalArrangement = Arrangement.spacedBy(6.dp)
+                                    ) {
+                                        Icon(
+                                            imageVector = Translate,
+                                            contentDescription = null,
+                                            modifier = Modifier.size(18.dp),
+                                            tint = MaterialTheme.colorScheme.primary
+                                        )
+                                        Text(
+                                            text = if (isArabic) "English" else "Arabic",
+                                            style = MaterialTheme.typography.labelLarge.copy(fontWeight = FontWeight.SemiBold),
+                                            color = MaterialTheme.colorScheme.onSecondaryContainer
+                                        )
+                                    }
+                                }
+
+                                // Release Notes Capsule Button
+                                Surface(
+                                    shape = CircleShape,
+                                    color = MaterialTheme.colorScheme.secondaryContainer,
+                                    modifier = Modifier.clip(CircleShape)
+                                ) {
+                                    Row(
+                                        modifier = Modifier
+                                            .height(36.dp)
+                                            .clickable(
+                                                role = Role.Button,
+                                                onClick = {
+                                                    try {
+                                                        uriHandler.openUri(releasesUrl)
+                                                    } catch (_: Exception) { }
+                                                }
+                                            )
+                                            .padding(horizontal = 14.dp),
+                                        verticalAlignment = Alignment.CenterVertically,
+                                        horizontalArrangement = Arrangement.spacedBy(6.dp)
+                                    ) {
+                                        Icon(
+                                            imageVector = MenuBook,
+                                            contentDescription = null,
+                                            modifier = Modifier.size(18.dp),
+                                            tint = MaterialTheme.colorScheme.primary
+                                        )
+                                        Text(
+                                            text = if (isArabic) "ملاحظات الإصدار" else "Release Notes",
+                                            style = MaterialTheme.typography.labelLarge.copy(fontWeight = FontWeight.SemiBold),
+                                            color = MaterialTheme.colorScheme.onSecondaryContainer
+                                        )
+                                    }
                                 }
                             }
                         }

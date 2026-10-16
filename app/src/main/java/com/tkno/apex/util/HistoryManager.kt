@@ -38,6 +38,11 @@ object HistoryManager {
         return context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
     }
 
+    fun isHistoryEnabled(context: Context): Boolean {
+        val appPrefs = context.getSharedPreferences("apex_prefs", Context.MODE_PRIVATE)
+        return appPrefs.getBoolean("history_enabled", true)
+    }
+
     // --- Clean History ---
 
     @Synchronized
@@ -75,6 +80,7 @@ object HistoryManager {
 
     @Synchronized
     fun addCleanRecords(context: Context, entries: List<CleanHistoryEntry>) {
+        if (!isHistoryEnabled(context)) return
         if (entries.isEmpty()) return
         val currentList = getCleanHistory(context).toMutableList()
         val existingIds = currentList.map { it.id }.toSet()
@@ -144,6 +150,7 @@ object HistoryManager {
 
     @Synchronized
     fun addStopRecords(context: Context, entries: List<StopHistoryEntry>) {
+        if (!isHistoryEnabled(context)) return
         if (entries.isEmpty()) return
         val currentList = getStopHistory(context).toMutableList()
         val existingIds = currentList.map { it.id }.toSet()

@@ -1579,8 +1579,13 @@ class CacheCleanerAccessibilityService : AccessibilityService() {
         )
 
         fun startCleaning(context: Context, packages: List<String>, mode: ServiceMode = ServiceMode.CLEAR_CACHE) {
-            if (packages.isEmpty()) return
-            packageList = packages
+            val filteredPackages = if (mode == ServiceMode.FORCE_STOP) {
+                packages.filter { !AppStorageHelper.isProtectedFromStop(it) }
+            } else {
+                packages
+            }
+            if (filteredPackages.isEmpty()) return
+            packageList = filteredPackages
             currentAppIndex = 0
             currentMode = mode
             isRunning = true
@@ -1589,8 +1594,8 @@ class CacheCleanerAccessibilityService : AccessibilityService() {
             if (inst != null) {
                 inst.processCurrentOrNextApp()
             } else {
-                progressCallback?.invoke(0, packages.size, packages[0])
-                openAppDetailsSettings(context, packages[0])
+                progressCallback?.invoke(0, filteredPackages.size, filteredPackages[0])
+                openAppDetailsSettings(context, filteredPackages[0])
             }
             
             // Wait 1.5s (1500ms) on the first app's settings page before Accessibility starts clicking

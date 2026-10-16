@@ -2,6 +2,7 @@ package com.tkno.apex.ui.main
 
 import com.tkno.apex.ui.icon.LeftPanelOpen
 import com.tkno.apex.ui.icon.InfoOutline
+import com.tkno.apex.ui.icon.HistoryOff
 
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.FastOutSlowInEasing
@@ -51,6 +52,7 @@ fun CleanScreen(
     onOpenDrawer: () -> Unit = {},
     showMenuButton: Boolean = true,
     showInfoIcon: Boolean = false,
+    isHistoryEnabled: Boolean = true,
     modifier: Modifier = Modifier
 ) {
     val remainingCacheMb = (totalCacheBytes / (1024 * 1024)).toInt()
@@ -104,11 +106,14 @@ fun CleanScreen(
                         fontWeight = FontWeight.Bold
                     )
                 }
-                IconButton(onClick = onOpenHistory) {
+                IconButton(
+                    onClick = onOpenHistory,
+                    enabled = isHistoryEnabled
+                ) {
                     Icon(
-                        imageVector = Icons.Default.History,
+                        imageVector = if (isHistoryEnabled) Icons.Default.History else HistoryOff,
                         contentDescription = stringResource(id = R.string.clean_history_icon_desc),
-                        tint = MaterialTheme.colorScheme.onBackground
+                        tint = if (isHistoryEnabled) MaterialTheme.colorScheme.onBackground else MaterialTheme.colorScheme.onBackground.copy(alpha = 0.38f)
                     )
                 }
             }

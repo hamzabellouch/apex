@@ -5,9 +5,11 @@ import com.tkno.apex.ui.icon.LeftPanelOpen
 import com.tkno.apex.ui.icon.Policy
 import com.tkno.apex.ui.icon.LocalFireDepartment
 import com.tkno.apex.ui.icon.Report
+import com.tkno.apex.ui.icon.HistoryOff
 import androidx.compose.ui.semantics.Role
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.ui.text.style.TextAlign
+import android.widget.Toast
 
 import android.app.LocaleManager
 import android.content.Intent
@@ -48,6 +50,7 @@ import androidx.compose.material.icons.automirrored.outlined.ArrowForward
 import androidx.compose.material.icons.automirrored.outlined.ContactSupport
 import androidx.compose.material.icons.automirrored.outlined.OpenInNew
 import androidx.compose.material.icons.automirrored.rounded.FormatListBulleted
+import androidx.compose.material.icons.filled.ArrowDownward
 import androidx.compose.material.icons.filled.Block
 import androidx.compose.material.icons.filled.BugReport
 import androidx.compose.material.icons.filled.Info
@@ -61,6 +64,7 @@ import androidx.compose.material.icons.rounded.ViewComfy
 import androidx.compose.material3.*
 import kotlinx.coroutines.launch
 import androidx.compose.runtime.*
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -87,6 +91,13 @@ import com.tkno.apex.ui.page.settings.about.UpdatePage
 import com.tkno.apex.ui.page.settings.about.WhatsNewDialog
 import com.tkno.apex.ui.svg.drawablevectors.DynamicColorImageVectors
 import com.tkno.apex.ui.svg.drawablevectors.coder
+import com.tkno.apex.ui.common.LocalDarkTheme
+import com.tkno.apex.ui.page.settings.appearance.DarkThemePreferences
+import com.tkno.apex.util.DarkThemePreference
+import com.tkno.apex.util.PreferenceUtil
+import com.tkno.apex.util.LanguageManager
+import com.tkno.apex.util.CustomLanguage
+import com.tkno.apex.util.RemoteLanguageItem
 import java.util.Locale
 
 enum class MenuSubScreen {
@@ -97,7 +108,7 @@ enum class MenuSubScreen {
 fun MenuScreen(
     onSubScreenStateChanged: (Boolean) -> Unit = {}
 ) {
-    var currentSubScreen by remember { mutableStateOf(MenuSubScreen.Main) }
+    var currentSubScreen by rememberSaveable { mutableStateOf(MenuSubScreen.Main) }
 
     LaunchedEffect(currentSubScreen) {
         onSubScreenStateChanged(currentSubScreen != MenuSubScreen.Main)
@@ -366,6 +377,7 @@ fun GeneralSettingsPage(
     var cleaningMode by remember { mutableIntStateOf(prefs.getInt("cleaning_mode", 1)) }
     var isIgnoreTinyCache by remember { mutableStateOf(prefs.getBoolean("ignore_tiny_cache", false)) }
     var isGestureFallbackEnabled by remember { mutableStateOf(prefs.getBoolean("gesture_fallback_enabled", false)) }
+    var isHistoryEnabled by remember { mutableStateOf(prefs.getBoolean("history_enabled", true)) }
     var showCleaningModeDialog by remember { mutableStateOf(false) }
 
     BasePreferencePage(
@@ -489,6 +501,20 @@ fun GeneralSettingsPage(
                     val newValue = !isGestureFallbackEnabled
                     isGestureFallbackEnabled = newValue
                     prefs.edit().putBoolean("gesture_fallback_enabled", newValue).apply()
+                }
+            )
+
+            PreferenceGroupTitle(title = stringResource(id = R.string.advanced_title))
+
+            PreferenceSwitch(
+                title = stringResource(id = R.string.history_title),
+                description = stringResource(id = R.string.history_setting_desc),
+                icon = if (isHistoryEnabled) Icons.Outlined.History else HistoryOff,
+                isChecked = isHistoryEnabled,
+                onClick = {
+                    val newValue = !isHistoryEnabled
+                    isHistoryEnabled = newValue
+                    prefs.edit().putBoolean("history_enabled", newValue).apply()
                 }
             )
         }
@@ -862,45 +888,7 @@ fun TimingSliderItem(
 fun getSavedLocaleDisplayName(context: android.content.Context): String {
     val prefs = context.getSharedPreferences("apex_prefs", android.content.Context.MODE_PRIVATE)
     val langTag = prefs.getString("app_language", "system") ?: "system"
-    if (langTag == "system") return context.getString(R.string.follow_system)
-    return when (langTag) {
-        "en" -> "English"
-        "ar" -> "العربية"
-        "az" -> "Azərbaycan"
-        "be" -> "Беларуская"
-        "zh-Hans" -> "简体中文"
-        "zh-Hant" -> "繁體中文"
-        "hr" -> "Hrvatski"
-        "cs" -> "Čeština"
-        "da" -> "Dansk"
-        "nl" -> "Nederlands"
-        "fil" -> "Filipino"
-        "fr" -> "Français"
-        "de" -> "Deutsch"
-        "el" -> "Ελληνικά"
-        "hi" -> "हिन्दी"
-        "hu" -> "Magyar"
-        "in" -> "Bahasa Indonesia"
-        "it" -> "Italiano"
-        "ja" -> "日本語"
-        "ko" -> "한국어"
-        "ms" -> "Bahasa Melayu"
-        "mn" -> "Монгол"
-        "fa" -> "فارسی"
-        "pl" -> "Polski"
-        "pt" -> "Português"
-        "ru" -> "Русский"
-        "sr" -> "Српски"
-        "si" -> "සිංහල"
-        "es" -> "Español"
-        "sv" -> "Svenska"
-        "th" -> "ไทย"
-        "tr" -> "Türkçe"
-        "uk" -> "Українська"
-        "vi" -> "Tiếng Việt"
-        "zgh" -> "ⵜⴰⵎⴰⵣⵉⵖⵜ"
-        else -> Locale.forLanguageTag(langTag).getDisplayName(Locale.forLanguageTag(langTag)).replaceFirstChar { it.uppercase() }
-    }
+    return LanguageManager.getDisplayName(context, langTag)
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -908,16 +896,15 @@ fun getSavedLocaleDisplayName(context: android.content.Context): String {
 fun AppearancePreferences(onNavigateBack: () -> Unit, onNavigateTo: (String) -> Unit = {}) {
     val context = LocalContext.current
     val prefs = remember { context.getSharedPreferences("apex_prefs", android.content.Context.MODE_PRIVATE) }
-
-    var darkThemePref by remember { mutableIntStateOf(prefs.getInt("dark_theme", 0)) }
     var isDynamicColor by remember { mutableStateOf(prefs.getBoolean("dynamic_color", true)) }
+    var appLang by remember { mutableStateOf(prefs.getString("app_language", "system") ?: "system") }
 
     DisposableEffect(prefs) {
         val listener = android.content.SharedPreferences.OnSharedPreferenceChangeListener { p, key ->
-            if (key == "dark_theme") {
-                darkThemePref = p.getInt("dark_theme", 0)
-            } else if (key == "dynamic_color") {
+            if (key == "dynamic_color") {
                 isDynamicColor = p.getBoolean("dynamic_color", true)
+            } else if (key == "app_language") {
+                appLang = p.getString("app_language", "system") ?: "system"
             }
         }
         prefs.registerOnSharedPreferenceChangeListener(listener)
@@ -926,17 +913,8 @@ fun AppearancePreferences(onNavigateBack: () -> Unit, onNavigateTo: (String) -> 
         }
     }
 
-    val isDark = when (darkThemePref) {
-        1 -> true
-        2 -> false
-        else -> isSystemInDarkTheme()
-    }
-
-    val darkThemeDesc = when (darkThemePref) {
-        1 -> stringResource(id = R.string.on)
-        2 -> stringResource(id = R.string.off)
-        else -> stringResource(id = R.string.follow_system)
-    }
+    val darkThemePreference = LocalDarkTheme.current
+    val isDarkTheme = darkThemePreference.isDarkTheme()
 
     BasePreferencePage(
         title = stringResource(id = R.string.look_and_feel),
@@ -961,20 +939,20 @@ fun AppearancePreferences(onNavigateBack: () -> Unit, onNavigateTo: (String) -> 
             )
             PreferenceSwitchWithDivider(
                 title = stringResource(id = R.string.dark_theme),
-                icon = if (isDark) Icons.Outlined.DarkMode else Icons.Outlined.LightMode,
-                isChecked = isDark,
-                description = darkThemeDesc,
+                icon = if (isDarkTheme) Icons.Outlined.DarkMode else Icons.Outlined.LightMode,
+                isChecked = isDarkTheme,
+                description = darkThemePreference.getDarkThemeDesc(),
                 onChecked = {
-                    val newPref = if (isDark) 2 else 1
-                    darkThemePref = newPref
-                    prefs.edit().putInt("dark_theme", newPref).apply()
+                    PreferenceUtil.modifyDarkThemePreference(
+                        if (isDarkTheme) DarkThemePreference.OFF else DarkThemePreference.ON
+                    )
                 },
                 onClick = { onNavigateTo("dark_theme") },
             )
             PreferenceItem(
                 title = stringResource(R.string.language),
                 icon = Icons.Outlined.Language,
-                description = getSavedLocaleDisplayName(context),
+                description = LanguageManager.getDisplayName(context, appLang),
             ) {
                 onNavigateTo("languages")
             }
@@ -982,78 +960,250 @@ fun AppearancePreferences(onNavigateBack: () -> Unit, onNavigateTo: (String) -> 
     }
 }
 
-/* ---------------- DarkThemePreferences ---------------- */
+/* ---------------- DownloadLanguagesBottomSheet ---------------- */
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun DarkThemePreferences(onNavigateBack: () -> Unit) {
-    val scrollBehavior = TopAppBarDefaults.exitUntilCollapsedScrollBehavior()
+fun DownloadLanguagesBottomSheet(
+    onDismissRequest: () -> Unit,
+    onLanguageInstalled: (CustomLanguage) -> Unit
+) {
     val context = LocalContext.current
-    val prefs = remember { context.getSharedPreferences("apex_prefs", android.content.Context.MODE_PRIVATE) }
-    var darkThemePref by remember { mutableIntStateOf(prefs.getInt("dark_theme", 0)) }
+    val coroutineScope = rememberCoroutineScope()
+    var isLoading by remember { mutableStateOf(true) }
+    var errorMessage by remember { mutableStateOf<String?>(null) }
+    var remoteLanguages by remember { mutableStateOf<List<RemoteLanguageItem>>(emptyList()) }
+    var downloadingCode by remember { mutableStateOf<String?>(null) }
 
-    Scaffold(
-        modifier = Modifier.fillMaxSize().nestedScroll(scrollBehavior.nestedScrollConnection),
-        topBar = {
-            TopAppBar(
-                title = {
-                    Text(
-                        text = stringResource(id = R.string.dark_theme),
-                        color = MaterialTheme.colorScheme.onSurface,
-                        fontSize = 24.sp,
-                        fontWeight = FontWeight.Bold
-                    )
-                },
-                navigationIcon = { BackButton { onNavigateBack() } },
-                colors = TopAppBarDefaults.topAppBarColors(
-                    containerColor = MaterialTheme.colorScheme.background,
-                    scrolledContainerColor = MaterialTheme.colorScheme.background
-                )
+    fun loadLanguages() {
+        isLoading = true
+        errorMessage = null
+        if (!LanguageManager.isNetworkAvailable(context)) {
+            isLoading = false
+            errorMessage = context.getString(R.string.no_internet_error)
+            return
+        }
+        coroutineScope.launch {
+            val result = LanguageManager.fetchRemoteLanguages()
+            result.onSuccess { list ->
+                remoteLanguages = list
+                isLoading = false
+            }.onFailure { err ->
+                if (!LanguageManager.isNetworkAvailable(context) ||
+                    err is java.net.UnknownHostException ||
+                    err is java.net.ConnectException ||
+                    err is java.net.SocketTimeoutException ||
+                    err is java.io.IOException
+                ) {
+                    errorMessage = context.getString(R.string.no_internet_error)
+                } else {
+                    errorMessage = err.localizedMessage ?: context.getString(R.string.download_failed)
+                }
+                isLoading = false
+            }
+        }
+    }
+
+    LaunchedEffect(Unit) {
+        loadLanguages()
+    }
+
+    ModalBottomSheet(
+        onDismissRequest = onDismissRequest,
+        dragHandle = { BottomSheetDefaults.DragHandle() },
+        containerColor = MaterialTheme.colorScheme.surfaceContainerLow
+    ) {
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 16.dp)
+                .padding(bottom = 32.dp)
+        ) {
+            Text(
+                text = stringResource(id = R.string.download_languages),
+                style = MaterialTheme.typography.titleLarge,
+                modifier = Modifier.padding(horizontal = 8.dp, vertical = 8.dp)
             )
-        },
-        content = { padding ->
-            LazyColumn(
-                modifier = Modifier.fillMaxSize(),
-                contentPadding = PaddingValues(
-                    top = padding.calculateTopPadding(),
-                    bottom = padding.calculateBottomPadding() + 48.dp
-                )
-            ) {
-                if (android.os.Build.VERSION.SDK_INT >= 29) {
-                    item {
-                        PreferenceSingleChoiceItem(
-                            text = stringResource(R.string.follow_system),
-                            selected = darkThemePref == 0,
-                            onClick = {
-                                darkThemePref = 0
-                                prefs.edit().putInt("dark_theme", 0).apply()
+            Text(
+                text = stringResource(id = R.string.download_languages_desc),
+                style = MaterialTheme.typography.bodyMedium,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
+                modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp)
+            )
+            Spacer(modifier = Modifier.height(16.dp))
+
+            when {
+                isLoading -> {
+                    Box(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .height(200.dp),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        CircularProgressIndicator()
+                    }
+                }
+                errorMessage != null -> {
+                    Column(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(vertical = 28.dp, horizontal = 16.dp),
+                        horizontalAlignment = Alignment.CenterHorizontally
+                    ) {
+                        Surface(
+                            shape = CircleShape,
+                            color = MaterialTheme.colorScheme.errorContainer,
+                            modifier = Modifier.size(56.dp)
+                        ) {
+                            Box(contentAlignment = Alignment.Center) {
+                                Icon(
+                                    imageVector = Icons.Outlined.WifiOff,
+                                    contentDescription = null,
+                                    tint = MaterialTheme.colorScheme.error,
+                                    modifier = Modifier.size(28.dp)
+                                )
                             }
+                        }
+                        Spacer(modifier = Modifier.height(16.dp))
+                        Text(
+                            text = errorMessage ?: "",
+                            style = MaterialTheme.typography.bodyMedium,
+                            fontWeight = FontWeight.Medium,
+                            color = MaterialTheme.colorScheme.error,
+                            textAlign = TextAlign.Center,
+                            modifier = Modifier.padding(horizontal = 16.dp)
+                        )
+                        Spacer(modifier = Modifier.height(20.dp))
+                        Button(
+                            onClick = { loadLanguages() },
+                            colors = ButtonDefaults.buttonColors(
+                                containerColor = MaterialTheme.colorScheme.error,
+                                contentColor = MaterialTheme.colorScheme.onError
+                            )
+                        ) {
+                            Icon(Icons.Outlined.Refresh, contentDescription = null, modifier = Modifier.size(18.dp))
+                            Spacer(modifier = Modifier.width(8.dp))
+                            Text(text = stringResource(id = R.string.retry))
+                        }
+                    }
+                }
+                remoteLanguages.isEmpty() -> {
+                    Box(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .height(150.dp),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        Text(
+                            text = stringResource(id = R.string.no_downloaded_languages),
+                            style = MaterialTheme.typography.bodyMedium,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant
                         )
                     }
                 }
-                item {
-                    PreferenceSingleChoiceItem(
-                        text = stringResource(R.string.on),
-                        selected = darkThemePref == 1,
-                        onClick = {
-                            darkThemePref = 1
-                            prefs.edit().putInt("dark_theme", 1).apply()
+                else -> {
+                    val installed = remember(remoteLanguages) {
+                        LanguageManager.getInstalledCustomLanguages(context).map { it.code }.toSet()
+                    }
+                    LazyColumn(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .heightIn(max = 420.dp)
+                    ) {
+                        items(remoteLanguages) { item ->
+                            val isInstalled = installed.contains(item.code) || LanguageManager.isBuiltInLanguage(item.code)
+                            val isDownloading = downloadingCode == item.code
+
+                            Surface(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .padding(vertical = 4.dp),
+                                shape = RoundedCornerShape(16.dp),
+                                color = MaterialTheme.colorScheme.surfaceContainerHigh,
+                                onClick = {
+                                    if (isInstalled) {
+                                        val custom = LanguageManager.loadCustomLanguage(context, item.code)
+                                            ?: CustomLanguage(item.code, item.name, item.englishName, item.direction)
+                                        onLanguageInstalled(custom)
+                                        onDismissRequest()
+                                    }
+                                }
+                            ) {
+                                Row(
+                                    modifier = Modifier
+                                        .fillMaxWidth()
+                                        .padding(horizontal = 16.dp, vertical = 12.dp),
+                                    verticalAlignment = Alignment.CenterVertically
+                                ) {
+                                    Column(modifier = Modifier.weight(1f)) {
+                                        Text(
+                                            text = item.name,
+                                            style = MaterialTheme.typography.titleMedium
+                                        )
+                                        Text(
+                                            text = item.englishName,
+                                            style = MaterialTheme.typography.bodySmall,
+                                            color = MaterialTheme.colorScheme.onSurfaceVariant
+                                        )
+                                    }
+                                    if (isInstalled) {
+                                        FilledTonalButton(
+                                            onClick = {
+                                                val custom = LanguageManager.loadCustomLanguage(context, item.code)
+                                                    ?: CustomLanguage(item.code, item.name, item.englishName, item.direction)
+                                                onLanguageInstalled(custom)
+                                                onDismissRequest()
+                                            }
+                                        ) {
+                                            Icon(Icons.Outlined.Check, contentDescription = null, modifier = Modifier.size(16.dp))
+                                            Spacer(modifier = Modifier.width(4.dp))
+                                            Text(stringResource(R.string.installed))
+                                        }
+                                    } else if (isDownloading) {
+                                        CircularProgressIndicator(modifier = Modifier.size(24.dp), strokeWidth = 2.5.dp)
+                                    } else {
+                                        Button(
+                                            onClick = {
+                                                if (!LanguageManager.isNetworkAvailable(context)) {
+                                                    Toast.makeText(context, context.getString(R.string.no_internet_error), Toast.LENGTH_SHORT).show()
+                                                    return@Button
+                                                }
+                                                downloadingCode = item.code
+                                                coroutineScope.launch {
+                                                    val res = LanguageManager.downloadRemoteLanguage(context, item)
+                                                    downloadingCode = null
+                                                    res.onSuccess { customLang ->
+                                                        Toast.makeText(context, context.getString(R.string.language_downloaded), Toast.LENGTH_SHORT).show()
+                                                        onLanguageInstalled(customLang)
+                                                        onDismissRequest()
+                                                    }.onFailure { e ->
+                                                        val msg = if (!LanguageManager.isNetworkAvailable(context) ||
+                                                            e is java.net.UnknownHostException ||
+                                                            e is java.net.ConnectException ||
+                                                            e is java.net.SocketTimeoutException
+                                                        ) {
+                                                            context.getString(R.string.no_internet_error)
+                                                        } else {
+                                                            e.localizedMessage ?: context.getString(R.string.download_failed)
+                                                        }
+                                                        Toast.makeText(context, msg, Toast.LENGTH_SHORT).show()
+                                                    }
+                                                }
+                                            }
+                                        ) {
+                                            Icon(Icons.Filled.ArrowDownward, contentDescription = null, modifier = Modifier.size(18.dp))
+                                            Spacer(modifier = Modifier.width(6.dp))
+                                            Text(stringResource(R.string.install))
+                                        }
+                                    }
+                                }
+                            }
                         }
-                    )
-                }
-                item {
-                    PreferenceSingleChoiceItem(
-                        text = stringResource(R.string.off),
-                        selected = darkThemePref == 2,
-                        onClick = {
-                            darkThemePref = 2
-                            prefs.edit().putInt("dark_theme", 2).apply()
-                        }
-                    )
+                    }
                 }
             }
         }
-    )
+    }
 }
 
 /* ---------------- LanguagesPage ---------------- */
@@ -1066,63 +1216,46 @@ fun LanguagesPage(onNavigateBack: () -> Unit) {
     val context = LocalContext.current
     val prefs = remember { context.getSharedPreferences("apex_prefs", android.content.Context.MODE_PRIVATE) }
     var selectedLangTag by remember { mutableStateOf(prefs.getString("app_language", "system") ?: "system") }
+    var refreshCustomTrigger by remember { mutableIntStateOf(0) }
+    var showDownloadSheet by remember { mutableStateOf(false) }
 
-    val suggestedLanguages = remember {
-        listOf(
-            Triple("English", "en", Locale.ENGLISH),
-            Triple("العربية", "ar", Locale.forLanguageTag("ar")),
-        )
+    DisposableEffect(prefs) {
+        val listener = android.content.SharedPreferences.OnSharedPreferenceChangeListener { p, key ->
+            if (key == "app_language") {
+                selectedLangTag = p.getString("app_language", "system") ?: "system"
+            }
+        }
+        prefs.registerOnSharedPreferenceChangeListener(listener)
+        onDispose {
+            prefs.unregisterOnSharedPreferenceChangeListener(listener)
+        }
     }
 
-    val allLanguagesList = remember {
+    val installedCustomLanguages = remember(selectedLangTag, refreshCustomTrigger) {
+        LanguageManager.getInstalledCustomLanguages(context)
+    }
+
+    val defaultLanguagesList = remember {
         listOf(
-            Triple("العربية", "ar", Locale.forLanguageTag("ar")),
-            Triple("Azərbaycan", "az", Locale.forLanguageTag("az")),
-            Triple("Беларуская", "be", Locale.forLanguageTag("be")),
-            Triple("简体中文", "zh-Hans", Locale.forLanguageTag("zh-Hans")),
-            Triple("繁體中文", "zh-Hant", Locale.forLanguageTag("zh-Hant")),
-            Triple("Hrvatski", "hr", Locale.forLanguageTag("hr")),
-            Triple("Čeština", "cs", Locale.forLanguageTag("cs")),
-            Triple("Dansk", "da", Locale.forLanguageTag("da")),
-            Triple("Nederlands", "nl", Locale.forLanguageTag("nl")),
             Triple("English", "en", Locale.ENGLISH),
-            Triple("Filipino", "fil", Locale.forLanguageTag("fil")),
-            Triple("Français", "fr", Locale.FRENCH),
-            Triple("Deutsch", "de", Locale.GERMAN),
-            Triple("Ελληνικά", "el", Locale.forLanguageTag("el")),
-            Triple("हिन्दी", "hi", Locale.forLanguageTag("hi")),
-            Triple("Magyar", "hu", Locale.forLanguageTag("hu")),
-            Triple("Bahasa Indonesia", "in", Locale.forLanguageTag("in")),
-            Triple("Italiano", "it", Locale.ITALIAN),
-            Triple("日本語", "ja", Locale.JAPANESE),
-            Triple("한국어", "ko", Locale.KOREAN),
-            Triple("Bahasa Melayu", "ms", Locale.forLanguageTag("ms")),
-            Triple("Монгол", "mn", Locale.forLanguageTag("mn")),
-            Triple("فارسی", "fa", Locale.forLanguageTag("fa")),
-            Triple("Polski", "pl", Locale.forLanguageTag("pl")),
-            Triple("Português", "pt", Locale.forLanguageTag("pt")),
-            Triple("Русский", "ru", Locale.forLanguageTag("ru")),
-            Triple("Српски", "sr", Locale.forLanguageTag("sr")),
-            Triple("සිංහල", "si", Locale.forLanguageTag("si")),
-            Triple("Español", "es", Locale.forLanguageTag("es")),
-            Triple("Svenska", "sv", Locale.forLanguageTag("sv")),
-            Triple("ไทย", "th", Locale.forLanguageTag("th")),
-            Triple("Türkçe", "tr", Locale.forLanguageTag("tr")),
-            Triple("Українська", "uk", Locale.forLanguageTag("uk")),
-            Triple("Tiếng Việt", "vi", Locale.forLanguageTag("vi")),
-            Triple("ⵜⴰⵎⴰⵣⵉⵖⵜ", "zgh", Locale.forLanguageTag("zgh"))
+            Triple("العربية", "ar", Locale.forLanguageTag("ar")),
+            Triple("Français", "fr", Locale.FRENCH)
         )
     }
 
     val deviceLocale = remember {
-        ConfigurationCompat.getLocales(context.resources.configuration).get(0) ?: Locale.getDefault()
+        ConfigurationCompat.getLocales(android.content.res.Resources.getSystem().configuration).get(0)
+            ?: Locale.getDefault()
     }
 
-    val isSystemLangSupported = remember(deviceLocale, allLanguagesList) {
+    val isSystemLangSupported = remember(deviceLocale, installedCustomLanguages) {
         val devTag = deviceLocale.toLanguageTag().lowercase()
         val devLang = deviceLocale.language.lowercase()
-        allLanguagesList.any { (_, tag, _) ->
+        defaultLanguagesList.any { (_, tag, _) ->
             val t = tag.lowercase()
+            t == devTag || t == devLang || devTag.startsWith(t) || devLang == t.split("-")[0]
+        } || installedCustomLanguages.any {
+            val t = it.code.lowercase()
             t == devTag || t == devLang || devTag.startsWith(t) || devLang == t.split("-")[0]
         }
     }
@@ -1131,32 +1264,55 @@ fun LanguagesPage(onNavigateBack: () -> Unit) {
         selectedLangTag = langTag
         prefs.edit().putString("app_language", langTag).apply()
 
-        val localeListCompat = if (langTag == "system" || locale == null) {
-            LocaleListCompat.getEmptyLocaleList()
-        } else {
-            LocaleListCompat.forLanguageTags(langTag)
-        }
-        AppCompatDelegate.setApplicationLocales(localeListCompat)
+        val isBuiltIn = LanguageManager.isBuiltInLanguage(langTag)
+        if (isBuiltIn) {
+            val localeListCompat = if (langTag == "system" || locale == null) {
+                LocaleListCompat.getEmptyLocaleList()
+            } else {
+                LocaleListCompat.forLanguageTags(langTag)
+            }
+            AppCompatDelegate.setApplicationLocales(localeListCompat)
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            val localeManager = context.getSystemService(android.content.Context.LOCALE_SERVICE) as? LocaleManager
-            if (localeManager != null) {
-                val localeList = if (langTag == "system" || locale == null) {
-                    LocaleList.getEmptyLocaleList()
-                } else {
-                    LocaleList(locale)
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                val localeManager = context.getSystemService(android.content.Context.LOCALE_SERVICE) as? LocaleManager
+                if (localeManager != null) {
+                    val localeList = if (langTag == "system" || locale == null) {
+                        LocaleList.getEmptyLocaleList()
+                    } else {
+                        LocaleList(locale)
+                    }
+                    localeManager.applicationLocales = localeList
                 }
-                localeManager.applicationLocales = localeList
+            }
+        } else {
+            AppCompatDelegate.setApplicationLocales(LocaleListCompat.getEmptyLocaleList())
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                val localeManager = context.getSystemService(android.content.Context.LOCALE_SERVICE) as? LocaleManager
+                localeManager?.applicationLocales = LocaleList.getEmptyLocaleList()
             }
         }
 
-        val targetLocale = if (langTag == "system" || locale == null) Locale.getDefault() else locale
+        val targetLocale = if (langTag == "system" || locale == null) {
+            ConfigurationCompat.getLocales(android.content.res.Resources.getSystem().configuration).get(0)
+                ?: Locale.getDefault()
+        } else {
+            locale
+        }
         Locale.setDefault(targetLocale)
-        val config = context.resources.configuration
-        config.setLocale(targetLocale)
-        config.setLayoutDirection(targetLocale)
-        @Suppress("DEPRECATION")
-        context.resources.updateConfiguration(config, context.resources.displayMetrics)
+    }
+
+    if (showDownloadSheet) {
+        DownloadLanguagesBottomSheet(
+            onDismissRequest = { showDownloadSheet = false },
+            onLanguageInstalled = { customLang ->
+                refreshCustomTrigger++
+                val cleanTag = when {
+                    customLang.code.startsWith("b+") -> customLang.code.removePrefix("b+").replace('+', '-')
+                    else -> customLang.code
+                }
+                setAppLanguage(customLang.code, Locale.forLanguageTag(cleanTag))
+            }
+        )
     }
 
     Scaffold(
@@ -1172,6 +1328,15 @@ fun LanguagesPage(onNavigateBack: () -> Unit) {
                         Text(text = stringResource(id = R.string.language), color = MaterialTheme.colorScheme.onBackground)
                     },
                     navigationIcon = { BackButton { onNavigateBack() } },
+                    actions = {
+                        IconButton(onClick = { showDownloadSheet = true }) {
+                            Icon(
+                                imageVector = Icons.Outlined.Add,
+                                contentDescription = stringResource(id = R.string.download_languages),
+                                tint = MaterialTheme.colorScheme.onBackground
+                            )
+                        }
+                    },
                     scrollBehavior = scrollBehavior,
                     windowInsets = WindowInsets(0.dp),
                     colors = TopAppBarDefaults.topAppBarColors(
@@ -1198,15 +1363,16 @@ fun LanguagesPage(onNavigateBack: () -> Unit) {
                         description = stringResource(id = R.string.translate_desc),
                         icon = Icons.Outlined.Translate,
                     ) {
-                        uriHandler.openUri("https://github.com/hamzabellouch/apex")
+                        uriHandler.openUri("https://github.com/hamzabellouch/language")
                     }
                 }
 
-                item {
+                // 1. Suggested (System default)
+                item(key = "suggested_header") {
                     PreferenceSubtitle(text = stringResource(id = R.string.suggested))
                 }
 
-                item {
+                item(key = "follow_system") {
                     PreferenceSingleChoiceItem(
                         text = stringResource(id = R.string.follow_system),
                         selected = selectedLangTag == "system",
@@ -1215,24 +1381,90 @@ fun LanguagesPage(onNavigateBack: () -> Unit) {
                     )
                 }
 
-                items(suggestedLanguages) { (displayName, langTag, locale) ->
+                // 2. Built-in Core Languages
+                item(key = "built_in_header") {
+                    PreferenceSubtitle(text = stringResource(id = R.string.built_in_languages))
+                }
+
+                items(
+                    items = defaultLanguagesList,
+                    key = { it.second }
+                ) { (displayName, langTag, locale) ->
                     PreferenceSingleChoiceItem(
                         text = displayName,
                         selected = selectedLangTag == langTag,
                         onClick = { setAppLanguage(langTag, locale) },
                     )
+                }
+
+                // 3. Downloaded Languages
+                if (installedCustomLanguages.isNotEmpty()) {
+                    item(key = "downloaded_header") {
+                        PreferenceSubtitle(text = stringResource(id = R.string.downloaded_languages))
+                    }
+
+                    items(
+                        items = installedCustomLanguages,
+                        key = { it.code }
+                    ) { customLang ->
+                        val cleanTag = when {
+                            customLang.code.startsWith("b+") -> customLang.code.removePrefix("b+").replace('+', '-')
+                            else -> customLang.code
+                        }
+                        Surface(
+                            onClick = {
+                                setAppLanguage(customLang.code, Locale.forLanguageTag(cleanTag))
+                            },
+                            modifier = Modifier.fillMaxWidth()
+                        ) {
+                            Row(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .padding(horizontal = 8.dp, vertical = 12.dp),
+                                verticalAlignment = Alignment.CenterVertically
+                            ) {
+                                Column(
+                                    modifier = Modifier
+                                        .weight(1f)
+                                        .padding(start = 8.dp)
+                                ) {
+                                    Text(
+                                        text = customLang.name,
+                                        style = MaterialTheme.typography.titleLarge.copy(fontSize = 20.sp),
+                                        color = MaterialTheme.colorScheme.onSurface
+                                    )
+                                    Text(
+                                        text = customLang.englishName,
+                                        style = MaterialTheme.typography.bodyMedium,
+                                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                                    )
+                                }
+                                IconButton(
+                                    onClick = {
+                                        LanguageManager.deleteCustomLanguage(context, customLang.code)
+                                        refreshCustomTrigger++
+                                        Toast.makeText(context, context.getString(R.string.language_deleted), Toast.LENGTH_SHORT).show()
+                                    }
+                                ) {
+                                    Icon(
+                                        imageVector = Icons.Outlined.DeleteOutline,
+                                        contentDescription = stringResource(R.string.delete),
+                                        tint = MaterialTheme.colorScheme.error
+                                    )
+                                }
+                                RadioButton(
+                                    selected = selectedLangTag == customLang.code,
+                                    onClick = {
+                                        setAppLanguage(customLang.code, Locale.forLanguageTag(cleanTag))
+                                    }
+                                )
+                            }
+                        }
+                    }
                 }
 
                 item {
-                    PreferenceSubtitle(text = stringResource(id = R.string.all_languages))
-                }
-
-                items(allLanguagesList) { (displayName, langTag, locale) ->
-                    PreferenceSingleChoiceItem(
-                        text = displayName,
-                        selected = selectedLangTag == langTag,
-                        onClick = { setAppLanguage(langTag, locale) },
-                    )
+                    Spacer(modifier = Modifier.height(32.dp))
                 }
             }
         },
@@ -1262,6 +1494,7 @@ fun SponsorsPage(onNavigateBack: () -> Unit) {
         canScroll = { true },
     )
     val uriHandler = LocalUriHandler.current
+    val context = LocalContext.current
 
     Scaffold(
         modifier = Modifier.fillMaxSize().nestedScroll(scrollBehavior.nestedScrollConnection),
@@ -1337,22 +1570,53 @@ fun SponsorsPage(onNavigateBack: () -> Unit) {
                                 }
                             }
 
-                            Button(
-                                onClick = {
-                                    uriHandler.openUri("https://github.com/sponsors/hamzabellouch")
-                                },
-                                contentPadding = ButtonDefaults.ButtonWithIconContentPadding,
-                                modifier = Modifier.align(Alignment.End),
+                            Column(
+                                modifier = Modifier.fillMaxWidth(),
+                                horizontalAlignment = Alignment.End,
                             ) {
-                                Icon(
-                                    modifier = Modifier
-                                        .padding(end = 8.dp)
-                                        .size(ButtonDefaults.IconSize),
-                                    imageVector = Icons.Outlined.VolunteerActivism,
-                                    contentDescription = null,
-                                )
+                                // 1. كبسولة Sponsor
+                                Button(
+                                    onClick = {
+                                        Toast.makeText(
+                                            context,
+                                            context.getString(R.string.sponsor_unavailable),
+                                            Toast.LENGTH_SHORT,
+                                        ).show()
+                                    },
+                                    contentPadding = ButtonDefaults.ButtonWithIconContentPadding,
+                                ) {
+                                    Icon(
+                                        modifier = Modifier
+                                            .padding(end = 8.dp)
+                                            .size(ButtonDefaults.IconSize),
+                                        imageVector = Icons.Outlined.VolunteerActivism,
+                                        contentDescription = null,
+                                    )
+                                    Text(text = stringResource(id = R.string.sponsor))
+                                }
 
-                                Text(text = stringResource(id = R.string.sponsor))
+                                Spacer(modifier = Modifier.height(8.dp))
+
+                                // 2. كبسولة Star
+                                Button(
+                                    onClick = {
+                                        uriHandler.openUri("https://github.com/hamzabellouch/apex")
+                                    },
+                                    colors = ButtonDefaults.buttonColors(
+                                        containerColor = Color(0xFFFFC107),
+                                        contentColor = Color(0xFF212121),
+                                    ),
+                                    contentPadding = ButtonDefaults.ButtonWithIconContentPadding,
+                                ) {
+                                    Icon(
+                                        modifier = Modifier
+                                            .padding(end = 8.dp)
+                                            .size(ButtonDefaults.IconSize),
+                                        imageVector = Icons.Outlined.StarBorder,
+                                        contentDescription = null,
+                                    )
+                                    Text(text = stringResource(id = R.string.star))
+                                }
                             }
                         }
                     }
@@ -1454,26 +1718,7 @@ fun TroubleShootingPage(onNavigateBack: () -> Unit) {
     var showContactDialog by remember { mutableStateOf(false) }
     var showReportDialog by remember { mutableStateOf(false) }
 
-    val prefs = remember { context.getSharedPreferences("apex_prefs", android.content.Context.MODE_PRIVATE) }
-    var darkThemePref by remember { mutableIntStateOf(prefs.getInt("dark_theme", 0)) }
-
-    DisposableEffect(prefs) {
-        val listener = android.content.SharedPreferences.OnSharedPreferenceChangeListener { p, key ->
-            if (key == "dark_theme") {
-                darkThemePref = p.getInt("dark_theme", 0)
-            }
-        }
-        prefs.registerOnSharedPreferenceChangeListener(listener)
-        onDispose {
-            prefs.unregisterOnSharedPreferenceChangeListener(listener)
-        }
-    }
-
-    val isDark = when (darkThemePref) {
-        1 -> true
-        2 -> false
-        else -> isSystemInDarkTheme()
-    }
+    val isDark = LocalDarkTheme.current.isDarkTheme()
 
     val emailContainer = if (isDark) Color(0xFF1E293B) else Color(0xFFF1F5F9)
     val emailContent = if (isDark) Color(0xFF94A3B8) else Color(0xFF475569)
@@ -1859,9 +2104,9 @@ fun AboutPage(
     AppUpdater(isAutoUpdateEnabled = isAutoUpdateEnabled)
 
     val versionName = try {
-        context.packageManager.getPackageInfo(context.packageName, 0).versionName ?: "0.1.0-beta"
+        context.packageManager.getPackageInfo(context.packageName, 0).versionName ?: "0.1.1-beta"
     } catch (e: Exception) {
-        "0.1.0-beta"
+        "0.1.1-beta"
     }
     val info = "App version: $versionName\nPackage name: ${context.packageName}\nDevice: Android ${android.os.Build.VERSION.RELEASE} (API ${android.os.Build.VERSION.SDK_INT})"
     val uriHandler = LocalUriHandler.current
@@ -2074,11 +2319,8 @@ fun AboutPage(
 
 /* ---------------- CreditsPage ---------------- */
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun CreditsPage(onNavigateBack: () -> Unit) {
-    val scrollBehavior = TopAppBarDefaults.exitUntilCollapsedScrollBehavior()
-
     val creditsList = remember {
         listOf(
             Triple("ReadYou", "GPL-3.0 License", "https://github.com/Ashinch/ReadYou"),
@@ -2096,51 +2338,37 @@ fun CreditsPage(onNavigateBack: () -> Unit) {
 
     val uriHandler = LocalUriHandler.current
 
-    Scaffold(
-        modifier = Modifier.fillMaxSize().nestedScroll(scrollBehavior.nestedScrollConnection),
-        topBar = {
-            TopAppBar(
-                title = {
-                    Text(
-                        text = stringResource(id = R.string.credits),
-                        color = MaterialTheme.colorScheme.onSurface,
-                        fontSize = 24.sp,
-                        fontWeight = FontWeight.Bold
+    BasePreferencePage(
+        title = stringResource(id = R.string.credits),
+        onBack = onNavigateBack,
+    ) { padding ->
+        LazyColumn(
+            modifier = Modifier.fillMaxSize(),
+            contentPadding = padding
+        ) {
+            item {
+                Surface(
+                    modifier = Modifier
+                        .fillParentMaxWidth()
+                        .padding(horizontal = 12.dp, vertical = 12.dp)
+                        .clip(MaterialTheme.shapes.large)
+                        .clickable {}
+                        .clearAndSetSemantics {},
+                    color = MaterialTheme.colorScheme.surfaceContainerLow,
+                ) {
+                    val painter = rememberVectorPainter(image = DynamicColorImageVectors.coder())
+                    Image(
+                        painter = painter,
+                        contentDescription = null,
+                        modifier = Modifier.padding(horizontal = 72.dp, vertical = 48.dp),
                     )
-                },
-                navigationIcon = { BackButton { onNavigateBack() } },
-                colors = TopAppBarDefaults.topAppBarColors(
-                    containerColor = MaterialTheme.colorScheme.background,
-                    scrolledContainerColor = MaterialTheme.colorScheme.background
-                )
-            )
-        },
-        content = { padding ->
-            LazyColumn(modifier = Modifier.padding(padding)) {
-                item {
-                    Surface(
-                        modifier = Modifier
-                            .fillParentMaxWidth()
-                            .padding(horizontal = 12.dp, vertical = 12.dp)
-                            .clip(MaterialTheme.shapes.large)
-                            .clickable {}
-                            .clearAndSetSemantics {},
-                        color = MaterialTheme.colorScheme.surfaceContainerLow,
-                    ) {
-                        val painter = rememberVectorPainter(image = DynamicColorImageVectors.coder())
-                        Image(
-                            painter = painter,
-                            contentDescription = null,
-                            modifier = Modifier.padding(horizontal = 72.dp, vertical = 48.dp),
-                        )
-                    }
-                }
-                items(creditsList) { item ->
-                    CreditItem(title = item.first, license = item.second) {
-                        uriHandler.openUri(item.third)
-                    }
                 }
             }
-        },
-    )
+            items(creditsList) { item ->
+                CreditItem(title = item.first, license = item.second) {
+                    uriHandler.openUri(item.third)
+                }
+            }
+        }
+    }
 }

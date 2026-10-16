@@ -37,14 +37,20 @@
     <string name="display_settings">المظهر الداكن، الألوان الديناميكية، اللغات</string>
     <string name="dark_theme">المظهر الداكن</string>
     <string name="follow_system">النظام</string>
+    <string name="follow_system_desc">اتباع إعدادات مظهر النظام</string>
     <string name="on">مفعل</string>
+    <string name="dark_theme_on_desc">تفعيل المظهر الداكن دائماً</string>
     <string name="off">معطل</string>
+    <string name="dark_theme_off_desc">تفعيل المظهر الفاتح دائماً</string>
+    <string name="additional_settings">إعدادات إضافية</string>
+    <string name="high_contrast">مظهر داكن عالي التباين</string>
+    <string name="high_contrast_desc">استخدام خلفية سوداء ناصعة لزيادة التباين</string>
     <string name="cancel">إلغاء</string>
     <string name="paste">لصق</string>
     <string name="close">إغلاق</string>
     <string name="to">النهاية</string>
     <string name="translate">ترجمة</string>
-    <string name="translate_desc">المساعدة في ترجمة هذا التطبيق على Hosted Weblate</string>
+    <string name="translate_desc">المساعدة في ترجمة هذا التطبيق على مستودع GitHub</string>
     <string name="github_issue">مشكلة في GitHub</string>
     <string name="github_issue_desc">تقديم إبلاغ عن خطأ أو طلب ميزة جديدة</string>
     <string name="info_copied">تم نسخ المعلومات إلى الحافظة</string>
@@ -57,7 +63,9 @@
     <string name="update">تحديث</string>
     <string name="telegram_channel">تليجرام</string>
     <string name="sponsor">دعم المشروع</string>
-    <string name="sponsor_msg">سيكون تطبيق إيبكس دائماً مجانياً ومفتوح المصدر في المستقبل للجميع. إذا أعجبك، يرجى النظر في رعايتي على GitHub!</string>
+    <string name="sponsor_unavailable">الدعم غير متاح حالياً</string>
+    <string name="star">نجمة</string>
+    <string name="sponsor_msg">سيكون تطبيق إيبكس دائماً مجانياً ومفتوح المصدر للجميع. إذا أعجبك، يرجى النظر في رعايتي على GitHub!</string>
     <string name="sponsors">الداعمون</string>
     <string name="instagram">إنستغرام</string>
     <string name="instagram_desc">تابع المطور على إنستغرام لمزيد من التحديثات</string>
@@ -330,4 +338,37 @@
     <string name="open_settings">فتح الإعدادات</string>
     <string name="pip_force_stopping">جارٍ الإيقاف الإجباري...</string>
     <string name="pip_cleaning_cache">جارٍ تنظيف التخزين المؤقت...</string>
+    <string name="advanced_title">متقدم</string>
+    <string name="history_setting_desc">تسجيل سجل عمليات التنظيف وإيقاف التطبيقات</string>
+
+    <!-- Onboarding / Welcome Flow -->
+    <string name="apex_brand" translatable="false">Apex</string>
+    <string name="welcome_to_apex">مرحبًا بك في\nApex</string>
+    <string name="welcome_desc">أداتك الذكية لتحرير مساحة التخزين وتسريع جهازك. تخلص من الملفات المؤقتة وأوقف التطبيقات المستنزفة لموارد هاتفك بنقرة واحدة.</string>
+    <string name="get_started">البدء</string>
+    <string name="onboarding_features_title">تنظيف ذكي\nوأداء فائق</string>
+    <string name="onboarding_features_desc">تخلص من الكاش المتراكم، وأوقف تطبيقات الخلفية التي تستهلك الذاكرة والبطارية، عبر تنظيف آلي فائق السرعة أو تحكّم يدوي مرن.</string>
+    <string name="skip">تخطي</string>
+    <string name="continue_button">متابعة</string>
+    <string name="onboarding_level_up_title">ارتقِ بتجربتك\nللقمة</string>
+    <string name="onboarding_level_up_desc">امنح هاتفك أداءً استثنائياً وسرعة فائقة مع وضع التيربو والأتمتة الذكية؛ تجربة متكاملة بدون إعلانات وبأعلى درجات الخصوصية.</string>
+    <string name="not_now">ليس الآن</string>
+    <string name="lets_go">لننطلق!</string>
+
+    <!-- Language Packs -->
+    <string name="download_languages">تحميل اللغات</string>
+    <string name="download_languages_desc">تحميل وتثبيت ترجمات المجتمع</string>
+    <string name="downloaded_languages">اللغات المحملة</string>
+    <string name="built_in_languages">اللغات</string>
+    <string name="languages">اللغات</string>
+    <string name="no_downloaded_languages">لا توجد لغات محملة بعد</string>
+    <string name="download_failed">فشل تحميل ملف اللغة</string>
+    <string name="language_downloaded">تم تحميل وتثبيت اللغة بنجاح</string>
+    <string name="language_deleted">تم حذف اللغة</string>
+    <string name="delete">حذف</string>
+    <string name="available_community_languages">لغات المجتمع المتاحة</string>
+    <string name="install">تثبيت</string>
+    <string name="installed">مثبت</string>
+    <string name="retry">إعادة المحاولة</string>
+    <string name="no_internet_error">لا يوجد اتصال بالإنترنت</string>
 </resources>

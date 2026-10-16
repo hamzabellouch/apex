@@ -39,6 +39,7 @@ import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.icons.outlined.TouchApp
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -69,6 +70,7 @@ import com.tkno.apex.service.CacheCleanerAccessibilityService
 import com.tkno.apex.service.ServiceMode
 import com.tkno.apex.ui.page.AppUpdater
 import com.tkno.apex.ui.page.settings.about.UpdatePage
+import com.tkno.apex.ui.page.settings.appearance.DarkThemePreferences
 import com.tkno.apex.util.AppStorageHelper
 import com.tkno.apex.util.RamInfo
 import kotlinx.coroutines.Dispatchers
@@ -113,7 +115,7 @@ fun MainScreen(
     }
 
     var currentTab by remember { mutableStateOf(initialTab) }
-    var currentSubScreen by remember { mutableStateOf(SubScreen.None) }
+    var currentSubScreen by rememberSaveable { mutableStateOf(SubScreen.None) }
     var isMenuSubScreenActive by remember { mutableStateOf(false) }
 
     val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
@@ -154,6 +156,9 @@ fun MainScreen(
     var animateNavIndicator by remember {
         mutableStateOf(prefs.getBoolean("animate_taskbar_indicator", true))
     }
+    var isHistoryEnabled by remember {
+        mutableStateOf(prefs.getBoolean("history_enabled", true))
+    }
 
     DisposableEffect(prefs) {
         val listener = android.content.SharedPreferences.OnSharedPreferenceChangeListener { p, key ->
@@ -163,6 +168,8 @@ fun MainScreen(
                 hideMenuButton = p.getBoolean("hide_menu_button", false)
             } else if (key == "animate_taskbar_indicator") {
                 animateNavIndicator = p.getBoolean("animate_taskbar_indicator", true)
+            } else if (key == "history_enabled") {
+                isHistoryEnabled = p.getBoolean("history_enabled", true)
             }
         }
         prefs.registerOnSharedPreferenceChangeListener(listener)
@@ -523,32 +530,34 @@ fun MainScreen(
 
                     // Offload History Recording & OS StorageStats refresh to background thread (0ms UI lag)
                     scope.launch(Dispatchers.IO) {
-                        val pm = context.packageManager
-                        val now = System.currentTimeMillis()
-                        if (finishedMode == ServiceMode.FORCE_STOP) {
-                            val entries = targetSet.map { pkg ->
-                                val label = try {
-                                    val info = pm.getApplicationInfo(pkg, 0)
-                                    info.loadLabel(pm).toString()
-                                } catch (e: Exception) {
-                                    pkg
+                        if (isHistoryEnabled) {
+                            val pm = context.packageManager
+                            val now = System.currentTimeMillis()
+                            if (finishedMode == ServiceMode.FORCE_STOP) {
+                                val entries = targetSet.map { pkg ->
+                                    val label = try {
+                                        val info = pm.getApplicationInfo(pkg, 0)
+                                        info.loadLabel(pm).toString()
+                                    } catch (e: Exception) {
+                                        pkg
+                                    }
+                                    com.tkno.apex.util.StopHistoryEntry(packageName = pkg, appName = label, timestamp = now)
                                 }
-                                com.tkno.apex.util.StopHistoryEntry(packageName = pkg, appName = label, timestamp = now)
-                            }
-                            com.tkno.apex.util.HistoryManager.addStopRecords(context, entries)
-                        } else {
-                            val entries = targetSet.map { pkg ->
-                                val appInfo = installedApps.find { it.packageName == pkg }
-                                val label = appInfo?.name ?: try {
-                                    val info = pm.getApplicationInfo(pkg, 0)
-                                    info.loadLabel(pm).toString()
-                                } catch (e: Exception) {
-                                    pkg
+                                com.tkno.apex.util.HistoryManager.addStopRecords(context, entries)
+                            } else {
+                                val entries = targetSet.map { pkg ->
+                                    val appInfo = installedApps.find { it.packageName == pkg }
+                                    val label = appInfo?.name ?: try {
+                                        val info = pm.getApplicationInfo(pkg, 0)
+                                        info.loadLabel(pm).toString()
+                                    } catch (e: Exception) {
+                                        pkg
+                                    }
+                                    val bytes = initialCacheMap[pkg] ?: appInfo?.cacheBytes ?: 0L
+                                    com.tkno.apex.util.CleanHistoryEntry(packageName = pkg, appName = label, bytesCleared = bytes, timestamp = now)
                                 }
-                                val bytes = initialCacheMap[pkg] ?: appInfo?.cacheBytes ?: 0L
-                                com.tkno.apex.util.CleanHistoryEntry(packageName = pkg, appName = label, bytesCleared = bytes, timestamp = now)
+                                com.tkno.apex.util.HistoryManager.addCleanRecords(context, entries)
                             }
-                            com.tkno.apex.util.HistoryManager.addCleanRecords(context, entries)
                         }
 
                         val freshApps = applySessionOverrides(AppStorageHelper.getInstalledAppsWithCache(context, forceRefresh = true))
@@ -1285,6 +1294,7 @@ fun MainScreen(
                                             onOpenDrawer = { scope.launch { drawerState.open() } },
                                             showMenuButton = !hideMenuButton && reorderableTabs.firstOrNull() == MainTab.Stop,
                                             showInfoIcon = hasCompletedStopSession && activeRunningUserApps.isNotEmpty(),
+                                            isHistoryEnabled = isHistoryEnabled,
                                             onAnalyzeStopClick = { handleStartStop() }
                                         )
                                     }
@@ -1298,6 +1308,7 @@ fun MainScreen(
                                             onOpenDrawer = { scope.launch { drawerState.open() } },
                                             showMenuButton = !hideMenuButton && reorderableTabs.firstOrNull() == MainTab.Clean,
                                             showInfoIcon = hasCompletedCleanSession && filteredTotalCacheBytes > 0L,
+                                            isHistoryEnabled = isHistoryEnabled,
                                             onAnalyzeClick = { handleStartClean() }
                                         )
                                     }

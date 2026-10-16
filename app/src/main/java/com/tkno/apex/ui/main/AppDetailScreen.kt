@@ -16,10 +16,11 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
-import androidx.compose.material.icons.automirrored.outlined.Launch
 import androidx.compose.material.icons.filled.Android
-import androidx.compose.material.icons.outlined.Delete
-import androidx.compose.material.icons.outlined.SystemUpdate
+import com.tkno.apex.ui.icon.ArrowOutward
+import com.tkno.apex.ui.icon.DeleteForever
+import com.tkno.apex.ui.icon.DeployedCodeUpdate
+import com.tkno.apex.ui.icon.InfoMaterial
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -31,6 +32,8 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.core.graphics.drawable.toBitmap
@@ -192,33 +195,53 @@ fun AppDetailScreen(
 
             Spacer(modifier = Modifier.height(16.dp))
 
-            // Quick Actions Row (Uninstall, Update, Launch)
+            // Quick Actions Row (Uninstall, Update, Launch, App Info)
             Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceEvenly,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 4.dp),
+                horizontalArrangement = Arrangement.SpaceAround,
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 // Uninstall Button
                 AppDetailActionButton(
-                    icon = Icons.Outlined.Delete,
+                    icon = DeleteForever,
                     label = stringResource(R.string.app_detail_uninstall),
                     containerColor = Color(0xFFE53935),
                     textColor = textPrimary,
                     onClick = {
                         try {
-                            val intent = Intent(Intent.ACTION_DELETE).apply {
-                                data = Uri.parse("package:${app.packageName}")
+                            if (app.isSystemApp) {
+                                val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS).apply {
+                                    data = Uri.parse("package:${app.packageName}")
+                                    addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                                }
+                                context.startActivity(intent)
+                            } else {
+                                val uninstallIntent = Intent(Intent.ACTION_UNINSTALL_PACKAGE).apply {
+                                    data = Uri.parse("package:${app.packageName}")
+                                    putExtra(Intent.EXTRA_RETURN_RESULT, true)
+                                    addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                                }
+                                context.startActivity(uninstallIntent)
                             }
-                            context.startActivity(intent)
                         } catch (e: Exception) {
-                            Toast.makeText(context, e.localizedMessage, Toast.LENGTH_SHORT).show()
+                            try {
+                                val deleteIntent = Intent(Intent.ACTION_DELETE).apply {
+                                    data = Uri.parse("package:${app.packageName}")
+                                    addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                                }
+                                context.startActivity(deleteIntent)
+                            } catch (ex: Exception) {
+                                Toast.makeText(context, ex.localizedMessage ?: "Cannot uninstall app", Toast.LENGTH_SHORT).show()
+                            }
                         }
                     }
                 )
 
                 // Update Button
                 AppDetailActionButton(
-                    icon = Icons.Outlined.SystemUpdate,
+                    icon = DeployedCodeUpdate,
                     label = stringResource(R.string.app_detail_update),
                     containerColor = Color(0xFF2E7D32),
                     textColor = textPrimary,
@@ -236,19 +259,43 @@ fun AppDetailScreen(
                                 null
                             }
 
-                            val intent = if (installer == "com.sec.android.app.samsungapps") {
-                                Intent(Intent.ACTION_VIEW, Uri.parse("samsungapps://ProductDetail/${app.packageName}"))
-                            } else {
-                                Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=${app.packageName}"))
+                            val isSamsungSource = installer == "com.sec.android.app.samsungapps" ||
+                                (installer == null && (app.packageName.startsWith("com.sec.") || app.packageName.startsWith("com.samsung.")))
+
+                            if (isSamsungSource) {
+                                try {
+                                    val samsungIntent = Intent(Intent.ACTION_VIEW, Uri.parse("samsungapps://ProductDetail/${app.packageName}")).apply {
+                                        setPackage("com.sec.android.app.samsungapps")
+                                        addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                                    }
+                                    context.startActivity(samsungIntent)
+                                    return@AppDetailActionButton
+                                } catch (e: Exception) {
+                                    // Galaxy store app not available, fall through
+                                }
                             }
-                            context.startActivity(intent)
+
+                            // Google Play Store
+                            try {
+                                val playIntent = Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=${app.packageName}")).apply {
+                                    setPackage("com.android.vending")
+                                    addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                                }
+                                context.startActivity(playIntent)
+                            } catch (e: Exception) {
+                                val genericMarketIntent = Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=${app.packageName}")).apply {
+                                    addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                                }
+                                context.startActivity(genericMarketIntent)
+                            }
                         } catch (e: Exception) {
-                            // Fallback to web browser Play Store link
                             try {
                                 val webIntent = Intent(
                                     Intent.ACTION_VIEW,
                                     Uri.parse("https://play.google.com/store/apps/details?id=${app.packageName}")
-                                )
+                                ).apply {
+                                    addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                                }
                                 context.startActivity(webIntent)
                             } catch (ex: Exception) {
                                 Toast.makeText(context, context.getString(R.string.toast_cannot_open_store), Toast.LENGTH_SHORT).show()
@@ -259,13 +306,15 @@ fun AppDetailScreen(
 
                 // Launch Button
                 AppDetailActionButton(
-                    icon = Icons.AutoMirrored.Outlined.Launch,
+                    icon = ArrowOutward,
                     label = stringResource(R.string.app_detail_launch),
                     containerColor = Color(0xFF8E24AA),
                     textColor = textPrimary,
                     onClick = {
                         try {
-                            val launchIntent = context.packageManager.getLaunchIntentForPackage(app.packageName)
+                            val launchIntent = context.packageManager.getLaunchIntentForPackage(app.packageName)?.apply {
+                                addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                            }
                             if (launchIntent != null) {
                                 context.startActivity(launchIntent)
                             } else {
@@ -276,47 +325,28 @@ fun AppDetailScreen(
                         }
                     }
                 )
-            }
 
-            Spacer(modifier = Modifier.height(18.dp))
-
-            // Prominent Green APP INFO Button - Exact same size/dimensions as Done button (height 40.dp, RoundedCornerShape 20.dp)
-            Button(
-                onClick = {
-                    try {
-                        val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS).apply {
-                            data = Uri.parse("package:${app.packageName}")
+                // App Info Button
+                AppDetailActionButton(
+                    icon = InfoMaterial,
+                    label = stringResource(R.string.app_detail_app_info),
+                    containerColor = Color(0xFF0288D1),
+                    textColor = textPrimary,
+                    onClick = {
+                        try {
+                            val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS).apply {
+                                data = Uri.parse("package:${app.packageName}")
+                                addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                            }
+                            context.startActivity(intent)
+                        } catch (e: Exception) {
+                            Toast.makeText(context, e.localizedMessage ?: "Cannot open app settings", Toast.LENGTH_SHORT).show()
                         }
-                        context.startActivity(intent)
-                    } catch (e: Exception) {
-                        Toast.makeText(context, e.localizedMessage, Toast.LENGTH_SHORT).show()
                     }
-                },
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(48.dp),
-                shape = RoundedCornerShape(24.dp),
-                colors = ButtonDefaults.buttonColors(
-                    containerColor = androidGreen,
-                    contentColor = Color.White
-                )
-            ) {
-                Icon(
-                    imageVector = Icons.Default.Android,
-                    contentDescription = null,
-                    modifier = Modifier.size(18.dp),
-                    tint = Color.White
-                )
-                Spacer(modifier = Modifier.width(6.dp))
-                Text(
-                    text = stringResource(R.string.app_detail_app_info),
-                    fontSize = 15.sp,
-                    fontWeight = FontWeight.Bold,
-                    color = Color.White
                 )
             }
 
-            Spacer(modifier = Modifier.height(16.dp))
+            Spacer(modifier = Modifier.height(24.dp))
         }
     }
 }

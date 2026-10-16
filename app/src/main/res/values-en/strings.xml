@@ -20,14 +20,20 @@
     <string name="display_settings">Dark theme, dynamic color, languages</string>
     <string name="dark_theme">Dark theme</string>
     <string name="follow_system">System</string>
+    <string name="follow_system_desc">Match system appearance settings</string>
     <string name="on">On</string>
+    <string name="dark_theme_on_desc">Always use dark theme</string>
     <string name="off">Off</string>
+    <string name="dark_theme_off_desc">Always use light theme</string>
+    <string name="additional_settings">Additional settings</string>
+    <string name="high_contrast">High contrast dark theme</string>
+    <string name="high_contrast_desc">Use pure black background for high contrast</string>
     <string name="cancel">Cancel</string>
     <string name="paste">Paste</string>
     <string name="close">Close</string>
     <string name="to">End</string>
     <string name="translate">Translate</string>
-    <string name="translate_desc">Help translate this app on Hosted Weblate</string>
+    <string name="translate_desc">Help translate this app on GitHub repository</string>
     <string name="github_issue">GitHub issue</string>
     <string name="github_issue_desc">Submit an issue for bug report or feature request</string>
     <string name="info_copied">Info copied to clipboard</string>
@@ -40,7 +46,9 @@
     <string name="update">Update</string>
     <string name="telegram_channel">Telegram</string>
     <string name="sponsor">Sponsor</string>
-    <string name="sponsor_msg">Apex will be always free and open source in the future for everyone. If you like it, please consider sponsoring me on GitHub!</string>
+    <string name="sponsor_unavailable">Sponsoring is currently unavailable</string>
+    <string name="star">Star</string>
+    <string name="sponsor_msg">Apex will be always free and open source for everyone. If you like it, please consider sponsoring me on GitHub!</string>
     <string name="sponsors">Sponsors</string>
     <string name="instagram">Instagram</string>
     <string name="instagram_desc">follow the developer on Instagram for more updates</string>
@@ -117,7 +125,7 @@
     <string name="app_detail_uninstall">Uninstall</string>
     <string name="app_detail_update">Update</string>
     <string name="app_detail_launch">Launch</string>
-    <string name="app_detail_app_info">APP INFO</string>
+    <string name="app_detail_app_info">App Info</string>
     <string name="toast_cannot_launch_app">Cannot launch this application</string>
     <string name="toast_cannot_open_store">Cannot open store page</string>
     <string name="performance_and_speed_title">Performance &amp; Speed</string>
@@ -322,4 +330,37 @@
     <string name="open_settings">Open Settings</string>
     <string name="pip_force_stopping">Force stopping...</string>
     <string name="pip_cleaning_cache">Cleaning cache...</string>
+    <string name="advanced_title">Advanced</string>
+    <string name="history_setting_desc">Record process cleaning and stop history</string>
+
+    <!-- Onboarding / Welcome Flow -->
+    <string name="apex_brand" translatable="false">Apex</string>
+    <string name="welcome_to_apex">Welcome to\nApex</string>
+    <string name="welcome_desc">Your smart tool to free up storage and boost performance. Clear cached files and stop resource-hungry apps with a single tap.</string>
+    <string name="get_started">Get started</string>
+    <string name="onboarding_features_title">Smart cleaning\n&amp; peak speed</string>
+    <string name="onboarding_features_desc">Clear accumulated cache and stop background apps draining your battery and RAM, with fast automated cleaning or flexible manual control.</string>
+    <string name="skip">Skip</string>
+    <string name="continue_button">Continue</string>
+    <string name="onboarding_level_up_title">Level up your\nexperience</string>
+    <string name="onboarding_level_up_desc">Elevate your device with exceptional speed, Turbo mode, and smart automation — a pure experience with zero ads and total privacy.</string>
+    <string name="not_now">Not now</string>
+    <string name="lets_go">Let\'s go!</string>
+
+    <!-- Language Packs -->
+    <string name="download_languages">Download languages</string>
+    <string name="download_languages_desc">Download community translations</string>
+    <string name="downloaded_languages">Downloaded languages</string>
+    <string name="built_in_languages">Languages</string>
+    <string name="languages">Languages</string>
+    <string name="no_downloaded_languages">No downloaded languages yet</string>
+    <string name="download_failed">Failed to download language</string>
+    <string name="language_downloaded">Language downloaded successfully</string>
+    <string name="language_deleted">Language deleted</string>
+    <string name="delete">Delete</string>
+    <string name="available_community_languages">Available community languages</string>
+    <string name="install">Install</string>
+    <string name="installed">Installed</string>
+    <string name="retry">Retry</string>
+    <string name="no_internet_error">No internet connection</string>
 </resources>

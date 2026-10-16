@@ -30,7 +30,7 @@
     <string name="close">Fermer</string>
     <string name="to">Fin</string>
     <string name="translate">Traduire</string>
-    <string name="translate_desc">Aidez à traduire cette application sur Hosted Weblate</string>
+    <string name="translate_desc">Aidez à traduire cette application sur le dépôt GitHub</string>
     <string name="github_issue">Problème GitHub</string>
     <string name="github_issue_desc">Soumettre un problème pour un rapport de bogue ou une demande de fonctionnalité</string>
     <string name="info_copied">Informations copiées dans le presse-papiers</string>
@@ -310,4 +310,21 @@ le nettoyage du cache</string>
     <string name="category_productivity_finance">Productivity and finance</string>
     <string name="detailed_statistics">Detailed statistics</string>
     <string name="no_usage_data_today">No usage data recorded for today</string>
+
+    <!-- Language Packs -->
+    <string name="download_languages">Télécharger des langues</string>
+    <string name="download_languages_desc">Télécharger les traductions de la communauté</string>
+    <string name="downloaded_languages">Langues téléchargées</string>
+    <string name="built_in_languages">Langues</string>
+    <string name="languages">Langues</string>
+    <string name="no_downloaded_languages">Aucune langue téléchargée pour le moment</string>
+    <string name="download_failed">Échec du téléchargement de la langue</string>
+    <string name="language_downloaded">Langue téléchargée avec succès</string>
+    <string name="language_deleted">Langue supprimée</string>
+    <string name="delete">Supprimer</string>
+    <string name="available_community_languages">Langues communautaires disponibles</string>
+    <string name="install">Installer</string>
+    <string name="installed">Installée</string>
+    <string name="retry">Réessayer</string>
+    <string name="no_internet_error">Pas de connexion Internet</string>
 </resources>

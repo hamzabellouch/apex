@@ -69,6 +69,7 @@ private val LightColorScheme = lightColorScheme(
 @Composable
 fun ApexTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
+    isHighContrastModeEnabled: Boolean = false,
     dynamicColor: Boolean = true,
     content: @Composable () -> Unit,
 ) {
@@ -91,15 +92,30 @@ fun ApexTheme(
     }
 
     val currentLocale = remember(configuration) {
-        ConfigurationCompat.getLocales(configuration).get(0) ?: Locale.getDefault()
+        ConfigurationCompat.getLocales(android.content.res.Resources.getSystem().configuration).get(0)
+            ?: ConfigurationCompat.getLocales(configuration).get(0)
+            ?: Locale.getDefault()
     }
 
     val targetLocale = remember(langTag, currentLocale) {
-        if (langTag == "system") currentLocale else Locale.forLanguageTag(langTag)
+        if (langTag == "system") {
+            currentLocale
+        } else {
+            val cleanTag = when {
+                langTag.startsWith("b+") -> langTag.removePrefix("b+").replace('+', '-')
+                else -> langTag
+            }
+            Locale.forLanguageTag(cleanTag)
+        }
     }
 
-    val isRtl = remember(targetLocale) {
-        TextUtilsCompat.getLayoutDirectionFromLocale(targetLocale) == android.view.View.LAYOUT_DIRECTION_RTL
+    val isRtl = remember(targetLocale, langTag) {
+        val custom = if (langTag != "system") com.tkno.apex.util.LanguageManager.loadCustomLanguage(context, langTag) else null
+        if (custom != null) {
+            custom.direction.equals("rtl", ignoreCase = true)
+        } else {
+            TextUtilsCompat.getLayoutDirectionFromLocale(targetLocale) == android.view.View.LAYOUT_DIRECTION_RTL
+        }
     }
 
     val layoutDirection = if (isRtl) LayoutDirection.Rtl else LayoutDirection.Ltr
@@ -115,20 +131,44 @@ fun ApexTheme(
         }
     }
 
-    val updatedContext = remember(context, updatedConfig) {
-        context.createConfigurationContext(updatedConfig)
+    val updatedContext = remember(context, updatedConfig, langTag) {
+        val custom = if (langTag != "system") com.tkno.apex.util.LanguageManager.loadCustomLanguage(context, langTag) else null
+        val configContext = context.createConfigurationContext(updatedConfig)
+        if (custom != null) {
+            val dynamicResources = com.tkno.apex.util.DynamicResources(configContext.resources, custom.strings)
+            object : android.content.ContextWrapper(configContext) {
+                override fun getResources(): android.content.res.Resources = dynamicResources
+                override fun getAssets(): android.content.res.AssetManager = configContext.assets
+            }
+        } else {
+            configContext
+        }
     }
 
     val typography = remember(isArabic) {
         getAppTypography(isArabic)
     }
 
-    val colorScheme = when {
+    val baseColorScheme = when {
         dynamicColor && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S -> {
             if (darkTheme) dynamicDarkColorScheme(context) else dynamicLightColorScheme(context)
         }
         darkTheme -> DarkColorScheme
         else -> LightColorScheme
+    }
+
+    val colorScheme = if (isHighContrastModeEnabled && darkTheme) {
+        baseColorScheme.copy(
+            surface = Color.Black,
+            background = Color.Black,
+            surfaceContainerLowest = Color.Black,
+            surfaceContainerLow = Color.Black,
+            surfaceContainer = Color.Black,
+            surfaceContainerHigh = Color(0xFF10151B),
+            surfaceContainerHighest = Color(0xFF16202B),
+        )
+    } else {
+        baseColorScheme
     }
 
     val view = LocalView.current
